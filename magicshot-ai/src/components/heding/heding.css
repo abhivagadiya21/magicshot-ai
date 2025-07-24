@@ -1,3 +1,9 @@
 .nevbar{
+    background-color: #1a1d1f;
+    padding: 20px 0px;
+}
 
+.logo-img {
+    width: 150px;
+    height: 36px;
 }

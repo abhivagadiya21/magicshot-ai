@@ -5,9 +5,9 @@ import Logo from "../heding/hedingimg/logo.png";
 
 export default function Heading() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-#1a1d1f nevbar">
       <div className="container-fluid">
-       <img src={Logo} alt="" />
+       <img src={Logo} alt="" className='logo-img' />
         <button
           className="navbar-toggler"
           type="button"
