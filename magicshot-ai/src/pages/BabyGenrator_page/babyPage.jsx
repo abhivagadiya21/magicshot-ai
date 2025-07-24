@@ -1,3 +1,4 @@
+import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import '../BabyGenrator_page/babyPage.css';
 function babyPage () {
     return(
@@ -14,10 +15,15 @@ function babyPage () {
                     <div className='inner-1-for-left-3'>
                         <p>Est. time: 30 seconds to 50 seconds</p>
                     </div>
-                    <div className="inner-2-for-left-3"></div>
+                    <div className="inner-2-for-left-3">
+                        <button className='baby-left-3-btn-1'>See Pricing</button>
+                        <button className='baby-left-3-btn-2'>Generate</button>
+                    </div>
                 </div>
             </div>
-            <div className="right-main-babyG"></div>
+            <div className="right-main-babyG">
+                <Upload_img />
+            </div>
         </div>
         </>
     )
