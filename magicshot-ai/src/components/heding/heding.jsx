@@ -1,13 +1,24 @@
-import React from 'react';
-import './heding.css'; 
+import React, { useState } from 'react';
+import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 
+const options = [
+  "Kissing Booth",
+  "Avatar Generator",
+  "Professional Headshot",
+  "Baby Generator",
+  "Change Hair Style",
+  "AI Video Effects"
+];
 
 export default function Heading() {
+  const [selected, setSelected] = useState("Change Hair Style");
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-#1a1d1f nevbar">
+    <nav className="navbar navbar-expand-lg custom-navbar nevbar">
       <div className="container-fluid">
-       <img src={Logo} alt="" className='logo-img' />
+        <img src={Logo} alt="Logo" className='logo-img' />
+
         <button
           className="navbar-toggler"
           type="button"
@@ -21,37 +32,41 @@ export default function Heading() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
+          <div className="dropdown me-3">
+            <button
+              className="btn btn-dark dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {selected}
+            </button>
+            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+              <li>
+                <h6 className="dropdown-header">Photo Generator</h6>
+              </li>
+              {options.map((option) => (
+                <li key={option}>
+                  <button
+                    className={`dropdown-item d-flex justify-content-between align-items-center ${selected === option ? 'active' : ''}`}
+                    onClick={() => setSelected(option)}
+                  >
+                    {option}
+                    {selected === option && <span className="ms-2">✔</span>}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
             <button className="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>

@@ -1,9 +1,21 @@
 .nevbar{
     background-color: #1a1d1f;
     padding: 20px 0px;
+    display: flex;
+justify-content: space-between;
 }
 
 .logo-img {
     width: 150px;
     height: 36px;
+}
+
+.custom-navbar {
+  background-color: #1a1d1f !important;
+
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
 }
