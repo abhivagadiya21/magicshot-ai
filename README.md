@@ -1,0 +1,1 @@
+# magicshot-ai
