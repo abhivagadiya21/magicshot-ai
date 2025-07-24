@@ -1,6 +1,7 @@
 import React from 'react';
 import './heding.css'; 
-import Logo from "../heding/hedingimg/logo.wedp"; // Adjust the path as necessary
+import Logo from "../heding/hedingimg/logo.png";
+
 
 export default function Heading() {
   return (
