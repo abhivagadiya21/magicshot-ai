@@ -1,7 +1,7 @@
 
 import './App.css';
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'; // ← only import Routes/Route
+import { Routes, Route } from 'react-router-dom'; 
 import Headers from './components/heding/heding.jsx';
 import BabyPage from './pages/BabyGenrator_page/babyPage.jsx';
 import ChagehaircutPage from './pages/ChangeHaircut_page/chnagehaircut.jsx';
