@@ -18,7 +18,6 @@ function App() {
         <Route path="/age-journey" element={<AgeJourney />} />
         <Route path="/change-haircut" element={<ChagehaircutPage />} />
       </Routes>
-    <Headers />
     </>
   );
 }
