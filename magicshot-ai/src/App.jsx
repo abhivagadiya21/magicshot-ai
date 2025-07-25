@@ -11,7 +11,7 @@ function App() {
     <>
     <Headers />
       {/* <BabyPage /> */}
-      {/* <ChagehaircutPage /> */}
+      <ChagehaircutPage />
       {/* <AgeJourney /> */}
       {/* <AgePredictor /> */}
     </>

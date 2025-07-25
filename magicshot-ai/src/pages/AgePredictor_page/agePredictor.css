@@ -9,8 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 72.5%;
-
+    width: 100%;
 }
 
 .left-main-babyG {
@@ -24,7 +23,6 @@
     width: 396px;
     min-width: 396px;
     max-width: 396px;
-
 }
 
 .inner-left-1-babyG {
@@ -35,9 +33,11 @@
     color: white;
     font-weight: 900;
 }
-.inner-left-1-babyG h4{
+
+.inner-left-1-babyG h4 {
     font-size: 20px;
 }
+
 .inner-left-3-babyG {
     width: 100%;
     display: flex;
@@ -86,20 +86,21 @@
     column-gap: 6px;
     border-radius: 50px;
     justify-content: center;
-    padding: 3px 5px ;
+    padding: 3px 5px;
     font-size: 12px;
     color: rgb(209, 204, 204);
     box-sizing: border-box;
 }
 
-/* responsive layout */
+/* responsive layout  yash thorugh*/
 @media (max-width: 768px) {
     .left-main-babyG {
         width: 100%;
         min-width: 100%;
         max-width: 100%;
     }
-    .right-main-babyG{
+
+    .right-main-babyG {
         display: none;
     }
 }
