@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
@@ -8,70 +8,128 @@ const options = [
     "age-predictor",
     "age-journey",
     "change-haircut",
-
 ];
 
 export default function Heading() {
-    const [selected, setSelected] = useState("Change Hair Style");
+    const [selected, setSelected] = useState("change-haircut");
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
-        <nav className="navbar navbar-expand-lg custom-navbar nevbar">
-            <div className="container-fluid">
-                <img src={Logo} alt="Logo" className='logo-img' />
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div className="dropdown me-3">
-                        <button
-                            className="btn btn-dark dropdown-toggle dropdown-button "
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            {selected}
-                        </button>
-                        <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+        <>
+            <nav className="custom-navbar">
+                <div className="navbar-container">
+                    <div className="navbar-left">
+                        <div className="navbar-hamburger-container">
+                            <button
+                                className="hamburger"
+                                onClick={() => setMenuOpen(!menuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                {menuOpen ? (
+                                    // Close icon
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="#fff"
+                                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18" />
+                                        <line x1="6" y1="6" x2="18" y2="18" />
+                                    </svg>
+                                ) : (
+                                    // Hamburger icon
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="#fff"
+                                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="3" y1="6" x2="21" y2="6" />
+                                        <line x1="3" y1="12" x2="21" y2="12" />
+                                        <line x1="3" y1="18" x2="21" y2="18" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
 
-                            {options.map((option) => (
-                                <li key={option}>
-                                    <button
-                                        className={`dropdown-item d-flex justify-content-between align-items-center ${selected === option ? 'active' : ''}`}
-                                        onClick={() => setSelected(option)}
-                                    >
-                                        {option}
-                                        {selected === option && <span className="ms-2">✔</span>}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
+                        <img src={Logo} alt="Logo" className="logo-img" />
+
+                        <div className={`navbar-content`}>
+                            <div className="dropdown" ref={dropdownRef}>
+                                <button
+                                    className="dropdown-button"
+                                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                                >
+                                    {selected}
+                                    <span className="arrow">&#x25BC;</span>
+                                </button>
+                                {dropdownOpen && (
+                                    <ul className="dropdown-menu">
+                                        {options.map((option) => (
+                                            <li key={option}>
+                                                <button
+                                                    className={`dropdown-item ${selected === option ? 'active' : ''}`}
+                                                    onClick={() => {
+                                                        setSelected(option);
+                                                        setDropdownOpen(false);
+                                                    }}
+                                                >
+                                                    {option}
+                                                    {selected === option && <span className="check">✔</span>}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="navbar-right">
+                        <button className="upgrade-btn">
+                            <img src={Plan} alt="Upgrade" />
+                            <span>Upgrade | <span className="highlight-text">50% Off</span></span>
+                        </button>
+
+                        <div className="auth-buttons">
+                            <button className="signin-btn">Sign In</button>
+                            <button className="signup-btn">Sign Up</button>
+                        </div>
                     </div>
                 </div>
+            </nav>
 
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-
-
-               <div className="d-flex align-items-center justify-content-between gap-3">
-              <button className="btn upgrade-btn d-flex align-items-center Upgrade-plan">
-        <samp><img src={Plan} alt="" /></samp>
-      <span>Upgrade | <span className="text-divayr">50% Off</span></span>
-    </button>
-
-    <div className="auth-buttons d-flex align-items-center gap-3">
-      <button className="btn text-white bg-transparent border-0">Sign In</button>
-      <button className="btn btn-signup">Sign Up</button>
-    </div>
-               </div>
+            {/* Mobile menu below navbar */}
+            <div className={`content ${menuOpen ? "show" : ""}`}>
+                <div className="content-inner">
+                    {options.map((opt) => (
+                        <div className="baby-text-container" key={opt}>
+                            <p className='baby-text'>{opt}</p>
+                            <span>
+                                <svg aria-hidden="true" fill="none" stroke="#fff"
+                                    focusable="false" height="1em" role="presentation"
+                                    viewBox="0 0 24 24" width="1em"
+                                    className="text-default-400 rotate-180"
+                                >
+                                    <path d="M15.5 19l-7-7 7-7"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="1.5"
+                                    />
+                                </svg>
+                            </span>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </nav>
+        </>
     );
 }
