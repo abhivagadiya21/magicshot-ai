@@ -140,6 +140,18 @@
 .navbar-hamburger-container {
   display: none;
 }
+/* Dropdown styles  for chat gpt*/
+.dropdown-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+ 
+}
+.navbar-left {
+  position: relative !important; /* ensures dropdown positions correctly */
+}
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
