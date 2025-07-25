@@ -2,15 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
+import { useNavigate } from 'react-router-dom';
 
 const options = [
-    <p onClick={() => navigate('/')}>baby-generator</p>,
-    <p>age-predictor</p>,
-    <p>age-journey</p>,
-    <p>change-haircut</p>,
+    { label: 'baby-generator', path: '/' },
+    { label: 'age-predictor', path: '/age-predictor' },
+    { label: 'age-journey', path: '/age-journey' },
+    { label: 'change-haircut', path: '/change-haircut' },
 ];
 
 export default function Heading() {
+    const navigate = useNavigate();
     const [selected, setSelected] = useState("change-haircut");
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -73,17 +75,18 @@ export default function Heading() {
                                 </button>
                                 {dropdownOpen && (
                                     <ul className="dropdown-menu">
-                                        {options.map((option) => (
-                                            <li key={option}>
+                                        {options.map(({ label, path }) => (
+                                            <li key={label}>
                                                 <button
-                                                    className={`dropdown-item ${selected === option ? 'active' : ''}`}
+                                                    className={`dropdown-item ${selected === label ? 'active' : ''}`}
                                                     onClick={() => {
-                                                        setSelected(option);
+                                                        setSelected(label);
                                                         setDropdownOpen(false);
+                                                        navigate(path);
                                                     }}
                                                 >
-                                                    {option}
-                                                    {selected === option && <span className="check">✔</span>}
+                                                    {label}
+                                                    {selected === label && <span className="check">✔</span>}
                                                 </button>
                                             </li>
                                         ))}
@@ -111,8 +114,12 @@ export default function Heading() {
             <div className={`content ${menuOpen ? "show" : ""}`}>
                 <div className="content-inner">
                     {options.map((opt) => (
-                        <div className="baby-text-container" key={opt}>
-                            <p className='baby-text'>{opt}</p>
+                        <div
+                            className="baby-text-container"
+                            key={opt.path}
+                            onClick={() => navigate(opt.path)}
+                        >
+                            <p className='baby-text'>{opt.label}</p>
                             <span>
                                 <svg aria-hidden="true" fill="none" stroke="#fff"
                                     focusable="false" height="1em" role="presentation"
@@ -128,6 +135,7 @@ export default function Heading() {
                             </span>
                         </div>
                     ))}
+
                 </div>
             </div>
         </>

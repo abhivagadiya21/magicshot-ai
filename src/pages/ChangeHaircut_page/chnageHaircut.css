@@ -8,9 +8,8 @@
 .right-main-babyG {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 72.5%;
-
+    align-items: center;    
+    width: 100%;
 }
 
 .left-main-babyG {
@@ -24,7 +23,6 @@
     width: 396px;
     min-width: 396px;
     max-width: 396px;
-
 }
 
 .inner-left-1-babyG {
@@ -92,7 +90,7 @@
     box-sizing: border-box;
 }
 
-/* responsive layout */
+/* responsive layout  yash thorugh*/
 @media (max-width: 768px) {
     .left-main-babyG {
         width: 100%;
