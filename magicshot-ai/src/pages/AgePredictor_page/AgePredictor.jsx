@@ -1,14 +1,14 @@
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
-import '../BabyGenrator_page/babyPage.css';
-import star from './babyG-img/star.svg'
-import babyImage from './babyG-img/babyG.png'
-function babyPage() {
+import './agePredictor.css';
+import star from '../BabyGenrator_page/babyG-img/star.svg'
+import predictorImage from './predictor_image/agepredictor.png';
+function AgePredictor() {
     return (
         <>
             <div className="main-baby-genrartor">
                 <div className="left-main-babyG">
                     <div className="inner-left-1-babyG">
-                        <h4>AI Baby Genrator</h4>
+                        <h4>AI Age Predictor</h4>
                     </div>
                     <div className='inner-left-2-babyG'>
 
@@ -21,7 +21,7 @@ function babyPage() {
                             <button className='baby-left-3-btn-1'>See Pricing</button>
                             <button className='baby-left-3-btn-2'>Generate
                                 < div className="baby-left-3-btn-2-icon">
-                                    <img src={star} alt="" />
+                                    <img src={star} alt="" /> 
                                     <span>-0.5</span>
                                 </div>
                             </button>
@@ -29,10 +29,10 @@ function babyPage() {
                     </div>
                 </div>
                 <div className="right-main-babyG">
-                    <Upload_img uploadDetails={{ image: babyImage }} />
+                    <Upload_img uploadDetails={{ image: predictorImage }} />
                 </div>
             </div>
         </>
     )
 }
-export default babyPage;
+export default AgePredictor;
