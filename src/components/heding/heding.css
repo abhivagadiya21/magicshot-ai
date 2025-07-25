@@ -1,0 +1,62 @@
+.nevbar{
+    background-color: #1a1d1f;
+    padding: 20px 0px;
+    display: flex;
+}
+
+.logo-img {
+    width: 150px;
+    height: 36px;
+}
+
+.custom-navbar {
+  background-color: #1a1d1f !important;
+
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+.container-fluid{
+    display: flex;
+    justify-content: space-between
+}
+.dropdown-button{
+    background-color: #27272A;
+    border-radius: 10PX;
+    width: 200px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.Upgrade-plan{
+    background-color: black;
+    border-radius: 10PX;
+    gap: 5px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 6px 14px;
+    color: white;
+}
+.text-divayr{
+    color: white;
+}
+.auth-buttons {
+  background-color: #1a1d1f;
+}
+
+.btn-signup {
+  background-color: #a646ff; 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 500;
+}
+
+.btn-signup:hover {
+  background-color: #9226ff;
+}
+
