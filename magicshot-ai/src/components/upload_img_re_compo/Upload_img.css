@@ -59,10 +59,10 @@
 }
 
 .upload-container .upload-btn {
-  background-color: #a855f7;
+  background-color: hsl(273.96000000000004 100% 58.43% / 1);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 30px;
   font-weight: 500;
   font-size: 16px;
   border-radius: 8px;
