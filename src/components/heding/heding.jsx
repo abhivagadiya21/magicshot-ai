@@ -4,10 +4,10 @@ import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 
 const options = [
-    "baby-generator",
-    "age-predictor",
-    "age-journey",
-    "change-haircut",
+    <p onClick={() => navigate('/')}>baby-generator</p>,
+    <p>age-predictor</p>,
+    <p>age-journey</p>,
+    <p>change-haircut</p>,
 ];
 
 export default function Heading() {
