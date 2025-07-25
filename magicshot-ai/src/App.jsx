@@ -10,8 +10,8 @@ function App() {
   return (
     <>
     <Headers />
-      {/* <BabyPage /> */}
-      <ChagehaircutPage />
+      <BabyPage />
+      {/* <ChagehaircutPage /> */}
       {/* <AgeJourney /> */}
       {/* <AgePredictor /> */}
     </>
