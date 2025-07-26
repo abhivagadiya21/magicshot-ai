@@ -1,14 +1,34 @@
-import Upload_img from '../../components/upload_img_re_compo/Upload_img';
+import usePopup from '../../hooks/usePopup';
 import '../BabyGenrator_page/babyPage.css';
+import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import star from './babyG-img/star.svg'
 import babyImage from './babyG-img/babyG.png'
+import questionMark from './babyG-img/question.svg'
+import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
+import poppassimage1 from './babyG-img/poppassimg1.png';
+import { useState } from 'react';
 function babyPage() {
+    const { showPopup, handleOpen, handleClose } = usePopup();
+
     return (
         <>
             <div className="main-baby-genrartor">
                 <div className="left-main-babyG">
                     <div className="inner-left-1-babyG">
                         <h4>AI Baby Genrator</h4>
+                        <button onClick={handleOpen} className='btn-pop-up-howWork'>
+                            <img src={questionMark} alt="" />
+                            <span>How It Works</span>
+                        </button>
+                        {showPopup && (
+                            <Howworkpop
+                                howworkpopDetails={{
+                                    onClose: handleClose ,
+                                    image: poppassimage1,
+                                    message:"Upload your photos, and AI quickly generates an image of your future baby."
+                                }}
+                            />
+                        )}
                     </div>
                     <div className='inner-left-2-babyG'>
 

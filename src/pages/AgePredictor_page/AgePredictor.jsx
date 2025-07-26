@@ -1,14 +1,32 @@
+import usePopup from '../../hooks/usePopup';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
-import './agePredictor.css';
+// import './agePredictor.css';
+import poppassimg2 from '../BabyGenrator_page/babyG-img/poppassimg2.png';
 import star from '../BabyGenrator_page/babyG-img/star.svg'
 import predictorImage from './predictor_image/agepredictor.png';
+import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
+import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
 function AgePredictor() {
+    const { showPopup, handleOpen, handleClose } = usePopup();
     return (
         <>
             <div className="main-baby-genrartor">
                 <div className="left-main-babyG">
                     <div className="inner-left-1-babyG">
                         <h4>AI Age Predictor</h4>
+                        <button onClick={handleOpen} className='btn-pop-up-howWork'>
+                            <img src={questionMark} alt="" />
+                            <span>How It Works</span>
+                        </button>
+                        {showPopup && (
+                            <Howworkpop
+                                howworkpopDetails={{
+                                    onClose: handleClose ,
+                                    image: poppassimg2,
+                                    message:"Predict your age with AI. Upload and guess!"
+                                }}
+                            />
+                        )}
                     </div>
                     <div className='inner-left-2-babyG'>
 
