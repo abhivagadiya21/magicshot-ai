@@ -92,6 +92,50 @@
     box-sizing: border-box;
 }
 
+.inner-left-2-babyG {
+    padding: 15px;
+
+
+}
+
+.uplod-button-babyG {
+    color: hsl(240 5.03% 64.9% / 1);
+    background-color: hsl(240deg 3.7% 15.88%);
+    border: none;
+    outline: none;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.uplod-image-button {
+    color: white;
+}
+
+.plus-iocn {
+    font-size: 30px;
+}
+
+.icon-text {
+    font-size: 14px;
+}
+
+.Upload-img-lebal {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.upload-image-buttons{
+    display: flex;
+    gap: 80px;
+}
+
+
 /* responsive layout  yash thorugh*/
 @media (max-width: 768px) {
     .left-main-babyG {
