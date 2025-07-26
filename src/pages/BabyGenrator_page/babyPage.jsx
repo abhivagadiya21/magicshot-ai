@@ -31,8 +31,23 @@ function babyPage() {
                         )}
                     </div>
                     <div className='inner-left-2-babyG'>
+                        <div className='upload-image-buttons'>
 
+                            
+                        <div className='uplod-image-button'>
+                            <p className='Upload-img-lebal'>Your Image</p>
+                            
+                            <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
+
+                        </div>
+                         <div className='uplod-image-button'>
+                            <p className='Upload-img-lebal'>Your Partner's Image</p>
+                            
+                            <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
+
+                        </div>
                     </div>
+                        </div>
                     <div className="inner-left-3-babyG">
                         <div className='inner-1-for-left-3'>
                             <p>Est. time: 30 seconds to 50 seconds</p>

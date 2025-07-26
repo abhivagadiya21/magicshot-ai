@@ -5,10 +5,10 @@ import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate } from 'react-router-dom';
 
 const options = [
-    { label: 'baby-generator', path: '/' },
-    { label: 'age-predictor', path: '/age-predictor' },
-    { label: 'age-journey', path: '/age-journey' },
-    { label: 'change-haircut', path: '/change-haircut' },
+    { label: 'Baby-generator', path: '/' },
+    { label: 'Age-predictor', path: '/age-predictor' },
+    { label: 'Age-journey', path: '/age-journey' },
+    { label: 'Change-haircut', path: '/change-haircut' },
 ];
 
 export default function Heading() {
