@@ -32,7 +32,8 @@
     padding: 15px;
     border-bottom: 1px solid rgb(92, 91, 91);
     color: white;
-    font-weight: 900;;
+    font-weight: 900;
+    ;
 }
 
 .inner-left-1-babyG h4 {
@@ -130,29 +131,48 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
-.upload-image-buttons{
+
+.upload-image-buttons {
     display: flex;
     gap: 80px;
 }
 
 
-.baby-gender{
+.baby-gender {
     color: white;
     margin-top: 10px;
 }
 
-.gender-main-container{
+.gender-main-container {
+    margin-top: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 10px;
-    margin: 10px 0;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
-.male-main{
+.gender-btn.active {
+    background-color: #242424;
+    background-image: linear-gradient(#242424, #242424),
+        linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border: 2px double transparent;
+    color: white;
+}
+
+.gender-btn.inactive {
+    background-color: rgb(26 29 31);
+    border: 1px solid rgb(92, 91, 91);
+    color: white;
+}
+
+
+.male-main {
     width: 49%;
-    height: 35px;
-    background-color:#242424;
+    background-color: #242424;
     color: white;
     border: 3px double transparent;
     background-image: linear-gradient(#242424, #242424), linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
@@ -164,7 +184,7 @@
     border-width: 2px;
 }
 
-.female-main{
+.female-main {
     width: 49%;
     height: 35px;
     background-color: rgb(26 29 31);
