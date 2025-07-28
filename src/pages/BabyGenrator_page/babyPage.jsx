@@ -16,7 +16,6 @@ function BabyPage() {
     return (
         <div className="main-baby-genrartor">
             <div className="left-main-babyG">
-                {/* Header + How It Works */}
                 <div className="inner-left-1-babyG">
                     <h4>AI Baby Generator</h4>
                     <button onClick={handleOpen} className='btn-pop-up-howWork'>
