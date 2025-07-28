@@ -1,6 +1,9 @@
 .custom-navbar {
   background-color: #1a1d1f;
-  padding: 1rem;
+  padding: 17px 0px;
+  border-bottom: 1px solid #ffffff24;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 .navbar-container {
@@ -9,11 +12,13 @@
   justify-content: space-between;
   /* flex-wrap: wrap; */
   gap: 20px;
-  padding: 2.9px 0px;
+  padding: 2.9px 10px;
+  
 }
 
 .logo-img {
-  height: 40px;
+  width: 150px;
+  height: 36.33;
 }
 
 .hamburger {
@@ -34,6 +39,7 @@
 
 .dropdown {
   position: relative;
+  font-size: 14px;
 }
 
 .dropdown-button {
@@ -87,7 +93,7 @@
 
 .navbar-right {
   display: flex;
-  gap: 1rem;
+  gap:30px;
   align-items: center;
   float: inline-end;
 }
@@ -95,18 +101,20 @@
 .navbar-left {
   display: flex;
   align-items: center;
+  gap: 30px;
 }
 
 .upgrade-btn {
   background-color: black;
   color: white;
   border-radius: 10px;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   display: flex;
   align-items: center;
   gap: 5px;
   border: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .highlight-text {
@@ -115,7 +123,7 @@
 
 .auth-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 30px;
 }
 
 .signin-btn {
@@ -123,16 +131,18 @@
   border: none;
   color: white;
   cursor: pointer;
+ padding: 9px 0px;
+  font-size: 14px;
 }
 
 .signup-btn {
-  background-color: #a646ff;
+  background-color: hsl(273.96000000000004 100% 58.43% / 1);
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 0.4rem 1.2rem;
-  font-weight: 500;
+  padding: 9px 25px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .signup-btn:hover {

@@ -12,17 +12,16 @@
     width: 100%;
 }
 
-.left-main-babyG {
+.left-main-babyG-2 {
     /* width: 27.5%; */
     height: 100%;
     background-color: rgb(26 29 31);
     border: 1px solid rgb(92, 91, 91);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 396px;
-    min-width: 396px;
-    max-width: 396px;
+    width: 421px;
+    min-width: 421px;
+    max-width: 421px;
 }
 
 .inner-left-1-babyG {
@@ -38,13 +37,13 @@
     font-size: 20px;
 }
 
-.inner-left-3-babyG {
+.inner-left-3-babyG-2 {
     width: 100%;
     display: flex;
     padding: 15px 10px;
     border-top: 1px solid rgb(92, 91, 91);
     color: white;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .inner-1-for-left-3 p {
@@ -91,6 +90,103 @@
     color: rgb(209, 204, 204);
     box-sizing: border-box;
 }
+
+.upload-age-button {
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 10px;
+    background-color: #27272a;
+    color: hsl(240 5.03% 64.9% / 1);
+    border: none;
+    font-size: 14px;
+
+}
+
+.font-wirth {
+    font-weight: 600;
+    /* color: white; */
+}
+
+.font-size {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.plus-iocn-2 {
+    font-size: 36px;
+    /* font-weight: 500; */
+    line-height: 19px;
+    margin-bottom: 10px;
+}
+
+.Version-main-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding:5px 10px;
+    /* background-color: #eeeeee; */
+    margin-top: 20px;
+    border-radius: 10px;
+    justify-content: space-between;
+    color: white;
+    border: 1px solid rgb(92, 91, 91);
+    margin-bottom: 310px;
+}
+
+.version-main-left {
+    display: flex;
+    gap: 10px;
+}
+
+.version-text-1 {
+    font-size: 14px;
+    align-items: center;
+    margin-top: 3px;
+    color: hsl(240 5.03% 64.9% / 1);
+}
+
+.version-star-container {
+    border: 3px double transparent;
+    background-image: linear-gradient(#242424, #242424), linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 50px;
+    display: flex;
+    color: #ffffff;
+ 
+
+}
+
+.version-star-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+}
+
+.version-star-icon-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    font-size: 12px;
+    color: white;
+    gap: 4px;
+    font-weight: 500;
+
+}
+.version-main-right{
+    display: flex;
+    gap: 5px;
+
+}
+
+
+
 
 /* responsive layout  yash thorugh*/
 @media (max-width: 768px) {
