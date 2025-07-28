@@ -13,7 +13,7 @@ const options = [
 
 export default function Heading() {
     const navigate = useNavigate();
-    const [selected, setSelected] = useState("change-haircut");
+    const [selected, setSelected] = useState("Baby-generator");
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
