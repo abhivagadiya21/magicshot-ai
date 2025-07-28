@@ -19,7 +19,7 @@
     border: 1px solid rgb(92, 91, 91);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 421px;
     min-width: 421px;
     max-width: 421px;
@@ -66,8 +66,18 @@
     flex-direction: column;
 }
 
+.inner-1-for-left-3-1{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
 .inner-1-for-left-3 p {
-    font-size: 0.75rem;
+    font-size: 12px;
+    padding-bottom: 10px;
+    /* display: flex; */
 }
 
 .inner-2-for-left-3 {
@@ -113,8 +123,6 @@
 
 .inner-left-2-babyG {
     padding: 15px;
-
-
 }
 
 .uplod-button-babyG {
@@ -149,10 +157,92 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
-.upload-image-buttons{
+
+.upload-image-buttons {
     display: flex;
     gap: 80px;
 }
+
+
+.baby-gender {
+    color: white;
+    margin-top: 10px;
+}
+
+.gender-main-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.gender-btn.active {
+    background-color: #242424;
+    background-image: linear-gradient(#242424, #242424),
+        linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border: 2px double transparent;
+    color: white;
+}
+
+.gender-btn.inactive {
+    background-color: rgb(26 29 31);
+    border: 1px solid rgb(92, 91, 91);
+    color: white;
+}
+
+
+.male-main {
+    width: 49%;
+    background-color: #242424;
+    color: white;
+    border: 3px double transparent;
+    background-image: linear-gradient(#242424, #242424), linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-width: 2px;
+}
+
+.female-main {
+    width: 49%;
+    height: 35px;
+    background-color: rgb(26 29 31);
+    color: white;
+    border: 1px solid rgb(92, 91, 91);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-width: 2px;
+}
+.Version-main-container-babyG{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding:5px 10px;
+    /* background-color: #eeeeee; */
+    margin-top: 20px;
+    border-radius: 10px;
+    justify-content: space-between;
+    color: white;
+    border: 1px solid rgb(92, 91, 91);
+    margin-bottom: 189px;
+
+}
+
+
+
+
+
+
+
+
 
 
 /* responsive layout  yash thorugh*/
