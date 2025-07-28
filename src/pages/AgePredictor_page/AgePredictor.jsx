@@ -1,6 +1,6 @@
 import usePopup from '../../hooks/usePopup';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
-// import './agePredictor.css';
+import './agePredictor.css';
 import poppassimg2 from '../BabyGenrator_page/babyG-img/poppassimg2.png';
 import star from '../BabyGenrator_page/babyG-img/star.svg'
 import predictorImage from './predictor_image/agepredictor.png';
