@@ -1,0 +1,83 @@
+.popup-overlay-how-work {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box-how-work-main {
+    width: 25%;
+    /* height: 65%; */
+    background-color: rgb(26 29 31);
+    border-radius: 15px;
+    /* padding: 20px; */
+}
+
+.inner-1-pop-how-work {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.inner-1-1-pop-how-work {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+    column-gap: 10px;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.pop-question-img {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.how-work-pop-close-btn {
+    /* height: 1.2rem;
+    width: 1.2rem; */
+    border-radius: 50%;
+    /* border: 1px solid white; */
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 7px 0px 7px;
+}
+
+.inner-2-pop-how-work {
+    height: 70% ;
+    width: 100%;
+    padding: 0px 20px;
+}
+
+.pop-pass-image-work {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    /* object-fit: contain; */
+}
+.inner-3-pop-how-pop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 30px;
+    font-weight: normal;
+    font-size: .9rem;
+    text-align: center;
+    
+}

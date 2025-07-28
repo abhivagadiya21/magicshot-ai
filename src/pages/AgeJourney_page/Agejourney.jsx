@@ -1,14 +1,32 @@
+import usePopup from '../../hooks/usePopup';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
-import './ageJourney.css';
+// import './ageJourney.css';
+import poppassimg3 from '../BabyGenrator_page/babyG-img/poppassimg3.png';
 import star from '../BabyGenrator_page/babyG-img/star.svg';
 import journeyImage from './journey_image/agejourney.png'
+import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
+import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
 function AgeJourney() {
+    const { showPopup, handleOpen, handleClose } = usePopup();
     return (
         <>
             <div className="main-baby-genrartor">
                 <div className="left-main-babyG">
                     <div className="inner-left-1-babyG">
                         <h4>AI Age Journey</h4>
+                        <button onClick={handleOpen} className='btn-pop-up-howWork'>
+                            <img src={questionMark} alt="" />
+                            <span>How It Works</span>
+                        </button>
+                        {showPopup && (
+                            <Howworkpop
+                                howworkpopDetails={{
+                                    onClose: handleClose ,
+                                    image: poppassimg3,
+                                    message:"Generate your age journey in seconds with help of AI."
+                                }}
+                            />
+                        )}
                     </div>
                     <div className='inner-left-2-babyG'>
 

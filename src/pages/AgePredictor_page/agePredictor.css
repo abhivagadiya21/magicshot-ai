@@ -22,6 +22,10 @@
     width: 421px;
     min-width: 421px;
     max-width: 421px;
+    justify-content: space-between;
+    width: 421px;
+    min-width: 421px;
+    max-width: 421px;
 }
 
 .inner-left-1-babyG {
