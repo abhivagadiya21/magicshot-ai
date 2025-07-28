@@ -7,11 +7,11 @@ function Upload_img({uploadDetails}) {
                 <div className="inner-1-img-babyG">
                     <img src={uploadDetails.image} alt="Baby Generator" className='upload-img-props ' />
                 </div>
-                <div class="upload-container">
-                    <span class="plus-icon">+</span>
-                    <div class="text">Drag or choose your image</div>
-                    <div class="subtext">Max size 30 MB</div>
-                    <button class="upload-btn">Upload image</button>
+                <div className="upload-container">
+                    <span className="plus-icon">+</span>
+                    <div className="text">Drag or choose your image</div>
+                    <div className="subtext">Max size 30 MB</div>
+                    <button className="upload-btn">Upload image</button>
                 </div>
 
             </div>
