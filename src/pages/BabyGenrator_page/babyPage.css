@@ -23,6 +23,7 @@
     width: 396px;
     min-width: 396px;
     max-width: 396px;
+    border-top: none;
 }
 
 .inner-left-1-babyG {
@@ -31,7 +32,7 @@
     padding: 15px;
     border-bottom: 1px solid rgb(92, 91, 91);
     color: white;
-    font-weight: 900;
+    font-weight: 900;;
 }
 
 .inner-left-1-babyG h4 {
@@ -49,6 +50,7 @@
 
 .inner-1-for-left-3 p {
     font-size: 0.75rem;
+    padding-bottom: 10px;
 }
 
 .inner-2-for-left-3 {
@@ -94,8 +96,6 @@
 
 .inner-left-2-babyG {
     padding: 15px;
-
-
 }
 
 .uplod-button-babyG {
@@ -134,6 +134,55 @@
     display: flex;
     gap: 80px;
 }
+
+
+.baby-gender{
+    color: white;
+    margin-top: 10px;
+}
+
+.gender-main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    margin: 10px 0;
+}
+
+.male-main{
+    width: 49%;
+    height: 35px;
+    background-color:#242424;
+    color: white;
+    border: 3px double transparent;
+    background-image: linear-gradient(#242424, #242424), linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-width: 2px;
+}
+
+.female-main{
+    width: 49%;
+    height: 35px;
+    background-color: rgb(26 29 31);
+    color: white;
+    border: 1px solid rgb(92, 91, 91);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-width: 2px;
+}
+
+
+
+
+
+
+
+
 
 
 /* responsive layout  yash thorugh*/

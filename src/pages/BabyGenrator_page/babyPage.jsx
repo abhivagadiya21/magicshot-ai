@@ -2,6 +2,8 @@ import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import '../BabyGenrator_page/babyPage.css';
 import star from './babyG-img/star.svg'
 import babyImage from './babyG-img/babyG.png'
+
+
 function babyPage() {
     return (
         <>
@@ -13,21 +15,29 @@ function babyPage() {
                     <div className='inner-left-2-babyG'>
                         <div className='upload-image-buttons'>
 
-                            
-                        <div className='uplod-image-button'>
-                            <p className='Upload-img-lebal'>Your Image</p>
-                            
-                            <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
 
-                        </div>
-                         <div className='uplod-image-button'>
-                            <p className='Upload-img-lebal'>Your Partner's Image</p>
-                            
-                            <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
+                            <div className='uplod-image-button'>
+                                <p className='Upload-img-lebal'>Your Image</p>
 
+                                <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
+
+                            </div>
+                            <div className='uplod-image-button'>
+                                <p className='Upload-img-lebal'>Your Partner's Image</p>
+
+                                <button className='uplod-button-babyG'><p className='plus-iocn'>+</p><p className='icon-text'>Upload</p></button>
+                            </div>
                         </div>
+                        <div>
+                            <p className='baby-gender'>Baby's Gender</p>
+                        </div>
+
+                    <div className='gender-main-container'>
+                        <button className='male-main'>Male</button>
+                        <button className='female-main' >Female</button>
                     </div>
-                        </div>
+
+                    </div>
                     <div className="inner-left-3-babyG">
                         <div className='inner-1-for-left-3'>
                             <p>Est. time: 30 seconds to 50 seconds</p>
