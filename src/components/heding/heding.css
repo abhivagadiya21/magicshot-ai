@@ -1,9 +1,11 @@
 .custom-navbar {
-  background-color: #1a1d1f;
-  padding: 17px 0px;
-  border-bottom: 1px solid #ffffff24;
+  background-color: #15191c;
+  padding:9px 0px;
   padding-left: 7px;
   padding-right: 7px;
+  width: 100%;
+  border-radius: 15px;
+  border: 3px solid #262a2d;
 }
 
 .navbar-container {
@@ -43,9 +45,8 @@
 }
 
 .dropdown-button {
-  background-color: #27272A;
+  background-color: #1d2328;
   color: white;
-  border: none;
   border-radius: 10px;
   padding: 0.5rem 1rem;
   min-width: 200px;
@@ -53,6 +54,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 3px solid #262a2d;
 }
 
 .arrow {
@@ -63,12 +65,13 @@
   position: absolute;
   top: 110%;
   left: 0;
-  background-color: #27272A;
+  background-color: #1d2328;
   list-style: none;
   padding: 0.5rem 0;
   border-radius: 10px;
   z-index: 100;
   width: 100%;
+   border: 3px solid #262a2d; 
 }
 
 .dropdown-item {
@@ -123,20 +126,39 @@
 
 .auth-buttons {
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .signin-btn {
-  background: none;
-  border: none;
+  background:#1d2328; /* gradient added */
   color: white;
+  border-bottom: 1.5px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 10px;
+  padding: 9px 25px;
   cursor: pointer;
- padding: 9px 0px;
   font-size: 14px;
+  outline-style: solid;
+  outline-color: #262a2d;
+  outline-width: 3px;
+  outline: 3px solid #262a2d !important;
+  outline-offset: 0; /* keeps it tight */
 }
 
+/* Keep outline on focus/click */
+
+.signin-btn:active {
+  border-bottom: none;
+}
+
+
 .signup-btn {
-  background-color: hsl(273.96000000000004 100% 58.43% / 1);
+/* background: linear-gradient(90deg, #2a3a60 0%, #0d1117 100%);
+box-shadow: 0 0 6px rgba(32, 64, 128, 0.5); */
+/* background: linear-gradient(90deg, #1f2a48 0%, #141820 100%); */
+background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -161,7 +183,7 @@
  
 }
 .navbar-left {
-  position: relative !important; /* ensures dropdown positions correctly */
+  position: relative !important; 
 }
 
 
@@ -254,4 +276,9 @@
   font-size: 16px;
   margin: 0px;
   color: white;
+}
+.navbar-main-container{
+  display: flex;
+  justify-content:center;
+  padding: 13px;
 }

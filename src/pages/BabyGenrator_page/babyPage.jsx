@@ -3,20 +3,30 @@ import usePopup from '../../hooks/usePopup';
 import '../BabyGenrator_page/babyPage.css';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
-
 import star from './babyG-img/star.svg';
 import babyImage from './babyG-img/babyG.png';
 import questionMark from './babyG-img/question.svg';
 import poppassimage1 from './babyG-img/poppassimg1.png';
+import Profileicon1 from './babyG-img/profile-1.svg';
+import Profileicon2 from './babyG-img/profile-2.svg';
+import upload from './babyG-img/upload.svg';
+import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
+import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
+
 
 function BabyPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
-    const [gender, setGender] = useState('male');
+    const [selectedGender, setSelectedGender] = useState(null);
+
+    const handleGenderSelect = (gender) => {
+        setSelectedGender(gender);
+    };
 
     return (
-        <div className="main-baby-genrartor">
+        <div className="main-baby-genrartor-1">
             <div className="left-main-babyG">
-                <div className="inner-left-1-babyG">
+
+                <div className="inner-left-1-babyG-1">
                     <h4>AI Baby Generator</h4>
                     <button onClick={handleOpen} className='btn-pop-up-howWork'>
                         <img src={questionMark} alt="Help icon" />
@@ -34,73 +44,83 @@ function BabyPage() {
                     )}
                 </div>
 
-                {/* Upload Sections */}
                 <div className='inner-left-2-babyG'>
                     <div className='upload-image-buttons'>
                         <div className='uplod-image-button'>
-                            <p className='Upload-img-lebal'>Your Image</p>
                             <button className='uplod-button-babyG'>
-                                <p className='plus-iocn'>+</p>
-                                <p className='icon-text'>Upload</p>
+                                <div className='profile-icon-container'>
+                                    <img src={Profileicon1} alt="" />
+                                </div>
+                                <div className='icon-text-container'>
+                                    <p className='icon-text'>Parent 1</p>
+
+                                </div>
                             </button>
+                            <div className='img-upload-button-container'>
+                                <button className='uplod-button'>
+                                    <img className='upload-img-icon' src={upload} alt="" />
+                                    <p>Upload</p>
+                                </button>
+                            </div>
                         </div>
 
-                        <div className='uplod-image-button'>
-                            <p className='Upload-img-lebal'>Your Partner's Image</p>
-                            <button className='uplod-button-babyG'>
-                                <p className='plus-iocn'>+</p>
-                                <p className='icon-text'>Upload</p>
+                        <div className='uplod-image-button-Parent-2'>
+                            <button className='uplod-button-babyG-Parent-2'>
+                                <div className='profile-icon-container'>
+                                    <img src={Profileicon2} alt="" />
+
+                                </div>
+                                <div className='icon-text-container'>
+                                    <p className='icon-text'>Parent 2</p>
+
+                                </div>
+
                             </button>
+                            <div className='img-upload-button-container'>
+                                <button className='uplod-button upload-button-parent-2'>
+                                    <img className='upload-img-icon' src={upload} alt="" />
+                                    <p>Upload</p>
+                                </button>
+                            </div>
                         </div>
+
                     </div>
 
-                    {/* Gender Selection */}
                     <p className='baby-gender'>Baby's Gender</p>
                     <div className="gender-main-container">
+                        {/* Boy Option */}
                         <button
-                            className={`gender-btn male-main ${gender === 'male' ? 'active' : 'inactive'}`}
-                            onClick={() => setGender('male')}
+                            className={`gender-option ${selectedGender === 'boy' ? 'selected' : ''}`}
+                            onClick={() => handleGenderSelect('boy')}
                         >
-                            Male
+                            <div className="avatar-container">
+                                <img src={boyIcon} alt="Boy Avatar" className="gender-avatar-img" />
+                                <span className="avatar-text">Boy</span>
+                            </div>
+                            <div className={`button-container ${selectedGender === 'boy' ? 'checked' : ''}`}>
+                                {selectedGender === 'boy' && <span className="checkmark">✔</span>}
+                            </div>
                         </button>
+
+                        {/* Girl Option */}
                         <button
-                            className={`gender-btn female-main ${gender === 'female' ? 'active' : 'inactive'}`}
-                            onClick={() => setGender('female')}
+                            className={`gender-option ${selectedGender === 'girl' ? 'selected' : ''}`}
+                            onClick={() => handleGenderSelect('girl')}
                         >
-                            Female
+                            <div className="avatar-container">
+                                <img src={girlIcon} alt="Girl Avatar" className="gender-avatar-img" />
+                                <span className="avatar-text">Girl</span>
+                            </div>
+                            <div className={`button-container ${selectedGender === 'girl' ? 'checked' : ''}`}>
+                                {selectedGender === 'girl' && <span className="checkmark">✔</span>}
+                            </div>
                         </button>
                     </div>
-                
 
-                 <div className='Version-main-container-babyG'>
-                                            <div className='version-main-left'>  
-                                                <p className='version-text-1'>Version (optional)</p>
-                                                <div className='version-star-container'>
-                                                    <div className='version-star-icon-text-container'>
-                                                        
-                                                    <div className='version-star-icon'>
-                                                        <img src={star} alt="" />
-                                                    </div>
-                                                    <div className='version-star-text'> 
-                                                        <p>-0.5
-                
-                                                        </p>
-                                                    </div>
-                                                    </div>
-                
-                                                </div>
-                                            </div>
-                                            <div className='version-main-right'>
-                                                <p className='version-text-2'>Magic Plus</p>
-                                                <span>
-                                                    <svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" class="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
-                                                </span>
-                
-                
-                                            </div>
-                
-                                        </div>
-                                        </div>
+
+
+
+                </div>
 
                 {/* Footer */}
                 <div className="inner-left-3-babyG">
@@ -123,7 +143,8 @@ function BabyPage() {
             </div>
 
             {/* Right Side Image Section */}
-            <div className="right-main-babyG">
+            <div className="right-main-babyG-1">
+                <h1>AI Baby Generator</h1>
                 <Upload_img uploadDetails={{ image: babyImage }} />
             </div>
         </div>
@@ -131,3 +152,5 @@ function BabyPage() {
 }
 
 export default BabyPage;
+
+
