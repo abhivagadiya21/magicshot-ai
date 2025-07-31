@@ -6,13 +6,14 @@ import star from '../BabyGenrator_page/babyG-img/star.svg'
 import predictorImage from './predictor_image/agepredictor.png';
 import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
 import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
+
 function AgePredictor() {
     const { showPopup, handleOpen, handleClose } = usePopup();
     return (
         <>
-            <div className="main-baby-genrartor">
-                <div className="left-main-babyG-2">
-                    <div className="inner-left-1-babyG">
+            <div className="main-agePredictor">
+                <div className="left-main-agePredictor">
+                    <div className="inner-left-1-agePredictor">
                         <h4>AI Age Predictor</h4>
                         <button onClick={handleOpen} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
@@ -21,17 +22,17 @@ function AgePredictor() {
                         {showPopup && (
                             <Howworkpop
                                 howworkpopDetails={{
-                                    onClose: handleClose ,
+                                    onClose: handleClose,
                                     image: poppassimg2,
-                                    message:"Predict your age with AI. Upload and guess!"
+                                    message: "Predict your age with AI. Upload and guess!"
                                 }}
                             />
                         )}
                     </div>
-                    <div className='inner-left-2-babyG'>
-                        <div className='upload-image-age-container'>
-                            <div className='upload-image-age-button'>
-                                <button className='upload-age-button'>
+                    <div className='inner-left-2-agePredictor'>
+                        <div className='upload-image-agePredictor-container'>
+                            <div className='upload-image-agePredictor-button'>
+                                <button className='upload-agePredictor-button'>
                                     <p className='plus-iocn-2'>+</p>
                                     <p className='font-wirth'>Drag or choose your image</p>
                                     <p className='font-size'>Max size 30 MB</p>
@@ -43,38 +44,34 @@ function AgePredictor() {
                                 <p className='version-text-1'>Version (optional)</p>
                                 <div className='version-star-container'>
                                     <div className='version-star-icon-text-container'>
-                                        
-                                    <div className='version-star-icon'>
-                                        <img src={star} alt="" />
+                                        <div className='version-star-icon'>
+                                            <img src={star} alt="" />
+                                        </div>
+                                        <div className='version-star-text'> 
+                                            <p>-1</p>
+                                        </div>
                                     </div>
-                                    <div className='version-star-text'> 
-                                        <p>-1
-
-                                        </p>
-                                    </div>
-                                    </div>
-
                                 </div>
                             </div>
                             <div className='version-main-right'>
                                 <p className='version-text-2'>V1</p>
                                 <span>
-                                    <svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" class="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180"><path d="m6 9 6 6 6-6"></path></svg>
+                                    <svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" className="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180">
+                                        <path d="m6 9 6 6 6-6"></path>
+                                    </svg>
                                 </span>
-
-
                             </div>
-
                         </div>
                     </div>
-                    <div className="inner-left-3-babyG">
+                    <div className="inner-left-3-agePredictor">
                         <div className='inner-1-for-left-3'>
                             <p>Est. time: 30 seconds to 50 seconds</p>
                         </div>
                         <div className="inner-2-for-left-3">
-                            <button className='baby-left-3-btn-1'>See Pricing</button>
-                            <button className='baby-left-3-btn-2'>Generate
-                                < div className="baby-left-3-btn-2-icon">
+                            <button className='agePredictor-left-3-btn-1'>See Pricing</button>
+                            <button className='agePredictor-left-3-btn-2'>
+                                Generate
+                                <div className="agePredictor-left-3-btn-2-icon">
                                     <img src={star} alt="" /> 
                                     <span>-0.5</span>
                                 </div>
@@ -82,7 +79,7 @@ function AgePredictor() {
                         </div>
                     </div>
                 </div>
-                <div className="right-main-babyG">
+                <div className="right-main-agePredictor">
                     <Upload_img uploadDetails={{ image: predictorImage }} />
                 </div>
             </div>

@@ -1,6 +1,7 @@
 body {
   font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   overflow-y: hidden;
+  background-color: #1d2328;
 }
 *{
     margin: 0px;
