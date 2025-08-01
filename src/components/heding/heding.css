@@ -127,10 +127,12 @@
 .auth-buttons {
   display: flex;
   gap: 20px;
+  height: 40px;
+  /* background-color: aliceblue; */
 }
 
 .signin-btn {
-  background:#1d2328; /* gradient added */
+  background:#1d2328; 
   color: white;
   border-bottom: 1.5px solid black;
   border-top: none;
@@ -147,11 +149,9 @@
   outline-offset: 0; /* keeps it tight */
 }
 
-
 .signin-btn:active {
   border-bottom: none;
 }
-
 
 .signup-btn {
 /* background: linear-gradient(90deg, #2a3a60 0%, #0d1117 100%);
@@ -164,10 +164,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   padding: 9px 25px;
   cursor: pointer;
   font-size: 14px;
-}
-
-.signup-btn:hover {
-  background-color: #9226ff;
+  outline: none;
 }
 
 .navbar-hamburger-container {
