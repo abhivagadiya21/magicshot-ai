@@ -56,7 +56,7 @@
     padding: 4px 7px 4px 9px;
     column-gap: 5px;
     display: flex;
-  background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
+    background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
     text-wrap: nowrap;
     font-weight: 800;
     color: white;
@@ -122,7 +122,7 @@
     column-gap: 8px;
 }
 
-.baby-left-3-btn-2-icon-1 {
+.baby-left-3-btn-2-icon {
     width: 70px;
     /* background-color: rgb(130 34 204); */
     display: flex;
@@ -154,11 +154,10 @@
     border: none;
     box-shadow: 1px 1px 50px #181818;
     padding-top: 10px;
+    cursor: pointer;
+    overflow: hidden
 }
 
-.uplod-button-babyG:hover {
-    color: hsl(240 5.03% 64.9% / 1);
-}
 
 .uplod-button-babyG-Parent-2 {
     color: hsl(240 5.03% 64.9% / 1);
@@ -175,15 +174,13 @@
     padding-top: 10px;
     border: none;
     padding-bottom: 20px;
-}
-
-.uplod-button-babyG-Parent-2:hover {
-    color: hsl(240 5.03% 64.9% / 1);
+    overflow: hidden;
 }
 
 
-.uplod-image-button {
+.uplod-image-button-babyG {
     color: white;
+
 }
 
 .plus-iocn {
@@ -247,10 +244,6 @@
     height: 50px;
 }
 
-.profile-icon-container img {
-    width: 25px;
-}
-
 .profile-icon-container-Parent-2 {
     display: flex;
     justify-content: center;
@@ -300,7 +293,7 @@
 
 .uplod-button {
     position: relative;
-   background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
+    background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
     color: white;
     border-radius: 10px;
     border: none;
@@ -308,6 +301,9 @@
     padding: 7px 15px;
     gap: 10px;
     font-size: 0.85rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .upload-img-icon {
@@ -325,7 +321,7 @@
 
 .gender-selection-container {
     display: flex;
-    gap: 20px; 
+    gap: 20px;
     margin-top: 15px;
 }
 
@@ -355,7 +351,7 @@
     height: 30px;
     border-radius: 50%;
     margin-right: 8px;
-    object-fit: cover; 
+    object-fit: cover;
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -392,7 +388,7 @@
 
 .avatar-text {
     font-weight: 500;
-    font-size: 16px; 
+    font-size: 16px;
     color: #fff;
 }
 
@@ -407,4 +403,88 @@
     .right-main-babyG {
         display: none;
     }
+}
+
+
+.cropper-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #333;
+}
+
+.crop-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.cropped-preview img {
+    max-width: 200px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #4f46e5;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    background: #1d2328;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+.popup button.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+}
+
+.Parent-Icon {
+    width: 25px;
+}
+
+
+.hidden {
+    display: none;
 }

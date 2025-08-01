@@ -8,15 +8,18 @@ import babyImage from './babyG-img/babyG.png';
 import questionMark from './babyG-img/question.svg';
 import poppassimage1 from './babyG-img/poppassimg1.png';
 import Profileicon1 from './babyG-img/profile-1.svg';
-import Profileicon2 from './babyG-img/profile-2.svg';
 import upload from './babyG-img/upload.svg';
 import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
 import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
+import CropImage from "../../components/CropImage/CropImage";
+import useUploadImg from "../../hooks/useUploadImg";
 
 
 function BabyPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
     const [selectedGender, setSelectedGender] = useState(null);
+    const parent1Upload = useUploadImg();
+    const parent2Upload = useUploadImg();
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
@@ -46,44 +49,111 @@ function BabyPage() {
 
                 <div className='inner-left-2-babyG'>
                     <div className='upload-image-buttons'>
-                        <div className='uplod-image-button'>
-                            <button className='uplod-button-babyG'>
-                                <div className='profile-icon-container'>
-                                    <img src={Profileicon1} alt="" />
-                                </div>
-                                <div className='icon-text-container'>
-                                    <p className='icon-text'>Parent 1</p>
+                        <div className="uplod-image-button-Parent-2">
+                            <label className="uplod-button-babyG" htmlFor="parent1Input">
+                                {parent1Upload.croppedImage ? (
+                                    <img
+                                        src={parent1Upload.croppedImage}
+                                        alt="Parent 1"
+                                        className="preview-img"
+                                    />
+                                ) : (
+                                    <>
+                                        <div className="profile-icon-container">
+                                            <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                        </div>
+                                        <p>Parent 1</p>
+                                    </>
+                                )}
+                            </label>
 
-                                </div>
-                            </button>
                             <div className='img-upload-button-container'>
-                                <button className='uplod-button'>
-                                    <img className='upload-img-icon' src={upload} alt="" />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="parent1Input"
+                                    className="hidden"
+                                    onChange={parent1Upload.handleFileUpload}
+                                />
+
+                                <label htmlFor="parent1Input" className="uplod-button">
+                                    <img className="upload-img-icon" src={upload} alt="Upload Icon" />
                                     <p>Upload</p>
-                                </button>
+                                </label>
                             </div>
+                            {/* Cropper Modal */}
+                            {parent1Upload.showCropper && (
+                                <div className="overlay">
+                                    <div className="popup">
+                                        <button
+                                            className="close-btn"
+                                            onClick={() => parent1Upload.setShowCropper(false)}
+                                        >
+                                            ✖
+                                        </button>
+                                        <CropImage
+                                            imageSrc={parent1Upload.selectedFile}
+                                            onCropDone={parent1Upload.handleCropComplete}
+                                            onCancel={() => parent1Upload.setShowCropper(false)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
                         </div>
 
-                        <div className='uplod-image-button-Parent-2'>
-                            <button className='uplod-button-babyG-Parent-2'>
-                                <div className='profile-icon-container'>
-                                    <img src={Profileicon2} alt="" />
+                        <div className="uplod-image-button-Parent-2">
+                            <label className="uplod-button-babyG" htmlFor="parent2Input">
+                                {parent2Upload.croppedImage ? (
+                                    <img
+                                        src={parent2Upload.croppedImage}
+                                        alt="Parent 2"
+                                        className="preview-img"
+                                    />
+                                ) : (
+                                    <>
+                                        <div className="profile-icon-container">
+                                            <img src={Profileicon1} alt="Parent 2 Icon" className='Parent-Icon' />
+                                        </div>
+                                        <p>Parent 2</p>
+                                    </>
+                                )}
+                            </label>
 
-                                </div>
-                                <div className='icon-text-container'>
-                                    <p className='icon-text'>Parent 2</p>
-
-                                </div>
-
-                            </button>
                             <div className='img-upload-button-container'>
-                                <button className='uplod-button upload-button-parent-2'>
-                                    <img className='upload-img-icon' src={upload} alt="" />
-                                    <p>Upload</p>
-                                </button>
-                            </div>
-                        </div>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="parent2Input"
+                                    className="hidden"
+                                    onChange={parent2Upload.handleFileUpload}
+                                />
 
+                                <label htmlFor="parent2Input" className="uplod-button">
+                                    <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                    <p>Upload</p>
+                                </label>
+                            </div>
+                            {/* Cropper Modal */}
+                            {parent2Upload.showCropper && (
+                                <div className="overlay">
+                                    <div className="popup">
+                                        <button
+                                            className="close-btn"
+                                            onClick={() => parent2Upload.setShowCropper(false)}
+                                        >
+                                            ✖
+                                        </button>
+                                        <CropImage
+                                            imageSrc={parent2Upload.selectedFile}
+                                            onCropDone={parent2Upload.handleCropComplete}
+                                            onCancel={() => parent2Upload.setShowCropper(false)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
                     </div>
 
                     <p className='baby-gender'>Baby's Gender</p>
@@ -116,10 +186,6 @@ function BabyPage() {
                             </div>
                         </button>
                     </div>
-
-
-
-
                 </div>
 
                 {/* Footer */}
