@@ -147,7 +147,6 @@
   outline-offset: 0; /* keeps it tight */
 }
 
-/* Keep outline on focus/click */
 
 .signin-btn:active {
   border-bottom: none;
