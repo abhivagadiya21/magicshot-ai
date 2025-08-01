@@ -36,6 +36,7 @@
     max-width: 421px;
     border-radius: 15px;
     border: 3px solid #262a2d;
+    overflow-y: scroll;
 }
 
 .inner-left-1-changeHair {
@@ -76,7 +77,9 @@
     color: white;
     flex-direction: column;
     position: sticky;
-    top: 100%;
+    bottom: 0;
+    /* top: 100%; */
+    background-color: #15191c;
     z-index: 999;
 }
 
@@ -134,13 +137,14 @@
 
 .inner-left-2-changeHair {
     padding: 15px;
+    /* background-color: #3231d3; */
 }
 
 .uplod-button-changeHair {
     color: hsl(240 5.03% 64.9% / 1);
     background-color: #1d2328;
     outline: none;
-    width: 165px;
+    width: 100%;
     height: 150px;
     display: flex;
     align-items: center;
@@ -186,7 +190,7 @@
     font-size: 30px;
 }
 
-.icon-text {
+.icon-text-changeHair {
     font-size: 14px;
     margin-top: 5px;
 }
@@ -232,7 +236,7 @@
     color: white;
 }
 
-.profile-icon-container {
+.profile-icon-container-changeHair {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -242,7 +246,7 @@
     height: 50px;
 }
 
-.profile-icon-container img {
+.profile-icon-container-changeHair img {
     width: 25px;
 }
 
@@ -260,7 +264,7 @@
     width: 25px;
 }
 
-.icon-text-container {
+.icon-text-container-changeHair {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -305,11 +309,11 @@
     font-size: 0.85rem;
 }
 
-.upload-img-icon {
+.upload-img-icon-changeHair {
     width: 15px;
 }
 
-.img-upload-button-container {
+.img-upload-button-container-changeHair {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -319,7 +323,7 @@
 
 .gender-selection-container {
     display: flex;
-    gap: 20px; 
+    gap: 20px;
     margin-top: 15px;
 }
 
@@ -344,7 +348,7 @@
     height: 30px;
     border-radius: 50%;
     margin-right: 8px;
-    object-fit: cover; 
+    object-fit: cover;
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -379,9 +383,92 @@
 
 .avatar-text {
     font-weight: 500;
-    font-size: 16px; 
+    font-size: 16px;
     color: #fff;
 }
+.inner-2-left-in-tab-btnshow-div-changeHair{
+    display: flex;
+    
+}
+
+
+/* .tab-btn-1-chageHair:focus,
+.tab-btn-2-chageHair:focus {
+    border-bottom: 2px solid #c589e4;
+} */
+
+.inner-2-left-in-tab-btn-changeHair {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    column-gap: 60px;
+
+}
+
+.tab-btn-1-chageHair,
+.tab-btn-2-chageHair {
+    width: 30%;
+    padding: 10px;
+    font-size: 0.8rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.active-tab{
+    border-bottom: 2px solid #c589e4;
+}
+
+.tab1-content-changeHair {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+
+.tab1-inner-1-content {
+    display: flex;
+    width: 32%;
+    padding: 1.5%;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.tab1-inner-1-content-img-div-hair {
+    display: flex;
+
+
+}
+
+.tab1-inner-1-content p {
+    color: white;
+}
+
+.tab1-content-inner-1-img-hair {
+
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
     .left-main-changeHair {
