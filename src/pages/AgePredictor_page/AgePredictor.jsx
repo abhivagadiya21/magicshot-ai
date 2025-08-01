@@ -6,6 +6,9 @@ import star from '../BabyGenrator_page/babyG-img/star.svg'
 import predictorImage from './predictor_image/agepredictor.png';
 import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
 import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
+import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
+import upload from '../BabyGenrator_page/babyG-img/upload.svg';
+
 
 function AgePredictor() {
     const { showPopup, handleOpen, handleClose } = usePopup();
@@ -30,38 +33,24 @@ function AgePredictor() {
                         )}
                     </div>
                     <div className='inner-left-2-agePredictor'>
-                        <div className='upload-image-agePredictor-container'>
-                            <div className='upload-image-agePredictor-button'>
-                                <button className='upload-agePredictor-button'>
-                                    <p className='plus-iocn-2'>+</p>
-                                    <p className='font-wirth'>Drag or choose your image</p>
-                                    <p className='font-size'>Max size 30 MB</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='Version-main-container'>
-                            <div className='version-main-left'>  
-                                <p className='version-text-1'>Version (optional)</p>
-                                <div className='version-star-container'>
-                                    <div className='version-star-icon-text-container'>
-                                        <div className='version-star-icon'>
-                                            <img src={star} alt="" />
-                                        </div>
-                                        <div className='version-star-text'> 
-                                            <p>-1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='version-main-right'>
-                                <p className='version-text-2'>V1</p>
-                                <span>
-                                    <svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" className="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180">
-                                        <path d="m6 9 6 6 6-6"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
+                        
+                        <div className='uplod-image-button'>
+                                                    <button className='uplod-button-agePredictor'>
+                                                        <div className='profile-icon-container'>
+                                                            <img src={Profileicon1} alt="" />
+                                                        </div>
+                                                        <div className='icon-text-container'>
+                                                            <p className='icon-text'>Drag or choose your image</p>
+                        
+                                                        </div>
+                                                    </button>
+                                                    <div className='img-upload-button-container'>
+                                                        <button className='uplod-button'>
+                                                            <img className='upload-img-icon' src={upload} alt="" />
+                                                            <p>Upload</p>
+                                                        </button>
+                                                    </div>
+                                                </div>
                     </div>
                     <div className="inner-left-3-agePredictor">
                         <div className='inner-1-for-left-3'>
