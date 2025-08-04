@@ -409,15 +409,15 @@
 .cropper-container {
     position: relative;
     width: 100%;
-    height: 400px;
-    background: #333;
+    height: 350px;
+    background: #1d2328;
+    margin: auto;
+    display: flex;
 }
 
 .crop-buttons {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-top: 12px;
     position: relative;
     z-index: 10;
 }
@@ -453,10 +453,10 @@
 
 .popup {
     background: #1d2328;
-    padding: 20px;
+    padding: 15px;
     border-radius: 12px;
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 700px;
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.6);
     position: relative;
 }
@@ -470,6 +470,16 @@
     font-size: 20px;
     color: white;
     cursor: pointer;
+}
+.cropper-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+ justify-content: center;
+
 }
 
 .preview-img {
@@ -487,4 +497,65 @@
 
 .hidden {
     display: none;
+}
+.crop-buttons{
+   background-color: #15191c;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    border: 3px solid #262a2d;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.cropper-content-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.cropper-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.retio-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #1d2328;
+    border-radius: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 8px 10px;
+}
+.left-rotesan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #1d2328;
+    padding: 8px 60px;
+    border-radius: 15px;
+    text-align: center;
+    width: 25px;
+    border: none;
+    color: white;
+    text-wrap: nowrap;
+}
+.roted-img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+.select-img-button{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 15px;
+     background-color: #15191c;
+    color: white;
+     border: 3px solid #262a2d;
+    padding: 10px;
+
 }

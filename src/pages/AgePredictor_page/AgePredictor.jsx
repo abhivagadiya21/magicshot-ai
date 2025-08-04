@@ -8,10 +8,20 @@ import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
 import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
 import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
+import CropImage from "../../components/CropImage/CropImage";
+import useUploadImg from "../../hooks/useUploadImg";
+import { useState } from "react";
 
 
 function AgePredictor() {
     const { showPopup, handleOpen, handleClose } = usePopup();
+    const [selectedGender, setSelectedGender] = useState(null);
+    const parent1Upload = useUploadImg();
+
+    const handleGenderSelect = (gender) => {
+        setSelectedGender(gender);
+    };
+
     return (
         <>
             <div className="main-agePredictor">
@@ -32,25 +42,72 @@ function AgePredictor() {
                             />
                         )}
                     </div>
-                    <div className='inner-left-2-agePredictor'>
-                        
-                        <div className='uplod-image-button'>
-                                                    <button className='uplod-button-agePredictor'>
-                                                        <div className='profile-icon-container'>
-                                                            <img src={Profileicon1} alt="" />
-                                                        </div>
-                                                        <div className='icon-text-container'>
-                                                            <p className='icon-text'>Drag or choose your image</p>
-                        
-                                                        </div>
-                                                    </button>
-                                                    <div className='img-upload-button-container'>
-                                                        <button className='uplod-button'>
-                                                            <img className='upload-img-icon' src={upload} alt="" />
-                                                            <p>Upload</p>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                    <div className="uplod-image-button-Parent-2">
+                        <label className="uplod-button-agePredictor" htmlFor="parent1Input">
+                            {parent1Upload.croppedImage ? (
+                                <img
+                                    src={parent1Upload.croppedImage}
+                                    alt="Parent 1"
+                                    className="preview-img"
+                                />
+                            ) : (
+                                <>
+                                    <div className="profile-icon-container">
+                                        <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                    </div>
+                                    <p>Parent 1</p>
+                                </>
+                            )}
+                        </label>
+
+                        <div className='img-upload-button-container'>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                id="parent1Input"
+                                className="hidden"
+                                onChange={parent1Upload.handleFileUpload}
+                                disabled={!!parent1Upload.croppedImage}
+                            />
+
+                            {!parent1Upload.croppedImage ? (
+                                <label htmlFor="parent1Input" className="uplod-button">
+                                    <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                    <p>Upload</p>
+                                </label>
+                            ) : (
+                                <button
+                                    type="button"
+                                    className="uplod-button"
+                                    onClick={() => {
+                                        parent1Upload.resetImage(); 
+                                        const input = document.getElementById("parent1Input");
+                                        if (input) input.value = ""; 
+                                    }}
+                                >
+                                    ✖ Cancel
+                                </button>
+                            )}
+                        </div>
+
+                        {parent1Upload.showCropper && (
+                            <div className="overlay">
+                                <div className="popup">
+                                    <button
+                                        className="close-btn"
+                                        onClick={() => parent1Upload.setShowCropper(false)}
+                                    >
+                                        ✖
+                                    </button>
+                                    <CropImage
+                                        imageSrc={parent1Upload.selectedFile}
+                                        onCropDone={parent1Upload.handleCropComplete}
+                                        onCancel={() => parent1Upload.setShowCropper(false)}
+                                    />
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                     <div className="inner-left-3-agePredictor">
                         <div className='inner-1-for-left-3'>
@@ -61,7 +118,7 @@ function AgePredictor() {
                             <button className='agePredictor-left-3-btn-2'>
                                 Generate
                                 <div className="agePredictor-left-3-btn-2-icon">
-                                    <img src={star} alt="" /> 
+                                    <img src={star} alt="" />
                                     <span>-0.5</span>
                                 </div>
                             </button>

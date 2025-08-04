@@ -140,7 +140,7 @@
     color: hsl(240 5.03% 64.9% / 1);
     background-color: #1d2328;
     outline: none;
-    width: 100%;
+    width: 95%;
     height: 150px;
     display: flex;
     align-items: center;
@@ -151,6 +151,7 @@
     border: none;
     box-shadow: 1px 1px 50px #181818;
     padding-top: 10px;
+    margin-left: 10px;
 }
 
 .uplod-button-agePredictor:hover {

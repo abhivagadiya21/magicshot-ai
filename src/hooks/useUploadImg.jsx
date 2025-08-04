@@ -16,16 +16,28 @@ function useUploadImg() {
       };
       reader.readAsDataURL(file);
     }
+
+    event.target.value = "";
   };
 
-  const handleCropComplete = async (croppedAreaPixels) => {
+  const handleCropComplete = async (croppedAreaPixels, rotation = 0) => {
     try {
-      const croppedImg = await getCroppedImg(selectedFile, croppedAreaPixels);
+      const croppedImg = await getCroppedImg(
+        selectedFile,
+        croppedAreaPixels,
+        rotation
+      );
       setCroppedImage(croppedImg);
       setShowCropper(false);
     } catch (error) {
       console.error("Crop failed:", error);
     }
+  };
+
+  const resetImage = () => {
+    setSelectedFile(null);
+    setCroppedImage(null);
+    setShowCropper(false);
   };
 
   return {
@@ -35,6 +47,7 @@ function useUploadImg() {
     setShowCropper,
     handleFileUpload,
     handleCropComplete,
+    resetImage,
   };
 }
 
