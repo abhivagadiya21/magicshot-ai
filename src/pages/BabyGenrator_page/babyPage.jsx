@@ -14,7 +14,6 @@ import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
 import CropImage from "../../components/CropImage/CropImage";
 import useUploadImg from "../../hooks/useUploadImg";
 
-
 function BabyPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
     const [selectedGender, setSelectedGender] = useState(null);
@@ -60,28 +59,43 @@ function BabyPage() {
                                 ) : (
                                     <>
                                         <div className="profile-icon-container">
-                                            <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                            <img src={Profileicon1} alt="Parent 1 Icon" className="Parent-Icon" />
                                         </div>
                                         <p>Parent 1</p>
                                     </>
                                 )}
                             </label>
 
-                            <div className='img-upload-button-container'>
+                            <div className="img-upload-button-container">
                                 <input
                                     type="file"
                                     accept="image/*"
                                     id="parent1Input"
                                     className="hidden"
                                     onChange={parent1Upload.handleFileUpload}
+                                    disabled={!!parent1Upload.croppedImage}
                                 />
 
-                                <label htmlFor="parent1Input" className="uplod-button">
-                                    <img className="upload-img-icon" src={upload} alt="Upload Icon" />
-                                    <p>Upload</p>
-                                </label>
+                                {!parent1Upload.croppedImage ? (
+                                    <label htmlFor="parent1Input" className="uplod-button">
+                                        <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                        <p>Upload</p>
+                                    </label>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="uplod-button"
+                                        onClick={() => {
+                                            parent1Upload.resetImage();
+                                            const input = document.getElementById("parent1Input");
+                                            if (input) input.value = "";
+                                        }}
+                                    >
+                                        ✖ Cancel
+                                    </button>
+                                )}
                             </div>
-                            {/* Cropper Modal */}
+
                             {parent1Upload.showCropper && (
                                 <div className="overlay">
                                     <div className="popup">
@@ -91,6 +105,9 @@ function BabyPage() {
                                         >
                                             ✖
                                         </button>
+                                        <div className="cropper-header">
+                                            <p>Crop Image</p>
+                                        </div>
                                         <CropImage
                                             imageSrc={parent1Upload.selectedFile}
                                             onCropDone={parent1Upload.handleCropComplete}
@@ -99,8 +116,9 @@ function BabyPage() {
                                     </div>
                                 </div>
                             )}
-
                         </div>
+
+
 
                         <div className="uplod-image-button-Parent-2">
                             <label className="uplod-button-babyG" htmlFor="parent2Input">
@@ -127,12 +145,27 @@ function BabyPage() {
                                     id="parent2Input"
                                     className="hidden"
                                     onChange={parent2Upload.handleFileUpload}
+                                    disabled={!!parent2Upload.croppedImage}
                                 />
 
-                                <label htmlFor="parent2Input" className="uplod-button">
-                                    <img className="upload-img-icon" src={upload} alt="Upload Icon" />
-                                    <p>Upload</p>
-                                </label>
+                                {!parent2Upload.croppedImage ? (
+                                    <label htmlFor="parent2Input" className="uplod-button">
+                                        <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                        <p>Upload</p>
+                                    </label>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="uplod-button"
+                                        onClick={() => {
+                                            parent2Upload.resetImage();
+                                            const input = document.getElementById("parent2Input");
+                                            if (input) input.value = "";
+                                        }}
+                                    >
+                                        ✖ Cancel
+                                    </button>
+                                )}
                             </div>
                             {/* Cropper Modal */}
                             {parent2Upload.showCropper && (

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import usePopup from '../../hooks/usePopup';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import './ageJourney.css';
-
 import poppassimg3 from '../BabyGenrator_page/babyG-img/poppassimg3.png';
 import star from '../BabyGenrator_page/babyG-img/star.svg';
 import journeyImage from './journey_image/agejourney.png';
@@ -10,15 +9,24 @@ import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
 import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
 import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
+import CropImage from "../../components/CropImage/CropImage";
+import useUploadImg from "../../hooks/useUploadImg";
+
 
 function AgeJourney() {
     const { showPopup, handleOpen, handleClose } = usePopup();
+    const [selectedGender, setSelectedGender] = useState(null);
+    const parent1Upload = useUploadImg();
+
+    const handleGenderSelect = (gender) => {
+        setSelectedGender(gender);
+    };
 
     const sliderInputRef = useRef(null);
     const sliderThumbRef = useRef(null);
     const sliderLineRef = useRef(null);
 
-    const [sliderValue, setSliderValue] = useState(50); // NEW state to hold slider value
+    const [sliderValue, setSliderValue] = useState(50); 
 
     const showSliderValue = () => {
         const slider_input = sliderInputRef.current;
@@ -74,25 +82,73 @@ function AgeJourney() {
                 </div>
 
                 <div className="inner-left-2-ageJourney">
-                    <div className="uplod-image-button">
-                        <button className="uplod-button-ageJourney">
-                            <div className="profile-icon-container">
-                                <img src={Profileicon1} alt="" />
-                            </div>
-                            <div className="icon-text-container">
-                                <p className="icon-text">Drag or choose your image</p>
-                            </div>
-                        </button>
-                        <div className="img-upload-button-container">
-                            <button className="uplod-button">
-                                <img className="upload-img-icon" src={upload} alt="" />
+                    <label className="uplod-button-ageJourney" htmlFor="parent1Input">
+                        {parent1Upload.croppedImage ? (
+                            <img
+                                src={parent1Upload.croppedImage}
+                                alt="Parent 1"
+                                className="preview-img"
+                            />
+                        ) : (
+                            <>
+                                <div className="profile-icon-container">
+                                    <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                </div>
+                                <p>Parent 1</p>
+                            </>
+                        )}
+                    </label>
+
+                    <div className='img-upload-button-container'>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            id="parent1Input"
+                            className="hidden"
+                            onChange={parent1Upload.handleFileUpload}
+                            disabled={!!parent1Upload.croppedImage}
+                        />
+
+                        {!parent1Upload.croppedImage ? (
+                            <label htmlFor="parent1Input" className="uplod-button">
+                                <img className="upload-img-icon" src={upload} alt="Upload Icon" />
                                 <p>Upload</p>
+                            </label>
+                        ) : (
+                            <button
+                                type="button"
+                                className="uplod-button"
+                                onClick={() => {
+                                    parent1Upload.resetImage(); // ✅ clean state
+                                    const input = document.getElementById("parent1Input");
+                                    if (input) input.value = ""; // reset file input
+                                }}
+                            >
+                                ✖ Cancel
                             </button>
-                        </div>
+                        )}
                     </div>
+                    {parent1Upload.showCropper && (
+                        <div className="overlay">
+                            <div className="popup">
+                                <button
+                                    className="close-btn"
+                                    onClick={() => parent1Upload.setShowCropper(false)}
+                                >
+                                    ✖
+                                </button>
+                                <CropImage
+                                    imageSrc={parent1Upload.selectedFile}
+                                    onCropDone={parent1Upload.handleCropComplete}
+                                    onCancel={() => parent1Upload.setShowCropper(false)}
+                                />
+                            </div>
+                        </div>
+                    )}
+
 
                     <div>
-                        <p className="select-age">Select End Age <strong>{sliderValue}</strong></p> 
+                        <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
                     </div>
 
                     <div className="container">

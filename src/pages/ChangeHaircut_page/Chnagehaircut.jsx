@@ -19,17 +19,20 @@ import style5 from './hairstyle_image/hairstyle5.png';
 import style6 from './hairstyle_image/hairstyle6.png';
 import style7 from './hairstyle_image/hairstyle7.png';
 import color1 from './hairstyle_image/haircolor1.png';
-import color2 from './hairstyle_image/haircolor2.png';  
+import color2 from './hairstyle_image/haircolor2.png';
 import color3 from './hairstyle_image/haircolor3.png';
 import color4 from './hairstyle_image/haircolor4.png';
 import color5 from './hairstyle_image/haircolor5.png';
 import color6 from './hairstyle_image/haircolor6.png';
 import color7 from './hairstyle_image/haircolor7.png';
+import CropImage from "../../components/CropImage/CropImage";
+import useUploadImg from "../../hooks/useUploadImg";
 
 function ChangehaircutPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
     const [selectedGender, setSelectedGender] = useState(null);
     const [activeTab, setActiveTab] = useState('tab1');
+    const parent1Upload = useUploadImg();
 
 
     const handleGenderSelect = (gender) => {
@@ -58,20 +61,71 @@ function ChangehaircutPage() {
                     </div>
                     <div className='inner-left-2-changeHair'>
                         <div className='inner-left-2-in-upload-div'>
-                            <button className='uplod-button-changeHair'>
-                                <div className='profile-icon-container-changeHair'>
-                                    <img src={Profileicon1} alt="" />
-                                </div>
-                                <div className='icon-text-container-changeHair'>
-                                    <p className='icon-text-changeHair'>Upload</p>
-                                </div>
-                            </button>
-                            <div className='img-upload-button-container-changeHair'>
-                                <button className='uplod-button'>
-                                    <img className='upload-img-icon-changeHair' src={upload} alt="" />
-                                    <p>Upload</p>
-                                </button>
+                            <label className="uplod-button-changeHair" htmlFor="parent1Input">
+                                {parent1Upload.croppedImage ? (
+                                    <img
+                                        src={parent1Upload.croppedImage}
+                                        alt="Parent 1"
+                                        className="preview-img"
+                                    />
+                                ) : (
+                                    <>
+                                        <div className="profile-icon-container">
+                                            <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                        </div>
+                                        <p>Parent 1</p>
+                                    </>
+                                )}
+                            </label>
+
+                            <div className='img-upload-button-container'>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="parent1Input"
+                                    className="hidden"
+                                    onChange={parent1Upload.handleFileUpload}
+                                    disabled={!!parent1Upload.croppedImage}
+                                />
+
+                                {!parent1Upload.croppedImage ? (
+                                    <label htmlFor="parent1Input" className="uplod-button">
+                                        <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                        <p>Upload</p>
+                                    </label>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="uplod-button"
+                                        onClick={() => {
+                                            parent1Upload.resetImage(); 
+                                            const input = document.getElementById("parent1Input");
+                                            if (input) input.value = ""; 
+                                        }}
+                                    >
+                                        ✖ Cancel
+                                    </button>
+                                )}
                             </div>
+                            {/* Cropper Modal */}
+                            {parent1Upload.showCropper && (
+                                <div className="overlay">
+                                    <div className="popup">
+                                        <button
+                                            className="close-btn"
+                                            onClick={() => parent1Upload.setShowCropper(false)}
+                                        >
+                                            ✖
+                                        </button>
+                                        <CropImage
+                                            imageSrc={parent1Upload.selectedFile}
+                                            onCropDone={parent1Upload.handleCropComplete}
+                                            onCancel={() => parent1Upload.setShowCropper(false)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
                         </div>
 
 
@@ -115,11 +169,41 @@ function ChangehaircutPage() {
                             <button onClick={() => setActiveTab('tab2')}
                                 // className='tab-btn-2-chageHair'
                                 className={`tab-btn-2-chageHair ${activeTab === 'tab2' ? 'active-tab' : ''}`}
-                                >hair Color</button>
+                            >hair Color</button>
                         </div>
                         <div className="inner-2-left-in-tab-btnshow-div-changeHair">
                             {activeTab === 'tab1' && (
                                 <div className="tab1-content-changeHair">
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
                                     <div className='tab1-inner-1-content'>
                                         <div className='tab1-inner-1-content-img-div-hair'>
                                             <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
@@ -170,7 +254,37 @@ function ChangehaircutPage() {
                                 </div>
                             )}
                             {activeTab === 'tab2' && (
-                                 <div className="tab1-content-changeHair">
+                                <div className="tab1-content-changeHair">
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
                                     <div className='tab1-inner-1-content'>
                                         <div className='tab1-inner-1-content-img-div-hair'>
                                             <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
