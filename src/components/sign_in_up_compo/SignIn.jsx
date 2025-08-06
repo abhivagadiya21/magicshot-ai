@@ -1,16 +1,60 @@
-import { Link } from "react-router-dom"; 
-const SignIn = () => {
-  return (
-    <form style={{ color: "#9c6fff", textDecoration: "none" }}>
-      <input type="email" placeholder="Email Address" />
-      <input type="password" placeholder="Password" />
-      <div style={{ textAlign: "right", marginBottom: "1rem" }}>
-        <Link to="../forgot-password" style={{ color: "#9c6fff", textDecoration: "none" }}>Forgot Password?</Link>
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./signin.css"; // Optional: Custom styles if needed
 
+function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // You can replace this with actual login API logic
+    console.log("Logging in with:", { email, password });
+    alert("Login successful (demo)!");
+
+    // Optional: Redirect after login
+    // navigate('/dashboard');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="signin-form">
+      <div className="form-group">
+        <label>Email Address</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
-      <button>Login</button>
+
+      <div className="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <button type="submit" className="form-submit-btn">Sign In</button>
+
+      <p className="form-footer">
+        Forgot your password?{" "}
+        <span
+          className="forgot-link"
+          onClick={() => navigate("/sign-in-up/forgot-password")}
+        >
+          Reset here
+        </span>
+      </p>
     </form>
   );
-};
+}
 
 export default SignIn;

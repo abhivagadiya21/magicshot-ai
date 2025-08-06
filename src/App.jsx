@@ -25,7 +25,7 @@ function App() {
           <Route path="/change-haircut" element={<ChagehaircutPage />} />
         </Route>
        
-        <Route path="/sign-in-up" element={<CoverPagesing />} >
+        <Route path="/auth" element={<CoverPagesing />} >
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="forgot-password" element={<ForgotPassword />} />

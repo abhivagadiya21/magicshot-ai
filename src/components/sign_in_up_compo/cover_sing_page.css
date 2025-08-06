@@ -1,0 +1,91 @@
+
+.main-cover-sign-page-compo {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main-cover-sign-page-compo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(./sign_in_up_img/cover_image.png);
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.inner-main-cover-sing-page{
+    display: flex;
+    width: 1000px;
+    height: 82%;
+    z-index: 1;
+}
+
+.left-inner-main-cover-sing{
+    width: 60.3%;
+    height: 100%;
+    display: flex;
+}
+.containt-left-sign-page{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.right-inner-main-cover-sing{
+  background-color: black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.right-side-main-logo{
+    width: 200px;
+    height: 48.2px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+}
+
+.form-header button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.active-tab {
+}
+
+.form-body {
+  margin-top: 1rem; 
+}
