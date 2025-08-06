@@ -30,7 +30,7 @@ import useUploadImg from "../../hooks/useUploadImg";
 
 function ChangehaircutPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
-    const [selectedGender, setSelectedGender] = useState(null);
+    const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
 
@@ -43,7 +43,7 @@ function ChangehaircutPage() {
             <div className="main-changeHair">
                 <div className="left-main-changeHair">
                     <div className="inner-left-1-changeHair">
-                        <h4>Change Hairstyle</h4>
+                        <h4>Al Change Hairstyle</h4>
                         <button onClick={handleOpen} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
@@ -98,12 +98,13 @@ function ChangehaircutPage() {
                                         type="button"
                                         className="uplod-button"
                                         onClick={() => {
-                                            parent1Upload.resetImage(); 
+                                            parent1Upload.resetImage();
                                             const input = document.getElementById("parent1Input");
-                                            if (input) input.value = ""; 
+                                            if (input) input.value = "";
                                         }}
                                     >
-                                        ✖ Cancel
+                                        <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
+                                        cancel
                                     </button>
                                 )}
                             </div>
@@ -115,7 +116,7 @@ function ChangehaircutPage() {
                                             className="close-btn"
                                             onClick={() => parent1Upload.setShowCropper(false)}
                                         >
-                                            ✖
+                                            <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
                                         </button>
                                         <CropImage
                                             imageSrc={parent1Upload.selectedFile}
@@ -134,29 +135,54 @@ function ChangehaircutPage() {
                         <div className="gender-main-container">
                             {/* Boy Option */}
                             <button
-                                className={`gender-option ${selectedGender === 'boy' ? 'selected' : ''}`}
-                                onClick={() => handleGenderSelect('boy')}
+                                className={`gender-option ${selectedGender === "boy" ? "selected" : ""}`}
+                                onClick={() => handleGenderSelect("boy")}
                             >
                                 <div className="avatar-container">
                                     <img src={boyIcon} alt="Boy Avatar" className="gender-avatar-img" />
-                                    <span className="avatar-text">Male</span>
+                                    <span className="avatar-text">Boy</span>
                                 </div>
-                                <div className={`button-container ${selectedGender === 'boy' ? 'checked' : ''}`}>
-                                    {selectedGender === 'boy' && <span className="checkmark">✔</span>}
+                                <div
+                                    className={`button-container ${selectedGender === "boy" ? "checked" : ""
+                                        }`}
+                                >
+                                    {selectedGender === "boy" && (
+                                        <span className="checkmark">
+                                            <img
+                                                width="24"
+                                                height="24"
+                                                src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/FFFFFF/external-verified-check-circle-for-approved-valid-content-basic-bold-tal-revivo.png"
+                                                alt="checkmark"
+                                            />
+                                        </span>
+                                    )}
                                 </div>
                             </button>
 
                             {/* Girl Option */}
                             <button
-                                className={`gender-option ${selectedGender === 'girl' ? 'selected' : ''}`}
-                                onClick={() => handleGenderSelect('girl')}
+                                className={`gender-option ${selectedGender === "girl" ? "selected" : ""
+                                    }`}
+                                onClick={() => handleGenderSelect("girl")}
                             >
                                 <div className="avatar-container">
                                     <img src={girlIcon} alt="Girl Avatar" className="gender-avatar-img" />
-                                    <span className="avatar-text">Female</span>
+                                    <span className="avatar-text">Girl</span>
                                 </div>
-                                <div className={`button-container ${selectedGender === 'girl' ? 'checked' : ''}`}>
-                                    {selectedGender === 'girl' && <span className="checkmark">✔</span>}
+                                <div
+                                    className={`button-container ${selectedGender === "girl" ? "checked" : ""
+                                        }`}
+                                >
+                                    {selectedGender === "girl" && (
+                                        <span className="checkmark">
+                                            <img
+                                                width="24"
+                                                height="24"
+                                                src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/FFFFFF/external-verified-check-circle-for-approved-valid-content-basic-bold-tal-revivo.png"
+                                                alt="checkmark"
+                                            />
+                                        </span>
+                                    )}
                                 </div>
                             </button>
                         </div>
@@ -216,11 +242,6 @@ function ChangehaircutPage() {
                                         </div>
                                         <p>High Ponytail</p>
                                     </div>
-                                    {/* <div className='tab1-inner-4-content'></div>
-                                    <div className='tab1-inner-5-content'></div>
-                                    <div className='tab1-inner-6-content'></div>
-                                    <div className='tab1-inner-7-content'></div>
-                                    <div className='tab1-inner-8-content'></div> */}
                                 </div>
                             )}
                             {activeTab === 'tab2' && (
@@ -267,11 +288,6 @@ function ChangehaircutPage() {
                                         </div>
                                         <p>Blonde</p>
                                     </div>
-                                    {/* <div className='tab1-inner-4-content'></div>
-                                    <div className='tab1-inner-5-content'></div>
-                                    <div className='tab1-inner-6-content'></div>
-                                    <div className='tab1-inner-7-content'></div>
-                                    <div className='tab1-inner-8-content'></div> */}
                                 </div>
                             )}
                         </div>

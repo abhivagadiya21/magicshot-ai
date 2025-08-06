@@ -12,7 +12,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* flex-wrap: wrap; */
   gap: 20px;
   padding: 2.9px 10px;
   
@@ -32,7 +31,6 @@
   display: none;
 }
 
-/* Navbar content */
 .navbar-content {
   display: flex;
   align-items: center;
@@ -108,7 +106,7 @@
 }
 
 .upgrade-btn {
-  background-color: black;
+  background-color: #1d2328;
   color: white;
   border-radius: 10px;
   padding: 0.6rem 1rem;
@@ -118,6 +116,7 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
+  border: 3px solid #262a2d; 
 }
 
 .highlight-text {
@@ -128,7 +127,6 @@
   display: flex;
   gap: 20px;
   height: 40px;
-  /* background-color: aliceblue; */
 }
 
 .signin-btn {
@@ -170,7 +168,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
 .navbar-hamburger-container {
   display: none;
 }
-/* Dropdown styles  for chat gpt*/
+
 .dropdown-menu {
   display: block !important;
   visibility: visible !important;
@@ -255,8 +253,6 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   padding: 0px 15px;
   backdrop-filter: blur(10px);
   background-color: hsl(0deg 0% 0% / 70%);
-
-
 }
 
 .baby-text-container {

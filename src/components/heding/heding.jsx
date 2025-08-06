@@ -13,7 +13,7 @@ const options = [
 
 export default function Heading() {
     const navigate = useNavigate();
-    const [selected, setSelected] = useState("Baby-generator");
+    const [selected, setSelected] = useState("Baby generator");
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -89,7 +89,7 @@ export default function Heading() {
                                                         }}
                                                     >
                                                         {label}
-                                                        {selected === label && <span className="check">✔</span>}
+                                                        {selected === label && <span className="check"><img width="15" height="15" src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/FFFFFF/external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo.png" alt="external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo" /></span>}
                                                     </button>
                                                 </li>
                                             ))}
