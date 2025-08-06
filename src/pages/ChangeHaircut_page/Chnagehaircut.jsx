@@ -208,6 +208,36 @@ function ChangehaircutPage() {
                                     </div>
                                     <div className='tab1-inner-1-content'>
                                         <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
                                             <img src={style2} alt="Style 1" className='tab1-content-inner-1-img-hair' />
                                         </div>
                                         <p>Bob</p>
@@ -246,6 +276,36 @@ function ChangehaircutPage() {
                             )}
                             {activeTab === 'tab2' && (
                                 <div className="tab1-content-changeHair">
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
+                                    <div className='tab1-inner-1-content'>
+                                        <div className='tab1-inner-1-content-img-div-hair'>
+                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
+                                        </div>
+                                        <p>Random</p>
+                                    </div>
                                     <div className='tab1-inner-1-content'>
                                         <div className='tab1-inner-1-content-img-div-hair'>
                                             <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />

@@ -106,8 +106,9 @@ export default function Heading() {
                             </button>
 
                             <div className="auth-buttons">
-                                <button className="signin-btn">Sign In</button>
-                                <button className="signup-btn">Sign Up</button>
+                                <button className="signin-btn" onClick={() => navigate('/auth/signin')}>Sign In</button>
+
+                                <button className="signup-btn" onClick={() => navigate('/auth/signup')}>Sign Up</button>
                             </div>
                         </div>
                     </div>
