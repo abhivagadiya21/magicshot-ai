@@ -1,22 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./signin.css"; // Optional: Custom styles if needed
+import "./signin.css"; 
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const redirectPath = searchParams.get("ref") || "/";
 
-
-  const handleSignIn = () => {
-    // ✅ Login logic here
-    navigate(redirectPath);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
+
+
     console.log("Logging in with:", { email, password });
     alert("Login successful (demo)!");
   };
@@ -27,7 +21,7 @@ function SignIn() {
         <label>Email Address</label>
         <input
           type="email"
-          placeholder="Email Address"
+          placeholder="Enter your email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -38,24 +32,27 @@ function SignIn() {
         <label>Password</label>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
-      <button type="submit" onClick={handleSignIn} className="form-submit-btn">Sign In</button>
+      <button type="submit" className="form-submit-btn">Sign In</button>
 
-      <div className="form-footer">
-        <p
+      <p className="form-footer">
+        Forgot your password?{" "}
+        <span
           className="forgot-link"
           onClick={() => navigate("/auth/forgot-password")}
         >
           Reset here
+          
         </span>
+        
       </p>
-    </form>
+    </form> 
   );
 }
 
