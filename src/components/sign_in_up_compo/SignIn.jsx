@@ -21,7 +21,7 @@ function SignIn() {
 
   setTimeout(() => {
     console.log("Logging in with:", { email, password });
-     signIn(email);
+     SignIn(email);
     setLoading(false);
   }, 800);
 }
