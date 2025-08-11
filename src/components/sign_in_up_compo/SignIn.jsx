@@ -1,27 +1,35 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./signin.css"; 
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // ✅ Loading state
   const navigate = useNavigate();
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
-
-  const handleSignIn = () => {
-    // ✅ Login logic here
-    navigate(redirectPath);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log("Logging in with:", { email, password });
-     SignIn(email);
+
+    // 🔹 API call ya login logic yaha likh
+    setTimeout(() => {
     setLoading(false);
-  }, 800);
-}
+
+      // ✅ LocalStorage ma user save kar (demo purpose)
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ email, credits: 10 })
+      );
+
+      navigate(redirectPath);
+    }, 1000);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="signin-form">
@@ -49,7 +57,9 @@ function SignIn() {
         />
       </div>
 
-      <button type="submit" className="form-submit-btn">Sign In</button>
+      <button type="submit" className="form-submit-btn" disabled={loading}>
+        {loading ? "Signing In..." : "Sign In"}
+      </button>
 
       <p className="form-footer">
         Forgot your password?{" "}
@@ -62,7 +72,7 @@ function SignIn() {
         </span>
         
       </p>
-    </form> 
+    </form>
   );
 }
 
