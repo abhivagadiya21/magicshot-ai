@@ -7,19 +7,24 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
-
   const handleSignIn = () => {
-    // ✅ Login logic here
     navigate(redirectPath);
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true);
+
+  setTimeout(() => {
     console.log("Logging in with:", { email, password });
-    alert("Login successful (demo)!");
-  };
+     signIn(email);
+    setLoading(false);
+  }, 800);
+}
 
   return (
     <form onSubmit={handleSubmit} className="signin-form">
@@ -31,6 +36,7 @@ function SignIn() {
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
         />
       </div>
 
@@ -42,6 +48,7 @@ function SignIn() {
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
         />
       </div>
 

@@ -19,6 +19,38 @@ export default function Heading() {
     const dropdownRef = useRef(null);
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
+    const [user, setUser] = useState(null);
+
+    // Load user from localStorage
+    const loadUser = () => {
+        const savedUser = localStorage.getItem("user");
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+        } else {
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        loadUser();
+
+        window.addEventListener("storage", loadUser);
+
+        window.addEventListener("userUpdated", loadUser);
+
+        return () => {
+            window.removeEventListener("storage", loadUser);
+            window.removeEventListener("userUpdated", loadUser);
+        };
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        window.dispatchEvent(new Event("userUpdated"));
+        navigate("/");
+    };
+
+
 
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
@@ -115,31 +147,42 @@ export default function Heading() {
                             </button>
 
                             <div className="auth-buttons">
-                                {/* <button className="signin-btn" onClick={() => navigate('/auth/signin')}>Sign In</button>
-
-                                <button className="signup-btn" onClick={() => navigate('/auth/signup')}>Sign Up</button> */}
-
-
-
-
-                                <button
-                                    className="signin-btn"
-                                    onClick={() => navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)}
-                                >
-                                    Sign In
-                                </button>
-
-                                <button
-                                    className="signup-btn"
-                                    onClick={() => navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)}
-                                >
-                                    Sign Up
-                                </button>
+                                {user ? (
+                                    <>
+                                        <div className="user-info">
+                                            <span className="profile-name">{user.name}</span>
+                                            <span className="credits">
+                                                <img src={Plan} alt="credits" /> {user.credits}
+                                            </span>
+                                        </div>
+                                        <button className="logout-btn" onClick={handleLogout}>
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button
+                                            className="signin-btn"
+                                            onClick={() =>
+                                                navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)
+                                            }
+                                        >
+                                            Sign In
+                                        </button>
+                                        <button
+                                            className="signup-btn"
+                                            onClick={() =>
+                                                navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)
+                                            }
+                                        >
+                                            Sign Up
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
                 </nav>
-
             </div>
             {/* Mobile menu below navbar */}
             <div className={`content ${menuOpen ? "show" : ""}`}>
