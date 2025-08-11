@@ -49,12 +49,14 @@ function SignIn() {
         Forgot your password?{" "}
         <span
           className="forgot-link"
-          onClick={() => navigate("/sign-in-up/forgot-password")}
+          onClick={() => navigate("/auth/forgot-password")}
         >
           Reset here
+          
         </span>
+        
       </p>
-    </form>
+    </form> 
   );
 }
 
