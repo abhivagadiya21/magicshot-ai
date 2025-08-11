@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./signin.css"; // Optional: Custom styles if needed
+import { useLocation, useNavigate } from "react-router-dom";
+import "./signin.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirectPath = searchParams.get("ref") || "/";
 
+
+  const handleSignIn = () => {
+    // ✅ Login logic here
+    navigate(redirectPath);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // You can replace this with actual login API logic
     console.log("Logging in with:", { email, password });
     alert("Login successful (demo)!");
-
-    // Optional: Redirect after login
-    // navigate('/dashboard');
   };
 
   return (
@@ -24,7 +27,7 @@ function SignIn() {
         <label>Email Address</label>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Email Address"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -35,24 +38,23 @@ function SignIn() {
         <label>Password</label>
         <input
           type="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
-      <button type="submit" className="form-submit-btn">Sign In</button>
+      <button type="submit" onClick={handleSignIn} className="form-submit-btn">Sign In</button>
 
-      <p className="form-footer">
-        Forgot your password?{" "}
-        <span
+      <div className="form-footer">
+        <p
           className="forgot-link"
-          onClick={() => navigate("/sign-in-up/forgot-password")}
+          onClick={() => navigate("/auth/forgot-password")}
         >
-          Reset here
-        </span>
-      </p>
+          Forgot your password?
+        </p>
+      </div>
     </form>
   );
 }

@@ -16,28 +16,26 @@
 }
 
 .form-group input {
-  padding: 0.75rem;
+  padding: 0.45rem;
   border-radius: 0.5rem;
-  border: 1px solid #cbd5e0;
-  font-size: 1rem;
-  transition: 0.3s ease;
+  font-size:14px;
+  border: none;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }
 
 .form-submit-btn {
   background-color: #3b82f6;
   color: white;
-  padding: 0.75rem;
+  padding: 0.5rem;
   font-weight: bold;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.3s ease;
+  margin-top: 25px;
 }
 
 .form-submit-btn:hover {
@@ -47,17 +45,19 @@
 .form-footer {
   font-size: 0.875rem;
   color: #4a5568;
-  text-align: center;
+  text-align: end;
 }
 
 .forgot-link {
-  color: #3b82f6;
+  /* color: #3b82f6; */
   font-weight: 600;
   cursor: pointer;
-  margin-left: 4px;
+  align-items: end;
 }
+.signin-form h4{
+  color: white;
+  align-items: center;
+  text-align: center;
 
-.forgot-link:hover {
-  text-decoration: underline;
 }
     

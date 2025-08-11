@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -13,10 +13,19 @@ const options = [
 
 export default function Heading() {
     const navigate = useNavigate();
-    const [selected, setSelected] = useState("Baby generator");
+    const [selected, setSelected] = useState("");
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const location = useLocation();
+    const currentUrl = location.pathname + location.search;
+
+    useEffect(() => {
+        const match = options.find(opt => opt.path === location.pathname);
+        if (match) {
+            setSelected(match.label);
+        }
+    }, [location.pathname]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -106,9 +115,26 @@ export default function Heading() {
                             </button>
 
                             <div className="auth-buttons">
-                                <button className="signin-btn" onClick={() => navigate('/auth/signin')}>Sign In</button>
+                                {/* <button className="signin-btn" onClick={() => navigate('/auth/signin')}>Sign In</button>
 
-                                <button className="signup-btn" onClick={() => navigate('/auth/signup')}>Sign Up</button>
+                                <button className="signup-btn" onClick={() => navigate('/auth/signup')}>Sign Up</button> */}
+
+
+
+
+                                <button
+                                    className="signin-btn"
+                                    onClick={() => navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)}
+                                >
+                                    Sign In
+                                </button>
+
+                                <button
+                                    className="signup-btn"
+                                    onClick={() => navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)}
+                                >
+                                    Sign Up
+                                </button>
                             </div>
                         </div>
                     </div>
