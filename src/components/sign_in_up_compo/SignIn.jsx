@@ -1,25 +1,22 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./signin.css";
+import { useNavigate } from "react-router-dom";
+import "./signin.css"; 
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
-
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
+
   const handleSignIn = () => {
+    // ✅ Login logic here
     navigate(redirectPath);
   };
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setLoading(true);
-
-  setTimeout(() => {
+    e.preventDefault();
     console.log("Logging in with:", { email, password });
      SignIn(email);
     setLoading(false);
@@ -32,7 +29,7 @@ function SignIn() {
         <label>Email Address</label>
         <input
           type="email"
-          placeholder="Email Address"
+          placeholder="Enter your email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -44,7 +41,7 @@ function SignIn() {
         <label>Password</label>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
@@ -52,17 +49,20 @@ function SignIn() {
         />
       </div>
 
-      <button type="submit" onClick={handleSignIn} className="form-submit-btn">Sign In</button>
+      <button type="submit" className="form-submit-btn">Sign In</button>
 
-      <div className="form-footer">
-        <p
+      <p className="form-footer">
+        Forgot your password?{" "}
+        <span
           className="forgot-link"
           onClick={() => navigate("/auth/forgot-password")}
         >
-          Forgot your password?
-        </p>
-      </div>
-    </form>
+          Reset here
+          
+        </span>
+        
+      </p>
+    </form> 
   );
 }
 
