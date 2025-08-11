@@ -15,18 +15,11 @@ import useUploadImg from "../../hooks/useUploadImg";
 
 function AgeJourney() {
     const { showPopup, handleOpen, handleClose } = usePopup();
-    const [selectedGender, setSelectedGender] = useState(null);
+    const [sliderValue, setSliderValue] = useState(50); 
     const parent1Upload = useUploadImg();
-
-    const handleGenderSelect = (gender) => {
-        setSelectedGender(gender);
-    };
-
     const sliderInputRef = useRef(null);
     const sliderThumbRef = useRef(null);
     const sliderLineRef = useRef(null);
-
-    const [sliderValue, setSliderValue] = useState(50); 
 
     const showSliderValue = () => {
         const slider_input = sliderInputRef.current;
@@ -124,7 +117,8 @@ function AgeJourney() {
                                     if (input) input.value = ""; // reset file input
                                 }}
                             >
-                                ✖ Cancel
+                                <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
+                                            cancel 
                             </button>
                         )}
                     </div>
@@ -135,7 +129,8 @@ function AgeJourney() {
                                     className="close-btn"
                                     onClick={() => parent1Upload.setShowCropper(false)}
                                 >
-                                    ✖
+                                  <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
+                                        
                                 </button>
                                 <CropImage
                                     imageSrc={parent1Upload.selectedFile}
@@ -146,11 +141,9 @@ function AgeJourney() {
                         </div>
                     )}
 
-
                     <div>
                         <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
                     </div>
-
                     <div className="container">
                         <div className='ageJourney-rang-slider-icon'>👶</div>
                         <div className="range-slider">

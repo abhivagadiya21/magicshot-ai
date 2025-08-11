@@ -1,8 +1,5 @@
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import rotateicon from "../../pages/BabyGenrator_page/babyG-img/rotate-left.svg";
-import reaseticon from "../../pages/BabyGenrator_page/babyG-img/reaset.svg";
-import rotateicon2 from "../../pages/BabyGenrator_page/babyG-img/rotate-right.svg";
 
 function CropImage({ imageSrc, onCropDone }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -11,8 +8,12 @@ function CropImage({ imageSrc, onCropDone }) {
   const [aspect, setAspect] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const handleRotateLeft = () => setRotation((prev) => prev - 90);
-  const handleRotateRight = () => setRotation((prev) => prev + 90);
+  const handleRotateLeft = () =>
+    setRotation((prev) => (prev - 90 + 360) % 360);
+
+  const handleRotateRight = () =>
+    setRotation((prev) => (prev + 90) % 360);
+  
   const handleResetRotation = () => setRotation(0);
 
   const handleAspectChange = (e) => {
@@ -38,14 +39,24 @@ function CropImage({ imageSrc, onCropDone }) {
           onZoomChange={setZoom}
           onRotationChange={setRotation}
           onCropComplete={(_, croppedPixels) => setCroppedAreaPixels(croppedPixels)}
+          style={{
+            containerStyle: {
+              backgroundColor: "#3a4752", // ✅ custom background
+            },
+            mediaStyle: {
+              backgroundColor: "transparent",
+            },
+          }}
         />
         <div className="crop-buttons">
           <div className="ratio-select">
-            <label htmlFor="aspect-select">Aspect Ratio:</label>
+            <label htmlFor="aspect-select"></label>
             <select
               id="aspect-select"
+              className="aspect-select"
               onChange={(e) =>
                 setAspect(e.target.value === "free" ? null : parseFloat(e.target.value))
+
               }
             >
               <option value={1}>1:1</option>
@@ -53,9 +64,9 @@ function CropImage({ imageSrc, onCropDone }) {
               <option value={16 / 9}>16:9</option>
             </select>
           </div>
-          <button className="left-rotesan" onClick={handleRotateLeft}><img className="Parent-Icon" src={rotateicon} alt="Rotate Left" /></button>
-          <button className="left-rotesan" onClick={handleResetRotation}><img className="Parent-Icon" src={reaseticon} alt="Reset" /></button>
-          <button className="left-rotesan" onClick={handleRotateRight}><img className="Parent-Icon" src={rotateicon2} alt="Rotate Right" /></button>
+          <button className="left-rotesan" onClick={handleRotateLeft}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/rotate-left.png" alt="rotate-left" /></button>
+          <button className="left-rotesan" onClick={handleResetRotation}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/refresh--v1.png" alt="refresh--v1" /></button>
+          <button className="left-rotesan" onClick={handleRotateRight}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/rotate-right.png" alt="rotate-right" /></button>
         </div>
       </div>
       <div className="action-buttons">

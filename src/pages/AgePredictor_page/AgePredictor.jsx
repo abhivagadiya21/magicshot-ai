@@ -15,12 +15,7 @@ import { useState } from "react";
 
 function AgePredictor() {
     const { showPopup, handleOpen, handleClose } = usePopup();
-    const [selectedGender, setSelectedGender] = useState(null);
     const parent1Upload = useUploadImg();
-
-    const handleGenderSelect = (gender) => {
-        setSelectedGender(gender);
-    };
 
     return (
         <>
@@ -85,7 +80,8 @@ function AgePredictor() {
                                         if (input) input.value = ""; 
                                     }}
                                 >
-                                    ✖ Cancel
+                                   <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
+                                            cancel 
                                 </button>
                             )}
                         </div>
@@ -97,7 +93,8 @@ function AgePredictor() {
                                         className="close-btn"
                                         onClick={() => parent1Upload.setShowCropper(false)}
                                     >
-                                        ✖
+                                        <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
+                                            
                                     </button>
                                     <CropImage
                                         imageSrc={parent1Upload.selectedFile}

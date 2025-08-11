@@ -1,39 +1,60 @@
+
 export default function getCroppedImg(imageSrc, crop, rotation = 0) {
   return new Promise((resolve, reject) => {
+    console.log("getCroppedImg called with:", crop, rotation);
     const image = new Image();
-    image.crossOrigin = "anonymous"; 
+    image.crossOrigin = "anonymous";
     image.src = imageSrc;
 
     image.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+      // Main canvas for rotation & positioning
+      const mainCanvas = document.createElement("canvas");
+      const mainCtx = mainCanvas.getContext("2d");
 
-      const safeArea = Math.max(image.width, image.height) * 1;
-      canvas.width = safeArea;
-      canvas.height = safeArea;
+      if (rotation == 90 || rotation == 270) {
+        mainCanvas.width = image.height;
+        mainCanvas.height = image.width;
+      } else {
+        mainCanvas.width = image.width;
+        mainCanvas.height = image.height;
+      }
 
-      ctx.translate(safeArea / 2, safeArea / 2);
-      ctx.rotate((rotation * Math.PI) / 180);
-      ctx.translate(-safeArea / 2, -safeArea / 2);
+      // const safeArea = Math.max(image.width, image.height) * 1;
 
-      ctx.drawImage(
+      // Move pivot to center and rotate
+      // mainCtx.translate(safeArea / 2, safeArea / 2);
+      // mainCtx.rotate(rotation);
+      mainCtx.translate(mainCanvas.width / 2, mainCanvas.height / 2);
+      mainCtx.rotate((rotation * Math.PI) / 180);
+
+      // mainCtx.translate(-safeArea / 2, -safeArea / 2);
+
+      // Draw rotated image
+      mainCtx.drawImage(
         image,
-        (safeArea - image.width) / 2,
-        (safeArea - image.height) / 2
+        -image.width / 2,
+        -image.height / 2
       );
 
-      const data = ctx.getImageData(crop.x, crop.y, crop.width, crop.height);
 
-      canvas.width = crop.width;
-      canvas.height = crop.height;
-      ctx.putImageData(data, 0, 0);
+      // Cropping canvas
+      const cropCanvas = document.createElement("canvas");
+      const cropCtx = cropCanvas.getContext("2d");
 
-      canvas.toBlob((blob) => {
+      cropCanvas.width = crop.width;
+      cropCanvas.height = crop.height;
+
+      // Extract cropped image data from rotated canvas
+      const imageData = mainCtx.getImageData(crop.x, crop.y, crop.width, crop.height);
+      cropCtx.putImageData(imageData, 0, 0);
+
+      // Export blob
+      cropCanvas.toBlob((blob) => {
         if (!blob) {
           reject(new Error("Canvas is empty"));
           return;
         }
-        resolve(URL.createObjectURL(blob)); 
+        resolve(URL.createObjectURL(blob));
       }, "image/jpeg");
     };
 

@@ -22,6 +22,7 @@ function useUploadImg() {
 
   const handleCropComplete = async (croppedAreaPixels, rotation = 0) => {
     try {
+      console.log("Cropped Area Pixels:", croppedAreaPixels, rotation);
       const croppedImg = await getCroppedImg(
         selectedFile,
         croppedAreaPixels,
