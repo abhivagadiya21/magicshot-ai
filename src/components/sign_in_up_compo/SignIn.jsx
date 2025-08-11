@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signin.css"; // Optional: Custom styles if needed
+import ForgotPassword from "./ForgotPassword";
 
 function SignIn() {
   const [email, setEmail] = useState("");
