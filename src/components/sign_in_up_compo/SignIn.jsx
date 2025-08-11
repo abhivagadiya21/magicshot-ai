@@ -1,35 +1,30 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./signin.css"; 
+import { useLocation, useNavigate } from "react-router-dom";
+import "./signin.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // ✅ Loading state
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    console.log("Logging in with:", { email, password });
-
-    // 🔹 API call ya login logic yaha likh
-    setTimeout(() => {
-    setLoading(false);
-
-      // ✅ LocalStorage ma user save kar (demo purpose)
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ email, credits: 10 })
-      );
-
-      navigate(redirectPath);
-    }, 1000);
+  const handleSignIn = () => {
+    navigate(redirectPath);
   };
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  setTimeout(() => {
+    console.log("Logging in with:", { email, password });
+     SignIn(email);
+    setLoading(false);
+  }, 800);
+}
 
   return (
     <form onSubmit={handleSubmit} className="signin-form">
@@ -37,7 +32,7 @@ function SignIn() {
         <label>Email Address</label>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Email Address"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
@@ -49,7 +44,7 @@ function SignIn() {
         <label>Password</label>
         <input
           type="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
@@ -57,21 +52,19 @@ function SignIn() {
         />
       </div>
 
-      <button type="submit" className="form-submit-btn" disabled={loading}>
-        {loading ? "Signing In..." : "Sign In"}
-      </button>
+      <button type="submit" onClick={handleSignIn} className="form-submit-btn">Sign In</button>
 
-      <p className="form-footer">
-        Forgot your password?{" "}
-        <span
+      <div className="form-footer">
+        <p
           className="forgot-link"
           onClick={() => navigate("/auth/forgot-password")}
         >
           Reset here
           
-        </span>
         
-      </p>
+        
+        </p>
+      </div>
     </form>
   );
 }
