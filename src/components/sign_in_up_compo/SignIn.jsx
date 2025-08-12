@@ -94,7 +94,7 @@ function SignIn() {
           className="forgot-link"
           onClick={() => navigate("/auth/forgot-password")}
         >
-          Reset here
+        Forgot Password
         </p>
       </div>
     </form>

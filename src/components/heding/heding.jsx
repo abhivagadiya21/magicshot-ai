@@ -4,7 +4,6 @@ import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-
 const options = [
     { label: 'Baby Generator', path: '/' },
     { label: 'Age Predictor', path: '/age-predictor' },
@@ -22,7 +21,6 @@ export default function Heading() {
     const currentUrl = location.pathname + location.search;
     const [user, setUser] = useState(null);
 
-    // Load user from localStorage
     const loadUser = () => {
         const savedUser = localStorage.getItem("user");
         if (savedUser) {
@@ -48,10 +46,7 @@ export default function Heading() {
     const handleLogout = () => {
         localStorage.removeItem("user");
         window.dispatchEvent(new Event("userUpdated"));
-        navigate("/");
     };
-
-
 
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
@@ -75,8 +70,6 @@ export default function Heading() {
     return (
         <>
             <div className='navbar-main-container'>
-
-
                 <nav className="custom-navbar">
                     <div className="navbar-container">
                         <div className="navbar-left">
