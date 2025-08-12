@@ -12,6 +12,7 @@ import MainLayout from './layout/MainLayout.jsx';
 import SignIn from './components/sign_in_up_compo/SignIn.jsx'
 import SignUp from './components/sign_in_up_compo/SignUp.jsx'
 import ForgotPassword from './components/sign_in_up_compo/ForgotPassword.jsx';
+import Profile from './pages/profile_page/profile.jsx';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/age-predictor" element={<AgePredictor />} />
           <Route path="/age-journey" element={<AgeJourney />} />
           <Route path="/change-haircut" element={<ChagehaircutPage />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
        
         <Route path="/auth" element={<CoverPagesing />} >

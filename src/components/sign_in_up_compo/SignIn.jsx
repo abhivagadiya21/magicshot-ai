@@ -5,29 +5,58 @@ import "./signin.css";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
 
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
-  const handleSignIn = () => {
-    navigate(redirectPath);
-  };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
+  setError("");
 
-  setTimeout(() => {
-    console.log("Logging in with:", { email, password });
-     SignIn(email);
+  try {
+    const res = await fetch("http://192.168.1.8:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Invalid credentials");
+    }
+
+    const data = await res.json();
+    console.log("Login success:", data);
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: data.user?.email || email,
+      })
+    );
+
+    window.dispatchEvent(new Event("userUpdated"));
+
     setLoading(false);
-  }, 800);
-}
+    navigate(redirectPath);
+  } catch (err) {
+    console.error(err);
+    setError(err.message || "Something went wrong");
+    setLoading(false);
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="signin-form">
+      {error && <p className="error-msg">{error}</p>}
+
       <div className="form-group">
         <label>Email Address</label>
         <input
@@ -52,7 +81,13 @@ function SignIn() {
         />
       </div>
 
-      <button type="submit" onClick={handleSignIn} className="form-submit-btn">Sign In</button>
+      <button
+        type="submit"
+        className="form-submit-btn"
+        disabled={loading}
+      >
+        {loading ? "Signing In..." : "Sign In"}
+      </button>
 
       <div className="form-footer">
         <p
@@ -60,9 +95,6 @@ function SignIn() {
           onClick={() => navigate("/auth/forgot-password")}
         >
           Reset here
-          
-        
-        
         </p>
       </div>
     </form>

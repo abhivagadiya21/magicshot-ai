@@ -4,6 +4,7 @@ import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 
+
 const options = [
     { label: 'Baby Generator', path: '/' },
     { label: 'Age Predictor', path: '/age-predictor' },
@@ -149,15 +150,19 @@ export default function Heading() {
                             <div className="auth-buttons">
                                 {user ? (
                                     <>
+                                    <div className='profile-credit-container'>
+                                        
+                                    
                                         <div className="user-info">
                                             <span className="profile-name">{user.name}</span>
-                                            <span className="credits">
+                                            <span className="credits" onClick={handleLogout}>
                                                 <img src={Plan} alt="credits" /> {user.credits}
                                             </span>
                                         </div>
-                                        <button className="logout-btn" onClick={handleLogout}>
-                                            Logout
+                                        <button className="profile-btn" onClick={() => navigate('/profile')}>
+                                            <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user"/>
                                         </button>
+                                        </div>
                                     </>
                                 ) : (
                                     <>
