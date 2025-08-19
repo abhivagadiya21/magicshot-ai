@@ -129,7 +129,6 @@ function ChangehaircutPage() {
 
                         </div>
 
-
                         <p className='baby-gender'> Gender</p>
 
                         <div className="gender-main-container">

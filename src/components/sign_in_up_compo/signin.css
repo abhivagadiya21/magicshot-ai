@@ -49,7 +49,7 @@
 }
 
 .forgot-link {
-  /* color: #3b82f6; */
+  
   font-weight: 600;
   cursor: pointer;
   align-items: end;
@@ -60,4 +60,9 @@
   text-align: center;
 
 }
-    
+
+.forgot-link:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+  text-underline-position: below;
+}

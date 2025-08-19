@@ -1,43 +1,110 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
-
-
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [referralCode, setReferralCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // 🔐 Your sign-up logic here (call API, validate, etc.)
-    // On success:
-    navigate(redirectPath);
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const res = await fetch("http://192.168.1.8:3000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+          referralCode: referralCode || undefined,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "Sign-up failed");
+      }
+
+      const data = await res.json();
+      console.log("Sign-up success:", data);
+
+      // Save user info/token if needed
+      localStorage.setItem("user", JSON.stringify(data));
+
+      navigate(redirectPath);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form className="signin-form" onSubmit={handleSignUp}>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <div className="form-group">
         <label>Email Address</label>
-        <input className="form-group" type="email" placeholder="Email Address" />
+        <input
+          type="email"
+          placeholder="Email Address"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+           autoComplete="email"
+        />
       </div>
+
       <div className="form-group">
         <label>Password</label>
-        <input className="form-group" type="password" placeholder="Password" />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+           autoComplete="new-password"
+        />
       </div>
+
       <div className="form-group">
         <label>Confirm Password</label>
-        <input className="form-group" type="password" placeholder="Confirm Password" />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+           autoComplete="new-password"
+        />
       </div>
+
       <div className="form-group">
         <label>Referral Code</label>
-        <input className="form-group" type="text" placeholder="Referral Code (Optional)" />
+        <input
+          type="text"
+          placeholder="Referral Code (Optional)"
+          onChange={(e) => setReferralCode(e.target.value)}
+        />
       </div>
 
-
-      <button type="submit" className="form-submit-btn">Create Account</button>
+      <button type="submit" className="form-submit-btn" disabled={loading}>
+        {loading ? "Creating Account..." : "Create Account"}
+      </button>
     </form>
   );
 };

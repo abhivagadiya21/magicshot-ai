@@ -19,6 +19,34 @@ export default function Heading() {
     const dropdownRef = useRef(null);
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
+    const [user, setUser] = useState(null);
+
+    const loadUser = () => {
+        const savedUser = localStorage.getItem("user");
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+        } else {
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        loadUser();
+
+        window.addEventListener("storage", loadUser);
+
+        window.addEventListener("userUpdated", loadUser);
+
+        return () => {
+            window.removeEventListener("storage", loadUser);
+            window.removeEventListener("userUpdated", loadUser);
+        };
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        window.dispatchEvent(new Event("userUpdated"));
+    };
 
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
@@ -42,8 +70,6 @@ export default function Heading() {
     return (
         <>
             <div className='navbar-main-container'>
-
-
                 <nav className="custom-navbar">
                     <div className="navbar-container">
                         <div className="navbar-left">
@@ -115,31 +141,46 @@ export default function Heading() {
                             </button>
 
                             <div className="auth-buttons">
-                                {/* <button className="signin-btn" onClick={() => navigate('/auth/signin')}>Sign In</button>
-
-                                <button className="signup-btn" onClick={() => navigate('/auth/signup')}>Sign Up</button> */}
-
-
-
-
-                                <button
-                                    className="signin-btn"
-                                    onClick={() => navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)}
-                                >
-                                    Sign In
-                                </button>
-
-                                <button
-                                    className="signup-btn"
-                                    onClick={() => navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)}
-                                >
-                                    Sign Up
-                                </button>
+                                {user ? (
+                                    <>
+                                    <div className='profile-credit-container'>
+                                        
+                                    
+                                        <div className="user-info">
+                                            <span className="profile-name">{user.name}</span>
+                                            <span className="credits" onClick={handleLogout}>
+                                                <img src={Plan} alt="credits" /> {user.credits}
+                                            </span>
+                                        </div>
+                                        <button className="profile-btn" onClick={() => navigate('/profile')}>
+                                            <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user"/>
+                                        </button>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button
+                                            className="signin-btn"
+                                            onClick={() =>
+                                                navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)
+                                            }
+                                        >
+                                            Sign In
+                                        </button>
+                                        <button
+                                            className="signup-btn"
+                                            onClick={() =>
+                                                navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)
+                                            }
+                                        >
+                                            Sign Up
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
                 </nav>
-
             </div>
             {/* Mobile menu below navbar */}
             <div className={`content ${menuOpen ? "show" : ""}`}>
