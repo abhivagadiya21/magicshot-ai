@@ -2,6 +2,9 @@ import { useState } from "react";
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
 
+//api componet calloing
+import { babyuploadeAPI } from "../../services/imageBase";    
+
 import "../BabyGenrator_page/babyPage.css";
 import Upload_img from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
@@ -128,6 +131,31 @@ function BabyPage() {
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
 
+  const handleGenerate = async () => {
+    if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {           
+      alert("Please upload both parent images.");
+      return;
+    }
+    console.log(parent1Upload)       
+    const imageFiles = {
+      parent1: parent1Upload.croppedImage,
+      parent2: parent2Upload.croppedImage,
+    };    
+    const otherData = { 
+      userid:1,
+      gender: selectedGender,
+      transactionId:1,
+    }
+    try {
+      const response = await babyuploadeAPI(imageFiles,otherData);
+      console.log("Response from API:", response);          
+    }   
+    catch (error) {
+      console.error("Error generating baby image:", error);
+      alert("Failed to generate  image. Please try again.");
+    }   
+  }
+
   return (
     <div className="main-baby-genrartor-1">
       {/* Left Section */}
@@ -208,7 +236,7 @@ function BabyPage() {
 
           <div className="inner-2-for-left-3">
             <button className="baby-left-3-btn-1">See Pricing</button>
-            <button className="baby-left-3-btn-2">
+            <button className="baby-left-3-btn-2" onClick={handleGenerate}>
               Generate
               <div className="baby-left-3-btn-2-icon">
                 <img src={star} alt="star icon" />
