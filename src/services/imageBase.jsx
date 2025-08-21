@@ -1,4 +1,3 @@
-// api.js
 import axios from "axios";
 
 const api = axios.create({
@@ -8,7 +7,6 @@ const api = axios.create({
 export const babyuploadeAPI = async (imageFiles, otherData) => {
   try {
     const formData = new FormData();
-    // Send actual File objects, not blob URLs
     formData.append("parent1", imageFiles.parent1);
     formData.append("parent2", imageFiles.parent2);
     formData.append("userid", otherData.userid);
@@ -50,3 +48,50 @@ export const AgejournyAPI = async (imageFiles, otherData) => {
     throw error;
   }
 };
+
+
+
+export const agePredictorAPI = async (imageFiles, otherData) => {
+  try {
+    const formData = new FormData();
+    formData.append("agePredictorUpload", imageFiles.agePredictorUpload);
+    formData.append("userId", otherData.userId);
+    formData.append("Predict_age", otherData.Predict_age);
+    formData.append("transactionId", otherData.transactionId);
+
+    const response = await api.post("/age-predictor", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error predicting age:", error);
+    throw error;
+  }
+};
+
+export const changeHaircutAPI = async (imageFiles, otherData) => {
+  try {
+    const formData = new FormData();
+    // Send actual File objects, not blob URLs
+    formData.append("HairuploadPhoto", imageFiles.parent1);
+    formData.append("hairStyle", otherData.hairstyle);
+    formData.append("hairColor", otherData.hairColor);
+    formData.append("userid", otherData.userid);
+    formData.append("gender",otherData.gender);
+    formData.append("transactionId", otherData.transactionId);
+    console.log("imageFiles:", imageFiles.parent1);
+    const response = await api.post("/change-hairstyle", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
+  }
+}
