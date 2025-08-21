@@ -422,6 +422,7 @@
 
 .active-tab{
     border-bottom: 2px solid #c589e4;
+    background-color: transparent;
 }
 
 .tab1-content-changeHair {

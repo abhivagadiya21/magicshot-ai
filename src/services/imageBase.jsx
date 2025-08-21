@@ -37,14 +37,13 @@ export const AgejournyAPI = async (imageFiles, otherData) => {
     formData.append("userid", otherData.userid);
     formData.append("age", otherData.selectAge);
     formData.append("transactionId", otherData.transactionId);
-    
-    // console.log("imageFiles:",imageFiles.ageJourneyUpload);
+
     const response = await api.post("/age-journey", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    
+
     return response.data;
   } catch (error) {
     console.error("Error uploading image:", error);
