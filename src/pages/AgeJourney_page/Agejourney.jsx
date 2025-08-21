@@ -11,11 +11,14 @@ import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
 import CropImage from "../../components/CropImage/CropImage";
 import useUploadImg from "../../hooks/useUploadImg";
+import { blobUrlToFile } from "../../utils/blobToFile";
+import { AgejournyAPI } from '../../services/imageBase';
+
 
 
 function AgeJourney() {
     const { showPopup, handleOpen, handleClose } = usePopup();
-    const [sliderValue, setSliderValue] = useState(50); 
+    const [sliderValue, setSliderValue] = useState(50);
     const parent1Upload = useUploadImg();
     const sliderInputRef = useRef(null);
     const sliderThumbRef = useRef(null);
@@ -53,6 +56,38 @@ function AgeJourney() {
             }
         };
     }, []);
+
+    const handleGenerate = async () => {
+        if (!parent1Upload.croppedImage) {
+            alert("Please upload an image.");
+            return;
+        }
+
+        // console.log("Converted parent1Upload to File:", parent1Upload.croppedImage);
+        const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
+        // console.log("Converted parent1Upload to File:", parent1File);
+
+        const imageFiles = {
+            ageJourneyUpload: parent1File, 
+        };
+
+        const otherData = {
+            userid: 1,
+            selectAge: sliderValue,
+            transactionId: 1,
+        };
+        // console.log("sliderValue:", sliderValue);
+        try {
+            console.log("Sending data to API:", imageFiles, otherData);
+            const response = await AgejournyAPI(imageFiles, otherData);
+            console.log("check it first");
+            console.log("Response from API:", response);
+        } catch (error) {
+            console.error("Error generating age journey image:", error);
+            alert("Failed to generate image. Please try again.");
+        }
+    };
+
 
     return (
         <div className="main-ageJourney">
@@ -117,8 +152,8 @@ function AgeJourney() {
                                     if (input) input.value = ""; // reset file input
                                 }}
                             >
-                                <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
-                                            cancel 
+                                <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
+                                cancel
                             </button>
                         )}
                     </div>
@@ -129,8 +164,8 @@ function AgeJourney() {
                                     className="close-btn"
                                     onClick={() => parent1Upload.setShowCropper(false)}
                                 >
-                                  <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign"/>
-                                        
+                                    <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
+
                                 </button>
                                 <CropImage
                                     imageSrc={parent1Upload.selectedFile}
@@ -143,6 +178,7 @@ function AgeJourney() {
 
                     <div>
                         <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
+                        {/* {console.log("Slider Value:", sliderValue)} */}
                     </div>
                     <div className="container">
                         <div className='ageJourney-rang-slider-icon'>👶</div>
@@ -184,7 +220,7 @@ function AgeJourney() {
 
                     <div className="inner-2-for-left-3">
                         <button className="ageJourney-left-3-btn-1">See Pricing</button>
-                        <button className="ageJourney-left-3-btn-2">
+                        <button className="ageJourney-left-3-btn-2" onClick={handleGenerate}>
                             Generate
                             <div className="ageJourney-left-3-btn-2-icon">
                                 <img src={star} alt="star icon" />
