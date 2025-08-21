@@ -1,8 +1,6 @@
 import { useState } from "react";
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
-
-//api componet calloing
 import { babyuploadeAPI } from "../../services/imageBase";    
 
 import "../BabyGenrator_page/babyPage.css";
@@ -18,6 +16,7 @@ import Profileicon1 from "./babyG-img/profile-1.svg";
 import upload from "./babyG-img/upload.svg";
 import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
 import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
+import { blobUrlToFile } from "../../utils/blobToFile";
 
 function UploadSection({ label, uploadHook, inputId }) {
   return (
@@ -131,30 +130,34 @@ function BabyPage() {
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
 
-  const handleGenerate = async () => {
-    if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {           
-      alert("Please upload both parent images.");
-      return;
-    }
-    console.log(parent1Upload)       
-    const imageFiles = {
-      parent1: parent1Upload.croppedImage,
-      parent2: parent2Upload.croppedImage,
-    };    
-    const otherData = { 
-      userid:1,
-      gender: selectedGender,
-      transactionId:1,
-    }
-    try {
-      const response = await babyuploadeAPI(imageFiles,otherData);
-      console.log("Response from API:", response);          
-    }   
-    catch (error) {
-      console.error("Error generating baby image:", error);
-      alert("Failed to generate  image. Please try again.");
-    }   
+const handleGenerate = async () => {
+  if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
+    alert("Please upload both parent images.");
+    return;
   }
+
+  const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "parent1.png");
+  const parent2File = await blobUrlToFile(parent2Upload.croppedImage, "parent2.png");
+
+  const imageFiles = {
+    parent1: parent1File,
+    parent2: parent2File,
+  };
+
+  const otherData = {
+    userid: 1,
+    gender: selectedGender,
+    transactionId: 1,
+  };
+
+  try {
+    const response = await babyuploadeAPI(imageFiles, otherData);
+    console.log("Response from API:", response);
+  } catch (error) {
+    console.error("Error generating baby image:", error);
+    alert("Failed to generate image. Please try again.");
+  }
+};
 
   return (
     <div className="main-baby-genrartor-1">
