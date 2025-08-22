@@ -131,6 +131,10 @@ function BabyPage() {
   const parent2Upload = useUploadImg();
 
 const handleGenerate = async () => {
+  // if(user){
+  //   alert("please first login after that you can generate baby image");
+  //   return;
+  // }
   if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
     alert("Please upload both parent images.");
     return;

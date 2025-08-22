@@ -27,7 +27,7 @@ import color6 from './hairstyle_image/haircolor6.png';
 import color7 from './hairstyle_image/haircolor7.png';
 import CropImage from "../../components/CropImage/CropImage";
 import useUploadImg from "../../hooks/useUploadImg";
-import { chnageHaircutAPI } from '../../services/imageBase';
+import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
 
 function ChangehaircutPage() {
@@ -60,7 +60,7 @@ function ChangehaircutPage() {
             transactionId: 1,
         }
           try {
-            const response = await chnageHaircutAPI(imageFiles, otherData);
+            const response = await changeHaircutAPI(imageFiles, otherData);
             console.log("Response from API:", response);
           } catch (error) {
             console.error("Error generating  image:", error);
