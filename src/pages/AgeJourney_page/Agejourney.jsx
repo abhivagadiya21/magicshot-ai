@@ -63,12 +63,10 @@ function AgeJourney() {
             return;
         }
 
-        // console.log("Converted parent1Upload to File:", parent1Upload.croppedImage);
         const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
-        // console.log("Converted parent1Upload to File:", parent1File);
 
         const imageFiles = {
-            ageJourneyUpload: parent1File, 
+            ageJourneyUpload: parent1File,
         };
 
         const otherData = {
@@ -76,11 +74,8 @@ function AgeJourney() {
             selectAge: sliderValue,
             transactionId: 1,
         };
-        // console.log("sliderValue:", sliderValue);
         try {
-            console.log("Sending data to API:", imageFiles, otherData);
             const response = await AgejournyAPI(imageFiles, otherData);
-            console.log("check it first");
             console.log("Response from API:", response);
         } catch (error) {
             console.error("Error generating age journey image:", error);
