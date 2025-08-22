@@ -1,0 +1,35 @@
+.popup-overlay-getimage {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box-getimage {
+    width: 684px;
+    height: 684px;
+    background-color: rgb(26 29 31);
+    border-radius: 15px;
+    /* padding: 20px; */
+}
+
+.inner-1-pop-getimage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.inner-2-pop-getimage {
+    height: 70%;
+    width: 100%;
+    padding: 0px 20px;
+}

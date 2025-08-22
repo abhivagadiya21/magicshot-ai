@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
-import { babyuploadeAPI } from "../../services/imageBase";    
-
+import { babyuploadeAPI } from "../../services/imageBase";
 import "../BabyGenrator_page/babyPage.css";
+
 import Upload_img from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
 import Howworkpop from "../../components/popUp/how_it_work_pop/Howworkpop";
@@ -16,6 +19,7 @@ import Profileicon1 from "./babyG-img/profile-1.svg";
 import upload from "./babyG-img/upload.svg";
 import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
 import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
+import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 
 function UploadSection({ label, uploadHook, inputId }) {
@@ -100,6 +104,7 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
   const isSelected = selectedGender === gender;
   return (
     <button
+      type="button"
       className={`gender-option ${isSelected ? "selected" : ""}`}
       onClick={() => handleSelect(gender)}
     >
@@ -124,44 +129,74 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
 }
 
 function BabyPage() {
-  const { showPopup, handleOpen, handleClose } = usePopup();
+  // const { showPopup, handleOpen, handleClose } = usePopup();
+  const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
+  const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
+
   const [selectedGender, setSelectedGender] = useState("boy");
+  const [genraterImageurl, setGenraterImageurl] = useState(null);
+
 
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
 
-const handleGenerate = async () => {
-  // if(user){
-  //   alert("please first login after that you can generate baby image");
-  //   return;
-  // }
-  if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
-    alert("Please upload both parent images.");
-    return;
-  }
+  const handleGenerate = async () => {
+    if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
+      toast.error("⚠️ Please upload both parent images.");
+      return;
+    }
 
-  const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "parent1.png");
-  const parent2File = await blobUrlToFile(parent2Upload.croppedImage, "parent2.png");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser?.id) {
+      toast.error("❌ User not logged in.");
+      return;
+    }
 
-  const imageFiles = {
-    parent1: parent1File,
-    parent2: parent2File,
+    const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "parent1.png");
+    const parent2File = await blobUrlToFile(parent2Upload.croppedImage, "parent2.png");
+
+    const imageFiles = {
+      parent1: parent1File,
+      parent2: parent2File,
+    };
+    console.log("Image Files:", imageFiles);
+
+    const otherData = {
+      userid: storedUser.id,
+      gender: selectedGender,
+      transactionId: 1,
+    };
+    console.log("Other Data:", otherData);
+
+    try {
+      const response = await babyuploadeAPI(imageFiles, otherData);
+      console.log("Response from API:", response);
+      const data = response.data;
+      // const genraterImageurl = data.file;
+      // setGenraterImageurl(data.file);
+      // console.log("Generated Baby Image URL:", genraterImageurl);
+
+      if (data?.file) {
+        setGenraterImageurl(data.file); // update state
+        console.log("Generated Baby Image URL:", data.file); // log directly
+        console.log("Generated Baby Image URL:", genraterImageurl); // log directly
+        toast.success("🎉 Baby image generated successfully!");
+      } else {
+        toast.error("❌ No image returned from server.");
+      }
+
+
+      toast.success("🎉 Baby image generated successfully!");
+    } catch (error) {
+      console.error("Error generating baby image:", error);
+      toast.error("❌ Failed to generate image. Please try again.");
+    }
+
   };
-
-  const otherData = {
-    userid: 1,
-    gender: selectedGender,
-    transactionId: 1,
+  const handleclick = async () => {
+    await handleGenerate();
+    openImagePopup();
   };
-
-  try {
-    const response = await babyuploadeAPI(imageFiles, otherData);
-    console.log("Response from API:", response);
-  } catch (error) {
-    console.error("Error generating baby image:", error);
-    alert("Failed to generate image. Please try again.");
-  }
-};
 
   return (
     <div className="main-baby-genrartor-1">
@@ -169,18 +204,17 @@ const handleGenerate = async () => {
       <div className="left-main-babyG">
         <div className="inner-left-1-babyG-1">
           <h4>AI Baby Generator</h4>
-          <button onClick={handleOpen} className="btn-pop-up-howWork">
+          <button onClick={openHowWork} className="btn-pop-up-howWork">
             <img src={questionMark} alt="Help icon" />
             <span>How It Works</span>
           </button>
 
-          {showPopup && (
+          {showHowWork && (
             <Howworkpop
               howworkpopDetails={{
-                onClose: handleClose,
+                onClose: closeHowWork,
                 image: poppassimage1,
-                message:
-                  "Upload your photos, and AI quickly generates an image of your future baby.",
+                message: "Upload your photos, and AI quickly generates an image of your future baby.",
               }}
             />
           )}
@@ -212,29 +246,11 @@ const handleGenerate = async () => {
         {/* Footer */}
         <div className="inner-left-3-babyG">
           <div className="inner-1-for-left-3-1">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
-                fill="white"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M6.7984 4.40196C7.1514 4.18396 7.2604 3.72196 7.0424 3.36996C6.8234 3.01696 6.3614 2.90796 6.0104 3.12596C4.6374 3.97296 3.4374 5.11596 2.5404 6.43096C2.3074 6.77296 2.3954 7.23996 2.7374 7.47296C2.8664 7.56196 3.0134 7.60396 3.1594 7.60396C3.3994 7.60396 3.6344 7.48896 3.7794 7.27696C4.5594 6.13396 5.6034 5.13996 6.7984 4.40196Z"
-                fill="white"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M21.7798 6.43147C20.8738 5.10147 19.6698 3.95447 18.2988 3.11447C17.9458 2.89847 17.4838 3.00847 17.2668 3.36147C17.0508 3.71547 17.1608 4.17647 17.5138 4.39347C18.7068 5.12347 19.7528 6.12047 20.5408 7.27647C20.6858 7.48947 20.9208 7.60347 21.1608 7.60347C21.3058 7.60347 21.4528 7.56147 21.5828 7.47347C21.9248 7.24047 22.0128 6.77347 21.7798 6.43147Z"
                 fill="white"
               />
             </svg>
@@ -243,13 +259,19 @@ const handleGenerate = async () => {
 
           <div className="inner-2-for-left-3">
             <button className="baby-left-3-btn-1">See Pricing</button>
-            <button className="baby-left-3-btn-2" onClick={handleGenerate}>
+            <button className="baby-left-3-btn-2" onClick={handleclick}>
               Generate
               <div className="baby-left-3-btn-2-icon">
                 <img src={star} alt="star icon" />
                 <span>-0.5</span>
               </div>
             </button>
+            {showImagePopup && genraterImageurl && <GetImage_pop
+              getimage_details={{
+                onClose: closeImagePopup,
+                image: genraterImageurl,
+              }}
+            />}
           </div>
         </div>
       </div>

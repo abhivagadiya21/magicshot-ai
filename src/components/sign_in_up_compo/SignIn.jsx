@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./signin.css";
 
-function SignIn() {
+export default function SignIn({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,49 +14,60 @@ function SignIn() {
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const res = await fetch("http://192.168.1.8:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch("http://192.168.1.8:3000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!res.ok) {
-      throw new Error("Invalid credentials");
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.error || "Login failed");
+        setLoading(false);
+        return;
+      }
+
+      const token = data.data?.token;
+      console.log("Received token:", token);
+
+      if (!token || typeof token !== "string") {
+        toast.error("Invalid token received from server");
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem("token", token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: data.data?.user?.id,
+          email: data.data?.user?.email,
+          token,
+        })
+      );
+
+      if (typeof onLoginSuccess === "function") {
+        onLoginSuccess(token);
+      }
+
+      toast.success("Logged in successfully ✅");
+      navigate(redirectPath);
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    const data = await res.json();
-    console.log("Login success:", data);
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        email: data.user?.email || email,
-      })
-    );
-
-    window.dispatchEvent(new Event("userUpdated"));
-
-    setLoading(false);
-    navigate(redirectPath);
-  } catch (err) {
-    console.error(err);
-    setError(err.message || "Something went wrong");
-    setLoading(false);
-  }
-};
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="signin-form">
-      {error && <p className="error-msg">{error}</p>}
-
+    <form onSubmit={handleLogin} className="signin-form">
       <div className="form-group">
         <label>Email Address</label>
         <input
@@ -81,11 +92,7 @@ function SignIn() {
         />
       </div>
 
-      <button
-        type="submit"
-        className="form-submit-btn"
-        disabled={loading}
-      >
+      <button type="submit" className="form-submit-btn" disabled={loading}>
         {loading ? "Signing In..." : "Sign In"}
       </button>
 
@@ -94,11 +101,9 @@ function SignIn() {
           className="forgot-link"
           onClick={() => navigate("/auth/forgot-password")}
         >
-        Forgot Password
+          Forgot Password
         </p>
       </div>
     </form>
   );
 }
-
-export default SignIn;
