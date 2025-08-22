@@ -27,8 +27,9 @@ import color6 from './hairstyle_image/haircolor6.png';
 import color7 from './hairstyle_image/haircolor7.png';
 import CropImage from "../../components/CropImage/CropImage";
 import useUploadImg from "../../hooks/useUploadImg";
-import { chnageHaircutAPI } from '../../services/imageBase';
+import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
+import { toast } from "react-toastify";
 
 function ChangehaircutPage() {
     const { showPopup, handleOpen, handleClose } = usePopup();
@@ -42,31 +43,48 @@ function ChangehaircutPage() {
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
     };
-    const handleGenerate= async () => {
-        if(!parent1Upload.croppedImage) {
-            alert("Please upload an image of Parent 1");
-            return;
-        }
-        const uploadPhoto =await blobUrlToFile(parent1Upload.croppedImage, "parent1.jpg");
-        console.log("Upload Photo:", uploadPhoto);
-        const imageFiles ={
-            parent1: uploadPhoto,
-        }
-        const otherData ={
-            hairstyle: hairstyle,
-            hairColor: hairColor,
-            userid:1,
-            gender: selectedGender,
-            transactionId: 1,
-        }
-          try {
-            const response = await chnageHaircutAPI(imageFiles, otherData);
-            console.log("Response from API:", response);
-          } catch (error) {
-            console.error("Error generating  image:", error);
-            alert("Failed to generate image. Please try again.");
-          }
-    }
+
+    const handleGenerate = async () => {
+  if (!parent1Upload.croppedImage) {
+    toast.error("⚠️ Please upload an image of Parent 1.");
+    return;
+  }
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  if (!storedUser?.id) {
+    toast.error("❌ User not logged in.");
+    return;
+  }
+
+  try {
+    const uploadPhoto = await blobUrlToFile(
+      parent1Upload.croppedImage,
+      "parent1.jpg"
+    );
+    console.log("Upload Photo:", uploadPhoto);
+
+    const imageFiles = {
+      parent1: uploadPhoto,
+    };
+
+    const otherData = {
+      hairstyle: hairstyle,
+      hairColor: hairColor,
+      userid: storedUser.id,
+      gender: selectedGender,
+      transactionId: 1,
+    };
+
+    const response = await changeHaircutAPI(imageFiles, otherData);
+    console.log("Response from API:", response);
+
+    toast.success("🎉 Haircut image generated successfully!");
+  } catch (error) {
+    console.error("Error generating image:", error);
+    toast.error("❌ Failed to generate image. Please try again.");
+  }
+};
+
     return (
         <>
             <div className="main-changeHair">
