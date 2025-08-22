@@ -13,6 +13,7 @@ import CropImage from "../../components/CropImage/CropImage";
 import useUploadImg from "../../hooks/useUploadImg";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { AgejournyAPI } from '../../services/imageBase';
+import { toast } from "react-toastify";
 
 
 
@@ -58,30 +59,46 @@ function AgeJourney() {
     }, []);
 
     const handleGenerate = async () => {
-        if (!parent1Upload.croppedImage) {
-            alert("Please upload an image.");
-            return;
-        }
+  if (!parent1Upload.croppedImage) {
+    toast.error("⚠️ Please upload an image.");
+    return;
+  }
 
-        const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  if (!storedUser?.id) {
+    toast.error("❌ User not logged in.");
+    return;
+  }
 
-        const imageFiles = {
-            ageJourneyUpload: parent1File,
-        };
+  try {
+    const parent1File = await blobUrlToFile(
+      parent1Upload.croppedImage,
+      "ageJourney.png"
+    );
 
-        const otherData = {
-            userid: 1,
-            selectAge: sliderValue,
-            transactionId: 1,
-        };
-        try {
-            const response = await AgejournyAPI(imageFiles, otherData);
-            console.log("Response from API:", response);
-        } catch (error) {
-            console.error("Error generating age journey image:", error);
-            alert("Failed to generate image. Please try again.");
-        }
+    const imageFiles = {
+      ageJourneyUpload: parent1File,
     };
+
+    const otherData = {
+      userid: storedUser.id,
+      selectAge: sliderValue,
+      transactionId: 1,
+    };
+
+    toast.info("⏳ Generating age journey image... Please wait.");
+
+    console.log("Sending data to API:", imageFiles, otherData);
+    const response = await AgejournyAPI(imageFiles, otherData);
+    console.log("Response from API:", response);
+
+    toast.success("🎉 Age journey image generated successfully!");
+  } catch (error) {
+    console.error("Error generating age journey image:", error);
+    toast.error("❌ Failed to generate image. Please try again.");
+  }
+};
+
 
 
     return (

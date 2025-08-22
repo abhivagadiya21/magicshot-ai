@@ -16,39 +16,53 @@ import questionMark from "../BabyGenrator_page/babyG-img/question.svg";
 import Profileicon1 from "../BabyGenrator_page/babyG-img/profile-1.svg";
 import upload from "../BabyGenrator_page/babyG-img/upload.svg";
 import { blobUrlToFile } from "../../utils/blobToFile";
+import { toast } from "react-toastify";
 
 
 function AgePredictor() {
   const { showPopup, handleOpen, handleClose } = usePopup();
   const parent1Upload = useUploadImg();
+  
+const handleGenerate = async () => {
+  if (!parent1Upload.croppedImage) {
+    toast.error("❌ Please upload both parent images.");
+    return;
+  }
 
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  if (!storedUser?.id) {
+    toast.error("❌ User not logged in.");
+    return;
+  }
 
-  const handleGenerate = async () => {
-    if (!parent1Upload.croppedImage) {
-      alert("Please upload both parent images.");
-      return;
-    }
-  
-    const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "agePredictor.png");
-  
-    const imageFiles = {
-      agePredictorUpload: parent1File,
-    };
-  
-    const otherData = {
-      userId: 5,
-      transactionId: 1,
-      Predict_age: 30
-    };
-  
-    try {
-      const response = await agePredictorAPI(imageFiles, otherData);
-      console.log("Response from API:", response);
-    } catch (error) {
-      console.error("Error predicting age:", error);
-      alert("Failed to generate image. Please try again.");
-    }
+  const parent1File = await blobUrlToFile(
+    parent1Upload.croppedImage,
+    "agePredictor.png"
+  );
+
+  const imageFiles = {
+    agePredictorUpload: parent1File,
   };
+
+  const otherData = {
+    userId: storedUser.id,
+    transactionId: 1,
+    Predict_age: 30,
+  };
+  console.log("📸 Image Files:", imageFiles);
+  console.log("📸 Image Files:", otherData);
+
+  try {
+    const response = await agePredictorAPI(imageFiles, otherData);
+    console.log("✅ Response from API:", response);
+
+    toast.success("🎉 Age prediction generated successfully!");
+  } catch (error) {
+    console.error("❌ Error predicting age:", error);
+    toast.error("Failed to generate image. Please try again.");
+  }
+};
+
 
   return (
     <div className="main-agePredictor">
