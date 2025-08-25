@@ -47,12 +47,7 @@ function ChangehaircutPage() {
     const [hairstyle, setHairstyle] = useState(null);
 
     const styles = [
-        { name: "Random1", img: style1 },
-        { name: "Random2", img: style1 },
-        { name: "Random3", img: style1 },
-        { name: "Random4", img: style1 },
-        { name: "Random5", img: style1 },
-        { name: "Random6", img: style1 },
+        { name: "Random", img: style1 },
         { name: "Bob", img: style2 },
         { name: "Lob", img: style3 },
         { name: "Layered", img: style4 },
@@ -62,18 +57,13 @@ function ChangehaircutPage() {
     ];
 
      const HairColor = [
-        { name: "Random1", img: style1 },
-        { name: "Random2", img: style1 },
-        { name: "Random3", img: style1 },
-        { name: "Random4", img: style1 },
-        { name: "Random5", img: style1 },
-        { name: "Random6", img: style1 },
-        { name: "Bob", img: style2 },
-        { name: "Lob", img: style3 },
-        { name: "Layered", img: style4 },
-        { name: "Pixie cut", img: style5 },
-        { name: "Messy bun", img: style6 },
-        { name: "High Ponytail", img: style7 },
+        { name: "Random", img: color1 },
+        { name: "Black", img: color2 },
+        { name: "Dark Brown", img: color3 },
+        { name: "Medium Brown", img: color4 },
+        { name: "Light Brown", img: color5 },
+        { name: "Brunette", img: color6 },
+        { name: "Blonde", img: color7 },
     ];
 
     const handleGenderSelect = (gender) => {
