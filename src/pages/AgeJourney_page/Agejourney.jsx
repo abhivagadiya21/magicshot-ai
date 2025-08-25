@@ -102,7 +102,7 @@ function AgeJourney() {
             }
         } catch (error) {
             console.error("Error generating age journey image:", error);
-            toast.error("❌ Failed to generate image. Please try again.");
+            toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again.")
         }
     };
 
