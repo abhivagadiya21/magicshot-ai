@@ -30,9 +30,15 @@ import useUploadImg from "../../hooks/useUploadImg";
 import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
 import { toast } from "react-toastify";
+import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+
 
 function ChangehaircutPage() {
-    const { showPopup, handleOpen, handleClose } = usePopup();
+    const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
+    const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
+
+    const [genraterImageurl, setGenraterImageurl] = useState(null);
+    
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
@@ -75,45 +81,58 @@ function ChangehaircutPage() {
     };
 
     const handleGenerate = async () => {
-        if (!parent1Upload.croppedImage) {
-            toast.error("⚠️ Please upload an image of Parent 1.");
-            return;
-        }
+  if (!parent1Upload.croppedImage) {
+    toast.error("⚠️ Please upload an image of Parent 1.");
+    return;
+  }
 
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (!storedUser?.id) {
-            toast.error("❌ User not logged in.");
-            return;
-        }
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  if (!storedUser?.id) {
+    toast.error("❌ User not logged in.");
+    return;
+  }
 
-        try {
-            const uploadPhoto = await blobUrlToFile(
-                parent1Upload.croppedImage,
-                "parent1.jpg"
-            );
-            console.log("Upload Photo:", uploadPhoto);
+  try {
+    const uploadPhoto = await blobUrlToFile(
+      parent1Upload.croppedImage,
+      "parent1.jpg"
+    );
+    console.log("Upload Photo:", uploadPhoto);
 
-            const imageFiles = {
-                parent1: uploadPhoto,
-            };
-
-            const otherData = {
-                hairstyle: hairstyle,
-                hairColor: hairColor,
-                userid: storedUser.id,
-                gender: selectedGender,
-                transactionId: 1,
-            };
-
-            const response = await changeHaircutAPI(imageFiles, otherData);
-            console.log("Response from API:", response);
-
-            toast.success("🎉 Haircut image generated successfully!");
-        } catch (error) {
-            console.error("Error generating image:", error);
-            toast.error("❌ Failed to generate image. Please try again.");
-        }
+    const imageFiles = {
+      parent1: uploadPhoto,
     };
+
+    const otherData = {
+      hairstyle: hairstyle,
+      hairColor: hairColor,
+      userid: storedUser.id,
+      gender: selectedGender,
+      transactionId: 1,
+    };
+
+    const response = await changeHaircutAPI(imageFiles, otherData);
+    console.log("Response from API:", response);
+
+    if (response?.data?.file) {
+                setGenraterImageurl(response.data.file);
+                toast.success("🎉 Age journey image generated successfully!");
+            } else {
+                toast.error("❌ No image returned from server.");
+            }
+
+    toast.success("🎉 Haircut image generated successfully!");
+  } catch (error) {
+    console.error("Error generating image:", error);
+    toast.error("❌ Failed to generate image. Please try again.");
+  }
+};
+
+ const handleClickGenerate = async () => {
+        await handleGenerate();
+        openImagePopup();
+    };
+
 
     return (
         <>
@@ -121,20 +140,19 @@ function ChangehaircutPage() {
                 <div className="left-main-changeHair">
                     <div className="inner-left-1-changeHair">
                         <h4>Al Change Hairstyle</h4>
-                        <button onClick={handleOpen} className='btn-pop-up-howWork'>
+                        <button onClick={openHowWork} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
                         </button>
-                        {showPopup && (
-                            <Howworkpop
-                                howworkpopDetails={{
-                                    onClose: handleClose,
-                                    image: poppassimg4,
-                                    message:
-                                        "Upload your photo, choose from a variety of hairstyles and hair colors, and let AI instantly transform your look. No editing skills needed—just pick, preview, and download your new hairstyle in seconds."
-                                }}
-                            />
-                        )}
+                         {showHowWork && (
+                        <Howworkpop
+                            howworkpopDetails={{
+                                onClose: closeHowWork,
+                                image: poppassimg3,
+                                message: "Generate your age journey in seconds with help of AI."
+                            }}
+                        />
+                    )}
                     </div>
                     <div className='inner-left-2-changeHair'>
                         <div className='inner-left-2-in-upload-div'>
@@ -331,13 +349,21 @@ function ChangehaircutPage() {
                         </div>
                         <div className="inner-2-for-left-3">
                             <button className='changeHair-left-3-btn-1'>See Pricing</button>
-                            <button className='changeHair-left-3-btn-2' onClick={handleGenerate}>
+                            <button className='changeHair-left-3-btn-2' onClick={handleClickGenerate}>
                                 Generate
                                 <div className="changeHair-left-3-btn-2-icon">
                                     <img src={star} alt="" />
                                     <span>-0.5</span>
                                 </div>
                             </button>
+                            {showImagePopup && genraterImageurl && (
+                            <GetImage_pop
+                                getimage_details={{
+                                    onClose: closeImagePopup,
+                                    image: genraterImageurl,
+                                }}
+                            />
+                        )}
                         </div>
                     </div>
                 </div>
