@@ -43,6 +43,7 @@ const SignUp = () => {
 
       const data = await res.json();
       console.log("Sign-up success:", data);
+      // console.log("Sign-up success:", data.bouns);
 
       // Save user info/token if needed
       localStorage.setItem("user", JSON.stringify(data));
