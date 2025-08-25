@@ -26,7 +26,7 @@ const SignUp = () => {
       setLoading(true);
       setError("");
 
-      const res = await fetch("http://192.168.1.8:3000/auth/register", {
+      const res = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -43,6 +43,7 @@ const SignUp = () => {
 
       const data = await res.json();
       console.log("Sign-up success:", data);
+      // console.log("Sign-up success:", data.bouns);
 
       // Save user info/token if needed
       localStorage.setItem("user", JSON.stringify(data));
