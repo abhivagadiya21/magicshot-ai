@@ -38,7 +38,7 @@ function ChangehaircutPage() {
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
 
     const [genraterImageurl, setGenraterImageurl] = useState(null);
-    
+
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
@@ -56,7 +56,7 @@ function ChangehaircutPage() {
         { name: "High Ponytail", img: style7 },
     ];
 
-     const HairColor = [
+    const HairColor = [
         { name: "Random", img: color1 },
         { name: "Black", img: color2 },
         { name: "Dark Brown", img: color3 },
@@ -71,54 +71,54 @@ function ChangehaircutPage() {
     };
 
     const handleGenerate = async () => {
-  if (!parent1Upload.croppedImage) {
-    toast.error("⚠️ Please upload an image of Parent 1.");
-    return;
-  }
+        if (!parent1Upload.croppedImage) {
+            toast.error("⚠️ Please upload an image of Parent 1.");
+            return;
+        }
 
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  if (!storedUser?.id) {
-    toast.error("❌ User not logged in.");
-    return;
-  }
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser?.id) {
+            toast.error("❌ User not logged in.");
+            return;
+        }
 
-  try {
-    const uploadPhoto = await blobUrlToFile(
-      parent1Upload.croppedImage,
-      "parent1.jpg"
-    );
-    console.log("Upload Photo:", uploadPhoto);
+        try {
+            const uploadPhoto = await blobUrlToFile(
+                parent1Upload.croppedImage,
+                "parent1.jpg"
+            );
+            console.log("Upload Photo:", uploadPhoto);
 
-    const imageFiles = {
-      parent1: uploadPhoto,
-    };
+            const imageFiles = {
+                parent1: uploadPhoto,
+            };
 
-    const otherData = {
-      hairstyle: hairstyle,
-      hairColor: hairColor,
-      userid: storedUser.id,
-      gender: selectedGender,
-      transactionId: 1,
-    };
+            const otherData = {
+                hairstyle: hairstyle,
+                hairColor: hairColor,
+                userid: storedUser.id,
+                gender: selectedGender,
+                transactionId: 1,
+            };
 
-    const response = await changeHaircutAPI(imageFiles, otherData);
-    console.log("Response from API:", response);
+            const response = await changeHaircutAPI(imageFiles, otherData);
+            console.log("Response from API:", response);
 
-    if (response?.data?.file) {
+            if (response?.data?.file) {
                 setGenraterImageurl(response.data.file);
                 toast.success("🎉 Age journey image generated successfully!");
             } else {
                 toast.error("❌ No image returned from server.");
             }
 
-    toast.success("🎉 Haircut image generated successfully!");
-  } catch (error) {
-    console.error("Error generating image:", error);
-    toast.error("❌ Failed to generate image. Please try again.");
-  }
-};
+            toast.success("🎉 Haircut image generated successfully!");
+        } catch (error) {
+            console.error("Error generating image:", error);
+            toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again.")
+        }
+    };
 
- const handleClickGenerate = async () => {
+    const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
     };
@@ -134,15 +134,15 @@ function ChangehaircutPage() {
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
                         </button>
-                         {showHowWork && (
-                        <Howworkpop
-                            howworkpopDetails={{
-                                onClose: closeHowWork,
-                                image: poppassimg3,
-                                message: "Generate your age journey in seconds with help of AI."
-                            }}
-                        />
-                    )}
+                        {showHowWork && (
+                            <Howworkpop
+                                howworkpopDetails={{
+                                    onClose: closeHowWork,
+                                    image: poppassimg3,
+                                    message: "Generate your age journey in seconds with help of AI."
+                                }}
+                            />
+                        )}
                     </div>
                     <div className='inner-left-2-changeHair'>
                         <div className='inner-left-2-in-upload-div'>
@@ -304,29 +304,29 @@ function ChangehaircutPage() {
                                             </div>
                                         ))}
                                     </div>
-                                    
+
                                 </div>
                             )}
                             {activeTab === 'tab2' && (
-                                    <div className="tab1-content-changeHair">
-                                        {HairColor.map((color, idx) => (
-                                            <div
-                                                key={idx}
-                                                className={`tab1-inner-1-content ${hairColor === color.name ? "selected" : ""
-                                                    }`}
-                                                onClick={() => setHairColor(color.name)}
-                                            >
-                                                <div className="tab1-inner-1-content-img-div-hair">
-                                                    <img
-                                                        src={color.img}
-                                                        alt={color.name}
-                                                        className="tab1-content-inner-1-img-hair"
-                                                    />
-                                                </div>
-                                                <p>{color.name}</p>
+                                <div className="tab1-content-changeHair">
+                                    {HairColor.map((color, idx) => (
+                                        <div
+                                            key={idx}
+                                            className={`tab1-inner-1-content ${hairColor === color.name ? "selected" : ""
+                                                }`}
+                                            onClick={() => setHairColor(color.name)}
+                                        >
+                                            <div className="tab1-inner-1-content-img-div-hair">
+                                                <img
+                                                    src={color.img}
+                                                    alt={color.name}
+                                                    className="tab1-content-inner-1-img-hair"
+                                                />
                                             </div>
-                                        ))}
-                                    </div>
+                                            <p>{color.name}</p>
+                                        </div>
+                                    ))}
+                                </div>
 
                             )}
                         </div>
@@ -347,13 +347,13 @@ function ChangehaircutPage() {
                                 </div>
                             </button>
                             {showImagePopup && genraterImageurl && (
-                            <GetImage_pop
-                                getimage_details={{
-                                    onClose: closeImagePopup,
-                                    image: genraterImageurl,
-                                }}
-                            />
-                        )}
+                                <GetImage_pop
+                                    getimage_details={{
+                                        onClose: closeImagePopup,
+                                        image: genraterImageurl,
+                                    }}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

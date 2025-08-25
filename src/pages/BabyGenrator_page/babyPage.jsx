@@ -135,7 +135,6 @@ function BabyPage() {
 
   const [selectedGender, setSelectedGender] = useState("boy");
   const [genraterImageurl, setGenraterImageurl] = useState(null);
-  
 
 
   const parent1Upload = useUploadImg();

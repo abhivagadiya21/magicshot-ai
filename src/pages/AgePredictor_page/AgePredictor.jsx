@@ -77,7 +77,7 @@ function AgePredictor() {
       toast.success("🎉 Age prediction generated successfully!");
     } catch (error) {
       console.error("❌ Error predicting age:", error);
-      toast.error("Failed to generate image. Please try again.");
+      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again." )
     }
   };
   const handleclick = async () => {
