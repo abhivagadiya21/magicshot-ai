@@ -422,7 +422,6 @@
 
 .active-tab{
     border-bottom: 2px solid #c589e4;
-    background-color: transparent;
 }
 
 .tab1-content-changeHair {
@@ -453,10 +452,14 @@
 }
 
 .tab1-content-inner-1-img-hair {
-
     width: 100%;
     object-fit: contain;
     border-radius: 10px;
+}
+
+
+.tab1-content-inner-1-img-hair:active{
+    border: 2px solid #c589e4;
 }
 
 
