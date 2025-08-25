@@ -30,60 +30,109 @@ import useUploadImg from "../../hooks/useUploadImg";
 import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
 import { toast } from "react-toastify";
+import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+
 
 function ChangehaircutPage() {
-    const { showPopup, handleOpen, handleClose } = usePopup();
+    const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
+    const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
+
+    const [genraterImageurl, setGenraterImageurl] = useState(null);
+    
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
 
-    const [hairstyle, setHairstyle] = useState("default");
     const [hairColor, setHairColor] = useState("default");
+    const [hairstyle, setHairstyle] = useState(null);
+
+    const styles = [
+        { name: "Random1", img: style1 },
+        { name: "Random2", img: style1 },
+        { name: "Random3", img: style1 },
+        { name: "Random4", img: style1 },
+        { name: "Random5", img: style1 },
+        { name: "Random6", img: style1 },
+        { name: "Bob", img: style2 },
+        { name: "Lob", img: style3 },
+        { name: "Layered", img: style4 },
+        { name: "Pixie cut", img: style5 },
+        { name: "Messy bun", img: style6 },
+        { name: "High Ponytail", img: style7 },
+    ];
+
+     const HairColor = [
+        { name: "Random1", img: style1 },
+        { name: "Random2", img: style1 },
+        { name: "Random3", img: style1 },
+        { name: "Random4", img: style1 },
+        { name: "Random5", img: style1 },
+        { name: "Random6", img: style1 },
+        { name: "Bob", img: style2 },
+        { name: "Lob", img: style3 },
+        { name: "Layered", img: style4 },
+        { name: "Pixie cut", img: style5 },
+        { name: "Messy bun", img: style6 },
+        { name: "High Ponytail", img: style7 },
+    ];
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
     };
 
     const handleGenerate = async () => {
-        if (!parent1Upload.croppedImage) {
-            toast.error("⚠️ Please upload an image of Parent 1.");
-            return;
-        }
+  if (!parent1Upload.croppedImage) {
+    toast.error("⚠️ Please upload an image of Parent 1.");
+    return;
+  }
 
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (!storedUser?.id) {
-            toast.error("❌ User not logged in.");
-            return;
-        }
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  if (!storedUser?.id) {
+    toast.error("❌ User not logged in.");
+    return;
+  }
 
-        try {
-            const uploadPhoto = await blobUrlToFile(
-                parent1Upload.croppedImage,
-                "parent1.jpg"
-            );
-            console.log("Upload Photo:", uploadPhoto);
+  try {
+    const uploadPhoto = await blobUrlToFile(
+      parent1Upload.croppedImage,
+      "parent1.jpg"
+    );
+    console.log("Upload Photo:", uploadPhoto);
 
-            const imageFiles = {
-                parent1: uploadPhoto,
-            };
-
-            const otherData = {
-                hairstyle: hairstyle,
-                hairColor: hairColor,
-                userid: storedUser.id,
-                gender: selectedGender,
-                transactionId: 1,
-            };
-
-            const response = await changeHaircutAPI(imageFiles, otherData);
-            console.log("Response from API:", response);
-
-            toast.success("🎉 Haircut image generated successfully!");
-        } catch (error) {
-            console.error("Error generating image:", error);
-            toast.error("❌ Failed to generate image. Please try again.");
-        }
+    const imageFiles = {
+      parent1: uploadPhoto,
     };
+
+    const otherData = {
+      hairstyle: hairstyle,
+      hairColor: hairColor,
+      userid: storedUser.id,
+      gender: selectedGender,
+      transactionId: 1,
+    };
+
+    const response = await changeHaircutAPI(imageFiles, otherData);
+    console.log("Response from API:", response);
+
+    if (response?.data?.file) {
+                setGenraterImageurl(response.data.file);
+                toast.success("🎉 Age journey image generated successfully!");
+            } else {
+                toast.error("❌ No image returned from server.");
+            }
+
+    toast.success("🎉 Haircut image generated successfully!");
+  } catch (error) {
+    console.error("Error generating image:", error);
+    toast.error("❌ Failed to generate image. Please try again.");
+  }
+};
+
+ const handleClickGenerate = async () => {
+        await handleGenerate();
+        openImagePopup();
+    };
+
 
     return (
         <>
@@ -91,20 +140,19 @@ function ChangehaircutPage() {
                 <div className="left-main-changeHair">
                     <div className="inner-left-1-changeHair">
                         <h4>Al Change Hairstyle</h4>
-                        <button onClick={handleOpen} className='btn-pop-up-howWork'>
+                        <button onClick={openHowWork} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
                         </button>
-                        {showPopup && (
-                            <Howworkpop
-                                howworkpopDetails={{
-                                    onClose: handleClose,
-                                    image: poppassimg4,
-                                    message:
-                                        "Upload your photo, choose from a variety of hairstyles and hair colors, and let AI instantly transform your look. No editing skills needed—just pick, preview, and download your new hairstyle in seconds."
-                                }}
-                            />
-                        )}
+                         {showHowWork && (
+                        <Howworkpop
+                            howworkpopDetails={{
+                                onClose: closeHowWork,
+                                image: poppassimg3,
+                                message: "Generate your age journey in seconds with help of AI."
+                            }}
+                        />
+                    )}
                     </div>
                     <div className='inner-left-2-changeHair'>
                         <div className='inner-left-2-in-upload-div'>
@@ -235,166 +283,61 @@ function ChangehaircutPage() {
 
                         <div className="inner-2-left-in-tab-btn-changeHair">
                             <button onClick={() => setActiveTab('tab1')}
-                                className={`tab-btn-1-chageHair ${activeTab === 'tab1' ? 'active-tab' : ''}`}
+                                className={`tab-btn-1-chageHair ${activeTab === 'tab1' ? 'active-tab1' : ''}`}
 
                             >Hairstyle</button>
                             <button onClick={() => setActiveTab('tab2')}
                                 // className='tab-btn-2-chageHair'
-                                className={`tab-btn-2-chageHair ${activeTab === 'tab2' ? 'active-tab' : ''}`}
+                                className={`tab-btn-2-chageHair ${activeTab === 'tab2' ? 'active-tab1' : ''}`}
                             >hair Color</button>
                         </div>
                         <div className="inner-2-left-in-tab-btnshow-div-changeHair">
                             {activeTab === 'tab1' && (
                                 <div className="tab1-content-changeHair">
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
+
+                                    <div className="tab1-content-changeHair">
+                                        {styles.map((style, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={`tab1-inner-1-content ${hairstyle === style.name ? "selected" : ""
+                                                    }`}
+                                                onClick={() => setHairstyle(style.name)}
+                                            >
+                                                <div className="tab1-inner-1-content-img-div-hair">
+                                                    <img
+                                                        src={style.img}
+                                                        alt={style.name}
+                                                        className="tab1-content-inner-1-img-hair"
+                                                    />
+                                                </div>
+                                                <p>{style.name}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Bob") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style2} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Bob</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Lob") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style3} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Lob</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Layered") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style4} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Layered</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Pixie cut") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style5} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Pixie cut</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("Messy bun") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style6} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Messy bun</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairstyle("High Ponytail") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={style7} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>High Ponytail</p>
-                                    </div>
+                                    
                                 </div>
                             )}
                             {activeTab === 'tab2' && (
-                                <div className="tab1-content-changeHair">
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
+                                    <div className="tab1-content-changeHair">
+                                        {HairColor.map((color, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={`tab1-inner-1-content ${hairColor === color.name ? "selected" : ""
+                                                    }`}
+                                                onClick={() => setHairColor(color.name)}
+                                            >
+                                                <div className="tab1-inner-1-content-img-div-hair">
+                                                    <img
+                                                        src={color.img}
+                                                        alt={color.name}
+                                                        className="tab1-content-inner-1-img-hair"
+                                                    />
+                                                </div>
+                                                <p>{color.name}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Random") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color1} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Random</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Black") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color2} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Black</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Dark brown") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color3} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Dark brown</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Medium Brown") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color4} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Medium Brown</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Light brown") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color5} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Light brown</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Brunette") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color6} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Brunette</p>
-                                    </div>
-                                    <div className='tab1-inner-1-content' onClick={() => { setHairColor("Blonde") }}>
-                                        <div className='tab1-inner-1-content-img-div-hair'>
-                                            <img src={color7} alt="Style 1" className='tab1-content-inner-1-img-hair' />
-                                        </div>
-                                        <p>Blonde</p>
-                                    </div>
-                                </div>
+
                             )}
                         </div>
 
@@ -406,13 +349,21 @@ function ChangehaircutPage() {
                         </div>
                         <div className="inner-2-for-left-3">
                             <button className='changeHair-left-3-btn-1'>See Pricing</button>
-                            <button className='changeHair-left-3-btn-2' onClick={handleGenerate}>
+                            <button className='changeHair-left-3-btn-2' onClick={handleClickGenerate}>
                                 Generate
                                 <div className="changeHair-left-3-btn-2-icon">
                                     <img src={star} alt="" />
                                     <span>-0.5</span>
                                 </div>
                             </button>
+                            {showImagePopup && genraterImageurl && (
+                            <GetImage_pop
+                                getimage_details={{
+                                    onClose: closeImagePopup,
+                                    image: genraterImageurl,
+                                }}
+                            />
+                        )}
                         </div>
                     </div>
                 </div>

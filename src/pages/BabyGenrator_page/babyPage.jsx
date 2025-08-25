@@ -180,7 +180,7 @@ function BabyPage() {
         setGenraterImageurl(data.file); // update state
         console.log("Generated Baby Image URL:", data.file); // log directly
         console.log("Generated Baby Image URL:", genraterImageurl); // log directly
-        toast.success("🎉 Baby image generated successfully!");
+     
       } else {
         toast.error("❌ No image returned from server.");
       }

@@ -65,10 +65,9 @@
 }
 
 .pop-pass-image-work {
-    border-radius: 15px;
-    width: 100%;
+    border-radius: 10px;
+    /* width: 50%; */
     height: 100%;
-    /* object-fit: contain; */
 }
 .inner-3-pop-how-pop{
     display: flex;

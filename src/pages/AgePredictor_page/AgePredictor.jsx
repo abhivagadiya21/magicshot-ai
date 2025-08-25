@@ -1,7 +1,7 @@
 import { useState } from "react";
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
-import { agePredictorAPI } from "../../services/imageBase"; 
+import { agePredictorAPI } from "../../services/imageBase";
 
 import Upload_img from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
@@ -15,53 +15,75 @@ import predictorImage from "./predictor_image/agepredictor.png";
 import questionMark from "../BabyGenrator_page/babyG-img/question.svg";
 import Profileicon1 from "../BabyGenrator_page/babyG-img/profile-1.svg";
 import upload from "../BabyGenrator_page/babyG-img/upload.svg";
+import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { toast } from "react-toastify";
 
 
 function AgePredictor() {
-  const { showPopup, handleOpen, handleClose } = usePopup();
+  const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
+  const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
+  const [genraterImageurl, setGenraterImageurl] = useState(null);
+  const [gettingAge, setGettingAge] = useState();
+
+  // const { showPopup, handleOpen, handleClose } = usePopup();
   const parent1Upload = useUploadImg();
-  
-const handleGenerate = async () => {
-  if (!parent1Upload.croppedImage) {
-    toast.error("❌ Please upload both parent images.");
-    return;
-  }
 
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  if (!storedUser?.id) {
-    toast.error("❌ User not logged in.");
-    return;
-  }
+  const handleGenerate = async () => {
+    if (!parent1Upload.croppedImage) {
+      toast.error("❌ Please upload both parent images.");
+      return;
+    }
 
-  const parent1File = await blobUrlToFile(
-    parent1Upload.croppedImage,
-    "agePredictor.png"
-  );
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser?.id) {
+      toast.error("❌ User not logged in.");
+      return;
+    }
 
-  const imageFiles = {
-    agePredictorUpload: parent1File,
+    const parent1File = await blobUrlToFile(
+      parent1Upload.croppedImage,
+      "agePredictor.png"
+    );
+
+    const imageFiles = {
+      agePredictorUpload: parent1File,
+    };
+
+    const otherData = {
+      userId: storedUser.id,
+      transactionId: 1,
+      Predict_age: 60,
+    };
+    console.log("📸 Image Files:", imageFiles);
+    console.log("📸 Image Files:", otherData);
+
+    try {
+      const response = await agePredictorAPI(imageFiles, otherData);
+      console.log("✅ Response from API:", response);
+      const data = response.data;
+
+
+      if (data?.file) { 
+        setGenraterImageurl(data.file); 
+        setGettingAge(data.agepredic);
+        console.log("Generated Baby Image URL:", data.file);
+        console.log("Generated Baby Image URL:", genraterImageurl); 
+
+      } else {
+        toast.error("❌ No image returned from server.");
+      }
+
+      toast.success("🎉 Age prediction generated successfully!");
+    } catch (error) {
+      console.error("❌ Error predicting age:", error);
+      toast.error("Failed to generate image. Please try again.");
+    }
   };
-
-  const otherData = {
-    userId: storedUser.id,
-    transactionId: 1,
-    Predict_age: 30,
+  const handleclick = async () => {
+    await handleGenerate();
+    openImagePopup();
   };
-  console.log("📸 Image Files:", imageFiles);
-  console.log("📸 Image Files:", otherData);
-
-  try {
-    const response = await agePredictorAPI(imageFiles, otherData);
-    console.log("✅ Response from API:", response);
-
-    toast.success("🎉 Age prediction generated successfully!");
-  } catch (error) {
-    console.error("❌ Error predicting age:", error);
-    toast.error("Failed to generate image. Please try again.");
-  }
-};
 
 
   return (
@@ -71,15 +93,15 @@ const handleGenerate = async () => {
         {/* Header */}
         <div className="inner-left-1-agePredictor">
           <h4>AI Age Predictor</h4>
-          <button onClick={handleOpen} className="btn-pop-up-howWork">
+          <button onClick={openHowWork} className="btn-pop-up-howWork">
             <img src={questionMark} alt="Help icon" />
             <span>How It Works</span>
           </button>
 
-          {showPopup && (
+          {showHowWork && (
             <Howworkpop
               howworkpopDetails={{
-                onClose: handleClose,
+                onClose: closeHowWork,
                 image: poppassimg2,
                 message: "Predict your age with AI. Upload and guess!",
               }}
@@ -178,13 +200,20 @@ const handleGenerate = async () => {
           </div>
           <div className="inner-2-for-left-3">
             <button className="agePredictor-left-3-btn-1">See Pricing</button>
-            <button className="agePredictor-left-3-btn-2" onClick={handleGenerate}>
+            <button className="agePredictor-left-3-btn-2" onClick={handleclick}>
               Generate
-              <div className="agePredictor-left-3-btn-2-icon">
-                <img src={star} alt="star" />
+              <div className="baby-left-3-btn-2-icon">
+                <img src={star} alt="star icon" />
                 <span>-0.5</span>
               </div>
             </button>
+            {showImagePopup && genraterImageurl && <GetImage_pop
+              getimage_details={{
+                onClose: closeImagePopup,
+                image: genraterImageurl,
+                getingAge: gettingAge,
+              }}
+            />}
           </div>
         </div>
       </div>

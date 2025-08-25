@@ -144,7 +144,7 @@
   outline-color: #262a2d;
   outline-width: 3px;
   outline: 3px solid #262a2d !important;
-  outline-offset: 0; /* keeps it tight */
+  outline-offset: 0; 
 }
 
 .signin-btn:active {

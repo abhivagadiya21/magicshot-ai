@@ -420,9 +420,8 @@
     transition: all 0.3s ease;
 }
 
-.active-tab{
+.active-tab1{
     border-bottom: 2px solid #c589e4;
-    background-color: transparent;
 }
 
 .tab1-content-changeHair {
@@ -453,10 +452,21 @@
 }
 
 .tab1-content-inner-1-img-hair {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid transparent; 
+}
 
-    width: 100%;
-    object-fit: contain;
-    border-radius: 10px;
+.tab1-inner-1-content.selected .tab1-content-inner-1-img-hair {
+  border: 3px solid #c589e4;
+  
+}
+
+
+.tab1-content-inner-1-img-hair:active{
+    border: 2px solid #c589e4;
 }
 
 
