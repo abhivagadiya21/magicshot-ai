@@ -253,6 +253,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   padding: 0px 15px;
   backdrop-filter: blur(10px);
   background-color: hsl(0deg 0% 0% / 70%);
+  z-index: 5;
 }
 
 .baby-text-container {
