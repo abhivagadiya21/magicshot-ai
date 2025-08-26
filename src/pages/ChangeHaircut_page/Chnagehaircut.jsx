@@ -54,6 +54,20 @@ function ChangehaircutPage() {
         { name: "Pixie cut", img: style5 },
         { name: "Messy bun", img: style6 },
         { name: "High Ponytail", img: style7 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
     ];
 
     const HairColor = [

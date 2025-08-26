@@ -28,6 +28,7 @@ function CropImage({ imageSrc, onCropDone }) {
 
   return (
     <>
+    <div className="cropper-wrapper">
       <div className="cropper-container">
         <Cropper
           image={imageSrc}
@@ -48,7 +49,9 @@ function CropImage({ imageSrc, onCropDone }) {
             },
           }}
         />
-        <div className="crop-buttons">
+        
+      </div>
+      <div className="crop-buttons">
           <div className="ratio-select">
             <label htmlFor="aspect-select"></label>
             <select
