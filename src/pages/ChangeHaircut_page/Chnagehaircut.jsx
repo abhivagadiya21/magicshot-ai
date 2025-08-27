@@ -31,7 +31,7 @@ import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
-import { useCredits } from "../../components/global_com/contaxt";
+import { useCredits } from "../../components/global_com/context.jsx";
 
 
 
@@ -48,7 +48,7 @@ function ChangehaircutPage() {
 
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
-    const { dispatch } = useCredits();
+    const { dispatch,fetchUser } = useCredits();
 
     const styles = [
         { name: "Random", img: style1 },
@@ -125,11 +125,12 @@ function ChangehaircutPage() {
 
             if (data?.file) {
                 // setTimeout(() => {
-                    setLoading(false);
-                    setGenraterImageurl(data.file);
-                    openImagePopup();
-                    toast.success("🎉 Hairstyle image generated successfully!");
-                    dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+                setLoading(false);
+                setGenraterImageurl(data.file);
+                openImagePopup();
+                toast.success("🎉 Hairstyle image generated successfully!");
+                fetchUser()
+
 
                 // }, 5000);
             } else {
@@ -403,7 +404,7 @@ function ChangehaircutPage() {
                                             closeImagePopup()
                                         },
                                         image: genraterImageurl,
-                                        imgname:"change-haircut"
+                                        imgname: "change-haircut"
                                     }}
                                 />
                             )}

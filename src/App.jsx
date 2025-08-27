@@ -16,7 +16,7 @@ import SignIn from './components/sign_in_up_compo/SignIn.jsx';
 import SignUp from './components/sign_in_up_compo/SignUp.jsx';
 import ForgotPassword from './components/sign_in_up_compo/ForgotPassword.jsx';
 import Profile from './pages/profile_page/profile.jsx';
-import { CreditProvider } from './components/global_com/contaxt.jsx';
+import { CreditProvider } from './components/global_com/context.jsx';
 
 function App() {
   return (

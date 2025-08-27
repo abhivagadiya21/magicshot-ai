@@ -15,8 +15,8 @@ function GetImagePop({ getimage_details }) {
             if (!imageRef.current) return;
 
             const canvas = await html2canvas(imageRef.current, {
-                useCORS: true, // cross-origin images માટે
-                backgroundColor: null, // transparent background maintain કરવા
+                useCORS: true, 
+                backgroundColor: null, 
                 scale: 2, // high resolution
             });
 
