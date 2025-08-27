@@ -31,6 +31,8 @@ import { changeHaircutAPI } from '../../services/imageBase';
 import { blobUrlToFile } from '../../utils/blobToFile';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+import { useCredits } from "../../components/global_com/contaxt";
+
 
 
 function ChangehaircutPage() {
@@ -46,6 +48,7 @@ function ChangehaircutPage() {
 
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
+    const { dispatch } = useCredits();
 
     const styles = [
         { name: "Random", img: style1 },
@@ -85,87 +88,89 @@ function ChangehaircutPage() {
         setSelectedGender(gender);
     };
 
-const handleGenerate = async () => {
-    if (!parent1Upload.croppedImage) {
-        toast.error("⚠️ Please upload an image of Parent 1.");
-        return;
-    }
+    const handleGenerate = async () => {
+        if (!parent1Upload.croppedImage) {
+            toast.error("⚠️ Please upload an image of Parent 1.");
+            return;
+        }
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser?.id) {
-        toast.error("❌ User not logged in.");
-        return;
-    }
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser?.id) {
+            toast.error("❌ User not logged in.");
+            return;
+        }
 
-    const uploadPhoto = await blobUrlToFile(
-        parent1Upload.croppedImage,
-        "parent1.jpg"
-    );
+        const uploadPhoto = await blobUrlToFile(
+            parent1Upload.croppedImage,
+            "parent1.jpg"
+        );
 
-    const imageFiles = {
-        parent1: uploadPhoto,
-    };
+        const imageFiles = {
+            parent1: uploadPhoto,
+        };
 
-    const otherData = {
-        hairstyle: hairstyle,
-        hairColor: hairColor,
-        userid: storedUser.id,
-        gender: selectedGender,
-        transactionId: 1,
-    };
+        const otherData = {
+            hairstyle: hairstyle,
+            hairColor: hairColor,
+            userid: storedUser.id,
+            gender: selectedGender,
+            transactionId: 1,
+        };
 
-    setLoading(true);
+        setLoading(true);
 
-    try {
-        const { data } = await changeHaircutAPI(imageFiles, otherData);
-        console.log("Response from API:", data);
+        try {
+            const { data } = await changeHaircutAPI(imageFiles, otherData);
+            console.log("Response from API:", data);
 
-        if (data?.file) {
-            setTimeout(() => {
+            if (data?.file) {
+                // setTimeout(() => {
+                    setLoading(false);
+                    setGenraterImageurl(data.file);
+                    openImagePopup();
+                    toast.success("🎉 Hairstyle image generated successfully!");
+                    dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+
+                // }, 5000);
+            } else {
+                toast.error("❌ No image returned from server.");
                 setLoading(false);
-                setGenraterImageurl(data.file);
-                openImagePopup();
-                toast.success("🎉 Hairstyle image generated successfully!");
-            }, 5000);
-        } else {
-            toast.error("❌ No image returned from server.");
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
             setLoading(false);
         }
-    } catch (error) {
-        toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
-        setLoading(false);
-    }
-};
+    };
 
 
 
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
-        window.dispatchEvent(new Event("creditsUpdated"));
+        // window.dispatchEvent(new Event("creditsUpdated"));
     };
 
 
     return (
         <>
             <div className="main-changeHair">
-                 {loading && (
-                <div className="loader-overlay">
-                    <div className="loader-wrapper">
-                        <div className="loader"></div>
-                        <span class="loader-letter">G</span>
-                        <span class="loader-letter">e</span>
-                        <span class="loader-letter">n</span>
-                        <span class="loader-letter">e</span>
-                        <span class="loader-letter">r</span>
-                        <span class="loader-letter">a</span>
-                        <span class="loader-letter">t</span>
-                        <span class="loader-letter">i</span>
-                        <span class="loader-letter">n</span>
-                        <span class="loader-letter">g</span>
+                {loading && (
+                    <div className="loader-overlay">
+                        <div className="loader-wrapper">
+                            <div className="loader"></div>
+                            <span class="loader-letter">G</span>
+                            <span class="loader-letter">e</span>
+                            <span class="loader-letter">n</span>
+                            <span class="loader-letter">e</span>
+                            <span class="loader-letter">r</span>
+                            <span class="loader-letter">a</span>
+                            <span class="loader-letter">t</span>
+                            <span class="loader-letter">i</span>
+                            <span class="loader-letter">n</span>
+                            <span class="loader-letter">g</span>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
 
                 <div className="left-main-changeHair">
@@ -238,6 +243,9 @@ const handleGenerate = async () => {
                             {parent1Upload.showCropper && (
                                 <div className="overlay">
                                     <div className="popup">
+                                        <div className="cropper-header">
+                                            <p>Crop Image</p>
+                                        </div>
                                         <button
                                             className="close-btn"
                                             onClick={() => parent1Upload.setShowCropper(false)}
@@ -390,7 +398,10 @@ const handleGenerate = async () => {
                             {showImagePopup && genraterImageurl && (
                                 <GetImage_pop
                                     getimage_details={{
-                                        onClose: closeImagePopup,
+                                        onClose: () => {
+                                            setGenraterImageurl(null);
+                                            closeImagePopup()
+                                        },
                                         image: genraterImageurl,
                                     }}
                                 />

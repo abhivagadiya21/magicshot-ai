@@ -18,7 +18,7 @@ import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
 import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
-
+import { useCredits } from "../../components/global_com/contaxt";
 
 function UploadSection({ label, uploadHook, inputId }) {
   return (
@@ -137,6 +137,8 @@ function BabyPage() {
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
 
+  const { dispatch } = useCredits();
+
   const handleGenerate = async () => {
     if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
       toast.error("⚠️ Please upload both parent images.");
@@ -174,11 +176,12 @@ function BabyPage() {
 
 
       if (data?.file) {
-        setTimeout(() => {
+        // setTimeout(() => {
           setLoading(false);
           setGenraterImageurl(data.file);
           toast.success("🎉 Baby image generated successfully!");
-        }, 5000);
+          dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+        // }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
         setLoading(false);
@@ -192,7 +195,7 @@ function BabyPage() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
-    window.dispatchEvent(new Event("creditsUpdated"));
+    // window.dispatchEvent(new Event("creditsUpdated"));
   };
 
   return (
@@ -284,7 +287,10 @@ function BabyPage() {
             </button>
             {showImagePopup && genraterImageurl && <GetImage_pop
               getimage_details={{
-                onClose: closeImagePopup,
+                onClose: () => {
+                  setGenraterImageurl(null);
+                  closeImagePopup()
+                },
                 image: genraterImageurl,
               }}
             />}

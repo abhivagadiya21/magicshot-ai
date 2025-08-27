@@ -15,6 +15,8 @@ import { blobUrlToFile } from "../../utils/blobToFile";
 import { AgejournyAPI } from '../../services/imageBase';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+import { useCredits } from "../../components/global_com/contaxt";
+
 
 function AgeJourney() {
     // Popup hooks
@@ -29,6 +31,8 @@ function AgeJourney() {
     const sliderInputRef = useRef(null);
     const sliderThumbRef = useRef(null);
     const sliderLineRef = useRef(null);
+    const { dispatch } = useCredits();
+
 
     // Handle slider UI
     const showSliderValue = () => {
@@ -65,49 +69,51 @@ function AgeJourney() {
     }, []);
 
     // API call to generate image
-   const handleGenerate = async () => {
-    if (!parent1Upload.croppedImage) {
-        toast.error("⚠️ Please upload an image.");
-        return;
-    }
+    const handleGenerate = async () => {
+        if (!parent1Upload.croppedImage) {
+            toast.error("⚠️ Please upload an image.");
+            return;
+        }
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser?.id) {
-        toast.error("❌ User not logged in.");
-        return;
-    }
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser?.id) {
+            toast.error("❌ User not logged in.");
+            return;
+        }
 
-    const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
+        const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
 
-    const imageFiles = { ageJourneyUpload: parent1File };
-    const otherData = { userid: storedUser.id, selectAge: sliderValue, transactionId: 1 };
+        const imageFiles = { ageJourneyUpload: parent1File };
+        const otherData = { userid: storedUser.id, selectAge: sliderValue, transactionId: 1 };
 
-    setLoading(true);
-    try {
-        const { data } = await AgejournyAPI(imageFiles, otherData); 
-        if (data?.file) {
-            setTimeout(() => {
+        setLoading(true);
+        try {
+            const { data } = await AgejournyAPI(imageFiles, otherData);
+            if (data?.file) {
+                // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Age journey generated successfully!");
-            }, 5000);
-        } else {
-            toast.error("❌ No image returned from server.");
+                dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+
+                // }, 5000);
+            } else {
+                toast.error("❌ No image returned from server.");
+                setLoading(false);
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
             setLoading(false);
         }
-    } catch (error) {
-        toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
-        setLoading(false);
-    }
-};
+    };
 
 
 
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
-        window.dispatchEvent(new Event("creditsUpdated"));
+        // window.dispatchEvent(new Event("creditsUpdated"));
     };
 
     return (
@@ -203,6 +209,9 @@ function AgeJourney() {
                     {parent1Upload.showCropper && (
                         <div className="overlay">
                             <div className="popup">
+                                <div className="cropper-header">
+                                    <p>Crop Image</p>
+                                </div>
                                 <button
                                     className="close-btn"
                                     onClick={() => parent1Upload.setShowCropper(false)}
@@ -269,7 +278,10 @@ function AgeJourney() {
                         {showImagePopup && genraterImageurl && (
                             <GetImage_pop
                                 getimage_details={{
-                                    onClose: closeImagePopup,
+                                    onClose: () => {
+                                        setGenraterImageurl(null);
+                                        closeImagePopup()
+                                    },
                                     image: genraterImageurl,
                                 }}
                             />

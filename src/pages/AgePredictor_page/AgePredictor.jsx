@@ -15,6 +15,8 @@ import upload from "../BabyGenrator_page/babyG-img/upload.svg";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { toast } from "react-toastify";
+import { useCredits } from "../../components/global_com/contaxt";
+
 
 
 function AgePredictor() {
@@ -23,6 +25,7 @@ function AgePredictor() {
   const [genraterImageurl, setGenraterImageurl] = useState(null);
   const [gettingAge, setGettingAge] = useState();
   const [loading, setLoading] = useState(false);
+  const { dispatch } = useCredits();
 
   const parent1Upload = useUploadImg();
 
@@ -56,7 +59,7 @@ function AgePredictor() {
     console.log("📸 Image Files:", otherData);
 
     setLoading(true);
-    
+
     try {
       const response = await agePredictorAPI(imageFiles, otherData);
       console.log("✅ Response from API:", response);
@@ -64,12 +67,14 @@ function AgePredictor() {
 
 
       if (data?.file) {
-        setTimeout(() => {
-          setLoading(false); 
-          setGenraterImageurl(data.file);
-          setGettingAge(data.agepredic);
-          toast.success("🎉 Baby image generated successfully!");
-        }, 5000);
+        // setTimeout(() => {
+        setLoading(false);
+        setGenraterImageurl(data.file);
+        setGettingAge(data.agepredic);
+        toast.success("🎉 Baby image generated successfully!");
+        dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+
+        // }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
         setLoading(false);
@@ -84,7 +89,7 @@ function AgePredictor() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
-    window.dispatchEvent(new Event("creditsUpdated"));
+    // window.dispatchEvent(new Event("creditsUpdated"));
   };
 
 
@@ -193,6 +198,9 @@ function AgePredictor() {
           {parent1Upload.showCropper && (
             <div className="overlay">
               <div className="popup">
+                <div className="cropper-header">
+                  <p>Crop Image</p>
+                </div>
                 <button
                   className="close-btn"
                   onClick={() => parent1Upload.setShowCropper(false)}
@@ -230,7 +238,10 @@ function AgePredictor() {
             </button>
             {showImagePopup && genraterImageurl && <GetImage_pop
               getimage_details={{
-                onClose: closeImagePopup,
+                onClose: () => {
+                  setGenraterImageurl(null);
+                  closeImagePopup()
+                },
                 image: genraterImageurl,
                 getingAge: gettingAge,
               }}

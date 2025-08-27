@@ -3,7 +3,8 @@ import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getUserProfileAPI } from '../../services/imageBase';
+// import { getUserProfileAPI } from '../../services/imageBase';
+import { useCredits } from '../global_com/contaxt';
 // import { credit } from '../sign_in_up_compo/SignUp';
 
 
@@ -22,56 +23,60 @@ export default function Heading() {
     const dropdownRef = useRef(null);
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
 
-    const fetchUser = async () => {
-        try {
-            const token = localStorage.getItem("token"); // token from login/signup response
-            if (!token) return setUser(null);
+    const { state, dispatch, fetchUser } = useCredits();
+    const { user, credits } = state;
 
-            const res = await getUserProfileAPI(token);
-            if (res.status === "success") {
-                setUser(res.data); // backend returns { credits, email, id }
-            }
-        } catch (err) {
-            console.error("Profile fetch error:", err);
-            setUser(null);
-        }
-    };
+
+    // const fetchUser = async () => {
+    //     try {
+    //         const token = localStorage.getItem("token"); // token from login/signup response
+    //         if (!token) return setUser(null);
+
+    //         const res = await getUserProfileAPI(token);
+    //         if (res.status === "success") {
+    //             setUser(res.data); // backend returns { credits, email, id }
+    //         }
+    //     } catch (err) {
+    //         console.error("Profile fetch error:", err);
+    //         setUser(null);
+    //     }
+    // };
 
 
     useEffect(() => {
         fetchUser();
     }, [location.pathname]);
 
-    useEffect(() => {
-        const handleUpdate = () => fetchUser();
+    // useEffect(() => {
+    //     const handleUpdate = () => fetchUser();
 
-        window.addEventListener("creditsUpdated", handleUpdate);
-        return () => window.removeEventListener("creditsUpdated", handleUpdate);
-    }, []);
+    //     window.addEventListener("creditsUpdated", handleUpdate);
+    //     return () => window.removeEventListener("creditsUpdated", handleUpdate);
+    // }, []);
 
-    const loadUser = () => {
-        const savedUser = localStorage.getItem("user");
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        } else {
-            setUser(null);
-        }
-    };
+    // const loadUser = () => {
+    //     const savedUser = localStorage.getItem("user");
+    //     if (savedUser) {
+    //         setUser(JSON.parse(savedUser));
+    //     } else {
+    //         setUser(null);
+    //     }
+    // };
 
-    useEffect(() => {
-        loadUser();
+    // useEffect(() => {
+    //     loadUser();
 
-        window.addEventListener("storage", loadUser);
+    //     window.addEventListener("storage", loadUser);
 
-        window.addEventListener("userUpdated", loadUser);
+    //     window.addEventListener("userUpdated", loadUser);
 
-        return () => {
-            window.removeEventListener("storage", loadUser);
-            window.removeEventListener("userUpdated", loadUser);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("storage", loadUser);
+    //         window.removeEventListener("userUpdated", loadUser);
+    //     };
+    // }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -187,7 +192,8 @@ export default function Heading() {
                                     <>
                                         <div className='profile-credit-container'>
                                             <div className='credit-show-con'>
-                                                Credits: {user.credits}
+                                                Credits: {credits}
+
                                             </div>
 
 

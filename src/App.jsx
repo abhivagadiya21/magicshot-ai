@@ -16,38 +16,41 @@ import SignIn from './components/sign_in_up_compo/SignIn.jsx';
 import SignUp from './components/sign_in_up_compo/SignUp.jsx';
 import ForgotPassword from './components/sign_in_up_compo/ForgotPassword.jsx';
 import Profile from './pages/profile_page/profile.jsx';
+import { CreditProvider } from './components/global_com/contaxt.jsx';
 
 function App() {
   return (
     <>
-      {/* ✅ Toast container ek vaar top level par */}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}  // 3s ma band
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+      <CreditProvider>
+        {/* ✅ Toast container ek vaar top level par */}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}  // 3s ma band
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
 
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<BabyPage />} />
-          <Route path="/age-predictor" element={<AgePredictor />} />
-          <Route path="/age-journey" element={<AgeJourney />} />
-          <Route path="/change-haircut" element={<ChagehaircutPage />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-       
-        <Route path="/auth" element={<CoverPagesing />}>
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-        </Route>
-      </Routes>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<BabyPage />} />
+            <Route path="/age-predictor" element={<AgePredictor />} />
+            <Route path="/age-journey" element={<AgeJourney />} />
+            <Route path="/change-haircut" element={<ChagehaircutPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+
+          <Route path="/auth" element={<CoverPagesing />}>
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+          </Route>
+        </Routes>
+      </CreditProvider>
     </>
   );
 }
