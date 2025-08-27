@@ -192,6 +192,7 @@ function BabyPage() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
+    window.dispatchEvent(new Event("creditsUpdated"));
   };
 
   return (

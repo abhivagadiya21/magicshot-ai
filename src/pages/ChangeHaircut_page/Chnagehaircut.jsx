@@ -142,6 +142,7 @@ const handleGenerate = async () => {
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
+        window.dispatchEvent(new Event("creditsUpdated"));
     };
 
 

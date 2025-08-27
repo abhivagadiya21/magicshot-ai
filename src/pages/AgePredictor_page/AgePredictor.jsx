@@ -84,6 +84,7 @@ function AgePredictor() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
+    window.dispatchEvent(new Event("creditsUpdated"));
   };
 
 

@@ -179,7 +179,19 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
 .navbar-left {
   position: relative !important; 
 }
-
+.credit-show-con{
+  background-color: #1d2328;
+  color: white;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border: 3px solid #262a2d; 
+}
 
 /* Responsive styles */
 @media (max-width: 768px) {
