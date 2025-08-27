@@ -1,4 +1,5 @@
 import './getimage_pop.css';
+import graduant from './Black-Fade-PNG-Isolated-HD.png'
 
 function getImage_pop({ getimage_details }) {
     const handleDownload = async () => {
@@ -36,35 +37,17 @@ function getImage_pop({ getimage_details }) {
                     </button>
                 </div>
                 <div className="inner-2-pop-getimage">
-                    <img className='pop-pass-image-work' src={getimage_details.image} alt="" />
+                    <div className='pop-pass-image-get'>
+                    <img className='pop-pass-image-get' src={getimage_details.image} alt="" />
+                    <img className='pop-pass-image-black' src={graduant} alt="" />
+                    <p className='age-img'>{getimage_details.getingAge}</p>
+                    </div>
                 </div>
                 <div className="inner-3-pop-getimage">
-                    <p>{getimage_details.getingAge}</p>
+                   
 
-                    <div class="container1" onClick={handleDownload}>
-                        <label class="label">
-                            <input type="checkbox" class="input" />
-                            <span class="circle"
-                            ><svg
-                                class="icon"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                    <path
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="1.5"
-                                        d="M12 19V5m0 14-4-4m4 4 4-4"
-                                    ></path>
-                                </svg>
-                                <div class="square"></div>
-                            </span>
-                            <p class="title">Download</p>
-                            <p class="title">Open</p>
-                        </label>
+                    <div className="installer" onClick={handleDownload}>
+                        <label htmlFor="progressLinux"><input id="progressLinux" type="radio" /><span></span></label>
                     </div>
 
                 </div>

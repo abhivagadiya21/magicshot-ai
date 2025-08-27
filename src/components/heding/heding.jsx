@@ -133,35 +133,47 @@ export default function Heading() {
                             <img src={Logo} alt="Logo" className="logo-img" />
 
                             <div className={`navbar-content`}>
-                                <div className="dropdown" ref={dropdownRef}>
-                                    <button
-                                        className="dropdown-button"
-                                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                                    >
-                                        {selected}
-                                        <span className="arrow"><svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" class="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180"><path d="m6 9 6 6 6-6"></path></svg></span>
-                                    </button>
-                                    {dropdownOpen && (
-                                        <ul className="dropdown-menu">
-                                            {options.map(({ label, path }) => (
-                                                <li key={label}>
-                                                    <button
-                                                        className={`dropdown-item ${selected === label ? 'active' : ''}`}
-                                                        onClick={() => {
-                                                            setSelected(label);
-                                                            setDropdownOpen(false);
-                                                            navigate(path);
-                                                        }}
-                                                    >
-                                                        {label}
-                                                        {selected === label && <span className="check"><img width="15" height="15" src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/FFFFFF/external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo.png" alt="external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo" /></span>}
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
+                                {location.pathname !== "/profile" && (
+                                    <div className="dropdown" ref={dropdownRef}>
+                                        <button
+                                            className="dropdown-button"
+                                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        >
+                                            {selected}
+                                            <span className="arrow"><svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" class="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180"><path d="m6 9 6 6 6-6"></path></svg></span>
+                                        </button>
+                                        {dropdownOpen && (
+                                            <ul className="dropdown-menu">
+                                                {options.map(({ label, path }) => (
+                                                    <li key={label}>
+                                                        <button
+                                                            className={`dropdown-item ${selected === label ? 'active' : ''}`}
+                                                            onClick={() => {
+                                                                setSelected(label);
+                                                                setDropdownOpen(false);
+                                                                navigate(path);
+                                                            }}
+                                                        >
+                                                            {label}
+                                                            {selected === label && (
+                                                                <span className="check">
+                                                                    <img
+                                                                        width="15"
+                                                                        height="15"
+                                                                        src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/FFFFFF/external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo.png"
+                                                                        alt="check"
+                                                                    />
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                )}
                             </div>
+
                         </div>
 
                         <div className="navbar-right">
@@ -177,6 +189,7 @@ export default function Heading() {
                                             <div className='credit-show-con'>
                                                 Credits: {user.credits}
                                             </div>
+
 
                                             <div className="user-info">
                                                 <span className="profile-name">{user.name}</span>
