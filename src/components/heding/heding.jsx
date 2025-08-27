@@ -4,8 +4,9 @@ import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { getUserProfileAPI } from '../../services/imageBase';
-import { useCredits } from '../global_com/contaxt';
+import { useCredits } from '../global_com/context';
 // import { credit } from '../sign_in_up_compo/SignUp';
+import square from "../heding/hedingimg/squarelogo.png";
 
 
 const options = [
@@ -136,6 +137,7 @@ export default function Heading() {
                             </div>
 
                             <img src={Logo} alt="Logo" className="logo-img" />
+                            <img src={square} alt="Logo" className="square" />
 
                             <div className={`navbar-content`}>
                                 {location.pathname !== "/profile" && (

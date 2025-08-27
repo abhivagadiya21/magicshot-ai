@@ -16,7 +16,7 @@ function GetImagePop({ getimage_details }) {
             const canvas = await html2canvas(imageRef.current, {
                 useCORS: true, 
                 backgroundColor: null, 
-                scale: 2,
+                scale: 2, // high resolution
             });
 
             const link = document.createElement("a");

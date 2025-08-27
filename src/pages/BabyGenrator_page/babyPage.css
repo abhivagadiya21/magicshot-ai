@@ -77,7 +77,7 @@
     flex-direction: column;
     position: sticky;
     top: 100%;
-    z-index: 999;
+    /* z-index: 999; */
 }
 
 .inner-1-for-left-3-1 {
@@ -745,5 +745,20 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .popup {
+    width: 97%;
+  }
+
+  .cropper-wrapper{
+    flex-direction: column;
+  }
+
+  .crop-buttons{
+    flex-direction: row;
   }
 }

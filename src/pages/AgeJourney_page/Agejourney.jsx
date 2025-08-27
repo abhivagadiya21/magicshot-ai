@@ -15,7 +15,7 @@ import { blobUrlToFile } from "../../utils/blobToFile";
 import { AgejournyAPI } from '../../services/imageBase';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
-import { useCredits } from "../../components/global_com/contaxt";
+import { useCredits } from "../../components/global_com/context.jsx";
 
 
 function AgeJourney() {
@@ -31,7 +31,7 @@ function AgeJourney() {
     const sliderInputRef = useRef(null);
     const sliderThumbRef = useRef(null);
     const sliderLineRef = useRef(null);
-    const { dispatch } = useCredits();
+    const { dispatch, fetchUser  } = useCredits();
 
 
     // Handle slider UI
@@ -95,7 +95,7 @@ function AgeJourney() {
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Age journey generated successfully!");
-                dispatch({ type: "SUBTRACT_CREDITS", payload: 10 });
+                fetchUser()
 
                 // }, 5000);
             } else {
