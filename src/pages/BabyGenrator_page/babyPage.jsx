@@ -292,6 +292,7 @@ function BabyPage() {
                   closeImagePopup()
                 },
                 image: genraterImageurl,
+                imgname:"baby-image"
               }}
             />}
           </div>

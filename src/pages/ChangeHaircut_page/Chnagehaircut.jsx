@@ -403,6 +403,7 @@ function ChangehaircutPage() {
                                             closeImagePopup()
                                         },
                                         image: genraterImageurl,
+                                        imgname:"change-haircut"
                                     }}
                                 />
                             )}

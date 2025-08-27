@@ -283,6 +283,7 @@ function AgeJourney() {
                                         closeImagePopup()
                                     },
                                     image: genraterImageurl,
+                                    imgname:"age-journey"
                                 }}
                             />
                         )}

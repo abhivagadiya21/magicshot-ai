@@ -244,6 +244,7 @@ function AgePredictor() {
                 },
                 image: genraterImageurl,
                 getingAge: gettingAge,
+                imgname:"age-predictor"
               }}
             />}
           </div>
