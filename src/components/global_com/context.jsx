@@ -8,10 +8,6 @@ function creditsReducer(state, action) {
       return { ...state, user: action.payload.user, credits: action.payload.credits };
     case "SET_CREDITS":
       return { ...state, credits: action.payload };
-    case "ADD_CREDITS":
-      return { ...state, credits: state.credits + action.payload };
-    case "SUBTRACT_CREDITS":
-      return { ...state, credits: state.credits - action.payload };
     case "LOGOUT":
       return { user: null, credits: 0 };
     default:

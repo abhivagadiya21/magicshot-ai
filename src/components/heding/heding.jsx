@@ -4,7 +4,7 @@ import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { getUserProfileAPI } from '../../services/imageBase';
-import { useCredits } from '../global_com/contaxt';
+import { useCredits } from '../global_com/context';
 // import { credit } from '../sign_in_up_compo/SignUp';
 
 
