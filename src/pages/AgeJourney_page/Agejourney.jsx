@@ -109,6 +109,7 @@ function AgeJourney() {
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
+        window.dispatchEvent(new Event("creditsUpdated"));
     };
 
     return (

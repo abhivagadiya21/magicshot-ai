@@ -13,6 +13,7 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [credit,setCredit] = useState();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const SignUp = () => {
 
       // Save user info/token if needed
       localStorage.setItem("user", JSON.stringify(data));
-
+      //  setCredit(data.user.credit);
       navigate(redirectPath);
     } catch (err) {
       console.error(err);
@@ -111,3 +112,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+// export {credit}

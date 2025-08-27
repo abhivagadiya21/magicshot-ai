@@ -121,6 +121,7 @@ function ChangehaircutPage() {
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
+        window.dispatchEvent(new Event("creditsUpdated"));
     };
 
 

@@ -3,6 +3,9 @@ import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getUserProfileAPI } from '../../services/imageBase';
+// import { credit } from '../sign_in_up_compo/SignUp';
+
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -20,6 +23,33 @@ export default function Heading() {
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
     const [user, setUser] = useState(null);
+
+    const fetchUser = async () => {
+        try {
+            const token = localStorage.getItem("token"); // token from login/signup response
+            if (!token) return setUser(null);
+
+            const res = await getUserProfileAPI(token);
+            if (res.status === "success") {
+                setUser(res.data); // backend returns { credits, email, id }
+            }
+        } catch (err) {
+            console.error("Profile fetch error:", err);
+            setUser(null);
+        }
+    };
+
+
+    useEffect(() => {
+        fetchUser();
+    }, [location.pathname]);
+
+    useEffect(() => {
+        const handleUpdate = () => fetchUser();
+
+        window.addEventListener("creditsUpdated", handleUpdate);
+        return () => window.removeEventListener("creditsUpdated", handleUpdate);
+    }, []);
 
     const loadUser = () => {
         const savedUser = localStorage.getItem("user");
@@ -143,18 +173,21 @@ export default function Heading() {
                             <div className="auth-buttons">
                                 {user ? (
                                     <>
-                                    <div className='profile-credit-container'>
-                                        
-                                    
-                                        <div className="user-info">
-                                            <span className="profile-name">{user.name}</span>
-                                            <span className="credits" onClick={handleLogout}>
-                                                <img src={Plan} alt="credits" /> {user.credits}
-                                            </span>
-                                        </div>
-                                        <button className="profile-btn" onClick={() => navigate('/profile')}>
-                                            <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user"/>
-                                        </button>
+                                        <div className='profile-credit-container'>
+                                            <div className='credit-show-con'>
+                                                Credits: {user.credits}
+                                            </div>
+
+                                            <div className="user-info">
+                                                <span className="profile-name">{user.name}</span>
+                                                <span className="credits" onClick={handleLogout}>
+                                                    {/* <img src={Plan} alt="credits" /> {user.credits} */}
+                                                    <img src={Plan} alt="credits" />
+                                                </span>
+                                            </div>
+                                            <button className="profile-btn" onClick={() => navigate('/profile')}>
+                                                <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user" />
+                                            </button>
                                         </div>
                                     </>
                                 ) : (

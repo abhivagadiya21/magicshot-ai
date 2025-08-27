@@ -135,7 +135,7 @@ function BabyPage() {
 
   const [selectedGender, setSelectedGender] = useState("boy");
   const [genraterImageurl, setGenraterImageurl] = useState(null);
-  
+
 
 
   const parent1Upload = useUploadImg();
@@ -177,18 +177,18 @@ function BabyPage() {
       // setGenraterImageurl(data.file);
       // console.log("Generated Baby Image URL:", genraterImageurl);
 
-    //   if (data?.status === "error") {
-    //   // toast.error(`❌ ${data.message || "Something went wrong"}`);
-    //   toast.error(`❌ ${data.message }`);
-    //   console.log(`❌ ${data.message }`);
-    //   return;
-    // }
+      //   if (data?.status === "error") {
+      //   // toast.error(`❌ ${data.message || "Something went wrong"}`);
+      //   toast.error(`❌ ${data.message }`);
+      //   console.log(`❌ ${data.message }`);
+      //   return;
+      // }
 
       if (data?.file) {
         setGenraterImageurl(data.file); // update state
         console.log("Generated Baby Image URL:", data.file); // log directly
         console.log("Generated Baby Image URL:", genraterImageurl); // log directly
-     
+
       } else {
         toast.error("❌ No image returned from server.");
       }
@@ -196,7 +196,7 @@ function BabyPage() {
 
       toast.success("🎉 Baby image generated successfully!");
     } catch (error) {
-      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again." )
+      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again.")
       console.error("Error generating baby image:", error);
       // toast.error("❌ Failed to generate image. Please try again.");
     }
@@ -205,6 +205,7 @@ function BabyPage() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
+    window.dispatchEvent(new Event("creditsUpdated"));
   };
 
   return (

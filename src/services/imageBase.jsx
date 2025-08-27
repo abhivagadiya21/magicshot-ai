@@ -95,3 +95,18 @@ export const changeHaircutAPI = async (imageFiles, otherData) => {
     throw error;
   }
 }
+
+
+export const getUserProfileAPI = async (token) => {
+  try {
+    const response = await api.get("/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    throw error;
+  }
+};

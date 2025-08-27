@@ -64,11 +64,11 @@ function AgePredictor() {
       const data = response.data;
 
 
-      if (data?.file) { 
-        setGenraterImageurl(data.file); 
+      if (data?.file) {
+        setGenraterImageurl(data.file);
         setGettingAge(data.agepredic);
         console.log("Generated Baby Image URL:", data.file);
-        console.log("Generated Baby Image URL:", genraterImageurl); 
+        console.log("Generated Baby Image URL:", genraterImageurl);
 
       } else {
         toast.error("❌ No image returned from server.");
@@ -77,12 +77,13 @@ function AgePredictor() {
       toast.success("🎉 Age prediction generated successfully!");
     } catch (error) {
       console.error("❌ Error predicting age:", error);
-      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again." )
+      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again.")
     }
   };
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
+    window.dispatchEvent(new Event("creditsUpdated"));
   };
 
 
