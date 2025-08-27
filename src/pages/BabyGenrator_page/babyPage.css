@@ -747,3 +747,18 @@
     opacity: 0;
   }
 }
+
+
+@media (max-width: 768px) {
+  .popup {
+    width: 97%;
+  }
+
+  .cropper-wrapper{
+    flex-direction: column;
+  }
+
+  .crop-buttons{
+    flex-direction: row;
+  }
+}
