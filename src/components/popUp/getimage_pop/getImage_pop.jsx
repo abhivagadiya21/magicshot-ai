@@ -5,8 +5,7 @@ import html2canvas from 'html2canvas';
 
 function GetImagePop({ getimage_details }) {
     const imageRef = useRef(null);
-    const downloadingRef = useRef(false); // prevent double calls
-
+    const downloadingRef = useRef(false); 
     const handleDownload = async () => {
         if (downloadingRef.current) return;
         downloadingRef.current = true;
@@ -15,9 +14,9 @@ function GetImagePop({ getimage_details }) {
             if (!imageRef.current) return;
 
             const canvas = await html2canvas(imageRef.current, {
-                useCORS: true, // cross-origin images માટે
-                backgroundColor: null, // transparent background maintain કરવા
-                scale: 2, // high resolution
+                useCORS: true, 
+                backgroundColor: null, 
+                scale: 2,
             });
 
             const link = document.createElement("a");

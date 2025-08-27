@@ -384,12 +384,48 @@
     font-size: 16px; 
     color: #fff;
 }
+/* .main-agePredictor {
+    width: 100%;
+    background-color: #1d2328;
+    height: 89.2vh;
+    display: flex;
+    justify-content: center; 
+    padding: 0;             
+    overflow-x: hidden;       
+
+.left-main-agePredictor {
+    height: 100%;
+    background-color: #15191c;
+    display: flex;
+    flex-direction: column;
+    width: 100%;         
+    min-width: unset;    
+    max-width: 500px;    
+    border-radius: 15px;
+    border: 3px solid #262a2d;
+    margin: 0 auto;      
+} */
 
 @media (max-width: 768px) {
     .left-main-agePredictor {
         width: 100%;
         min-width: 100%;
         max-width: 100%;
+    }
+
+    .right-main-agePredictor {
+        display: none;
+    }
+}
+
+@media (max-width: 425px) {
+    .left-main-agePredictor {
+        width: 100%;
+        /* min-width: 100%; */
+        /* max-width: 100%; */
+        padding-right: 0px;
+        padding: 100px;
+        margin: 0;
     }
 
     .right-main-agePredictor {
