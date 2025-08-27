@@ -1,4 +1,5 @@
 import './getimage_pop.css';
+import graduant from './Black-Fade-PNG-Isolated-HD.png'
 
 function getImage_pop({ getimage_details }) {
     const handleDownload = async () => {
@@ -36,8 +37,11 @@ function getImage_pop({ getimage_details }) {
                     </button>
                 </div>
                 <div className="inner-2-pop-getimage">
+                    <div className='pop-pass-image-get'>
                     <img className='pop-pass-image-get' src={getimage_details.image} alt="" />
+                    <img className='pop-pass-image-black' src={graduant} alt="" />
                     <p className='age-img'>{getimage_details.getingAge}</p>
+                    </div>
                 </div>
                 <div className="inner-3-pop-getimage">
                    
