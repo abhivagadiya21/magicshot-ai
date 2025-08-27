@@ -193,6 +193,12 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   border: 3px solid #262a2d; 
 }
 
+
+.square{
+  display: none;
+}
+
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .navbar-hamburger-container {
@@ -301,4 +307,27 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   border-radius: 50px;
   padding: 5px;
   border: 3px solid #262a2d;
+}
+
+@media (max-width: 768px) {
+  .user-info {
+    display: none;
+  }
+
+  .credit-show-con{
+    /* display: none; */
+  }
+
+  .logo-img{
+    display: none;
+  }
+
+  .square{
+    display: block;
+    width: 30px;
+    height: 30px;
+    /* background-color: #1d2328; */
+    border-radius: 5px;
+    /* border: 3px solid #262a2d; */
+  }
 }
