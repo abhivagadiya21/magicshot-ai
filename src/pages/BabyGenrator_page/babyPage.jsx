@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
 import { babyuploadeAPI } from "../../services/imageBase";
 import "../BabyGenrator_page/babyPage.css";
-
 import Upload_img from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
 import Howworkpop from "../../components/popUp/how_it_work_pop/Howworkpop";
-
 import star from "./babyG-img/star.svg";
 import babyImage from "./babyG-img/babyG.png";
 import questionMark from "./babyG-img/question.svg";
@@ -21,6 +18,7 @@ import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
 import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
+
 
 function UploadSection({ label, uploadHook, inputId }) {
   return (
@@ -129,14 +127,12 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
 }
 
 function BabyPage() {
-  // const { showPopup, handleOpen, handleClose } = usePopup();
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
   const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
 
   const [selectedGender, setSelectedGender] = useState("boy");
   const [genraterImageurl, setGenraterImageurl] = useState(null);
-  
-
+  const [loading, setLoading] = useState(false);
 
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
@@ -169,39 +165,30 @@ function BabyPage() {
     };
     console.log("Other Data:", otherData);
 
+    setLoading(true);
+
     try {
       const response = await babyuploadeAPI(imageFiles, otherData);
       console.log("Response from API:", response);
       const data = response.data;
-      // const genraterImageurl = data.file;
-      // setGenraterImageurl(data.file);
-      // console.log("Generated Baby Image URL:", genraterImageurl);
 
-    //   if (data?.status === "error") {
-    //   // toast.error(`❌ ${data.message || "Something went wrong"}`);
-    //   toast.error(`❌ ${data.message }`);
-    //   console.log(`❌ ${data.message }`);
-    //   return;
-    // }
 
       if (data?.file) {
-        setGenraterImageurl(data.file); // update state
-        console.log("Generated Baby Image URL:", data.file); // log directly
-        console.log("Generated Baby Image URL:", genraterImageurl); // log directly
-     
+        setTimeout(() => {
+          setLoading(false);
+          setGenraterImageurl(data.file);
+          toast.success("🎉 Baby image generated successfully!");
+        }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
+        setLoading(false);
       }
-
-
-      toast.success("🎉 Baby image generated successfully!");
     } catch (error) {
-      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again." )
-      console.error("Error generating baby image:", error);
-      // toast.error("❌ Failed to generate image. Please try again.");
+      toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
+      setLoading(false);
     }
-
   };
+
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
@@ -209,6 +196,25 @@ function BabyPage() {
 
   return (
     <div className="main-baby-genrartor-1">
+      {loading && (
+        <div className="loader-overlay">
+          <div className="loader-wrapper">
+            <div className="loader"></div>
+            <span class="loader-letter">G</span>
+            <span class="loader-letter">e</span>
+            <span class="loader-letter">n</span>
+            <span class="loader-letter">e</span>
+            <span class="loader-letter">r</span>
+            <span class="loader-letter">a</span>
+            <span class="loader-letter">t</span>
+            <span class="loader-letter">i</span>
+            <span class="loader-letter">n</span>
+            <span class="loader-letter">g</span>
+          </div>
+        </div>
+      )}
+
+
       {/* Left Section */}
       <div className="left-main-babyG">
         <div className="inner-left-1-babyG-1">

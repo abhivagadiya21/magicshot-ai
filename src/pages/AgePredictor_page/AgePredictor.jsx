@@ -2,13 +2,10 @@ import { useState } from "react";
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
 import { agePredictorAPI } from "../../services/imageBase";
-
 import Upload_img from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
 import Howworkpop from "../../components/popUp/how_it_work_pop/Howworkpop";
-
 import "./agePredictor.css";
-
 import poppassimg2 from "../BabyGenrator_page/babyG-img/poppassimg2.png";
 import star from "../BabyGenrator_page/babyG-img/star.svg";
 import predictorImage from "./predictor_image/agepredictor.png";
@@ -25,8 +22,8 @@ function AgePredictor() {
   const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
   const [genraterImageurl, setGenraterImageurl] = useState(null);
   const [gettingAge, setGettingAge] = useState();
+  const [loading, setLoading] = useState(false);
 
-  // const { showPopup, handleOpen, handleClose } = usePopup();
   const parent1Upload = useUploadImg();
 
   const handleGenerate = async () => {
@@ -58,28 +55,32 @@ function AgePredictor() {
     console.log("📸 Image Files:", imageFiles);
     console.log("📸 Image Files:", otherData);
 
+    setLoading(true);
+    
     try {
       const response = await agePredictorAPI(imageFiles, otherData);
       console.log("✅ Response from API:", response);
       const data = response.data;
 
 
-      if (data?.file) { 
-        setGenraterImageurl(data.file); 
-        setGettingAge(data.agepredic);
-        console.log("Generated Baby Image URL:", data.file);
-        console.log("Generated Baby Image URL:", genraterImageurl); 
-
+      if (data?.file) {
+        setTimeout(() => {
+          setLoading(false); 
+          setGenraterImageurl(data.file);
+          setGettingAge(data.agepredic);
+          toast.success("🎉 Baby image generated successfully!");
+        }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
+        setLoading(false);
       }
-
-      toast.success("🎉 Age prediction generated successfully!");
     } catch (error) {
-      console.error("❌ Error predicting age:", error);
-      toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again." )
+      toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
+      setLoading(false);
     }
   };
+
+
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
@@ -88,6 +89,25 @@ function AgePredictor() {
 
   return (
     <div className="main-agePredictor">
+      {loading && (
+        <div className="loader-overlay">
+          <div className="loader-wrapper">
+            <div className="loader"></div>
+            <span class="loader-letter">G</span>
+            <span class="loader-letter">e</span>
+            <span class="loader-letter">n</span>
+            <span class="loader-letter">e</span>
+            <span class="loader-letter">r</span>
+            <span class="loader-letter">a</span>
+            <span class="loader-letter">t</span>
+            <span class="loader-letter">i</span>
+            <span class="loader-letter">n</span>
+            <span class="loader-letter">g</span>
+          </div>
+        </div>
+      )}
+
+
       {/* Left Section */}
       <div className="left-main-agePredictor">
         {/* Header */}
