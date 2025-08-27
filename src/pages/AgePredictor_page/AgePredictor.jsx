@@ -233,6 +233,7 @@ function AgePredictor() {
                 onClose: closeImagePopup,
                 image: genraterImageurl,
                 getingAge: gettingAge,
+                imgname:"age-predictor"
               }}
             />}
           </div>

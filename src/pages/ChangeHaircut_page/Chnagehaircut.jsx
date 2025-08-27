@@ -392,6 +392,7 @@ const handleGenerate = async () => {
                                     getimage_details={{
                                         onClose: closeImagePopup,
                                         image: genraterImageurl,
+                                        imgname:"change-haircut"
                                     }}
                                 />
                             )}

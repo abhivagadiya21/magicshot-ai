@@ -286,6 +286,7 @@ function BabyPage() {
               getimage_details={{
                 onClose: closeImagePopup,
                 image: genraterImageurl,
+                imgname:"baby-image"
               }}
             />}
           </div>

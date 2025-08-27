@@ -271,6 +271,7 @@ function AgeJourney() {
                                 getimage_details={{
                                     onClose: closeImagePopup,
                                     image: genraterImageurl,
+                                    imgname:"age-journey"
                                 }}
                             />
                         )}
