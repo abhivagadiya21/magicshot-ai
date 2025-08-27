@@ -43,10 +43,10 @@ function getImage_pop({ getimage_details }) {
                 </div>
                 <div className="inner-2-pop-getimage">
                     <div className='pop-pass-image-get'>
-                        <img className='pop-pass-image-get' src={getimage_details.image} alt="" />
-                        <img className='pop-pass-image-black' src={graduant} alt="" />
-                        <p className='age-img'>{getimage_details.getingAge}</p>
+                    <img className='pop-pass-image-get' src={getimage_details.image} alt="" />
                     </div>
+                     <img className='pop-pass-image-black' src={graduant} alt="" />
+                    <p className='age-img'>{getimage_details.getingAge}</p>
                 </div>
                 <div className="inner-3-pop-getimage">
 
