@@ -22,6 +22,7 @@ function AgeJourney() {
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
 
     const [genraterImageurl, setGenraterImageurl] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [sliderValue, setSliderValue] = useState(50);
     const parent1Upload = useUploadImg();
 
@@ -64,47 +65,44 @@ function AgeJourney() {
     }, []);
 
     // API call to generate image
-    const handleGenerate = async () => {
-        if (!parent1Upload.croppedImage) {
-            toast.error("⚠️ Please upload an image.");
-            return;
+   const handleGenerate = async () => {
+    if (!parent1Upload.croppedImage) {
+        toast.error("⚠️ Please upload an image.");
+        return;
+    }
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser?.id) {
+        toast.error("❌ User not logged in.");
+        return;
+    }
+
+    const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
+
+    const imageFiles = { ageJourneyUpload: parent1File };
+    const otherData = { userid: storedUser.id, selectAge: sliderValue, transactionId: 1 };
+
+    setLoading(true);
+    try {
+        const { data } = await AgejournyAPI(imageFiles, otherData); 
+        if (data?.file) {
+            setTimeout(() => {
+                setLoading(false);
+                setGenraterImageurl(data.file);
+                openImagePopup();
+                toast.success("🎉 Age journey generated successfully!");
+            }, 5000);
+        } else {
+            toast.error("❌ No image returned from server.");
+            setLoading(false);
         }
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
+        setLoading(false);
+    }
+};
 
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (!storedUser?.id) {
-            toast.error("❌ User not logged in.");
-            return;
-        }
 
-        try {
-            const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
-
-            const imageFiles = {
-                ageJourneyUpload: parent1File,
-            };
-
-            const otherData = {
-                userid: storedUser.id,
-                selectAge: sliderValue,
-                transactionId: 1,
-            };
-
-            toast.info("⏳ Generating age journey image... Please wait.");
-
-            const response = await AgejournyAPI(imageFiles, otherData);
-            console.log("API Response:", response);
-
-            if (response?.data?.file) {
-                setGenraterImageurl(response.data.file);
-                toast.success("🎉 Age journey image generated successfully!");
-            } else {
-                toast.error("❌ No image returned from server.");
-            }
-        } catch (error) {
-            console.error("Error generating age journey image:", error);
-            toast.error(error?.response?.data?.message || "❌ Failed to generate image. Please try again.")
-        }
-    };
 
     const handleClickGenerate = async () => {
         await handleGenerate();
@@ -113,6 +111,24 @@ function AgeJourney() {
 
     return (
         <div className="main-ageJourney">
+            {loading && (
+                <div className="loader-overlay">
+                    <div className="loader-wrapper">
+                        <div className="loader"></div>
+                        <span class="loader-letter">G</span>
+                        <span class="loader-letter">e</span>
+                        <span class="loader-letter">n</span>
+                        <span class="loader-letter">e</span>
+                        <span class="loader-letter">r</span>
+                        <span class="loader-letter">a</span>
+                        <span class="loader-letter">t</span>
+                        <span class="loader-letter">i</span>
+                        <span class="loader-letter">n</span>
+                        <span class="loader-letter">g</span>
+                    </div>
+                </div>
+            )}
+
             <div className="left-main-ageJourney">
                 {/* Header + How it Works Popup */}
                 <div className="inner-left-1-ageJourney">
