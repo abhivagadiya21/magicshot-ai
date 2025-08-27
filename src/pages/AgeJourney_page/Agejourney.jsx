@@ -86,12 +86,12 @@ function AgeJourney() {
     try {
         const { data } = await AgejournyAPI(imageFiles, otherData); 
         if (data?.file) {
-            setTimeout(() => {
+            // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Age journey generated successfully!");
-            }, 5000);
+            // }, 5000);
         } else {
             toast.error("❌ No image returned from server.");
             setLoading(false);
