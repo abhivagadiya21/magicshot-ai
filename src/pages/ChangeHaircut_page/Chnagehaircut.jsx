@@ -121,12 +121,12 @@ const handleGenerate = async () => {
         console.log("Response from API:", data);
 
         if (data?.file) {
-            setTimeout(() => {
+            // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Hairstyle image generated successfully!");
-            }, 5000);
+            // }, 5000);
         } else {
             toast.error("❌ No image returned from server.");
             setLoading(false);

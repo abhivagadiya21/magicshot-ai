@@ -64,12 +64,12 @@ function AgePredictor() {
 
 
       if (data?.file) {
-        setTimeout(() => {
+        // setTimeout(() => {
           setLoading(false); 
           setGenraterImageurl(data.file);
           setGettingAge(data.agepredic);
           toast.success("🎉 Baby image generated successfully!");
-        }, 5000);
+        // }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
         setLoading(false);
