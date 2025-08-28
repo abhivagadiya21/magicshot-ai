@@ -145,6 +145,7 @@
   outline-width: 3px;
   outline: 3px solid #262a2d !important;
   outline-offset: 0; 
+   text-wrap: nowrap;
 }
 
 .signin-btn:active {
@@ -163,6 +164,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   cursor: pointer;
   font-size: 14px;
   outline: none;
+  text-wrap: nowrap;
 }
 
 .navbar-hamburger-container {

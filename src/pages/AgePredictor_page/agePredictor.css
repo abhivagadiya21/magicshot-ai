@@ -418,17 +418,4 @@
     }
 }
 
-@media (max-width: 425px) {
-    .left-main-agePredictor {
-        width: 100%;
-        /* min-width: 100%; */
-        /* max-width: 100%; */
-        padding-right: 0px;
-        padding: 100px;
-        margin: 0;
-    }
 
-    .right-main-agePredictor {
-        display: none;
-    }
-}

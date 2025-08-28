@@ -5,7 +5,14 @@ import { getUserProfileAPI } from '../../services/imageBase';
 function creditsReducer(state, action) {
   switch (action.type) {
     case "SET_USER":
-      return { ...state, user: action.payload.user, credits: action.payload.credits };
+      if (!action.payload) {
+        return { ...state, user: null, credits: 0 }; // null payload case
+      }
+      return { 
+        ...state, 
+        user: action.payload.user, 
+        credits: action.payload.credits ?? 0 
+      };
     case "SET_CREDITS":
       return { ...state, credits: action.payload };
     case "LOGOUT":
@@ -14,6 +21,7 @@ function creditsReducer(state, action) {
       return state;
   }
 }
+
 
 const CreditContext = createContext();
 

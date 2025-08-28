@@ -3,11 +3,8 @@ import './heding.css';
 import Logo from "../heding/hedingimg/logo.png";
 import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
-// import { getUserProfileAPI } from '../../services/imageBase';
 import { useCredits } from '../global_com/context';
-// import { credit } from '../sign_in_up_compo/SignUp';
 import square from "../heding/hedingimg/squarelogo.png";
-
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -24,65 +21,34 @@ export default function Heading() {
     const dropdownRef = useRef(null);
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
-    // const [user, setUser] = useState(null);
 
     const { state, dispatch, fetchUser } = useCredits();
     const { user, credits } = state;
 
-
-    // const fetchUser = async () => {
-    //     try {
-    //         const token = localStorage.getItem("token"); // token from login/signup response
-    //         if (!token) return setUser(null);
-
-    //         const res = await getUserProfileAPI(token);
-    //         if (res.status === "success") {
-    //             setUser(res.data); // backend returns { credits, email, id }
-    //         }
-    //     } catch (err) {
-    //         console.error("Profile fetch error:", err);
-    //         setUser(null);
-    //     }
-    // };
-
-
+    // ✅ Run fetchUser only if localStorage has user
     useEffect(() => {
-        fetchUser();
+        const savedUser = localStorage.getItem("user");
+        if (savedUser) {
+            fetchUser();
+        }
     }, [location.pathname]);
 
-    // useEffect(() => {
-    //     const handleUpdate = () => fetchUser();
+    // ✅ Proper logout
+   const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
 
-    //     window.addEventListener("creditsUpdated", handleUpdate);
-    //     return () => window.removeEventListener("creditsUpdated", handleUpdate);
-    // }, []);
+    dispatch({ type: "SET_USER", payload: null });
+    dispatch({ type: "SET_CREDITS", payload: 0 });
 
-    // const loadUser = () => {
-    //     const savedUser = localStorage.getItem("user");
-    //     if (savedUser) {
-    //         setUser(JSON.parse(savedUser));
-    //     } else {
-    //         setUser(null);
-    //     }
-    // };
+    window.dispatchEvent(new Event("userUpdated"));
 
-    // useEffect(() => {
-    //     loadUser();
+    // 🚨 small delay so context reset first, then navigate
+    setTimeout(() => {
+        navigate("/", { replace: true });
+    }, 50);
+};
 
-    //     window.addEventListener("storage", loadUser);
-
-    //     window.addEventListener("userUpdated", loadUser);
-
-    //     return () => {
-    //         window.removeEventListener("storage", loadUser);
-    //         window.removeEventListener("userUpdated", loadUser);
-    //     };
-    // }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        window.dispatchEvent(new Event("userUpdated"));
-    };
 
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
@@ -147,7 +113,15 @@ export default function Heading() {
                                             onClick={() => setDropdownOpen(!dropdownOpen)}
                                         >
                                             {selected}
-                                            <span className="arrow"><svg aria-hidden="true" fill="none" focusable="false" height="1em" role="presentation" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="1em" data-slot="selectorIcon" class="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180"><path d="m6 9 6 6 6-6"></path></svg></span>
+                                            <span className="arrow">
+                                                <svg aria-hidden="true" fill="none" focusable="false" height="1em"
+                                                    role="presentation" stroke="currentColor" strokeLinecap="round"
+                                                    strokeLinejoin="round" strokeWidth="1.5"
+                                                    viewBox="0 0 24 24" width="1em"
+                                                    className="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180">
+                                                    <path d="m6 9 6 6 6-6"></path>
+                                                </svg>
+                                            </span>
                                         </button>
                                         {dropdownOpen && (
                                             <ul className="dropdown-menu">
@@ -180,7 +154,6 @@ export default function Heading() {
                                     </div>
                                 )}
                             </div>
-
                         </div>
 
                         <div className="navbar-right">
@@ -191,26 +164,23 @@ export default function Heading() {
 
                             <div className="auth-buttons">
                                 {user ? (
-                                    <>
-                                        <div className='profile-credit-container'>
-                                            <div className='credit-show-con'>
-                                                Credits: {credits}
-
-                                            </div>
-
-
-                                            <div className="user-info">
-                                                <span className="profile-name">{user.name}</span>
-                                                <span className="credits" onClick={handleLogout}>
-                                                    {/* <img src={Plan} alt="credits" /> {user.credits} */}
-                                                    <img src={Plan} alt="credits" />
-                                                </span>
-                                            </div>
-                                            <button className="profile-btn" onClick={() => navigate('/profile')}>
-                                                <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user" />
-                                            </button>
+                                    <div className='profile-credit-container'>
+                                        <div className='credit-show-con'>
+                                            Credits: {credits}
                                         </div>
-                                    </>
+
+                                        <div className="user-info">
+                                            <span className="profile-name">{user.name}</span>
+                                            <span className="credits" onClick={handleLogout}>
+                                                <img src={Plan} alt="logout" />
+                                            </span>
+                                        </div>
+                                        <button className="profile-btn" onClick={() => navigate('/profile')}>
+                                            <img width="30" height="30"
+                                                src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png"
+                                                alt="user" />
+                                        </button>
+                                    </div>
                                 ) : (
                                     <>
                                         <button
@@ -236,6 +206,7 @@ export default function Heading() {
                     </div>
                 </nav>
             </div>
+
             {/* Mobile menu below navbar */}
             <div className={`content ${menuOpen ? "show" : ""}`}>
                 <div className="content-inner">
@@ -261,7 +232,6 @@ export default function Heading() {
                             </span>
                         </div>
                     ))}
-
                 </div>
             </div>
         </>
