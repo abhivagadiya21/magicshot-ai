@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import BabyPage from './pages/BabyGenrator_page/babyPage.jsx';
-import ChangeHaircut from "./pages/ChangeHaircut_page/changehaircut.jsx";
+import ChangeHaircut from "./pages/ChangeHaircut_page/ChangeHaircut.jsx";
 import AgeJourney from './pages/AgeJourney_page/Agejourney.jsx';
 import CoverPagesing from './components/sign_in_up_compo/Cover_sing_in_up.jsx';
 import AgePredictor from './pages/AgePredictor_page/AgePredictor.jsx';
