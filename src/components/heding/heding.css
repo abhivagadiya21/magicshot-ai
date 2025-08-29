@@ -102,7 +102,6 @@
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 30px;
 }
 
 .upgrade-btn {
@@ -206,6 +205,12 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   .navbar-hamburger-container {
     display: block;
   }
+  .navbar-main-container{
+   display: flex;
+  justify-content:center;
+  padding: 0px;
+
+  }
 
   .navbar-content {
     flex-direction: column;
@@ -232,6 +237,19 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
 
   .dropdown-button {
     width: 100%;
+  }
+  .signup-btn{
+    padding: 4px 10px;
+    font-size: 12px;
+
+  }
+  .signin-btn{
+    padding: 4px 10px;
+    font-size: 12px;
+
+  }
+  .auth-buttons{
+    height: 35px;
   }
 }
 
@@ -328,8 +346,6 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
     display: block;
     width: 30px;
     height: 30px;
-    /* background-color: #1d2328; */
     border-radius: 5px;
-    /* border: 3px solid #262a2d; */
   }
 }

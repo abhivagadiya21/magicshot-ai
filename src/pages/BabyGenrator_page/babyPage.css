@@ -46,6 +46,12 @@
     font-weight: 900;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 0px;
+}
+.bagy-hading{
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
 }
 
 .btn-pop-up-howWork {
@@ -75,9 +81,6 @@
     padding: 15px 10px;
     color: white;
     flex-direction: column;
-    position: sticky;
-    top: 100%;
-    /* z-index: 999; */
 }
 
 .inner-1-for-left-3-1 {
@@ -118,12 +121,9 @@
     color: white;
     display: flex;
     justify-content: center;
-    column-gap: 8px;
 }
 
 .baby-left-3-btn-2-icon {
-    width: 70px;
-    /* background-color: rgb(130 34 204); */
     display: flex;
     column-gap: 6px;
     border-radius: 50px;
@@ -142,8 +142,6 @@
     color: hsl(240 5.03% 64.9% / 1);
     background-color: #1d2328;
     outline: none;
-    width: 165px;
-    height: 150px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -154,7 +152,9 @@
     box-shadow: 1px 1px 50px #181818;
     padding-top: 10px;
     cursor: pointer;
-    overflow: hidden
+    overflow: hidden;
+    align-items: center;
+    height: 100%;
 }
 
 
@@ -196,9 +196,14 @@
     margin-bottom: 10px;
 }
 
-.upload-image-buttons {
+.baby-upload-image-buttons {
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    gap: 15px;
+}
+.uplod-image-button-Parent-2{
+  width: 40%;
 }
 
 
@@ -243,7 +248,7 @@
     height: 50px;
 }
 
-.profile-icon-container-Parent-2 {
+/* .profile-icon-container-Parent-2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -251,7 +256,7 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
-}
+} */
 
 .profile-icon-container-Parent-2 img {
     width: 25px;
@@ -403,7 +408,7 @@
         display: none;
     }
 }
-
+n
 
 .cropper-container {
     position: relative;
@@ -761,4 +766,47 @@
   .crop-buttons{
     flex-direction: row;
   }
+  .uplod-button{
+    position: relative;
+    background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    padding: 4px 10px;
+    gap: 10px;
+    font-size: 10px;
+  }
+  .jugad{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #15191c;
+    border-radius: 0px 0px 15px 15px;
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+    width: 93.9% !important;
+    border: 3px solid #262a2d;
+    border-top: none;
+    margin-bottom: 11px;
+    
 }
+}
+.jugad{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #15191c;
+    border-radius: 0px 0px 15px 15px;
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+    width: 421px;
+    border: 3px solid #262a2d;
+    border-top: none;
+    left: 13px;
+}
+

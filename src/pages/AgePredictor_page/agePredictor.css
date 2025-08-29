@@ -384,6 +384,9 @@
     font-size: 16px; 
     color: #fff;
 }
+.uplod-image-button-Parent-agePredictor{
+
+}
 /* .main-agePredictor {
     width: 100%;
     background-color: #1d2328;
@@ -416,6 +419,17 @@
     .right-main-agePredictor {
         display: none;
     }
+    .uplod-button{
+    position: relative;
+    background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    padding: 4px 10px;
+    gap: 10px;
+    font-size: 10px;
+  }
 }
 
 

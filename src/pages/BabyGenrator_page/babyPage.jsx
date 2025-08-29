@@ -220,8 +220,9 @@ function BabyPage() {
 
       {/* Left Section */}
       <div className="left-main-babyG">
+        <div>
         <div className="inner-left-1-babyG-1">
-          <h4>AI Baby Generator</h4>
+          <p className="bagy-hading">AI Baby Generator</p>
           <button onClick={openHowWork} className="btn-pop-up-howWork">
             <img src={questionMark} alt="Help icon" />
             <span>How It Works</span>
@@ -239,7 +240,7 @@ function BabyPage() {
         </div>
 
         <div className="inner-left-2-babyG">
-          <div className="upload-image-buttons">
+          <div className="baby-upload-image-buttons">
             <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
             <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
           </div>
@@ -262,6 +263,7 @@ function BabyPage() {
         </div>
 
         {/* Footer */}
+        <div className="jugad">
         <div className="inner-left-3-babyG">
           <div className="inner-1-for-left-3-1">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -274,7 +276,8 @@ function BabyPage() {
             </svg>
             <p>Est. time: 30 to 50 seconds</p>
           </div>
-
+            </div>
+            
           <div className="inner-2-for-left-3">
             <button className="baby-left-3-btn-1">See Pricing</button>
             <button className="baby-left-3-btn-2" onClick={handleclick}>
@@ -294,6 +297,7 @@ function BabyPage() {
                 imgname: "baby-image"
               }}
             />}
+          </div>
           </div>
         </div>
       </div>
