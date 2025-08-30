@@ -198,7 +198,7 @@ function BabyPage() {
   };
 
   return (
-    <div className="main-baby-genrartor-1">
+    <div className="main-baby-genrartor-1 main-baby-genrartor-midia">
       {loading && (
         <div className="loader-overlay">
           <div className="loader-wrapper">

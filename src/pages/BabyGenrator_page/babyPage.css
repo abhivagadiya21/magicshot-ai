@@ -78,7 +78,7 @@
 .inner-left-3-babyG {
     width: 100%;
     display: flex;
-    padding: 15px 10px;
+    padding: 0px 10px;
     color: white;
     flex-direction: column;
 }
@@ -796,6 +796,9 @@ n
 }
 .jugad2{
   top: 27% !important;
+}
+.main-baby-genrartor-midia{
+  height: 81.2vh;
 }
 }
 
