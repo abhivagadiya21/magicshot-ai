@@ -781,32 +781,38 @@ n
    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
     background-color: #15191c;
     border-radius: 0px 0px 15px 15px;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    /* bottom: 100%; */
+    top: 34%!important;
+    width: 100%;
     flex-direction: column;
-    width: 93.9% !important;
-    border: 3px solid #262a2d;
+    /* border: 3px solid #262a2d; */
     border-top: none;
-    margin-bottom: 11px;
-    
+    /* left: 13px; */
+    z-index: 10;
 }
 }
+
 .jugad{
    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
     background-color: #15191c;
     border-radius: 0px 0px 15px 15px;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    /* bottom: 100%; */
+    top: 33%;
+    width: 100%;
     flex-direction: column;
-    width: 421px;
-    border: 3px solid #262a2d;
+    /* border: 3px solid #262a2d; */
     border-top: none;
-    left: 13px;
+    /* left: 13px; */
+    z-index: 10;
 }
 
