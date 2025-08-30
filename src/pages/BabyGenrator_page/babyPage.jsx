@@ -264,7 +264,7 @@ function BabyPage() {
           </div>
 
           {/* Footer */}
-          <div className="jugad">
+          <div className="jugad jugad2">
             <div className="inner-left-3-babyG">
               <div className="inner-1-for-left-3-1">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
