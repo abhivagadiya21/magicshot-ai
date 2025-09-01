@@ -798,7 +798,7 @@ n
   top: 27% !important;
 }
 .main-baby-genrartor-midia{
-  height: 81.2vh;
+  height: calc(100vh - 120px);
 }
 }
 
@@ -812,7 +812,7 @@ n
     border-radius: 0px 0px 15px 15px;
     position: relative;
     /* bottom: 100%; */
-    top: 33%;
+    top: 38%;
     width: 100%;
     flex-direction: column;
     /* border: 3px solid #262a2d; */
