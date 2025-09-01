@@ -1,7 +1,8 @@
 .main-baby-genrartor-1 {
   width: 100%;
   background-color: #1d2328;
-  height: 89.2vh;
+  /* height: 89.2vh; */
+  height: 100vh;
   display: flex;
   padding-left: 13px;
   padding-right: 13px;
@@ -812,11 +813,12 @@ n .cropper-container {
     align-items: center;
 
   }
-  .main-baby-genrartor-midia{
-    height: calc(100vh -120px);
-  }
+  /* .main-baby-genrartor-midia{
+    height: calc(100% -120px);
+  } */
   .left-main-babyG{
-    height: calc(100vh - 100px);
+    /* height: calc(100% - 90px); */
+    height: 100%;
   }
 
 }
