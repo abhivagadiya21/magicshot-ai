@@ -2,7 +2,7 @@
   width: 100%;
   background-color: #1d2328;
 /*   height: 89.2vh; */
-  min-height: 100vh;
+  min-height: calc(100vh -120px);
   display: flex;
   padding-left: 13px;
   padding-right: 13px;
@@ -28,7 +28,7 @@
 }
 
 .left-main-babyG {
-   min-height: calc(100vh -120px);
+   min-height: 300px;
   background-color: #15191c;
   display: flex;
   flex-direction: column;
