@@ -28,8 +28,6 @@
 }
 
 .left-main-babyG {
-  /* height: 100vh; */
-  /* height: calc(100vh - 120px); */
   height: 100%;
   background-color: #15191c;
   display: flex;
@@ -814,11 +812,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
-  /* .main-baby-genrartor-midia{
+  .main-baby-genrartor-midia{
     height: calc(100% -120px);
-  } */
+  }
 
 }
 
@@ -834,7 +831,6 @@
   max-width: 421px;
   flex-direction: column;
   border-top: none;
-  /* z-index: 2; */
   padding: 10px;
 }
 
