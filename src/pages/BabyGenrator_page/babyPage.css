@@ -30,6 +30,7 @@
 .left-main-babyG {
   /* height: 100vh; */
   /* height: calc(100vh - 120px); */
+  height: 100%;
   background-color: #15191c;
   display: flex;
   flex-direction: column;
