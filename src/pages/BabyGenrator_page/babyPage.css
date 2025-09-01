@@ -1,8 +1,8 @@
 .main-baby-genrartor-1 {
   width: 100%;
   background-color: #1d2328;
-  /* height: calc(100vh - 120px); */
-  height: 89.2vh;
+  height: calc(100vh - 80px);
+  /* height: 89.2vh; */
   display: flex;
   padding-left: 13px;
   padding-right: 13px;
@@ -799,15 +799,10 @@ n .cropper-container {
     width: 100% !important;
     position: relative !important;
     top: 100% !important;
-    padding: 17px !important;
+    padding: 32px 12px !important;
     min-width: 100% !important;
     max-width: 100% !important;
-    border:none !important;
-    background-color: #16191d !important;
-  }
-
-  .main-baby-genrartor-midia {
-    height: calc(100vh - 120px);
+    border: none !important;
   }
 
   .left-main-babyG-footer {
@@ -824,15 +819,13 @@ n .cropper-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #15191c;
   border-radius: 0px 0px 15px 15px;
   position: absolute;
-  bottom: 1%;
+  bottom: 3%;
   width: 421px;
   min-width: 421px;
   max-width: 421px;
   flex-direction: column;
-  border: 3px solid #262a2d;
   border-top: none;
   z-index: 10;
   padding: 10px;
