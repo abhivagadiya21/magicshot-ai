@@ -39,6 +39,8 @@
   border-radius: 15px;
   border: 3px solid #262a2d;
    position: relative;
+  flex: 1;
+  min-height: 300px;
 }
 
 .inner-left-1-babyG-1 {
@@ -784,8 +786,8 @@
     flex-direction: row;
   }
 
-  .uplod-button {
-    position: relative;
+  .upload-button {
+   position: absolute;
     background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
     color: white;
     border-radius: 10px;
