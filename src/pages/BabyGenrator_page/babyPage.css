@@ -1,8 +1,8 @@
 .main-baby-genrartor-1 {
   width: 100%;
   background-color: #1d2328;
-/*   height: 89.2vh; */
-  min-height: calc(100vh - 94.6px);
+  height: 89.2vh;
+/*   height: 100vh; */
   display: flex;
   padding-left: 13px;
   padding-right: 13px;
@@ -28,7 +28,7 @@
 }
 
 .left-main-babyG {
-   min-height: 500px;
+  height: 100%;
   background-color: #15191c;
   display: flex;
   flex-direction: column;
@@ -39,6 +39,7 @@
   border: 3px solid #262a2d;
    position: relative;
   flex: 1;
+  min-height: 300px;
 }
 
 .inner-left-1-babyG-1 {
@@ -572,7 +573,7 @@
   border: 3px solid #262a2d;
   padding: 10px;
 
-}
+  }
 
 .aspect-select {
   background-color: transparent;
@@ -799,12 +800,11 @@
   .jugad2 {
     width: 100% !important;
     position: bottom !important;
-    position: absolute !important;
+    position: fixed !important;
     padding: 0px 26px !important;
     min-width: 100% !important;
     max-width: 100% !important;
     border: none !important;
-    bottom: 13px !important;
   }
 
   .left-main-babyG-footer {
@@ -813,9 +813,9 @@
     justify-content: center;
     align-items: center;
   }
-/*   .main-baby-genrartor-midia{
+  .main-baby-genrartor-midia{
     height: calc(100% -120px);
-  } */
+  }
 
 }
 
