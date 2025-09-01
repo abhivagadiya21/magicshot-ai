@@ -412,8 +412,7 @@
     display: none;
   }
 }
-
-n .cropper-container {
+ .cropper-container {
   position: relative;
   width: 100%;
   height: 350px;
