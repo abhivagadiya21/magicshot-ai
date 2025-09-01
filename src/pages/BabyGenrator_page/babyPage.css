@@ -813,7 +813,7 @@ n .cropper-container {
 
   }
   .main-baby-genrartor-midia{
-    height: calc(100vh);
+    height: calc(100vh - 120px);
   }
 
 }
@@ -830,7 +830,7 @@ n .cropper-container {
   max-width: 421px;
   flex-direction: column;
   border-top: none;
-  z-index: 10;
+  /* z-index: 2; */
   padding: 10px;
 }
 
