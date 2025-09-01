@@ -37,7 +37,6 @@
   max-width: 421px;
   border-radius: 15px;
   border: 3px solid #262a2d;
-  position: relative;
 }
 
 .inner-left-1-babyG-1 {
@@ -814,7 +813,7 @@ n .cropper-container {
 
   }
   .main-baby-genrartor-midia{
-    height: calc(100vh - 120px);
+    height: calc(100vh - 170px);
   }
 
 }
