@@ -198,6 +198,7 @@ function BabyPage() {
   };
 
   return (
+    <>
     <div className="main-baby-genrartor-1 main-baby-genrartor-midia">
       {loading && (
         <div className="loader-overlay">
@@ -264,7 +265,8 @@ function BabyPage() {
           </div>
 
           {/* Footer */}
-          <div className="jugad jugad2">
+          <div className="left-main-babyG-footer">
+    <div className="jugad jugad2">
             <div className="inner-left-3-babyG">
               <div className="inner-1-for-left-3-1">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -300,6 +302,8 @@ function BabyPage() {
               />}
             </div>
           </div>
+          </div>
+          
         
       </div>
 
@@ -308,7 +312,11 @@ function BabyPage() {
         <h1>AI Baby Generator</h1>
         <Upload_img uploadDetails={{ image: babyImage }} />
       </div>
+
+      
     </div>
+    
+    </>
   );
 }
 
