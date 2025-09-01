@@ -136,7 +136,7 @@ function AgePredictor() {
         </div>
 
         {/* Upload Section */}
-        <div className="uplod-image-button-Parent-2">
+        <div className="uplod-image-button-Parent-agePredictor ">
           <label className="uplod-button-agePredictor" htmlFor="parent1Input">
             {parent1Upload.croppedImage ? (
               <img

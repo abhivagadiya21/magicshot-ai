@@ -198,7 +198,8 @@ function BabyPage() {
   };
 
   return (
-    <div className="main-baby-genrartor-1">
+    <>
+    <div className="main-baby-genrartor-1 main-baby-genrartor-midia">
       {loading && (
         <div className="loader-overlay">
           <div className="loader-wrapper">
@@ -220,82 +221,90 @@ function BabyPage() {
 
       {/* Left Section */}
       <div className="left-main-babyG">
-        <div className="inner-left-1-babyG-1">
-          <h4>AI Baby Generator</h4>
-          <button onClick={openHowWork} className="btn-pop-up-howWork">
-            <img src={questionMark} alt="Help icon" />
-            <span>How It Works</span>
-          </button>
-
-          {showHowWork && (
-            <Howworkpop
-              howworkpopDetails={{
-                onClose: closeHowWork,
-                image: poppassimage1,
-                message: "Upload your photos, and AI quickly generates an image of your future baby.",
-              }}
-            />
-          )}
-        </div>
-
-        <div className="inner-left-2-babyG">
-          <div className="upload-image-buttons">
-            <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
-            <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
-          </div>
-
-          <p className="baby-gender">Baby's Gender</p>
-          <div className="gender-main-container">
-            <GenderOption
-              gender="boy"
-              selectedGender={selectedGender}
-              handleSelect={setSelectedGender}
-              icon={boyIcon}
-            />
-            <GenderOption
-              gender="girl"
-              selectedGender={selectedGender}
-              handleSelect={setSelectedGender}
-              icon={girlIcon}
-            />
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="inner-left-3-babyG">
-          <div className="inner-1-for-left-3-1">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
-                fill="white"
-              />
-            </svg>
-            <p>Est. time: 30 to 50 seconds</p>
-          </div>
-
-          <div className="inner-2-for-left-3">
-            <button className="baby-left-3-btn-1">See Pricing</button>
-            <button className="baby-left-3-btn-2" onClick={handleclick}>
-              Generate
-              <div className="baby-left-3-btn-2-icon">
-                <img src={star} alt="star icon" />
-                <span>-0.5</span>
-              </div>
+        <div>
+          <div className="inner-left-1-babyG-1">
+            <p className="bagy-hading">AI Baby Generator</p>
+            <button onClick={openHowWork} className="btn-pop-up-howWork">
+              <img src={questionMark} alt="Help icon" />
+              <span>How It Works</span>
             </button>
-            {showImagePopup && genraterImageurl && <GetImage_pop
-              getimage_details={{
-                onClose: () => {
-                  setGenraterImageurl(null);
-                  closeImagePopup()
-                },
-                image: genraterImageurl,
-                imgname: "baby-image"
-              }}
-            />}
+
+            {showHowWork && (
+              <Howworkpop
+                howworkpopDetails={{
+                  onClose: closeHowWork,
+                  image: poppassimage1,
+                  message: "Upload your photos, and AI quickly generates an image of your future baby.",
+                }}
+              />
+            )}
           </div>
-        </div>
+
+          <div className="inner-left-2-babyG">
+            <div className="baby-upload-image-buttons">
+              <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
+              <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
+            </div>
+
+            <p className="baby-gender">Baby's Gender</p>
+            <div className="gender-main-container">
+              <GenderOption
+                gender="boy"
+                selectedGender={selectedGender}
+                handleSelect={setSelectedGender}
+                icon={boyIcon}
+              />
+              <GenderOption
+                gender="girl"
+                selectedGender={selectedGender}
+                handleSelect={setSelectedGender}
+                icon={girlIcon}
+              />
+            </div>
+          </div>
+          </div>
+
+          {/* Footer */}
+          <div className="left-main-babyG-footer">
+    <div className="jugad jugad2">
+            <div className="inner-left-3-babyG">
+              <div className="inner-1-for-left-3-1">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
+                    fill="white"
+                  />
+                </svg>
+                <p>Est. time: 30 to 50 seconds</p>
+              </div>
+            </div>
+
+            <div className="inner-2-for-left-3">
+              <button className="baby-left-3-btn-1">See Pricing</button>
+              <button className="baby-left-3-btn-2" onClick={handleclick}>
+                Generate
+                <div className="baby-left-3-btn-2-icon">
+                  <img src={star} alt="star icon" />
+                  <span>-0.5</span>
+                </div>
+              </button>
+              {showImagePopup && genraterImageurl && <GetImage_pop
+                getimage_details={{
+                  onClose: () => {
+                    setGenraterImageurl(null);
+                    closeImagePopup()
+                  },
+                  image: genraterImageurl,
+                  imgname: "baby-image"
+                }}
+              />}
+            </div>
+          </div>
+          </div>
+          
+        
       </div>
 
       {/* Right Section */}
@@ -303,7 +312,11 @@ function BabyPage() {
         <h1>AI Baby Generator</h1>
         <Upload_img uploadDetails={{ image: babyImage }} />
       </div>
+
+      
     </div>
+    
+    </>
   );
 }
 
