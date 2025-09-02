@@ -20,7 +20,6 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    
 }
 
 .inner-1-pop-getimage {
@@ -28,6 +27,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    color: white;
 }
 
 .inner-2-pop-getimage {
@@ -37,7 +37,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    ;
 }
 .inner-3-pop-getimage{
     display: flex;
@@ -59,7 +58,7 @@
 }
 
 .getimage-pop-download-btn{
-   background:#1d2328; 
+  background:#1d2328; 
   color: white;
   border: 1.5px solid black;
   border-top: none;
@@ -79,121 +78,140 @@
   border-bottom: none;
 }
 
-
-
-/* From Uiverse.io by JkHuger */ 
-.installer {
-  width: 200px;
-  height: 40px;
-}
-
-.installer label {
-  position: absolute;
-  height: 40px;
-  width: 200px;
-  border-radius: 5px;
-  overflow: hidden;
+.download-btn {
+  height: 45px;
+  width: 120px;
   cursor: pointer;
+  background: white;
+  border: none;
+  background: #0000ff;
+  border-radius: 30px;
+  overflow: hidden;
+  font-size: 20px;
 }
 
-.installer label input {
-  display: none;
+.button-content {
+  transform: translateY(-45px);
+  transition: all 250ms ease-in-out;
 }
 
-.installer label span {
-  position: absolute;
-  height: 40px;
-  width: 200px;
-  line-height: 40px;
-  text-align: center;
-  color: #fff;
-  background: #3F8EFC;
-  border-radius: 5px;
-}
-
-.installer label input:checked ~ span {
-  background: #87E544;
-  animation: downloadSuccess 3.1s ease;
-}
-
-.installer label span:after {
-  content: 'DOWNLOAD';
-  position: absolute;
-  width: 80%;
-  height: 100%;
-  left: 10%;
-}
-
-.installer label input:checked ~ span:after {
-  content: 'Thank you!';
-  animation: downloadState 3s;
-}
-
-.installer label span:before {
-  content: '';
-  position: absolute;
+.svg-container,
+.text-container {
+  height: 45px;
   width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container .text {
+  font-size: 17px;
+  color: #fff;
+  font-weight: 600;
+  opacity: 1;
+  transition: opacity ease-in-out 250ms;
+}
+
+.download-icon {
+  height: 25px;
+  width: 25px;
+  fill: #fff;
   opacity: 0;
-  background: rgba(255,255,255,.2);
+  transition: opacity ease-in-out 250ms;
+}
+  
+.download-btn:hover .button-content {
+  transform: translateY(0px);
 }
 
-.installer label input:checked ~ span:before {
-  animation: downloadProgress 3s cubic-bezier(.67,.13,.1,.81);
+.download-btn:hover .text {
+  opacity: 0;
 }
 
-@keyframes downloadSuccess {
-  0%, 90% {
-    background: #3F8EFC;
-  }
+.download-btn:hover .download-icon {
+  opacity: 1;
+}
 
-  100% {
-    background: #87E544;
+.download-btn:focus .download-icon {
+  -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+  animation: heartbeat 1.5s ease-in-out infinite both;
+}
+
+@-webkit-keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
 }
 
-@keyframes downloadState {
-  0%, 95% {
-    content: 'DOWNLOADING...'
-  }
-
-  100% {
-    content: 'Thank you for download!'
-  }
+.download-button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
-
-@keyframes downloadProgress {
-  0% {
-    width: 5%;
-    opacity: 1;
-  }
-
-  35% {
-    width: 17%;
-  }
-
-  64% {
-    width: 51%;
-  }
-
-  81% {
-    width: 70%;
-  }
-
-  90% {
-    width: 86%;
-    opacity: 1;
-  }
-
-  100% {
-    width: 100%;
-    opacity: 0;
-  }
-}
-
-
 
 .pop-pass-image-get{
    border-radius: 10px;
