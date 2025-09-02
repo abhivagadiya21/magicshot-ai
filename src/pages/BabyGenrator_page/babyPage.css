@@ -22,6 +22,8 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .left-container {
@@ -197,9 +199,10 @@
 
 .baby-upload-image-buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  gap: 15px;
+  gap: 25px;
+  height: 140px;
 }
 
 .uplod-image-button-Parent-2 {
@@ -557,7 +560,7 @@
   border: 3px solid #262a2d;
   padding: 10px;
 
-}
+  }
 
 .aspect-select {
   background-color: transparent;
@@ -904,6 +907,6 @@
 
   .main-baby-genrartor-midia {
     height: calc(100% -120px);
-  }
+  } 
 
 }
