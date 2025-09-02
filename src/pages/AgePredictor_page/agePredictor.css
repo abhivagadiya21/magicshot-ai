@@ -1,11 +1,10 @@
 .main-agePredictor {
     width: 100%;
     background-color: #1d2328;
-    height: 89.2vh;
     display: flex;
     padding-left: 13px;
     padding-right: 13px;
-    padding-bottom: 35px;
+   
 }
 
 .right-main-agePredictor {
@@ -384,6 +383,30 @@
     font-size: 16px; 
     color: #fff;
 }
+.uplod-image-button-Parent-agePredictor{
+
+}
+/* .main-agePredictor {
+    width: 100%;
+    background-color: #1d2328;
+    height: 89.2vh;
+    display: flex;
+    justify-content: center; 
+    padding: 0;             
+    overflow-x: hidden;       
+
+.left-main-agePredictor {
+    height: 100%;
+    background-color: #15191c;
+    display: flex;
+    flex-direction: column;
+    width: 100%;         
+    min-width: unset;    
+    max-width: 500px;    
+    border-radius: 15px;
+    border: 3px solid #262a2d;
+    margin: 0 auto;      
+} */
 
 @media (max-width: 768px) {
     .left-main-agePredictor {
@@ -395,4 +418,17 @@
     .right-main-agePredictor {
         display: none;
     }
+    .uplod-button{
+    position: relative;
+    background: linear-gradient(90deg, #3231d3 0%, #443e4d 100%);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    padding: 4px 10px;
+    gap: 10px;
+    font-size: 10px;
+  }
 }
+
+

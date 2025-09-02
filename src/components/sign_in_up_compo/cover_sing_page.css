@@ -112,3 +112,9 @@
   width: 20px;
   height: 20px;
 }
+
+@media (max-width: 768px) {
+   .left-inner-main-cover-sing{
+    display: none;
+   }
+  }

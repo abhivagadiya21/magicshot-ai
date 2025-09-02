@@ -1,11 +1,10 @@
 .main-changeHair {
     width: 100%;
     background-color: #1d2328;
-    height: 89.2vh;
+    
     display: flex;
     padding-left: 13px;
     padding-right: 13px;
-    padding-bottom: 35px;
 }
 
 .right-main-changeHair {
@@ -36,7 +35,7 @@
     max-width: 421px;
     border-radius: 15px;
     border: 3px solid #262a2d;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .inner-left-1-changeHair {
@@ -386,9 +385,17 @@
     font-size: 16px;
     color: #fff;
 }
-.inner-2-left-in-tab-btnshow-div-changeHair{
+
+.inner-2-left-in-tab-btnshow-div-changeHair {
     display: flex;
-    
+    overflow-y: auto;
+    overflow-y: auto;
+    /* ✅ scroll only this div */
+    max-height: 400px;
+    /* set height as needed */
+    padding-right: 5px;
+    /* optional scrollbar spacing */
+    box-sizing: border-box;
 }
 
 
@@ -403,7 +410,6 @@
     margin-top: 10px;
     width: 100%;
     column-gap: 60px;
-
 }
 
 .tab-btn-1-chageHair,
@@ -420,7 +426,7 @@
     transition: all 0.3s ease;
 }
 
-.active-tab1{
+.active-tab1 {
     border-bottom: 2px solid #c589e4;
 }
 
@@ -428,7 +434,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-
+    
 }
 
 .tab1-inner-1-content {
@@ -452,20 +458,20 @@
 }
 
 .tab1-content-inner-1-img-hair {
-  width: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 3px solid transparent; 
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid transparent;
 }
 
 .tab1-inner-1-content.selected .tab1-content-inner-1-img-hair {
-  border: 3px solid #c589e4;
-  
+    border: 3px solid #c589e4;
+
 }
 
 
-.tab1-content-inner-1-img-hair:active{
+.tab1-content-inner-1-img-hair:active {
     border: 2px solid #c589e4;
 }
 

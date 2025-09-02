@@ -2,15 +2,12 @@ import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';  // ✅ styling import
-
-import Headers from './components/heding/heding.jsx';
+import 'react-toastify/dist/ReactToastify.css'; 
 import BabyPage from './pages/BabyGenrator_page/babyPage.jsx';
-import ChagehaircutPage from './pages/ChangeHaircut_page/chnagehaircut.jsx';
+import ChangeHaircut from "./pages/ChangeHaircut_page/ChangeHaircut.jsx";
 import AgeJourney from './pages/AgeJourney_page/Agejourney.jsx';
 import CoverPagesing from './components/sign_in_up_compo/Cover_sing_in_up.jsx';
 import AgePredictor from './pages/AgePredictor_page/AgePredictor.jsx';
-import AuthLayout from './layout/AuthLayout.jsx';
 import MainLayout from './layout/MainLayout.jsx';
 import SignIn from './components/sign_in_up_compo/SignIn.jsx';
 import SignUp from './components/sign_in_up_compo/SignUp.jsx';
@@ -22,10 +19,9 @@ function App() {
   return (
     <>
       <CreditProvider>
-        {/* ✅ Toast container ek vaar top level par */}
         <ToastContainer
           position="top-right"
-          autoClose={3000}  // 3s ma band
+          autoClose={3000}  
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -40,7 +36,7 @@ function App() {
             <Route path="/" element={<BabyPage />} />
             <Route path="/age-predictor" element={<AgePredictor />} />
             <Route path="/age-journey" element={<AgeJourney />} />
-            <Route path="/change-haircut" element={<ChagehaircutPage />} />
+            <Route path="/change-haircut" element={<ChangeHaircut />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
 
