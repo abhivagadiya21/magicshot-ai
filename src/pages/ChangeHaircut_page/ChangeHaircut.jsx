@@ -48,7 +48,7 @@ function ChangehaircutPage() {
 
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
-    const { dispatch,fetchUser } = useCredits();
+    const { dispatch, fetchUser } = useCredits();
 
     const styles = [
         { name: "Random", img: style1 },
@@ -174,7 +174,7 @@ function ChangehaircutPage() {
                 )}
 
 
-                <div className="left-main-changeHair">
+                <div className="left-container">
                     <div className="inner-left-1-changeHair">
                         <h4>Al Change Hairstyle</h4>
                         <button onClick={openHowWork} className='btn-pop-up-howWork'>
@@ -383,15 +383,25 @@ function ChangehaircutPage() {
 
 
                     </div>
-                    <div className="inner-left-3-changeHair">
-                        <div className='inner-1-for-left-3'>
-                            <p>Est. time: 30 seconds to 50 seconds</p>
+                    <div className="left-main-babyG-footer">
+                        <div className="time-estimation-container">
+                            <div className="time-estimation">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                        d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
+                                        fill="white"
+                                    />
+                                </svg>
+                                <p>Est. time: 30 to 50 seconds</p>
+                            </div>
                         </div>
-                        <div className="inner-2-for-left-3">
-                            <button className='changeHair-left-3-btn-1'>See Pricing</button>
-                            <button className='changeHair-left-3-btn-2' onClick={handleClickGenerate}>
+                        <div className="action-buttons-container">
+                            <button className='pricing-btn'>See Pricing</button>
+                            <button className='generate-btn' onClick={handleClickGenerate}>
                                 Generate
-                                <div className="changeHair-left-3-btn-2-icon">
+                                <div className="generate-btn-icon">
                                     <img src={star} alt="" />
                                     <span>-0.5</span>
                                 </div>

@@ -1,11 +1,10 @@
 .main-agePredictor {
     width: 100%;
     background-color: #1d2328;
-    height: 89.2vh;
     display: flex;
     padding-left: 13px;
     padding-right: 13px;
-    padding-bottom: 35px;
+   
 }
 
 .right-main-agePredictor {
