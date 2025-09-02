@@ -1,7 +1,7 @@
 .main-baby-genrartor-1 {
   width: 100%;
   background-color: #1d2328;
-  height: 89.2vh;
+  height: 100vh;
 /*   height: 100vh; */
   display: flex;
   padding-left: 13px;
@@ -25,6 +25,8 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .left-main-babyG {
@@ -39,7 +41,7 @@
   border: 3px solid #262a2d;
    position: relative;
   flex: 1;
-  min-height: 300px;
+  /* min-height: 300px; */
 }
 
 .inner-left-1-babyG-1 {
@@ -203,9 +205,10 @@
 
 .baby-upload-image-buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  gap: 15px;
+  gap: 25px;
+  height: 140px;
 }
 
 .uplod-image-button-Parent-2 {
@@ -813,9 +816,9 @@
     justify-content: center;
     align-items: center;
   }
-  .main-baby-genrartor-midia{
+  /* .main-baby-genrartor-midia{
     height: calc(100% -120px);
-  }
+  } */
 
 }
 
