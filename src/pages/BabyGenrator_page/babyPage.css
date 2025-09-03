@@ -36,17 +36,17 @@
   border-radius: 15px;
   border: 3px solid #262a2d;
   overflow: hidden;
+  padding: 15px;
 }
 
 .inner-left-1-babyG-1 {
   width: 100%;
   display: flex;
-  padding: 15px;
   color: white;
   font-weight: 900;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0px;
+  padding-bottom: 15px;
 }
 
 .bagy-hading {
@@ -135,9 +135,7 @@
   box-sizing: border-box;
 }
 
-.inner-left-2-babyG {
-  padding: 15px;
-}
+
 
 .uplod-button-babyG {
   color: hsl(240 5.03% 64.9% / 1);
@@ -156,6 +154,7 @@
   overflow: hidden;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 
@@ -206,7 +205,7 @@
 }
 
 .uplod-image-button-Parent-2 {
-  width: 40%;
+  width: 100%;
 }
 
 
@@ -785,13 +784,15 @@
   padding: 1rem;
   position: fixed;
   bottom: 0rem;
-  margin-bottom: calc(1rem - 3.5px);
+  margin-bottom: calc(1rem - 0px);
   border-radius: 15px;
-  min-width: calc(421px - 6px);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  min-width: calc(421px - 4px);
   background-color: #15191c;
   transform: translateY(0);
   will-change: "transform";
-  left: 17px;
+  left: 15px;
 }
 
 .time-estimation-container {

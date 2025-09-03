@@ -138,7 +138,7 @@ function AgeJourney() {
 
             <div className="left-container">
                 <div className="inner-left-1-ageJourney">
-                    <h4>AI Age Journey</h4>
+                    <p className="bagy-hading">AI Age Journey</p>
                     <button onClick={openHowWork} className="btn-pop-up-howWork">
                         <img src={questionMark} alt="" />
                         <span>How It Works</span>

@@ -72,6 +72,15 @@ function ChangehaircutPage() {
         { name: "Messy bun", img: style6 },
         { name: "Messy bun", img: style6 },
         { name: "Messy bun", img: style6 },
+         { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
+        { name: "Messy bun", img: style6 },
     ];
 
     const HairColor = [
@@ -174,9 +183,9 @@ function ChangehaircutPage() {
                 )}
 
 
-                <div className="left-container">
+                <div className="left-container left-container-changeHair">
                     <div className="inner-left-1-changeHair">
-                        <h4>Al Change Hairstyle</h4>
+                        <p className="bagy-hading">Al Change Hairstyle</p>
                         <button onClick={openHowWork} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
@@ -264,7 +273,7 @@ function ChangehaircutPage() {
 
                         </div>
 
-                        <p className='baby-gender'> Gender</p>
+                        <p className='baby-gender-changeHair'> Gender</p>
 
                         <div className="gender-main-container">
                             {/* Boy Option */}
@@ -383,6 +392,7 @@ function ChangehaircutPage() {
 
 
                     </div>
+                    
                     <div className="left-main-babyG-footer">
                         <div className="time-estimation-container">
                             <div className="time-estimation">

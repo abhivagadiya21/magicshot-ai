@@ -118,7 +118,7 @@ function AgePredictor() {
       <div className="left-container">
         {/* Header */}
         <div className="inner-left-1-agePredictor">
-          <h4>AI Age Predictor</h4>
+          <p className="bagy-hading">AI Age Predictor</p>
           <button onClick={openHowWork} className="btn-pop-up-howWork">
             <img src={questionMark} alt="Help icon" />
             <span>How It Works</span>
