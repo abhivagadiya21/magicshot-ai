@@ -784,7 +784,7 @@
   padding: 1rem;
   position: fixed;
   bottom: 0rem;
-  margin-bottom: calc(1rem - 0px);
+  margin-bottom: calc(1rem - 4px);
   border-radius: 15px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
