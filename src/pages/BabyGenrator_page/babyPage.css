@@ -860,6 +860,7 @@
     min-width: unset;
     width: calc(100% - 32.5px);
     left: 17px;
+     margin-bottom: calc(1rem + 1px);
   }
 
   .right-main-babyG-1 {
