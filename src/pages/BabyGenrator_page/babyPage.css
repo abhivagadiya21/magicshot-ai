@@ -784,7 +784,7 @@
   padding: 1rem;
   position: fixed;
   bottom: 0rem;
-  margin-bottom: calc(1rem - 4px);
+  margin-bottom: calc(1rem + 1px);
   border-radius: 15px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -858,6 +858,7 @@
   .left-main-babyG-footer {
     min-width: unset;
     width: calc(100% - 2rem);
+    left: 17px;
   }
 
   .right-main-babyG-1 {
