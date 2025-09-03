@@ -313,7 +313,10 @@ function BabyPage() {
                 <span>-0.5</span>
               </div>
             </button>
-            {showImagePopup && genraterImageurl && <GetImage_pop
+           
+          </div>
+        </div>
+         {showImagePopup && genraterImageurl && <GetImage_pop
               getimage_details={{
                 onClose: () => {
                   setGenraterImageurl(null);
@@ -323,8 +326,6 @@ function BabyPage() {
                 imgname: "baby-image"
               }}
             />}
-          </div>
-        </div>
 
         {/* Right Section */}
         <div className="right-main-babyG-1">

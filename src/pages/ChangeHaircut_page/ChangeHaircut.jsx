@@ -416,7 +416,11 @@ function ChangehaircutPage() {
                                     <span>-0.5</span>
                                 </div>
                             </button>
-                            {showImagePopup && genraterImageurl && (
+                            
+                        </div>
+                    </div>
+                </div>
+                {showImagePopup && genraterImageurl && (
                                 <GetImage_pop
                                     getimage_details={{
                                         onClose: () => {
@@ -428,9 +432,6 @@ function ChangehaircutPage() {
                                     }}
                                 />
                             )}
-                        </div>
-                    </div>
-                </div>
                 <div className="right-main-changeHair">
                     <Upload_img uploadDetails={{ image: hairImage }} />
                 </div>

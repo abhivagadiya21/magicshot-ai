@@ -248,7 +248,11 @@ function AgePredictor() {
                 <span>-0.5</span>
               </div>
             </button>
-            {showImagePopup && genraterImageurl && <GetImage_pop
+            
+          </div>
+        </div>
+      </div>
+      {showImagePopup && genraterImageurl && <GetImage_pop
               getimage_details={{
                 onClose: () => {
                   setGenraterImageurl(null);
@@ -259,9 +263,6 @@ function AgePredictor() {
                 imgname: "age-predictor"
               }}
             />}
-          </div>
-        </div>
-      </div>
 
       {/* Right Section */}
       <div className="right-main-agePredictor">

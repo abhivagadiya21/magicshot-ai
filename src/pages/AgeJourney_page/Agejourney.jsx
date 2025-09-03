@@ -278,7 +278,11 @@ function AgeJourney() {
                         </button>
 
                         {/* Generated Image Popup */}
-                        {showImagePopup && genraterImageurl && (
+                        
+                    </div>
+                </div>
+            </div>
+            {showImagePopup && genraterImageurl && (
                             <GetImage_pop
                                 getimage_details={{
                                     onClose: () => {
@@ -290,9 +294,6 @@ function AgeJourney() {
                                 }}
                             />
                         )}
-                    </div>
-                </div>
-            </div>
 
             <div className="right-main-ageJourney">
                 <Upload_img uploadDetails={{ image: journeyImage }} />
