@@ -791,6 +791,7 @@
   background-color: #15191c;
   transform: translateY(0);
   will-change: "transform";
+  left: 17px;
 }
 
 .time-estimation-container {
@@ -848,9 +849,9 @@
 
 @media (max-width: 768px) {
   .left-container {
+   width: unset;
+    min-width: unset;
     width: 100%;
-    min-width: 100%;
-    max-width: 100%;
   }
 
   .left-main-babyG-footer {
@@ -904,9 +905,5 @@
     justify-content: center;
     align-items: center;
   }
-
-  .main-baby-genrartor-midia {
-    height: calc(100% -120px);
-  } 
 
 }

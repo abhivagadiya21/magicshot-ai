@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import usePopup from "../../hooks/usePopup";
@@ -137,6 +137,30 @@ function BabyPage() {
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
 
+  
+  const fixedRef = useRef(null);
+
+
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+
+      if (fixedRef.current) {
+
+        // Shift with scroll so it participates in bounce
+
+        fixedRef.current.style.transform = `translateY(-${window.scrollY}px)`;
+
+      }
+
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+
+  }, []);
+
   const { dispatch, fetchUser } = useCredits();
   const handleGenerate = async () => {
     if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
@@ -265,7 +289,7 @@ function BabyPage() {
         </div>
 
         {/* Footer */}
-        <div className="left-main-babyG-footer">
+         <div className="left-main-babyG-footer" ref={fixedRef}>
           <div className="time-estimation-container">
             <div className="time-estimation">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -300,9 +324,6 @@ function BabyPage() {
               }}
             />}
           </div>
-
-
-
         </div>
 
         {/* Right Section */}
