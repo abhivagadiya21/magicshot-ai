@@ -2,7 +2,6 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://magicshot-ai-backend.onrender.com/auth",
-  // baseURL:"http://localhost:3000/auth",
 });
 
 export const babyuploadeAPI = async (imageFiles, otherData) => {
