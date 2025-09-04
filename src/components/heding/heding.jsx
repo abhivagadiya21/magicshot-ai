@@ -34,21 +34,19 @@ export default function Heading() {
     }, [location.pathname]);
 
     // ✅ Proper logout
-   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
 
-    dispatch({ type: "SET_USER", payload: null });
-    dispatch({ type: "SET_CREDITS", payload: 0 });
+        dispatch({ type: "SET_USER", payload: null });
+        dispatch({ type: "SET_CREDITS", payload: 0 });
 
-    window.dispatchEvent(new Event("userUpdated"));
+        window.dispatchEvent(new Event("userUpdated"));
 
-    // 🚨 small delay so context reset first, then navigate
-    setTimeout(() => {
-        navigate("/", { replace: true });
-    }, 50);
-};
-
+        setTimeout(() => {
+            navigate("/", { replace: true });
+        }, 50);
+    };
 
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
@@ -82,7 +80,6 @@ export default function Heading() {
                                     aria-label="Toggle menu"
                                 >
                                     {menuOpen ? (
-                                        // Close icon
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="#fff"
                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -90,7 +87,6 @@ export default function Heading() {
                                             <line x1="6" y1="6" x2="18" y2="18" />
                                         </svg>
                                     ) : (
-                                        // Hamburger icon
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="#fff"
                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -117,8 +113,7 @@ export default function Heading() {
                                                 <svg aria-hidden="true" fill="none" focusable="false" height="1em"
                                                     role="presentation" stroke="currentColor" strokeLinecap="round"
                                                     strokeLinejoin="round" strokeWidth="1.5"
-                                                    viewBox="0 0 24 24" width="1em"
-                                                    className="absolute end-3 w-4 h-4 transition-transform duration-150 ease motion-reduce:transition-none data-[open=true]:rotate-180">
+                                                    viewBox="0 0 24 24" width="1em">
                                                     <path d="m6 9 6 6 6-6"></path>
                                                 </svg>
                                             </span>
@@ -214,7 +209,10 @@ export default function Heading() {
                         <div
                             className="baby-text-container"
                             key={opt.path}
-                            onClick={() => navigate(opt.path)}
+                            onClick={() => {
+                                navigate(opt.path);   // ✅ navigate
+                                setMenuOpen(false);   // ✅ close menu immediately
+                            }}
                         >
                             <p className='baby-text'>{opt.label}</p>
                             <span>
