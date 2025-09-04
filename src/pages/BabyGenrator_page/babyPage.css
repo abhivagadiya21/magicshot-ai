@@ -95,7 +95,6 @@
 .inner-1-for-left-3 p {
   font-size: 12px;
   padding-bottom: 10px;
-
 }
 
 .inner-2-for-left-3 {
@@ -135,8 +134,6 @@
   box-sizing: border-box;
 }
 
-
-
 .uplod-button-babyG {
   color: hsl(240 5.03% 64.9% / 1);
   background-color: #1d2328;
@@ -157,7 +154,6 @@
   width: 100%;
 }
 
-
 .uplod-button-babyG-Parent-2 {
   color: hsl(240 5.03% 64.9% / 1);
   background-color: #1d2328;
@@ -176,13 +172,11 @@
   overflow: hidden;
 }
 
-
 .uplod-image-button-babyG {
   color: white;
-
 }
 
-.plus-iocn {
+.plus-icon {
   font-size: 30px;
 }
 
@@ -207,7 +201,6 @@
 .uplod-image-button-Parent-2 {
   width: 100%;
 }
-
 
 .baby-gender {
   color: white;
@@ -249,16 +242,6 @@
   width: 50px;
   height: 50px;
 }
-
-/* .profile-icon-container-Parent-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #605174;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-} */
 
 .profile-icon-container-Parent-2 img {
   width: 25px;
@@ -347,11 +330,6 @@
   border-width: 2px;
 }
 
-/* .gender-option.selected {
-    background-color: #e0f7fa;
-    border-color: #00bcd4; 
-} */
-
 .gender-avatar-img {
   width: 30px;
   height: 30px;
@@ -381,7 +359,6 @@
 
 .checkmark {
   font-size: 18px;
-  /* color: #4CAF50; */
   font-weight: bold;
   margin-right: 5px;
 }
@@ -397,8 +374,6 @@
   font-size: 16px;
   color: #fff;
 }
-
-
 
 .cropper-container {
   position: relative;
@@ -438,7 +413,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  /* dark background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -474,7 +448,6 @@
   color: white;
   font-size: 18px;
   font-weight: bold;
-
 }
 
 .preview-img {
@@ -484,8 +457,6 @@
   display: flex;
   justify-content: center;
 }
-
-
 
 .hidden {
   display: none;
@@ -559,7 +530,7 @@
   border: 3px solid #262a2d;
   padding: 10px;
 
-  }
+}
 
 .aspect-select {
   background-color: transparent;
@@ -569,8 +540,6 @@
   border: none;
   background-color: #1d2328;
   font-size: 0.8rem;
-
-
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
@@ -580,7 +549,6 @@
   background-position-x: 100%;
   background-position-y: 12px;
   padding: 0.625rem 0.625rem;
-
   background-color: #1d2328;
 }
 
@@ -592,7 +560,6 @@
   gap: 10px;
 }
 
-
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -600,9 +567,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
-  /* Semi-transparent background */
   backdrop-filter: blur(6px);
-  /* Main blur effect */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,7 +589,6 @@
   scale: 2;
 }
 
-
 .loader {
   position: absolute;
   top: 0;
@@ -632,7 +596,6 @@
   height: 100%;
   width: 100%;
   z-index: 1;
-
   background-color: transparent;
   mask: repeating-linear-gradient(90deg,
       transparent 0,
@@ -648,7 +611,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-
   background-image: radial-gradient(circle at 50% 50%, #ff0 0%, transparent 50%),
     radial-gradient(circle at 45% 45%, #f00 0%, transparent 45%),
     radial-gradient(circle at 55% 55%, #0ff 0%, transparent 45%),
@@ -757,24 +719,6 @@
   }
 }
 
-
-
-
-.jugad {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0px 0px 15px 15px;
-  position: absolute;
-  bottom: 3%;
-  width: 421px;
-  min-width: 421px;
-  max-width: 421px;
-  flex-direction: column;
-  border-top: none;
-  padding: 10px;
-}
-
 .left-main-babyG-footer {
   display: flex;
   justify-content: center;
@@ -793,8 +737,6 @@
   will-change: "transform";
   left: 15px;
 }
-
-
 
 .time-estimation-container {
   width: 100%;
@@ -851,7 +793,7 @@
 
 @media (max-width: 768px) {
   .left-container {
-   width: unset;
+    width: unset;
     min-width: unset;
     width: 100%;
   }
@@ -860,7 +802,7 @@
     min-width: unset;
     width: calc(100% - 32.5px);
     left: 17px;
-     margin-bottom: calc(1rem + 1px);
+    margin-bottom: calc(1rem + 1px);
   }
 
   .right-main-babyG-1 {
@@ -893,21 +835,9 @@
     font-size: 10px;
   }
 
-  .jugad2 {
-    width: 100% !important;
-    position: bottom !important;
-    position: fixed !important;
-    padding: 0px 26px !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    border: none !important;
-  }
-
   .left-main-babyG-footer {
-    /* padding: 13px; */
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
 }

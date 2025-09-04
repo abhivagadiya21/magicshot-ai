@@ -29,6 +29,7 @@ function App() {
           draggable
           pauseOnHover
           theme="colored"
+          
         />
 
         <Routes>

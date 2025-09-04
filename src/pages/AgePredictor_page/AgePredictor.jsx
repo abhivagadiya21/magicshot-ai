@@ -17,8 +17,6 @@ import { blobUrlToFile } from "../../utils/blobToFile";
 import { toast } from "react-toastify";
 import { useCredits } from "../../components/global_com/context.jsx";
 
-
-
 function AgePredictor() {
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
   const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
@@ -65,9 +63,7 @@ function AgePredictor() {
       console.log("✅ Response from API:", response);
       const data = response.data;
 
-
       if (data?.file) {
-        // setTimeout(() => {
         setLoading(false);
         setGenraterImageurl(data.file);
         setGettingAge(data.agepredic);
@@ -85,13 +81,10 @@ function AgePredictor() {
     }
   };
 
-
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
-    // window.dispatchEvent(new Event("creditsUpdated"));
   };
-
 
   return (
     <div className="main-agePredictor">
@@ -112,8 +105,6 @@ function AgePredictor() {
           </div>
         </div>
       )}
-
-
       {/* Left Section */}
       <div className="left-container">
         {/* Header */}
@@ -134,7 +125,6 @@ function AgePredictor() {
             />
           )}
         </div>
-
         {/* Upload Section */}
         <div className="uplod-image-button-Parent-agePredictor ">
           <label className="uplod-button-agePredictor" htmlFor="parent1Input">
@@ -153,11 +143,10 @@ function AgePredictor() {
                     className="Parent-Icon"
                   />
                 </div>
-                <p>Parent 1</p>
+                <p>Upload Your Image</p>
               </>
             )}
           </label>
-
           <div className="img-upload-button-container">
             <input
               type="file"
@@ -193,7 +182,6 @@ function AgePredictor() {
               </button>
             )}
           </div>
-
           {/* Crop Popup */}
           {parent1Upload.showCropper && (
             <div className="overlay">
@@ -221,7 +209,6 @@ function AgePredictor() {
             </div>
           )}
         </div>
-
         {/* Footer */}
         <div className="left-main-babyG-footer">
           <div className="time-estimation-container">
@@ -237,8 +224,6 @@ function AgePredictor() {
               <p>Est. time: 30 to 50 seconds</p>
             </div>
           </div>
-
-
           <div className="action-buttons-container">
             <button className="pricing-btn">See Pricing</button>
             <button className="generate-btn" onClick={handleclick}>
@@ -271,5 +256,4 @@ function AgePredictor() {
     </div>
   );
 }
-
 export default AgePredictor;

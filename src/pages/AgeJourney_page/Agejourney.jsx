@@ -168,7 +168,7 @@ function AgeJourney() {
                                 <div className="profile-icon-container">
                                     <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
                                 </div>
-                                <p>Parent 1</p>
+                                <p>Upload Your Image</p>
                             </>
                         )}
                     </label>
