@@ -14,6 +14,8 @@ function CoverPagesing() {
 
   return (
     <div className="main-cover-sign-page-compo">
+
+      <div className="main-cover-sing-page">
       <div className="inner-main-cover-sing-page">
         <div className="left-inner-main-cover-sing">
           <img className="containt-left-sign-page" src={containtImg} alt="Illustration" />
@@ -25,17 +27,28 @@ function CoverPagesing() {
           <img src={Logo} alt="Logo" className="right-side-main-logo" />
 
           <div className="form-container">
-            {/* ✅ Hide tabs on forgot-password */}
-            {currentPath !== "forgot-password" && (
-              <div className="form-header">
-                <Link to="signin">
-                  <button className={currentPath === "signin" ? "active-tab" : ""}>Sign In</button>
-                </Link>
-                <Link to="signup">
-                  <button className={currentPath === "signup" ? "active-tab" : ""}>Sign Up</button>
-                </Link>
-              </div>
-            )}
+            <div className="form-container">
+              {/* ✅ Hide tabs on forgot-password */}
+              {currentPath !== "forgot-password" && (
+                <div className="form-header">
+                  <Link to="signin">
+                    <button
+                      className={`tab-btn ${currentPath === "signin" ? "active" : ""}`}
+                    >
+                      Sign In
+                    </button>
+                  </Link>
+                  <Link to="signup">
+                    <button
+                      className={`tab-btn ${currentPath === "signup" ? "active" : ""}`}
+                    >
+                      Sign Up
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </div>
+
 
             <div className="form-body">
               <Outlet />
@@ -43,6 +56,7 @@ function CoverPagesing() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

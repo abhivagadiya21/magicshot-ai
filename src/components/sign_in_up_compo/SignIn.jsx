@@ -12,14 +12,14 @@ export default function SignIn({ onLoginSuccess }) {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const redirectPath = searchParams.get("ref") || "/";
+  const redirectPath = searchParams.get("ref") || "/"; 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("https://magicshot-ai-backend.onrender.com/auth/login", {
+      const response = await fetch("https://magicshot-ai-backend-production.up.railway.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -1,4 +1,3 @@
-
 export default function getCroppedImg(imageSrc, crop, rotation = 0) {
   return new Promise((resolve, reject) => {
     console.log("getCroppedImg called with:", crop, rotation);

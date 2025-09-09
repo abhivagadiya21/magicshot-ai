@@ -16,6 +16,7 @@ import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { toast } from "react-toastify";
 import { useCredits } from "../../components/global_com/context.jsx";
+import Loader from "../../components/Loader/Loader";
 
 function AgePredictor() {
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
@@ -87,30 +88,14 @@ function AgePredictor() {
   };
 
   return (
-    <div className="main-agePredictor">
-      {loading && (
-        <div className="loader-overlay">
-          <div className="loader-wrapper">
-            <div className="loader"></div>
-            <span class="loader-letter">G</span>
-            <span class="loader-letter">e</span>
-            <span class="loader-letter">n</span>
-            <span class="loader-letter">e</span>
-            <span class="loader-letter">r</span>
-            <span class="loader-letter">a</span>
-            <span class="loader-letter">t</span>
-            <span class="loader-letter">i</span>
-            <span class="loader-letter">n</span>
-            <span class="loader-letter">g</span>
-          </div>
-        </div>
-      )}
+    <div className="main-container">
+      {loading && <Loader/>}
       {/* Left Section */}
       <div className="left-container">
         {/* Header */}
-        <div className="inner-left-1-agePredictor">
-          <p className="bagy-hading">AI Age Predictor</p>
-          <button onClick={openHowWork} className="btn-pop-up-howWork">
+        <div className="header-section">
+          <p className="Baby-hading">AI Age Predictor</p>
+          <button onClick={openHowWork} className="button-popup-howtowork">
             <img src={questionMark} alt="Help icon" />
             <span>How It Works</span>
           </button>
@@ -126,8 +111,8 @@ function AgePredictor() {
           )}
         </div>
         {/* Upload Section */}
-        <div className="uplod-image-button-Parent-agePredictor ">
-          <label className="uplod-button-agePredictor" htmlFor="parent1Input">
+        <div className="upload-image-buttons">
+          <label className="uplod-image-button" htmlFor="parent1Input">
             {parent1Upload.croppedImage ? (
               <img
                 src={parent1Upload.croppedImage}
@@ -185,12 +170,12 @@ function AgePredictor() {
           {/* Crop Popup */}
           {parent1Upload.showCropper && (
             <div className="overlay">
-              <div className="popup">
+              <div className="crop-popup">
                 <div className="cropper-header">
                   <p>Crop Image</p>
                 </div>
                 <button
-                  className="close-btn"
+                  className="close-popup-button"
                   onClick={() => parent1Upload.setShowCropper(false)}
                 >
                   <img
@@ -233,7 +218,6 @@ function AgePredictor() {
                 <span>-0.5</span>
               </div>
             </button>
-            
           </div>
         </div>
       </div>

@@ -19,11 +19,12 @@ import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { useCredits } from "../../components/global_com/context.jsx";
+import Loader from "../../components/Loader/Loader";
 
 function UploadSection({ label, uploadHook, inputId }) {
   return (
-    <div className="uplod-image-button-Parent-2">
-      <label className="uplod-button-babyG" htmlFor={inputId}>
+    <div className="uplod-image-button-container">
+      <label className="uplod-image-button" htmlFor={inputId}>
         {uploadHook.croppedImage ? (
           <img src={uploadHook.croppedImage} alt={label} className="preview-img" />
         ) : (
@@ -35,8 +36,7 @@ function UploadSection({ label, uploadHook, inputId }) {
           </>
         )}
       </label>
-
-      <div className="img-upload-button-container">
+      <div className="image-upload-button-container">
         <input
           type="file"
           accept="image/*"
@@ -48,7 +48,7 @@ function UploadSection({ label, uploadHook, inputId }) {
 
         {!uploadHook.croppedImage ? (
           <label htmlFor={inputId} className="uplod-button">
-            <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+            <img className="upload-image-icon" src={upload} alt="Upload Icon" />
             <p>Upload</p>
           </label>
         ) : (
@@ -59,8 +59,7 @@ function UploadSection({ label, uploadHook, inputId }) {
               uploadHook.resetImage();
               const input = document.getElementById(inputId);
               if (input) input.value = "";
-            }}
-          >
+            }}>
             <img
               width="10"
               height="10"
@@ -74,8 +73,8 @@ function UploadSection({ label, uploadHook, inputId }) {
 
       {uploadHook.showCropper && (
         <div className="overlay">
-          <div className="popup">
-            <button className="close-btn" onClick={() => uploadHook.setShowCropper(false)}>
+          <div className="crop-popup">
+            <button className="close-popup-button" onClick={() => uploadHook.setShowCropper(false)}>
               <img
                 width="20"
                 height="20"
@@ -104,9 +103,8 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
     <button
       type="button"
       className={`gender-option ${isSelected ? "selected" : ""}`}
-      onClick={() => handleSelect(gender)}
-    >
-      <div className="avatar-container">
+      onClick={() => handleSelect(gender)}>
+      <div className="gender-avatar-container">
         <img src={icon} alt={`${gender} Avatar`} className="gender-avatar-img" />
         <span className="avatar-text">{gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
       </div>
@@ -129,36 +127,21 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
 function BabyPage() {
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
   const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
-
   const [selectedGender, setSelectedGender] = useState("boy");
   const [genraterImageurl, setGenraterImageurl] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
-
-  
   const fixedRef = useRef(null);
 
-
-
   useEffect(() => {
-
     const handleScroll = () => {
-
       if (fixedRef.current) {
-
-        // Shift with scroll so it participates in bounce
-
         fixedRef.current.style.transform = `translateY(-${window.scrollY}px)`;
-
       }
-
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
-
   }, []);
 
   const { dispatch, fetchUser } = useCredits();
@@ -167,7 +150,6 @@ function BabyPage() {
       toast.error("⚠️ Please upload both parent images.");
       return;
     }
-
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (!storedUser?.id) {
       toast.error("❌ User not logged in.");
@@ -196,15 +178,11 @@ function BabyPage() {
       const response = await babyuploadeAPI(imageFiles, otherData);
       console.log("Response from API:", response);
       const data = response.data;
-
-
       if (data?.file) {
-        // setTimeout(() => {
         setLoading(false);
         setGenraterImageurl(data.file);
         toast.success("🎉 Baby image generated successfully!");
         fetchUser()
-        // }, 5000);
       } else {
         toast.error("❌ No image returned from server.");
         setLoading(false);
@@ -218,41 +196,20 @@ function BabyPage() {
   const handleclick = async () => {
     await handleGenerate();
     openImagePopup();
-    // window.dispatchEvent(new Event("creditsUpdated"));
   };
 
   return (
     <>
-      <div className="main-baby-genrartor-1 main-baby-genrartor-midia">
-        {loading && (
-          <div className="loader-overlay">
-            <div className="loader-wrapper">
-              <div className="loader"></div>
-              <span class="loader-letter">G</span>
-              <span class="loader-letter">e</span>
-              <span class="loader-letter">n</span>
-              <span class="loader-letter">e</span>
-              <span class="loader-letter">r</span>
-              <span class="loader-letter">a</span>
-              <span class="loader-letter">t</span>
-              <span class="loader-letter">i</span>
-              <span class="loader-letter">n</span>
-              <span class="loader-letter">g</span>
-            </div>
-          </div>
-        )}
-
-
+      <div className="main-container main-baby-genrartor-midia">
+        {loading && <Loader />}
         {/* Left Section */}
         <div className="left-container">
-
-          <div className="inner-left-1-babyG-1">
-            <p className="bagy-hading">AI Baby Generator</p>
-            <button onClick={openHowWork} className="btn-pop-up-howWork">
+          <div className="header-section">
+            <p className="Baby-hading">AI Baby Generator</p>
+            <button onClick={openHowWork} className="button-popup-howtowork">
               <img src={questionMark} alt="Help icon" />
               <span>How It Works</span>
             </button>
-
             {showHowWork && (
               <Howworkpop
                 howworkpopDetails={{
@@ -264,13 +221,13 @@ function BabyPage() {
             )}
           </div>
 
-          <div className="inner-left-2-babyG">
-            <div className="baby-upload-image-buttons">
+         
+            <div className="upload-image-buttons-baby">
               <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
               <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
             </div>
 
-            <p className="baby-gender">Baby's Gender</p>
+            <p className="Baby-gender">Baby's Gender</p>
             <div className="gender-main-container">
               <GenderOption
                 gender="boy"
@@ -285,11 +242,10 @@ function BabyPage() {
                 icon={girlIcon}
               />
             </div>
-          </div>
+          
         </div>
 
-        {/* Footer */}
-         <div className="left-main-babyG-footer" ref={fixedRef}>
+        <div className="left-main-babyG-footer" ref={fixedRef}>
           <div className="time-estimation-container">
             <div className="time-estimation">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -297,8 +253,7 @@ function BabyPage() {
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
-                  fill="white"
-                />
+                  fill="white"/>
               </svg>
               <p>Est. time: 30 to 50 seconds</p>
             </div>
@@ -313,29 +268,25 @@ function BabyPage() {
                 <span>-0.5</span>
               </div>
             </button>
-           
           </div>
         </div>
-         {showImagePopup && genraterImageurl && <GetImage_pop
-              getimage_details={{
-                onClose: () => {
-                  setGenraterImageurl(null);
-                  closeImagePopup()
-                },
-                image: genraterImageurl,
-                imgname: "baby-image"
-              }}
-            />}
 
-        {/* Right Section */}
+        {showImagePopup && genraterImageurl && <GetImage_pop
+          getimage_details={{
+            onClose: () => {
+              setGenraterImageurl(null);
+              closeImagePopup()
+            },
+            image: genraterImageurl,
+            imgname: "baby-image"
+          }}
+        />}
+
         <div className="right-main-babyG-1">
           <h1>AI Baby Generator</h1>
           <Upload_img uploadDetails={{ image: babyImage }} />
         </div>
-
-
       </div>
-
     </>
   );
 }

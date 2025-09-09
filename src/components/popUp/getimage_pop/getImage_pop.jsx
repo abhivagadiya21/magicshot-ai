@@ -56,7 +56,6 @@ function GetImagePop({ getimage_details }) {
                     </button>
                 </div>
 
-                {/* capture this whole block */}
                 <div className="inner-2-pop-getimage" ref={imageRef}>
                     <div className="pop-pass-image-get">
                         <img
@@ -64,7 +63,6 @@ function GetImagePop({ getimage_details }) {
                             src={getimage_details.image}
                             alt=""
                         />
-
                         {getimage_details.getingAge && (
                             <div className="age-overlay">
                                 <img
@@ -107,8 +105,6 @@ function GetImagePop({ getimage_details }) {
                         </div>
                     </button>
                 </div>
-
-
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import usePopup from '../../hooks/usePopup';
 import Upload_img from '../../components/upload_img_re_compo/Upload_img';
 import './ageJourney.css';
+import "../BabyGenrator_page/babyPage.css";
 import poppassimg3 from '../BabyGenrator_page/babyG-img/poppassimg3.png';
 import star from '../BabyGenrator_page/babyG-img/star.svg';
 import journeyImage from './journey_image/agejourney.png';
@@ -16,6 +17,7 @@ import { AgejournyAPI } from '../../services/imageBase';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { useCredits } from "../../components/global_com/context.jsx";
+import Loader from "../../components/Loader/Loader";
 
 
 function AgeJourney() {
@@ -113,33 +115,16 @@ function AgeJourney() {
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
-        // window.dispatchEvent(new Event("creditsUpdated"));
     };
 
     return (
-        <div className="main-ageJourney">
-            {loading && (
-                <div className="loader-overlay">
-                    <div className="loader-wrapper">
-                        <div className="loader"></div>
-                        <span class="loader-letter">G</span>
-                        <span class="loader-letter">e</span>
-                        <span class="loader-letter">n</span>
-                        <span class="loader-letter">e</span>
-                        <span class="loader-letter">r</span>
-                        <span class="loader-letter">a</span>
-                        <span class="loader-letter">t</span>
-                        <span class="loader-letter">i</span>
-                        <span class="loader-letter">n</span>
-                        <span class="loader-letter">g</span>
-                    </div>
-                </div>
-            )}
+        <div className="main-container">
+            {loading && <Loader />}
 
             <div className="left-container">
-                <div className="inner-left-1-ageJourney">
-                    <p className="bagy-hading">AI Age Journey</p>
-                    <button onClick={openHowWork} className="btn-pop-up-howWork">
+                <div className="header-section">
+                    <p className="Baby-hading">AI Age Journey</p>
+                    <button onClick={openHowWork} className="button-popup-howtowork">
                         <img src={questionMark} alt="" />
                         <span>How It Works</span>
                     </button>
@@ -154,9 +139,8 @@ function AgeJourney() {
                     )}
                 </div>
 
-                {/* Image Upload Section */}
-                <div className="inner-left-2-ageJourney">
-                    <label className="uplod-button-ageJourney" htmlFor="parent1Input">
+                <div className="upload-image-buttons">
+                    <label className="uplod-image-button" htmlFor="parent1Input">
                         {parent1Upload.croppedImage ? (
                             <img
                                 src={parent1Upload.croppedImage}
@@ -166,14 +150,17 @@ function AgeJourney() {
                         ) : (
                             <>
                                 <div className="profile-icon-container">
-                                    <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                    <img
+                                        src={Profileicon1}
+                                        alt="Parent 1 Icon"
+                                        className="Parent-Icon"
+                                    />
                                 </div>
                                 <p>Upload Your Image</p>
                             </>
                         )}
                     </label>
-
-                    <div className='img-upload-button-container'>
+                    <div className="img-upload-button-container">
                         <input
                             type="file"
                             accept="image/*"
@@ -185,7 +172,7 @@ function AgeJourney() {
 
                         {!parent1Upload.croppedImage ? (
                             <label htmlFor="parent1Input" className="uplod-button">
-                                <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                <img className="upload-img-icon" src={upload} alt="Upload" />
                                 <p>Upload</p>
                             </label>
                         ) : (
@@ -198,24 +185,33 @@ function AgeJourney() {
                                     if (input) input.value = "";
                                 }}
                             >
-                                <img width="10" height="10" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
-                                cancel
+                                <img
+                                    width="10"
+                                    height="10"
+                                    src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
+                                    alt="delete"
+                                />
+                                Cancel
                             </button>
                         )}
                     </div>
-
-                    {/* Image Cropper Popup */}
+                    {/* Crop Popup */}
                     {parent1Upload.showCropper && (
                         <div className="overlay">
-                            <div className="popup">
+                            <div className="crop-popup">
                                 <div className="cropper-header">
                                     <p>Crop Image</p>
                                 </div>
                                 <button
-                                    className="close-btn"
+                                    className="close-popup-button"
                                     onClick={() => parent1Upload.setShowCropper(false)}
                                 >
-                                    <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png" alt="delete-sign" />
+                                    <img
+                                        width="20"
+                                        height="20"
+                                        src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
+                                        alt="close"
+                                    />
                                 </button>
                                 <CropImage
                                     imageSrc={parent1Upload.selectedFile}
@@ -225,31 +221,32 @@ function AgeJourney() {
                             </div>
                         </div>
                     )}
-
-                    {/* Slider */}
-                    <div>
-                        <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
-                    </div>
-                    <div className="container">
-                        <div className='ageJourney-rang-slider-icon'>👶</div>
-                        <div className="range-slider">
-                            <div ref={sliderThumbRef} id="slider_thumb" className="range-slider_thumb"></div>
-                            <div className="range-slider_line">
-                                <div ref={sliderLineRef} id="slider_line" className="range-slider_line-fill"></div>
-                            </div>
-                            <input
-                                ref={sliderInputRef}
-                                id="slider_input"
-                                className="range-slider_input"
-                                type="range"
-                                defaultValue="50"
-                                min="0"
-                                max="100"
-                            />
-                        </div>
-                        <div className='ageJourney-rang-slider-icon'>👴🏻</div>
-                    </div>
                 </div>
+
+                {/* Slider */}
+                <div>
+                    <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
+                </div>
+                <div className="container">
+                    <div className='ageJourney-rang-slider-icon'>👶</div>
+                    <div className="range-slider">
+                        <div ref={sliderThumbRef} id="slider_thumb" className="range-slider_thumb"></div>
+                        <div className="range-slider_line">
+                            <div ref={sliderLineRef} id="slider_line" className="range-slider_line-fill"></div>
+                        </div>
+                        <input
+                            ref={sliderInputRef}
+                            id="slider_input"
+                            className="range-slider_input"
+                            type="range"
+                            defaultValue="50"
+                            min="0"
+                            max="100"
+                        />
+                    </div>
+                    <div className='ageJourney-rang-slider-icon'>👴🏻</div>
+                </div>
+
 
                 {/* Generate Button */}
                 <div className="left-main-babyG-footer">
@@ -278,22 +275,22 @@ function AgeJourney() {
                         </button>
 
                         {/* Generated Image Popup */}
-                        
+
                     </div>
                 </div>
             </div>
             {showImagePopup && genraterImageurl && (
-                            <GetImage_pop
-                                getimage_details={{
-                                    onClose: () => {
-                                        setGenraterImageurl(null);
-                                        closeImagePopup()
-                                    },
-                                    image: genraterImageurl,
-                                    imgname: "age-journey"
-                                }}
-                            />
-                        )}
+                <GetImage_pop
+                    getimage_details={{
+                        onClose: () => {
+                            setGenraterImageurl(null);
+                            closeImagePopup()
+                        },
+                        image: genraterImageurl,
+                        imgname: "age-journey"
+                    }}
+                />
+            )}
 
             <div className="right-main-ageJourney">
                 <Upload_img uploadDetails={{ image: journeyImage }} />
