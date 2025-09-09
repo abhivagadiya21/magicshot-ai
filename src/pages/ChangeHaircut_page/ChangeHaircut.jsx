@@ -18,9 +18,13 @@ import { blobUrlToFile } from '../../utils/blobToFile.js';
 import { toast } from "react-toastify";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { useCredits } from "../../components/global_com/context.jsx";
+import closeIcon from "../../components/heding/hedingimg/close.svg";
+import timeIcon from "../AgeJourney_page/journey_image/time.svg";
+import checkmarkIcon from "../../components/heding/hedingimg/checkmark.svg";
 import Loader from "../../components/Loader/Loader";
 import hairstyles from '../../utils/hairstyles.json';
 import haircolors from '../../utils/haircolors.json';
+
 
 const importAll = (r) => {
     let images = {};
@@ -37,6 +41,7 @@ const haircolorImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}
     import: "default",
 });
 
+
 function ChangehaircutPage() {
     const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
@@ -49,7 +54,7 @@ function ChangehaircutPage() {
     const [hairstyle, setHairstyle] = useState(null);
     const { dispatch, fetchUser } = useCredits();
 
-    const styles = hairstyles.map((s) => ({
+       const styles = hairstyles.map((s) => ({
         ...s,
         img: hairstyleImages[`./hairstyle_image/${s.img}`],
     }));
@@ -100,15 +105,11 @@ function ChangehaircutPage() {
             console.log("Response from API:", data);
 
             if (data?.file) {
-                // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Hairstyle image generated successfully!");
                 fetchUser()
-
-
-                // }, 5000);
             } else {
                 toast.error("❌ No image returned from server.");
                 setLoading(false);
@@ -121,11 +122,14 @@ function ChangehaircutPage() {
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
+        // window.dispatchEvent(new Event("creditsUpdated"));
     };
     return (
         <>
             <div className="main-changeHair">
-                {loading && <Loader />}
+                {loading && (
+                    <Loader />
+                )}
 
 
                 <div className="left-container left-container-changeHair">
@@ -145,218 +149,202 @@ function ChangehaircutPage() {
                             />
                         )}
                     </div>
-
-                    <div className="upload-image-buttons">
-                        <label className="uplod-image-button" htmlFor="parent1Input">
-                            {parent1Upload.croppedImage ? (
-                                <img
-                                    src={parent1Upload.croppedImage}
-                                    alt="Parent 1"
-                                    className="preview-img"
-                                />
-                            ) : (
-                                <>
-                                    <div className="profile-icon-container">
-                                        <img
-                                            src={Profileicon1}
-                                            alt="Parent 1 Icon"
-                                            className="Parent-Icon"
-                                        />
-                                    </div>
-                                    <p>Upload Your Image</p>
-                                </>
-                            )}
-                        </label>
-                        <div className="img-upload-button-container">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                id="parent1Input"
-                                className="hidden"
-                                onChange={parent1Upload.handleFileUpload}
-                                disabled={!!parent1Upload.croppedImage}
-                            />
-
-                            {!parent1Upload.croppedImage ? (
-                                <label htmlFor="parent1Input" className="uplod-button">
-                                    <img className="upload-img-icon" src={upload} alt="Upload" />
-                                    <p>Upload</p>
-                                </label>
-                            ) : (
-                                <button
-                                    type="button"
-                                    className="uplod-button"
-                                    onClick={() => {
-                                        parent1Upload.resetImage();
-                                        const input = document.getElementById("parent1Input");
-                                        if (input) input.value = "";
-                                    }}
-                                >
+                    <div className='inner-left-2-changeHair'>
+                        <div className='inner-left-2-in-upload-div'>
+                            <label className="uplod-button-changeHair" htmlFor="parent1Input">
+                                {parent1Upload.croppedImage ? (
                                     <img
-                                        width="10"
-                                        height="10"
-                                        src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
-                                        alt="delete"
+                                        src={parent1Upload.croppedImage}
+                                        alt="Parent 1"
+                                        className="preview-img"
                                     />
-                                    Cancel
-                                </button>
-                            )}
-                        </div>
-                        {/* Crop Popup */}
-                        {parent1Upload.showCropper && (
-                            <div className="overlay">
-                                <div className="crop-popup">
-                                    <div className="cropper-header">
-                                        <p>Crop Image</p>
-                                    </div>
-                                    <button
-                                        className="close-popup-button"
-                                        onClick={() => parent1Upload.setShowCropper(false)}
-                                    >
-                                        <img
-                                            width="20"
-                                            height="20"
-                                            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
-                                            alt="close"
-                                        />
-                                    </button>
-                                    <CropImage
-                                        imageSrc={parent1Upload.selectedFile}
-                                        onCropDone={parent1Upload.handleCropComplete}
-                                        onCancel={() => parent1Upload.setShowCropper(false)}
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <p className='Gender-hading'> Gender</p>
-
-                    <div className="gender-main-container">
-                        {/* Boy Option */}
-                        <button
-                            className={`gender-option ${selectedGender === "boy" ? "selected" : ""}`}
-                            onClick={() => handleGenderSelect("boy")}
-                        >
-                            <div className="avatar-container">
-                                <img src={boyIcon} alt="Boy Avatar" className="gender-avatar-img" />
-                                <span className="avatar-text">Boy</span>
-                            </div>
-                            <div
-                                className={`button-container ${selectedGender === "boy" ? "checked" : ""
-                                    }`}
-                            >
-                                {selectedGender === "boy" && (
-                                    <span className="checkmark">
-                                        <img
-                                            width="24"
-                                            height="24"
-                                            src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/FFFFFF/external-verified-check-circle-for-approved-valid-content-basic-bold-tal-revivo.png"
-                                            alt="checkmark"
-                                        />
-                                    </span>
+                                ) : (
+                                    <>
+                                        <div className="profile-icon-container">
+                                            <img src={Profileicon1} alt="Parent 1 Icon" className='Parent-Icon' />
+                                        </div>
+                                        <p>Upload Your Image</p>
+                                    </>
                                 )}
-                            </div>
-                        </button>
+                            </label>
 
-                        {/* Girl Option */}
-                        <button
-                            className={`gender-option ${selectedGender === "girl" ? "selected" : ""}`}
-                            onClick={() => handleGenderSelect("girl")}
-                        >
-                            <div className="avatar-container">
-                                <img
-                                    src={girlIcon}
-                                    alt="Girl Avatar"
-                                    className="gender-avatar-img"
+                            <div className='img-upload-button-container'>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="parent1Input"
+                                    className="hidden"
+                                    onChange={parent1Upload.handleFileUpload}
+                                    disabled={!!parent1Upload.croppedImage}
                                 />
-                                <span className="avatar-text">Girl</span>
-                            </div>
 
-                            <div className={`button-container ${selectedGender === "girl" ? "checked" : ""}`} >
-                                {selectedGender === "girl" && (
-                                    <span className="checkmark">
-                                        <img
-                                            width="24"
-                                            height="24"
-                                            src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/FFFFFF/external-verified-check-circle-for-approved-valid-content-basic-bold-tal-revivo.png"
-                                            alt="checkmark"
-                                        />
-                                    </span>
+                                {!parent1Upload.croppedImage ? (
+                                    <label htmlFor="parent1Input" className="uplod-button">
+                                        <img className="upload-img-icon" src={upload} alt="Upload Icon" />
+                                        <p>Upload</p>
+                                    </label>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="uplod-button"
+                                        onClick={() => {
+                                            parent1Upload.resetImage();
+                                            const input = document.getElementById("parent1Input");
+                                            if (input) input.value = "";
+                                        }}
+                                    >
+                                        <img width="10" height="10" src={closeIcon} alt="delete-sign" />
+                                        cancel
+                                    </button>
                                 )}
                             </div>
-                        </button>
-                    </div>
-
-                    <div className="tabs-container">
-                        <button
-                            onClick={() => setActiveTab("tab1")}
-                            className={`tab-button-1-chageHair ${activeTab === "tab1" ? "active-tab1" : ""}`}
-                        >
-                            Hair style
-                        </button>
-                        <button
-                            onClick={() => setActiveTab("tab2")}
-                            className={`tab-button-2-chageHair ${activeTab === "tab2" ? "active-tab1" : ""}`}
-                        >
-                            Hair color
-                        </button>
-                    </div>
-
-                        {activeTab === "tab1" && (
-                            <div className="tab-images-container">
-                                {styles.map((style, idx) => (
-                                    <div
-                                        key={idx}
-                                        className={`tab1-inner-1-content ${hairstyle === style.name ? "selected" : ""
-                                            }`}
-                                        onClick={() => setHairstyle(style.name)}>
-                                        <div>
-                                            <img
-                                                src={style.img}
-                                                alt={style.name}
-                                                className="tab-image"
-                                            />
+                            {/* Cropper Modal */}
+                            {parent1Upload.showCropper && (
+                                <div className="overlay">
+                                    <div className="popup">
+                                        <div className="cropper-header">
+                                            <p>Crop Image</p>
                                         </div>
-                                        <p>{style.name}</p>
+                                        <button
+                                            className="close-btn"
+                                            onClick={() => parent1Upload.setShowCropper(false)}
+                                        >
+                                            <img width="20" height="20" src={closeIcon} alt="delete-sign" />
+                                        </button>
+                                        <CropImage
+                                            imageSrc={parent1Upload.selectedFile}
+                                            onCropDone={parent1Upload.handleCropComplete}
+                                            onCancel={() => parent1Upload.setShowCropper(false)}
+                                        />
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                </div>
+                            )}
 
-                        {activeTab === "tab2" && (
-                            <div className="tab-images-container">
-                                {HairColor.map((color, idx) => (
-                                    <div
-                                        key={idx}
-                                        className={`tab1-inner-1-content ${hairColor === color.name ? "selected" : ""
-                                            }`}
-                                        onClick={() => setHairColor(color.name)}
-                                    >
-                                        <div>
+                        </div>
+
+                        <p className='baby-gender-changeHair'> Gender</p>
+
+                        <div className="gender-main-container">
+                            {/* Boy Option */}
+                            <button
+                                className={`gender-option ${selectedGender === "boy" ? "selected" : ""}`}
+                                onClick={() => handleGenderSelect("boy")}
+                            >
+                                <div className="avatar-container">
+                                    <img src={boyIcon} alt="Boy Avatar" className="gender-avatar-img" />
+                                    <span className="avatar-text">Boy</span>
+                                </div>
+                                <div
+                                    className={`button-container ${selectedGender === "boy" ? "checked" : ""
+                                        }`}
+                                >
+                                    {selectedGender === "boy" && (
+                                        <span className="checkmark">
                                             <img
-                                                src={color.img}
-                                                alt={color.name}
-                                                className="tab-image"
+                                                width="24"
+                                                height="24"
+                                                src={checkmarkIcon}
+                                                alt="checkmark"
                                             />
-                                        </div>
-                                        <p>{color.name}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
 
+                            {/* Girl Option */}
+                            <button
+                                className={`gender-option ${selectedGender === "girl" ? "selected" : ""
+                                    }`}
+                                onClick={() => handleGenderSelect("girl")}
+                            >
+                                <div className="avatar-container">
+                                    <img src={girlIcon} alt="Girl Avatar" className="gender-avatar-img" />
+                                    <span className="avatar-text">Girl</span>
+                                </div>
+                                <div
+                                    className={`button-container ${selectedGender === "girl" ? "checked" : ""
+                                        }`}
+                                >
+                                    {selectedGender === "girl" && (
+                                        <span className="checkmark">
+                                            <img
+                                                width="24"
+                                                height="24"
+                                                src={checkmarkIcon}
+                                                alt="checkmark"
+                                            />
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
+                        </div>
+
+                        <div className="inner-2-left-in-tab-btn-changeHair">
+                            <button onClick={() => setActiveTab('tab1')}
+                                className={`tab-btn-1-chageHair ${activeTab === 'tab1' ? 'active-tab1' : ''}`}
+
+                            >Hairstyle</button>
+                            <button onClick={() => setActiveTab('tab2')}
+                                // className='tab-btn-2-chageHair'
+                                className={`tab-btn-2-chageHair ${activeTab === 'tab2' ? 'active-tab1' : ''}`}
+                            >hair Color</button>
+                        </div>
+
+                            {activeTab === 'tab1' && (
+                                <div className="tab1-content-changeHair">
+
+                                    <div className="tab1-content-changeHair">
+                                        {styles.map((style, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={`tab1-inner-1-content ${hairstyle === style.name ? "selected" : ""
+                                                    }`}
+                                                onClick={() => setHairstyle(style.name)}
+                                            >
+                                                <div className="tab1-inner-1-content-img-div-hair">
+                                                    <img
+                                                        src={style.img}
+                                                        alt={style.name}
+                                                        className="tab1-content-inner-1-img-hair"
+                                                    />
+                                                </div>
+                                                <p>{style.name}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+                            )}
+                            {activeTab === 'tab2' && (
+                                <div className="tab1-content-changeHair">
+                                    {HairColor.map((color, idx) => (
+                                        <div
+                                            key={idx}
+                                            className={`tab1-inner-1-content ${hairColor === color.name ? "selected" : ""
+                                                }`}
+                                            onClick={() => setHairColor(color.name)}
+                                        >
+                                            <div className="tab1-inner-1-content-img-div-hair">
+                                                <img
+                                                    src={color.img}
+                                                    alt={color.name}
+                                                    className="tab1-content-inner-1-img-hair"
+                                                />
+                                            </div>
+                                            <p>{color.name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                            )}
+
+
+                    </div>
+                    
                     <div className="left-main-babyG-footer">
                         <div className="time-estimation-container">
                             <div className="time-estimation">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
-                                        fill="white"
-                                    />
-                                </svg>
+                                <img src={timeIcon} alt="" />
                                 <p>Est. time: 30 to 50 seconds</p>
                             </div>
                         </div>
@@ -369,21 +357,22 @@ function ChangehaircutPage() {
                                     <span>-0.5</span>
                                 </div>
                             </button>
+                            
                         </div>
                     </div>
                 </div>
                 {showImagePopup && genraterImageurl && (
-                    <GetImage_pop
-                        getimage_details={{
-                            onClose: () => {
-                                setGenraterImageurl(null);
-                                closeImagePopup()
-                            },
-                            image: genraterImageurl,
-                            imgname: "change-haircut"
-                        }}
-                    />
-                )}
+                                <GetImage_pop
+                                    getimage_details={{
+                                        onClose: () => {
+                                            setGenraterImageurl(null);
+                                            closeImagePopup()
+                                        },
+                                        image: genraterImageurl,
+                                        imgname: "change-haircut"
+                                    }}
+                                />
+                            )}
                 <div className="right-main-changeHair">
                     <Upload_img uploadDetails={{ image: hairImage }} />
                 </div>

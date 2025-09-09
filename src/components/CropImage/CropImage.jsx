@@ -1,5 +1,8 @@
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
+import Rotateleft from "./CropImage-svg/rotate-left.svg"; 
+import Refresh from "./CropImage-svg/refresh.svg";
+import Rotateright from "./CropImage-svg/rotate-right.svg";
 
 function CropImage({ imageSrc, onCropDone }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -18,7 +21,7 @@ function CropImage({ imageSrc, onCropDone }) {
 
   const handleAspectChange = (e) => {
     const value = e.target.value;
-    setAspect(value === "free" ? null : parseFloat(value));
+    setAspect(value === "free" ? null : parseFloat(value)); 
   };
 
   const handleCropDone = useCallback(async () => {
@@ -67,9 +70,9 @@ function CropImage({ imageSrc, onCropDone }) {
               <option value={16 / 9}>16:9</option>
             </select>
           </div>
-          <button className="left-rotesan" onClick={handleRotateLeft}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/rotate-left.png" alt="rotate-left" /></button>
-          <button className="left-rotesan" onClick={handleResetRotation}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/refresh--v1.png" alt="refresh--v1" /></button>
-          <button className="left-rotesan" onClick={handleRotateRight}><img width="18" height="18" src="https://img.icons8.com/ios-filled/50/FFFFFF/rotate-right.png" alt="rotate-right" /></button>
+          <button className="left-rotesan" onClick={handleRotateLeft}><img width="18" height="18" src={Rotateleft} alt="rotate-left" /></button>
+          <button className="left-rotesan" onClick={handleResetRotation}><img width="18" height="18" src={Refresh} alt="refresh" /></button>
+          <button className="left-rotesan" onClick={handleRotateRight}><img width="18" height="18" src={Rotateright} alt="rotate-right" /></button>
         </div>
       </div>
       <div className="action-buttons">

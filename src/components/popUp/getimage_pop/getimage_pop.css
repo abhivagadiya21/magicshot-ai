@@ -1,64 +1,66 @@
 .popup-overlay-getimage {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-box-getimage {
-    /* width: 35%; */
-    height: 81%;
-    background-color: rgb(26 29 31);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
+  /* width: 35%; */
+  height: 81%;
+  background-color: rgb(26 29 31);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .inner-1-pop-getimage {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: white;
 }
 
 .inner-2-pop-getimage {
-    height: 70%;
-    width: 100%;
-    padding: 0px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.inner-3-pop-getimage{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 35px;
-}
-.getimage-pop-close-btn{
-    border-radius: 50%;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 7px 0px 7px;
+  height: 70%;
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.getimage-pop-download-btn{
-  background:#1d2328; 
+.inner-3-pop-getimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 35px;
+}
+
+.getimage-pop-close-btn {
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 7px 0px 7px;
+}
+
+.getimage-pop-download-btn {
+  background: #1d2328;
   color: white;
   border: 1.5px solid black;
   border-top: none;
@@ -72,8 +74,9 @@
   outline-color: #262a2d;
   outline-width: 3px;
   outline: 3px solid #262a2d !important;
-  outline-offset: 0; 
+  outline-offset: 0;
 }
+
 .getimage-pop-download-btn:active {
   border-bottom: none;
 }
@@ -119,7 +122,7 @@
   opacity: 0;
   transition: opacity ease-in-out 250ms;
 }
-  
+
 .download-btn:hover .button-content {
   transform: translateY(0px);
 }
@@ -146,24 +149,28 @@
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
   }
+
   10% {
     -webkit-transform: scale(0.91);
     transform: scale(0.91);
     -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
   }
+
   17% {
     -webkit-transform: scale(0.98);
     transform: scale(0.98);
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
   }
+
   33% {
     -webkit-transform: scale(0.87);
     transform: scale(0.87);
     -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
   }
+
   45% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -171,6 +178,7 @@
     animation-timing-function: ease-out;
   }
 }
+
 @keyframes heartbeat {
   from {
     -webkit-transform: scale(1);
@@ -180,24 +188,28 @@
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
   }
+
   10% {
     -webkit-transform: scale(0.91);
     transform: scale(0.91);
     -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
   }
+
   17% {
     -webkit-transform: scale(0.98);
     transform: scale(0.98);
     -webkit-animation-timing-function: ease-out;
     animation-timing-function: ease-out;
   }
+
   33% {
     -webkit-transform: scale(0.87);
     transform: scale(0.87);
     -webkit-animation-timing-function: ease-in;
     animation-timing-function: ease-in;
   }
+
   45% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -206,28 +218,22 @@
   }
 }
 
-.download-button-container{
+.download-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.pop-pass-image-get{
-   border-radius: 10px;
-    /* width: 50%; */
-    height: 100%;
-    opacity: hidden;
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    color: aqua;
+.pop-pass-image-get {
+  height: 100%;
+  opacity: hidden;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
 }
 
-.pop-pass-image-get {
-  position: relative; 
-  display: inline-block;
-}
+
 
 .age-overlay {
   position: absolute;
@@ -257,11 +263,15 @@
 
 
 @media (max-width: 768px) {
-  .popup-box-getimage{
+  .popup-box-getimage {
     width: 100%;
   }
+
+  .pop-pass-image-get {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    object-fit: contain;
+    /* border-radius: 15px; */
+  }
 }
-
-
-
-

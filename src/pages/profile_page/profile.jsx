@@ -1,5 +1,6 @@
 import './profile.css';
 import { useEffect, useState } from "react";
+import userIcon from '../../components/heding/hedingimg/user.svg';
 
 export default function profile() {
     const [userEmail, setUserEmail] = useState("");
@@ -26,7 +27,7 @@ export default function profile() {
         <div className="profile-info">
             <h1>User Profile</h1>
 
-            <img width="30" height="30" src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png" alt="user"/>
+            <img width="30" height="30" src={userIcon} alt="user"/>
             <span className="profile-name">{userEmail}</span>
         </div>
       

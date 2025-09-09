@@ -1,7 +1,7 @@
 import './cover_sing_page.css';
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import closeIcon from "../../components/heding/hedingimg/close.svg";
 import containtImg from './sign_in_up_img/containt.png';
 import Logo from "../heding/hedingimg/logo.png";
 
@@ -23,7 +23,7 @@ function CoverPagesing() {
 
         <div className="right-inner-main-cover-sing">
           <img width="20" height="20" className='cloase-button'
-            onClick={() => navigate(redirectPath)} src="https://img.icons8.com/ios-filled/50/FFFFFF/cancel.png" alt="cancel" />
+            onClick={() => navigate(redirectPath)} src={closeIcon} alt="cancel" />
           <img src={Logo} alt="Logo" className="right-side-main-logo" />
 
           <div className="form-container">

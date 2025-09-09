@@ -1,7 +1,9 @@
 import './getimage_pop.css';
-import graduant from './Black-Fade-PNG-Isolated-HD.png';
+import graduant from '../getimage_pop/getimage_pop-img/Black-Fade-PNG-Isolated-HD.png';
 import { useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
+import closeIcon from "../getimage_pop/getimage_pop-img/close.svg";
+import downloadIcon from "../getimage_pop/getimage_pop-img/download.svg";
 
 function GetImagePop({ getimage_details }) {
     const imageRef = useRef(null);
@@ -47,12 +49,7 @@ function GetImagePop({ getimage_details }) {
                         className="getimage-pop-close-btn"
                         onClick={getimage_details.onClose}
                     >
-                        <img
-                            width="20"
-                            height="20"
-                            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
-                            alt="close"
-                        />
+                        <img width="20" height="20" src={closeIcon} alt="close"/>
                     </button>
                 </div>
 
@@ -85,17 +82,7 @@ function GetImagePop({ getimage_details }) {
                     >
                         <div className="button-content">
                             <div className="svg-container">
-                                <svg
-                                    className="download-icon"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479 6.908l-4-4h3v-4h2v4h3l-4 4z"
-                                    />
-                                </svg>
+                                <img src={downloadIcon} alt="" />
                             </div>
                             <div className="text-container">
                                 <div className="text">

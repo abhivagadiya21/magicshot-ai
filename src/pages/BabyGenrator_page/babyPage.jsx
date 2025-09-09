@@ -19,6 +19,10 @@ import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
 import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { useCredits } from "../../components/global_com/context.jsx";
+import closeIcon from "../../components/heding/hedingimg/close.svg";
+import timeIcon from "../AgeJourney_page/journey_image/time.svg";
+import checkmarkIcon from "../../components/heding/hedingimg/checkmark.svg";
+
 import Loader from "../../components/Loader/Loader";
 
 function UploadSection({ label, uploadHook, inputId }) {
@@ -63,7 +67,7 @@ function UploadSection({ label, uploadHook, inputId }) {
             <img
               width="10"
               height="10"
-              src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
+              src={closeIcon}
               alt="delete"
             />
             Cancel
@@ -78,7 +82,7 @@ function UploadSection({ label, uploadHook, inputId }) {
               <img
                 width="20"
                 height="20"
-                src="https://img.icons8.com/ios-glyphs/30/FFFFFF/delete-sign.png"
+                src={closeIcon}
                 alt="close"
               />
             </button>
@@ -114,7 +118,7 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
             <img
               width="24"
               height="24"
-              src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/24/FFFFFF/external-verified-check-circle-for-approved-valid-content-basic-bold-tal-revivo.png"
+              src={checkmarkIcon}              
               alt="checkmark"
             />
           </span>
@@ -248,13 +252,7 @@ function BabyPage() {
         <div className="left-main-babyG-footer" ref={fixedRef}>
           <div className="time-estimation-container">
             <div className="time-estimation">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.3618 15.7052C15.2218 15.9452 14.9718 16.0752 14.7218 16.0752C14.5918 16.0752 14.4518 16.0352 14.3318 15.9652L11.6018 14.3252C11.3718 14.1952 11.2318 13.9452 11.2318 13.6852V10.1552C11.2318 9.73516 11.5718 9.40516 11.9818 9.40516C12.3918 9.40516 12.7318 9.73516 12.7318 10.1552V13.2552L15.1018 14.6852C15.4618 14.8952 15.5818 15.3552 15.3618 15.7052ZM12.1518 5.03516C7.75187 5.03516 4.17188 8.61516 4.17188 13.0152C4.17188 17.4152 7.75187 20.9952 12.1518 20.9952C16.5518 20.9952 20.1318 17.4152 20.1318 13.0152C20.1318 8.61516 16.5518 5.03516 12.1518 5.03516Z"
-                  fill="white"/>
-              </svg>
+              <img src={timeIcon} alt="" />
               <p>Est. time: 30 to 50 seconds</p>
             </div>
           </div>
