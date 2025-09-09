@@ -5,6 +5,12 @@ import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCredits } from '../global_com/context';
 import square from "../heding/hedingimg/squarelogo.png";
+import closeIcon from "../heding/hedingimg/close.svg";
+import menuIcon from "../heding/hedingimg/menu.svg";
+import dropdownIcon from "../heding/hedingimg/dropdown.svg";
+import checkmarkIcon from "../heding/hedingimg/checkmark.svg";
+import userIcon from "../heding/hedingimg/user.svg";
+import moblienavIcon from "../heding/hedingimg/moblienavarrow.svg";
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -80,20 +86,9 @@ export default function Heading() {
                                     aria-label="Toggle menu"
                                 >
                                     {menuOpen ? (
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="#fff"
-                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <line x1="18" y1="6" x2="6" y2="18" />
-                                            <line x1="6" y1="6" x2="18" y2="18" />
-                                        </svg>
+                                        <img src={closeIcon} alt="Close" />
                                     ) : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="#fff"
-                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <line x1="3" y1="6" x2="21" y2="6" />
-                                            <line x1="3" y1="12" x2="21" y2="12" />
-                                            <line x1="3" y1="18" x2="21" y2="18" />
-                                        </svg>
+                                        <img src={menuIcon} alt="Menu" />
                                     )}
                                 </button>
                             </div>
@@ -110,12 +105,7 @@ export default function Heading() {
                                         >
                                             {selected}
                                             <span className="arrow">
-                                                <svg aria-hidden="true" fill="none" focusable="false" height="1em"
-                                                    role="presentation" stroke="currentColor" strokeLinecap="round"
-                                                    strokeLinejoin="round" strokeWidth="1.5"
-                                                    viewBox="0 0 24 24" width="1em">
-                                                    <path d="m6 9 6 6 6-6"></path>
-                                                </svg>
+                                                <img height="20px" width="20px" src={dropdownIcon} alt="" />
                                             </span>
                                         </button>
                                         {dropdownOpen && (
@@ -133,12 +123,7 @@ export default function Heading() {
                                                             {label}
                                                             {selected === label && (
                                                                 <span className="check">
-                                                                    <img
-                                                                        width="15"
-                                                                        height="15"
-                                                                        src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/FFFFFF/external-select-checkmark-symbol-to-choose-true-answer-basic-regular-tal-revivo.png"
-                                                                        alt="check"
-                                                                    />
+                                                                    <img width="15" height="15" src={checkmarkIcon} alt="check"/>
                                                                 </span>
                                                             )}
                                                         </button>
@@ -171,9 +156,7 @@ export default function Heading() {
                                             </span>
                                         </div>
                                         <button className="profile-btn" onClick={() => navigate('/profile')}>
-                                            <img width="30" height="30"
-                                                src="https://img.icons8.com/fluency-systems-filled/48/FFFFFF/user.png"
-                                                alt="user" />
+                                            <img width="30" height="30" src={userIcon} alt="user" />
                                         </button>
                                     </div>
                                 ) : (
@@ -216,17 +199,7 @@ export default function Heading() {
                         >
                             <p className='baby-text'>{opt.label}</p>
                             <span>
-                                <svg aria-hidden="true" fill="none" stroke="#fff"
-                                    focusable="false" height="1em" role="presentation"
-                                    viewBox="0 0 24 24" width="1em"
-                                    className="text-default-400 rotate-180"
-                                >
-                                    <path d="M15.5 19l-7-7 7-7"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="1.5"
-                                    />
-                                </svg>
+                                <img height="20px" width="20px" src={moblienavIcon} alt="" />
                             </span>
                         </div>
                     ))}
