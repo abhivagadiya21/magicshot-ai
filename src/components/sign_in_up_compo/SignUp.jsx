@@ -6,7 +6,6 @@ const SignUp = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,7 +26,7 @@ const SignUp = () => {
       setLoading(true);
       setError("");
 
-      const res = await fetch("https://magicshot-ai-backend.onrender.com/auth/register", {
+      const res = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

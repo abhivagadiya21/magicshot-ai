@@ -130,6 +130,13 @@
     color: rgb(209, 204, 204);
     box-sizing: border-box;
 }
+.upload-image-buttons {
+  /* display: flex; */
+  justify-content: center;
+  width: 100%;
+  gap: 25px;
+  height: 140px;
+}                                                           
 
 .inner-left-2-agePredictor {
     padding: 15px;
@@ -195,12 +202,6 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
-
-.upload-image-buttons {
-    display: flex;
-    justify-content: space-around;
-}
-
 .agePredictor-gender {
     color: white;
     margin-top: 25px;

@@ -11,20 +11,6 @@ import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
 import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
 import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
-import style1 from './hairstyle_image/hairstyle1.png';
-import style2 from './hairstyle_image/hairstyle2.png';
-import style3 from './hairstyle_image/hairstyle3.png';
-import style4 from './hairstyle_image/hairstyle4.png';
-import style5 from './hairstyle_image/hairstyle5.png';
-import style6 from './hairstyle_image/hairstyle6.png';
-import style7 from './hairstyle_image/hairstyle7.png';
-import color1 from './hairstyle_image/haircolor1.png';
-import color2 from './hairstyle_image/haircolor2.png';
-import color3 from './hairstyle_image/haircolor3.png';
-import color4 from './hairstyle_image/haircolor4.png';
-import color5 from './hairstyle_image/haircolor5.png';
-import color6 from './hairstyle_image/haircolor6.png';
-import color7 from './hairstyle_image/haircolor7.png';
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
 import { changeHaircutAPI } from '../../services/imageBase.jsx';
@@ -35,66 +21,49 @@ import { useCredits } from "../../components/global_com/context.jsx";
 import closeIcon from "../../components/heding/hedingimg/close.svg";
 import timeIcon from "../AgeJourney_page/journey_image/time.svg";
 import checkmarkIcon from "../../components/heding/hedingimg/checkmark.svg";
+import Loader from "../../components/Loader/Loader";
+import hairstyles from '../../utils/hairstyles.json';
+import haircolors from '../../utils/haircolors.json';
 
+
+const importAll = (r) => {
+    let images = {};
+    r.keys().forEach((key) => (images[key.replace("./", "")] = r(key)));
+    return images;
+};
+
+const hairstyleImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}", {
+    eager: true,
+    import: "default",
+});
+const haircolorImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}", {
+    eager: true,
+    import: "default",
+});
 
 
 function ChangehaircutPage() {
     const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
-
     const [genraterImageurl, setGenraterImageurl] = useState(null);
     const [loading, setLoading] = useState(false);
-
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
-
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
     const { dispatch, fetchUser } = useCredits();
 
-    const styles = [
-        { name: "Random", img: style1 },
-        { name: "Bob", img: style2 },
-        { name: "Lob", img: style3 },
-        { name: "Layered", img: style4 },
-        { name: "Pixie cut", img: style5 },
-        { name: "Messy bun", img: style6 },
-        { name: "High Ponytail", img: style7 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
+       const styles = hairstyles.map((s) => ({
+        ...s,
+        img: hairstyleImages[`./hairstyle_image/${s.img}`],
+    }));
 
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-         { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-        { name: "Messy bun", img: style6 },
-    ];
+    const HairColor = haircolors.map((c) => ({
+        ...c,
+        img: haircolorImages[`./hairstyle_image/${c.img}`],
+    }));
 
-    const HairColor = [
-        { name: "Random", img: color1 },
-        { name: "Black", img: color2 },
-        { name: "Dark Brown", img: color3 },
-        { name: "Medium Brown", img: color4 },
-        { name: "Light Brown", img: color5 },
-        { name: "Brunette", img: color6 },
-        { name: "Blonde", img: color7 },
-    ];
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
@@ -136,15 +105,11 @@ function ChangehaircutPage() {
             console.log("Response from API:", data);
 
             if (data?.file) {
-                // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Hairstyle image generated successfully!");
                 fetchUser()
-
-
-                // }, 5000);
             } else {
                 toast.error("❌ No image returned from server.");
                 setLoading(false);
@@ -168,21 +133,7 @@ function ChangehaircutPage() {
         <>
             <div className="main-changeHair">
                 {loading && (
-                    <div className="loader-overlay">
-                        <div className="loader-wrapper">
-                            <div className="loader"></div>
-                            <span class="loader-letter">G</span>
-                            <span class="loader-letter">e</span>
-                            <span class="loader-letter">n</span>
-                            <span class="loader-letter">e</span>
-                            <span class="loader-letter">r</span>
-                            <span class="loader-letter">a</span>
-                            <span class="loader-letter">t</span>
-                            <span class="loader-letter">i</span>
-                            <span class="loader-letter">n</span>
-                            <span class="loader-letter">g</span>
-                        </div>
-                    </div>
+                    <Loader />
                 )}
 
 
@@ -343,7 +294,7 @@ function ChangehaircutPage() {
                                 className={`tab-btn-2-chageHair ${activeTab === 'tab2' ? 'active-tab1' : ''}`}
                             >hair Color</button>
                         </div>
-                        <div className="inner-2-left-in-tab-btnshow-div-changeHair">
+
                             {activeTab === 'tab1' && (
                                 <div className="tab1-content-changeHair">
 
@@ -391,7 +342,6 @@ function ChangehaircutPage() {
                                 </div>
 
                             )}
-                        </div>
 
 
                     </div>
