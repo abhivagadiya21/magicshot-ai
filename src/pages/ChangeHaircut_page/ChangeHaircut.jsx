@@ -11,20 +11,6 @@ import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
 import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
 import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
-import style1 from './hairstyle_image/hairstyle1.png';
-import style2 from './hairstyle_image/hairstyle2.png';
-import style3 from './hairstyle_image/hairstyle3.png';
-import style4 from './hairstyle_image/hairstyle4.png';
-import style5 from './hairstyle_image/hairstyle5.png';
-import style6 from './hairstyle_image/hairstyle6.png';
-import style7 from './hairstyle_image/hairstyle7.png';
-import color1 from './hairstyle_image/haircolor1.png';
-import color2 from './hairstyle_image/haircolor2.png';
-import color3 from './hairstyle_image/haircolor3.png';
-import color4 from './hairstyle_image/haircolor4.png';
-import color5 from './hairstyle_image/haircolor5.png';
-import color6 from './hairstyle_image/haircolor6.png';
-import color7 from './hairstyle_image/haircolor7.png';
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
 import { changeHaircutAPI } from '../../services/imageBase.jsx';
@@ -54,14 +40,11 @@ const haircolorImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}
 function ChangehaircutPage() {
     const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
-
     const [genraterImageurl, setGenraterImageurl] = useState(null);
     const [loading, setLoading] = useState(false);
-
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
-
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
     const { dispatch, fetchUser } = useCredits();
@@ -135,15 +118,10 @@ function ChangehaircutPage() {
             setLoading(false);
         }
     };
-
-
-
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
     };
-
-
     return (
         <>
             <div className="main-changeHair">
@@ -252,7 +230,6 @@ function ChangehaircutPage() {
                         )}
                     </div>
 
-                    {/* <p className='baby-gender-changeHair'> Gender</p> */}
                     <p className='Gender-hading'> Gender</p>
 
                     <div className="gender-main-container">
@@ -368,7 +345,7 @@ function ChangehaircutPage() {
                                 ))}
                             </div>
                         )}
-                        
+
                     <div className="left-main-babyG-footer">
                         <div className="time-estimation-container">
                             <div className="time-estimation">
