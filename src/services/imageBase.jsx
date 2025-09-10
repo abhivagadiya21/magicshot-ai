@@ -62,8 +62,7 @@ export const agePredictorAPI = async (imageFiles, otherData) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    });
-
+    }); 
     return response.data;
   } catch (error) {
     console.error("Error predicting age:", error);
@@ -74,7 +73,6 @@ export const agePredictorAPI = async (imageFiles, otherData) => {
 export const changeHaircutAPI = async (imageFiles, otherData) => {
   try {
     const formData = new FormData();
-    // Send actual File objects, not blob URLs
     formData.append("HairuploadPhoto", imageFiles.parent1);
     formData.append("hairStyle", otherData.hairstyle);
     formData.append("hairColor", otherData.hairColor);
@@ -87,14 +85,12 @@ export const changeHaircutAPI = async (imageFiles, otherData) => {
         "Content-Type": "multipart/form-data",
       },
     });
-
     return response.data;
   } catch (error) {
     console.error("Error uploading image:", error);
     throw error;
   }
 }
-
 
 export const getUserProfileAPI = async (token) => {
   try {

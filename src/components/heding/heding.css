@@ -20,6 +20,7 @@
 .logo-img {
   width: 150px;
   height: 36.33;
+  cursor: pointer;
 }
 
 .hamburger {
@@ -342,6 +343,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
 
   .logo-img{
     display: none;
+    
   }
 
   .square{

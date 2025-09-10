@@ -7,10 +7,8 @@ export default function SignIn({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/"; 
 
@@ -97,10 +95,7 @@ export default function SignIn({ onLoginSuccess }) {
       </button>
 
       <div className="form-footer">
-        <p
-          className="forgot-link"
-          onClick={() => navigate("/auth/forgot-password")}
-        >
+        <p className="forgot-link" onClick={() => navigate("/auth/forgot-password")}>
           Forgot Password
         </p>
       </div>
