@@ -52,6 +52,7 @@
   padding-left: 1rem;
   padding-right: 1rem;
   width: 371px;
+  height: 552px;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -69,19 +70,19 @@
 .form-container {
   width: 100%;
   border-radius: 12px;
-  padding-top: 2rem;
+  padding: 1rem .2rem;
 }
 
 
 .form-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
-  background-color: #27272a;
+  background-color: #1d2328;
   border-radius: 50px;
   overflow: hidden;
   width: 100%;
-  padding: 3px;
+  padding: 0px;
+  border: 3px solid #262a2d; 
 }
 
 .form-header button {

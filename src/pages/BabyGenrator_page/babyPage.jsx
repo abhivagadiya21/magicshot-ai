@@ -1,24 +1,31 @@
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import usePopup from "../../hooks/usePopup";
 import useUploadImg from "../../hooks/useUploadImg";
-import { babyuploadeAPI } from "../../services/imageBase";
+import { babyUploadeAPI } from "../../services/imageBase";
+
 import "../BabyGenrator_page/babyPage.css";
-import Upload_img from "../../components/upload_img_re_compo/Upload_img";
+
+import UploadImg from "../../components/upload_img_re_compo/Upload_img";
 import CropImage from "../../components/CropImage/CropImage";
-import Howworkpop from "../../components/popUp/how_it_work_pop/Howworkpop";
-import star from "./babyG-img/star.svg";
+import HowWorkPop from "../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx";
+
+import starIcon from "./babyG-img/star.svg";
 import babyImage from "./babyG-img/babyG.png";
-import questionMark from "./babyG-img/question.svg";
-import poppassimage1 from "./babyG-img/poppassimg1.png";
-import Profileicon1 from "./babyG-img/profile-1.svg";
-import upload from "./babyG-img/upload.svg";
+import questionMarkIcon from "./babyG-img/question.svg";
+import popPassImage1 from "./babyG-img/poppassimg1.png";
+import profileIcon1 from "./babyG-img/profile-1.svg";
+import uploadIcon from "./babyG-img/upload.svg";
 import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
 import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
-import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+
+import GetImagePop from "../../components/popUp/getimage_pop/GetImagePop.jsx";
+
 import { blobUrlToFile } from "../../utils/blobToFile";
 import { useCredits } from "../../components/global_com/context.jsx";
+
 import closeIcon from "../../components/heding/hedingimg/close.svg";
 import timeIcon from "../AgeJourney_page/journey_image/time.svg";
 import checkmarkIcon from "../../components/heding/hedingimg/checkmark.svg";
@@ -34,7 +41,7 @@ function UploadSection({ label, uploadHook, inputId }) {
         ) : (
           <>
             <div className="profile-icon-container">
-              <img src={Profileicon1} alt={`${label} Icon`} className="Parent-Icon" />
+              <img src={profileIcon1} alt={`${label} Icon`} className="Parent-Icon" />
             </div>
             <p>{label}</p>
           </>
@@ -52,7 +59,7 @@ function UploadSection({ label, uploadHook, inputId }) {
 
         {!uploadHook.croppedImage ? (
           <label htmlFor={inputId} className="uplod-button">
-            <img className="upload-image-icon" src={upload} alt="Upload Icon" />
+            <img className="upload-image-icon" src={uploadIcon} alt="Upload Icon" />
             <p>Upload</p>
           </label>
         ) : (
@@ -118,7 +125,7 @@ function GenderOption({ gender, selectedGender, handleSelect, icon }) {
             <img
               width="24"
               height="24"
-              src={checkmarkIcon}              
+              src={checkmarkIcon}
               alt="checkmark"
             />
           </span>
@@ -132,7 +139,7 @@ function BabyPage() {
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
   const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
   const [selectedGender, setSelectedGender] = useState("boy");
-  const [genraterImageurl, setGenraterImageurl] = useState(null);
+  const [genraterImageUrl, setGenraterImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const parent1Upload = useUploadImg();
   const parent2Upload = useUploadImg();
@@ -149,6 +156,7 @@ function BabyPage() {
   }, []);
 
   const { dispatch, fetchUser } = useCredits();
+
   const handleGenerate = async () => {
     if (!parent1Upload.croppedImage || !parent2Upload.croppedImage) {
       toast.error("⚠️ Please upload both parent images.");
@@ -170,7 +178,7 @@ function BabyPage() {
     console.log("Image Files:", imageFiles);
 
     const otherData = {
-      userid: storedUser.id,
+      userId: storedUser.id,
       gender: selectedGender,
       transactionId: 1,
     };
@@ -179,14 +187,14 @@ function BabyPage() {
     setLoading(true);
 
     try {
-      const response = await babyuploadeAPI(imageFiles, otherData);
+      const response = await babyUploadeAPI(imageFiles, otherData);
       console.log("Response from API:", response);
       const data = response.data;
       if (data?.file) {
         setLoading(false);
-        setGenraterImageurl(data.file);
+        setGenraterImageUrl(data.file);
         toast.success("🎉 Baby image generated successfully!");
-        fetchUser()
+        fetchUser();
       } else {
         toast.error("❌ No image returned from server.");
         setLoading(false);
@@ -197,7 +205,7 @@ function BabyPage() {
     }
   };
 
-  const handleclick = async () => {
+  const handleClickGenerate = async () => {
     await handleGenerate();
     openImagePopup();
   };
@@ -211,42 +219,40 @@ function BabyPage() {
           <div className="header-section">
             <p className="Baby-hading">AI Baby Generator</p>
             <button onClick={openHowWork} className="button-popup-howtowork">
-              <img src={questionMark} alt="Help icon" />
+              <img src={questionMarkIcon} alt="Help icon" />
               <span>How It Works</span>
             </button>
             {showHowWork && (
-              <Howworkpop
-                howworkpopDetails={{
+              <HowWorkPop
+                howWorkPopDetails={{
                   onClose: closeHowWork,
-                  image: poppassimage1,
+                  image: popPassImage1,
                   message: "Upload your photos, and AI quickly generates an image of your future baby.",
                 }}
               />
             )}
           </div>
 
-         
-            <div className="upload-image-buttons-baby">
-              <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
-              <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
-            </div>
+          <div className="upload-image-buttons-baby">
+            <UploadSection label="Parent 1" uploadHook={parent1Upload} inputId="parent1Input" />
+            <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
+          </div>
 
-            <p className="Baby-gender">Baby's Gender</p>
-            <div className="gender-main-container">
-              <GenderOption
-                gender="boy"
-                selectedGender={selectedGender}
-                handleSelect={setSelectedGender}
-                icon={boyIcon}
-              />
-              <GenderOption
-                gender="girl"
-                selectedGender={selectedGender}
-                handleSelect={setSelectedGender}
-                icon={girlIcon}
-              />
-            </div>
-          
+          <p className="Baby-gender">Baby's Gender</p>
+          <div className="gender-main-container">
+            <GenderOption
+              gender="boy"
+              selectedGender={selectedGender}
+              handleSelect={setSelectedGender}
+              icon={boyIcon}
+            />
+            <GenderOption
+              gender="girl"
+              selectedGender={selectedGender}
+              handleSelect={setSelectedGender}
+              icon={girlIcon}
+            />
+          </div>
         </div>
 
         <div className="left-main-babyG-footer" ref={fixedRef}>
@@ -259,30 +265,32 @@ function BabyPage() {
 
           <div className="action-buttons-container">
             <button className="pricing-btn">See Pricing</button>
-            <button className="generate-btn" onClick={handleclick}>
+            <button className="generate-btn" onClick={handleClickGenerate}>
               Generate
               <div className="generate-btn-icon">
-                <img src={star} alt="star icon" />
+                <img src={starIcon} alt="star icon" />
                 <span>-0.5</span>
               </div>
             </button>
           </div>
         </div>
 
-        {showImagePopup && genraterImageurl && <GetImage_pop
-          getimage_details={{
-            onClose: () => {
-              setGenraterImageurl(null);
-              closeImagePopup()
-            },
-            image: genraterImageurl,
-            imgname: "baby-image"
-          }}
-        />}
+        {showImagePopup && genraterImageUrl && (
+          <GetImagePop
+            getImageDetails={{
+              onClose: () => {
+                setGenraterImageUrl(null);
+                closeImagePopup();
+              },
+              image: genraterImageUrl,
+              imgName: "baby-image",
+            }}
+          />
+        )}
 
         <div className="right-main-babyG-1">
           <h1>AI Baby Generator</h1>
-          <Upload_img uploadDetails={{ image: babyImage }} />
+          <UploadImg uploadDetails={{ image: babyImage }} />
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  padding: 0px 10px;
 }
 
 .form-group {
@@ -11,19 +12,35 @@
 
 .form-group label {
   font-weight: 600;
-  color: #4a5568;
+  color: white;
   margin-bottom: 0.4rem;
 }
 
-.form-group input {
+input[type="email"] {
   padding: 0.45rem;
   border-radius: 0.5rem;
-  font-size:14px;
+  font-size: 14px;
   border: none;
+  background-color: #1d2328;
+  color: white;
 }
 
-.form-group input:focus {
-  outline: none;
+input[type="password"] {
+  padding: 0.45rem;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  border: none;
+  background-color: #1d2328;
+  color: white;
+}
+
+input[type="text"] {
+  padding: 0.45rem;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  border: none;
+  background-color: #1d2328;
+  color: white;
 }
 
 .form-submit-btn {
@@ -45,12 +62,13 @@
 }
 
 .forgot-link {
-  
+
   font-weight: 600;
   cursor: pointer;
   align-items: end;
 }
-.signin-form h4{
+
+.signin-form h4 {
   color: white;
   align-items: center;
   text-align: center;
@@ -62,4 +80,3 @@
   text-decoration: underline;
   text-underline-position: below;
 }
-

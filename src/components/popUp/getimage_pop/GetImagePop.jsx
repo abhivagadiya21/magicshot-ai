@@ -1,17 +1,20 @@
-import './getimage_pop.css';
-import graduant from '../getimage_pop/getimage_pop-img/Black-Fade-PNG-Isolated-HD.png';
 import { useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
+
+import graduant from '../getimage_pop/getimage_pop-img/Black-Fade-PNG-Isolated-HD.png';
 import closeIcon from "../getimage_pop/getimage_pop-img/close.svg";
 import downloadIcon from "../getimage_pop/getimage_pop-img/download.svg";
 
+import './getimage_pop.css';
+
 function GetImagePop({ getimage_details }) {
+
     const imageRef = useRef(null);
     const downloadingRef = useRef(false);
+
     const handleDownload = async () => {
         if (downloadingRef.current) return;
         downloadingRef.current = true;
-
         try {
             if (!imageRef.current) return;
 
@@ -25,6 +28,7 @@ function GetImagePop({ getimage_details }) {
             link.href = canvas.toDataURL("image/png");
             link.download = (getimage_details.imgname || "downloaded-image") + ".png";
             link.click();
+
         } catch (err) {
             console.error("Download failed:", err);
         } finally {
@@ -38,9 +42,11 @@ function GetImagePop({ getimage_details }) {
         return () => {
             downloadingRef.current = false;
         };
+
     }, []);
 
     return (
+
         <div className="popup-overlay-getimage">
             <div className="popup-box-getimage">
                 <div className="inner-1-pop-getimage">
@@ -74,6 +80,7 @@ function GetImagePop({ getimage_details }) {
                         )}
                     </div>
                 </div>
+
                 <div className="download-button-container">
                     <button
                         className="download-btn pixel-corners"
@@ -94,7 +101,9 @@ function GetImagePop({ getimage_details }) {
                 </div>
             </div>
         </div>
+
     );
+
 }
 
 export default GetImagePop;

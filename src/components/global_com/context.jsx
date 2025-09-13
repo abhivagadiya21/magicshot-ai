@@ -1,34 +1,43 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
-import { getUserProfileAPI } from '../../services/imageBase';
+import { getUserProfileAPI } from "../../services/imageBase";
 
-// Reducer for state updates
+// Action constants
+const SET_USER = "SET_USER";
+const SET_CREDITS = "SET_CREDITS";
+const LOGOUT = "LOGOUT";
+
+// Reducer for credit state management
 function creditsReducer(state, action) {
   switch (action.type) {
-    case "SET_USER":
+    case SET_USER:
       if (!action.payload) {
-        return { ...state, user: null, credits: 0 }; // null payload case
+        return { ...state, user: null, credits: 0 };
       }
-      return { 
-        ...state, 
-        user: action.payload.user, 
-        credits: action.payload.credits ?? 0 
+      return {
+        ...state,
+        user: action.payload.user,
+        credits: action.payload.credits ?? 0,
       };
-    case "SET_CREDITS":
+
+    case SET_CREDITS:
       return { ...state, credits: action.payload };
-    case "LOGOUT":
+
+    case LOGOUT:
       return { user: null, credits: 0 };
+
     default:
       return state;
   }
 }
 
-
 const CreditContext = createContext();
 
 export function CreditProvider({ children }) {
-  const [state, dispatch] = useReducer(creditsReducer, { credits: 0, user: null });
+  const [state, dispatch] = useReducer(creditsReducer, {
+    user: null,
+    credits: 0,
+  });
 
-  // Fetch user profile from backend
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -37,19 +46,18 @@ export function CreditProvider({ children }) {
       const res = await getUserProfileAPI(token);
       if (res.status === "success") {
         dispatch({
-          type: "SET_USER",
+          type: SET_USER,
           payload: {
             user: res.data,
             credits: res.data.credits,
           },
         });
       }
-    } catch (err) {
-      console.error("Profile fetch error:", err);
+    } catch (error) {
+      console.error("Profile fetch error:", error);
     }
   };
 
-  // Load user profile on mount
   useEffect(() => {
     fetchUser();
   }, []);
@@ -61,7 +69,6 @@ export function CreditProvider({ children }) {
   );
 }
 
-// Custom hook to use credits globally
 export function useCredits() {
   return useContext(CreditContext);
 }

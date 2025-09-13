@@ -6,31 +6,17 @@ import star from '../BabyGenrator_page/babyG-img/star.svg';
 import hairImage from './hairstyle_image/changehaircut.png'
 import poppassimg4 from '../BabyGenrator_page/babyG-img/poppassimg4.png';
 import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
-import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop.jsx';
+import Howworkpop from '../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx';
 import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
 import upload from '../BabyGenrator_page/babyG-img/upload.svg';
 import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
 import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
-import style1 from './hairstyle_image/hairstyle1.png';
-import style2 from './hairstyle_image/hairstyle2.png';
-import style3 from './hairstyle_image/hairstyle3.png';
-import style4 from './hairstyle_image/hairstyle4.png';
-import style5 from './hairstyle_image/hairstyle5.png';
-import style6 from './hairstyle_image/hairstyle6.png';
-import style7 from './hairstyle_image/hairstyle7.png';
-import color1 from './hairstyle_image/haircolor1.png';
-import color2 from './hairstyle_image/haircolor2.png';
-import color3 from './hairstyle_image/haircolor3.png';
-import color4 from './hairstyle_image/haircolor4.png';
-import color5 from './hairstyle_image/haircolor5.png';
-import color6 from './hairstyle_image/haircolor6.png';
-import color7 from './hairstyle_image/haircolor7.png';
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
 import { changeHaircutAPI } from '../../services/imageBase.jsx';
 import { blobUrlToFile } from '../../utils/blobToFile.js';
 import { toast } from "react-toastify";
-import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+import GetImage_pop from "../../components/popUp/getimage_pop/GetImagePop.jsx";
 import { useCredits } from "../../components/global_com/context.jsx";
 import Loader from "../../components/Loader/Loader";
 import hairstyles from '../../utils/hairstyles.json';
@@ -152,7 +138,7 @@ function ChangehaircutPage() {
 
                 <div className="left-container left-container-changeHair">
                     <div className="inner-left-1-changeHair">
-                        <p className="bagy-hading">Al Change Hairstyle</p>
+                        <p className="Baby-hading">Al Change Hairstyle</p>
                         <button onClick={openHowWork} className='btn-pop-up-howWork'>
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>

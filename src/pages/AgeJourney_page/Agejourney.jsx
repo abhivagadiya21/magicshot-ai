@@ -1,283 +1,322 @@
-import { useEffect, useRef, useState } from 'react';
-import usePopup from '../../hooks/usePopup';
-import Upload_img from '../../components/upload_img_re_compo/Upload_img';
-import './ageJourney.css';
-import "../BabyGenrator_page/babyPage.css";
-import poppassimg3 from '../BabyGenrator_page/babyG-img/poppassimg3.png';
-import star from '../BabyGenrator_page/babyG-img/star.svg';
-import journeyImage from './journey_image/agejourney.png';
-import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
-import Howworkpop from '../../components/popUp/how_it_work_pop/Howworkpop';
-import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
-import upload from '../BabyGenrator_page/babyG-img/upload.svg';
-import CropImage from "../../components/CropImage/CropImage";
-import useUploadImg from "../../hooks/useUploadImg";
-import { blobUrlToFile } from "../../utils/blobToFile";
-import { AgejournyAPI } from '../../services/imageBase';
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import GetImage_pop from "../../components/popUp/getimage_pop/getImage_pop.jsx";
+
+// Services & Utils
+import { AgejournyAPI } from "../../services/imageBase";
+import { blobUrlToFile } from "../../utils/blobToFile";
+
+// Hooks
+import usePopup from "../../hooks/usePopup";
+import useUploadImg from "../../hooks/useUploadImg";
 import { useCredits } from "../../components/global_com/context.jsx";
-import closeIcon from "../../components/heding/hedingimg/close.svg";
-import timeIcon from '../AgeJourney_page/journey_image/time.svg';
+
+// Components
 import Loader from "../../components/Loader/Loader";
+import HowWorkPopup from "../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx";
+import CropImage from "../../components/CropImage/CropImage";
+import GetImagePopup from "../../components/popUp/getimage_pop/GetImagePop.jsx";
+import UploadImg from "../../components/upload_img_re_compo/Upload_img";
+
+// Assets
+import starIcon from "../BabyGenrator_page/babyG-img/star.svg";
+import questionMarkIcon from "../BabyGenrator_page/babyG-img/question.svg";
+import popPassImg3 from "../BabyGenrator_page/babyG-img/poppassimg3.png";
+import profileIcon1 from "../BabyGenrator_page/babyG-img/profile-1.svg";
+import uploadIcon from "../BabyGenrator_page/babyG-img/upload.svg";
+import journeyImage from "./journey_image/agejourney.png";
+import timeIcon from "../AgeJourney_page/journey_image/time.svg";
+import closeIcon from "../../components/heding/hedingimg/close.svg";
+
+// Styles
+import "./ageJourney.css";
+import "../BabyGenrator_page/babyPage.css";
+
 
 
 function AgeJourney() {
-    // Popup hooks
-    const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
-    const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
+  // Popup hooks
+  const {
+    showPopup: showHowWork,
+    handleOpen: openHowWork,
+    handleClose: closeHowWork,
+  } = usePopup();
+  const {
+    showPopup: showImagePopup,
+    handleOpen: openImagePopup,
+    handleClose: closeImagePopup,
+  } = usePopup();
 
-    const [genraterImageurl, setGenraterImageurl] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [sliderValue, setSliderValue] = useState(50);
-    const parent1Upload = useUploadImg();
+  const [generatedImageUrl, setGeneratedImageUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [sliderValue, setSliderValue] = useState(50);
+  const parentUpload = useUploadImg();
 
-    const sliderInputRef = useRef(null);
-    const sliderThumbRef = useRef(null);
-    const sliderLineRef = useRef(null);
-    const { dispatch, fetchUser } = useCredits();
+  const sliderInputRef = useRef(null);
+  const sliderThumbRef = useRef(null);
+  const sliderLineRef = useRef(null);
+  const { dispatch, fetchUser } = useCredits();
 
+  // Handle slider UI
+  const updateSliderUI = () => {
+    const sliderInput = sliderInputRef.current;
+    const sliderThumb = sliderThumbRef.current;
+    const sliderLine = sliderLineRef.current;
 
-    // Handle slider UI
-    const showSliderValue = () => {
-        const slider_input = sliderInputRef.current;
-        const slider_thumb = sliderThumbRef.current;
-        const slider_line = sliderLineRef.current;
+    if (!sliderInput || !sliderThumb || !sliderLine) return;
 
-        if (!slider_input || !slider_thumb || !slider_line) return;
+    setSliderValue(sliderInput.value);
+    sliderThumb.innerHTML = sliderInput.value;
+    const bulletPosition = sliderInput.value / sliderInput.max;
+    const space = sliderInput.offsetWidth - sliderThumb.offsetWidth;
+    sliderThumb.style.left = bulletPosition * space + "px";
+    sliderLine.style.width = sliderInput.value + "%";
+  };
 
-        setSliderValue(slider_input.value);
-        slider_thumb.innerHTML = slider_input.value;
-        const bulletPosition = slider_input.value / slider_input.max;
-        const space = slider_input.offsetWidth - slider_thumb.offsetWidth;
-        slider_thumb.style.left = bulletPosition * space + 'px';
-        slider_line.style.width = slider_input.value + '%';
+  useEffect(() => {
+    updateSliderUI();
+    const handleResize = () => updateSliderUI();
+    window.addEventListener("resize", handleResize);
+
+    const inputEl = sliderInputRef.current;
+    if (inputEl) {
+      inputEl.addEventListener("input", updateSliderUI);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (inputEl) {
+        inputEl.removeEventListener("input", updateSliderUI);
+      }
     };
+  }, []);
 
-    useEffect(() => {
-        showSliderValue();
-        const handleResize = () => showSliderValue();
-        window.addEventListener('resize', handleResize);
+  // API call to generate image
+  const handleGenerate = async () => {
+    if (!parentUpload.croppedImage) {
+      toast.error("⚠️ Please upload an image.");
+      return;
+    }
 
-        const inputEl = sliderInputRef.current;
-        if (inputEl) {
-            inputEl.addEventListener('input', showSliderValue);
-        }
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser?.id) {
+      toast.error("❌ User not logged in.");
+      return;
+    }
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            if (inputEl) {
-                inputEl.removeEventListener('input', showSliderValue);
-            }
-        };
-    }, []);
-
-    // API call to generate image
-    const handleGenerate = async () => {
-        if (!parent1Upload.croppedImage) {
-            toast.error("⚠️ Please upload an image.");
-            return;
-        }
-
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (!storedUser?.id) {
-            toast.error("❌ User not logged in.");
-            return;
-        }
-
-        const parent1File = await blobUrlToFile(parent1Upload.croppedImage, "ageJourney.png");
-
-        const imageFiles = { ageJourneyUpload: parent1File };
-        const otherData = { userid: storedUser.id, selectAge: sliderValue, transactionId: 1 };
-
-        setLoading(true);
-        try {
-            const { data } = await AgejournyAPI(imageFiles, otherData);
-            if (data?.file) {
-                // setTimeout(() => {
-                setLoading(false);
-                setGenraterImageurl(data.file);
-                openImagePopup();
-                toast.success("🎉 Age journey generated successfully!");
-                fetchUser()
-
-                // }, 5000);
-            } else {
-                toast.error("❌ No image returned from server.");
-                setLoading(false);
-            }
-        } catch (error) {
-            toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
-            setLoading(false);
-        }
-    };
-
-
-
-    const handleClickGenerate = async () => {
-        await handleGenerate();
-        openImagePopup();
-    };
-
-    return (
-        <div className="main-container">
-            {loading && <Loader />}
-
-            <div className="left-container">
-                <div className="header-section">
-                    <p className="Baby-hading">AI Age Journey</p>
-                    <button onClick={openHowWork} className="button-popup-howtowork">
-                        <img src={questionMark} alt="" />
-                        <span>How It Works</span>
-                    </button>
-                    {showHowWork && (
-                        <Howworkpop
-                            howworkpopDetails={{
-                                onClose: closeHowWork,
-                                image: poppassimg3,
-                                message: "Generate your age journey in seconds with help of AI."
-                            }}
-                        />
-                    )}
-                </div>
-
-                <div className="upload-image-buttons">
-                    <label className="uplod-image-button" htmlFor="parent1Input">
-                        {parent1Upload.croppedImage ? (
-                            <img src={parent1Upload.croppedImage} alt="Parent 1" className="preview-img"/>
-                        ) : (
-                            <>
-                                <div className="profile-icon-container">
-                                    <img
-                                        src={Profileicon1}
-                                        alt="Parent 1 Icon"
-                                        className="Parent-Icon"
-                                    />
-                                </div>
-                                <p>Upload Your Image</p>
-                            </>
-                        )}
-                    </label>
-                    <div className="img-upload-button-container">
-                        <input
-                            type="file"
-                            accept="image/*"
-                            id="parent1Input"
-                            className="hidden"
-                            onChange={parent1Upload.handleFileUpload}
-                            disabled={!!parent1Upload.croppedImage}
-                        />
-
-                        {!parent1Upload.croppedImage ? (
-                            <label htmlFor="parent1Input" className="uplod-button">
-                                <img className="upload-img-icon" src={upload} alt="Upload" />
-                                <p>Upload</p>
-                            </label>
-                        ) : (
-                            <button
-                                type="button"
-                                className="uplod-button"
-                                onClick={() => {
-                                    parent1Upload.resetImage();
-                                    const input = document.getElementById("parent1Input");
-                                    if (input) input.value = "";
-                                }}
-                            >
-                                <img width="10" height="10" src={closeIcon} alt="delete-sign" />
-                                cancel
-                            </button>
-                        )}
-                    </div>
-                    {/* Crop Popup */}
-                    {parent1Upload.showCropper && (
-                        <div className="overlay">
-                            <div className="crop-popup">
-                                <div className="cropper-header">
-                                    <p>Crop Image</p>
-                                </div>
-                                <button
-                                    className="close-popup-button"
-                                    onClick={() => parent1Upload.setShowCropper(false)}
-                                >
-                                    <img width="20" height="20" src={closeIcon} alt="delete-sign" />
-                                </button>
-                                <CropImage
-                                    imageSrc={parent1Upload.selectedFile}
-                                    onCropDone={parent1Upload.handleCropComplete}
-                                    onCancel={() => parent1Upload.setShowCropper(false)}
-                                />
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                {/* Slider */}
-                <div>
-                    <p className="select-age">Select End Age <strong>{sliderValue}</strong></p>
-                </div>
-                <div className="container">
-                    <div className='ageJourney-rang-slider-icon'>👶</div>
-                    <div className="range-slider">
-                        <div ref={sliderThumbRef} id="slider_thumb" className="range-slider_thumb"></div>
-                        <div className="range-slider_line">
-                            <div ref={sliderLineRef} id="slider_line" className="range-slider_line-fill"></div>
-                        </div>
-                        <input
-                            ref={sliderInputRef}
-                            id="slider_input"
-                            className="range-slider_input"
-                            type="range"
-                            defaultValue="50"
-                            min="0"
-                            max="100"
-                        />
-                    </div>
-                    <div className='ageJourney-rang-slider-icon'>👴🏻</div>
-                </div>
-
-
-                {/* Generate Button */}
-                <div className="left-main-babyG-footer">
-                    <div className="time-estimation-container">
-                        <div className="time-estimation">
-                            <img src={timeIcon} alt="" />
-                            <p>Est. time: 30 to 50 seconds</p>
-                        </div>
-                    </div>
-
-                    <div className="action-buttons-container">
-                        <button className="pricing-btn">See Pricing</button>
-                        <button className="generate-btn" onClick={handleClickGenerate}>
-                            Generate
-                            <div className="generate-btn-icon">
-                                <img src={star} alt="star icon" />
-                                <span>-0.5</span>
-                            </div>
-                        </button>
-
-                        {/* Generated Image Popup */}
-
-                    </div>
-                </div>
-            </div>
-            {showImagePopup && genraterImageurl && (
-                <GetImage_pop
-                    getimage_details={{
-                        onClose: () => {
-                            setGenraterImageurl(null);
-                            closeImagePopup()
-                        },
-                        image: genraterImageurl,
-                        imgname: "age-journey"
-                    }}
-                />
-            )}
-
-            <div className="right-main-ageJourney">
-                <Upload_img uploadDetails={{ image: journeyImage }} />
-            </div>
-        </div>
+    const parentFile = await blobUrlToFile(
+      parentUpload.croppedImage,
+      "ageJourney.png"
     );
+
+    const imageFiles = { ageJourneyUpload: parentFile };
+    const otherData = {
+      userId: storedUser.id,
+      selectAge: sliderValue,
+      transactionId: 1,
+    };
+
+    setLoading(true);
+    try {
+      const { data } = await AgejournyAPI(imageFiles, otherData);
+      if (data?.file) {
+        setLoading(false);
+        setGeneratedImageUrl(data.file);
+        openImagePopup();
+        toast.success("🎉 Age journey generated successfully!");
+        fetchUser();
+      } else {
+        toast.error("❌ No image returned from server.");
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message || "❌ Failed to generate image."
+      );
+      setLoading(false);
+    }
+  };
+
+  const handleClickGenerate = async () => {
+    await handleGenerate();
+    openImagePopup();
+  };
+
+  return (
+    <div className="main-container">
+      {loading && <Loader />}
+
+      <div className="left-container">
+        <div className="header-section">
+          <p className="Baby-hading">AI Age Journey</p>
+          <button onClick={openHowWork} className="button-popup-howtowork">
+            <img src={questionMarkIcon} alt="question icon" />
+            <span>How It Works</span>
+          </button>
+          {showHowWork && (
+            <HowWorkPopup
+              howworkpopDetails={{
+                onClose: closeHowWork,
+                image: popPassImg3,
+                message: "Generate your age journey in seconds with help of AI.",
+              }}
+            />
+          )}
+        </div>
+
+        <div className="upload-image-buttons">
+          <label className="uplod-image-button" htmlFor="parent1Input">
+            {parentUpload.croppedImage ? (
+              <img
+                src={parentUpload.croppedImage}
+                alt="Uploaded preview"
+                className="preview-img"
+              />
+            ) : (
+              <>
+                <div className="profile-icon-container">
+                  <img
+                    src={profileIcon1}
+                    alt="Profile Icon"
+                    className="Parent-Icon"
+                  />
+                </div>
+                <p>Upload Your Image</p>
+              </>
+            )}
+          </label>
+
+          <div className="img-upload-button-container">
+            <input
+              type="file"
+              accept="image/*"
+              id="parent1Input"
+              className="hidden"
+              onChange={parentUpload.handleFileUpload}
+              disabled={!!parentUpload.croppedImage}
+            />
+
+            {!parentUpload.croppedImage ? (
+              <label htmlFor="parent1Input" className="uplod-button">
+                <img
+                  className="upload-img-icon"
+                  src={uploadIcon}
+                  alt="Upload icon"
+                />
+                <p>Upload</p>
+              </label>
+            ) : (
+              <button
+                type="button"
+                className="uplod-button"
+                onClick={() => {
+                  parentUpload.resetImage();
+                  const input = document.getElementById("parent1Input");
+                  if (input) input.value = "";
+                }}
+              >
+                <img width="10" height="10" src={closeIcon} alt="close icon" />
+                Cancel
+              </button>
+            )}
+          </div>
+
+          {/* Crop Popup */}
+          {parentUpload.showCropper && (
+            <div className="overlay">
+              <div className="crop-popup">
+                <div className="cropper-header">
+                  <p>Crop Image</p>
+                </div>
+                <button
+                  className="close-popup-button"
+                  onClick={() => parentUpload.setShowCropper(false)}
+                >
+                  <img width="20" height="20" src={closeIcon} alt="close icon" />
+                </button>
+                <CropImage
+                  imageSrc={parentUpload.selectedFile}
+                  onCropDone={parentUpload.handleCropComplete}
+                  onCancel={() => parentUpload.setShowCropper(false)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Slider */}
+        <div>
+          <p className="select-age">
+            Select End Age <strong>{sliderValue}</strong>
+          </p>
+        </div>
+        <div className="container">
+          <div className="ageJourney-rang-slider-icon">👶</div>
+          <div className="range-slider">
+            <div
+              ref={sliderThumbRef}
+              id="sliderThumb"
+              className="range-slider_thumb"
+            ></div>
+            <div className="range-slider_line">
+              <div
+                ref={sliderLineRef}
+                id="sliderLine"
+                className="range-slider_line-fill"
+              ></div>
+            </div>
+            <input
+              ref={sliderInputRef}
+              id="sliderInput"
+              className="range-slider_input"
+              type="range"
+              defaultValue="50"
+              min="0"
+              max="100"
+            />
+          </div>
+          <div className="ageJourney-rang-slider-icon">👴🏻</div>
+        </div>
+
+        {/* Generate Button */}
+        <div className="left-main-babyG-footer">
+          <div className="time-estimation-container">
+            <div className="time-estimation">
+              <img src={timeIcon} alt="time icon" />
+              <p>Est. time: 30 to 50 seconds</p>
+            </div>
+          </div>
+
+          <div className="action-buttons-container">
+            <button className="pricing-btn">See Pricing</button>
+            <button className="generate-btn" onClick={handleClickGenerate}>
+              Generate
+              <div className="generate-btn-icon">
+                <img src={starIcon} alt="star icon" />
+                <span>-0.5</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {showImagePopup && generatedImageUrl && (
+        <GetImagePopup
+          getimage_details={{
+            onClose: () => {
+              setGeneratedImageUrl(null);
+              closeImagePopup();
+            },
+            image: generatedImageUrl,
+            imgname: "age-journey",
+          }}
+        />
+      )}
+
+      <div className="right-main-ageJourney">
+        <UploadImg uploadDetails={{ image: journeyImage }} />
+      </div>
+    </div>
+  );
 }
 
 export default AgeJourney;

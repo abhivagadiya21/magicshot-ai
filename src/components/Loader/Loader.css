@@ -1,4 +1,3 @@
-
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -36,11 +35,13 @@
   width: 100%;
   z-index: 1;
   background-color: transparent;
-  mask: repeating-linear-gradient(90deg,
-      transparent 0,
-      transparent 6px,
-      black 7px,
-      black 8px);
+  mask: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 6px,
+    black 7px,
+    black 8px
+  );
 }
 
 .loader::after {
@@ -55,12 +56,13 @@
     radial-gradient(circle at 55% 55%, #0ff 0%, transparent 45%),
     radial-gradient(circle at 45% 55%, #0f0 0%, transparent 45%),
     radial-gradient(circle at 55% 45%, #00f 0%, transparent 45%);
-  mask: radial-gradient(circle at 50% 50%,
-      transparent 0%,
-      transparent 10%,
-      black 25%);
-  animation:
-    transform-animation 2s infinite alternate,
+  mask: radial-gradient(
+    circle at 50% 50%,
+    transparent 0%,
+    transparent 10%,
+    black 25%
+  );
+  animation: transform-animation 2s infinite alternate,
     opacity-animation 4s infinite;
   animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
 }
@@ -76,7 +78,6 @@
 }
 
 @keyframes opacity-animation {
-
   0%,
   100% {
     opacity: 0;
@@ -142,17 +143,14 @@
   0% {
     opacity: 0;
   }
-
   5% {
     opacity: 1;
     text-shadow: 0 0 4px #fff;
     transform: scale(1.1) translateY(-2px);
   }
-
   20% {
     opacity: 0.2;
   }
-
   100% {
     opacity: 0;
   }

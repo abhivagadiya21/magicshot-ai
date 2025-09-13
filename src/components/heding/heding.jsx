@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './heding.css';
-import Logo from "../heding/hedingimg/logo.png";
-import Plan from "../heding/hedingimg/plan.svg";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCredits } from '../global_com/context';
+
+import Logo from "../heding/hedingimg/logo.png";
+import Plan from "../heding/hedingimg/plan.svg";
 import square from "../heding/hedingimg/squarelogo.png";
 import closeIcon from "../heding/hedingimg/close.svg";
 import menuIcon from "../heding/hedingimg/menu.svg";
@@ -11,6 +11,8 @@ import dropdownIcon from "../heding/hedingimg/dropdown.svg";
 import checkmarkIcon from "../heding/hedingimg/checkmark.svg";
 import userIcon from "../heding/hedingimg/user.svg";
 import moblienavIcon from "../heding/hedingimg/moblienavarrow.svg";
+
+import './heding.css';
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -123,7 +125,7 @@ export default function Heading() {
                                                             {label}
                                                             {selected === label && (
                                                                 <span className="check">
-                                                                    <img width="15" height="15" src={checkmarkIcon} alt="check"/>
+                                                                    <img width="15" height="15" src={checkmarkIcon} alt="check" />
                                                                 </span>
                                                             )}
                                                         </button>
@@ -187,17 +189,17 @@ export default function Heading() {
 
             {/* Mobile menu below navbar */}
             <div className={`content ${menuOpen ? "show" : ""}`}>
-                <div className="content-inner">
+                <div className="mobile-nav">
                     {options.map((opt) => (
                         <div
-                            className="baby-text-container"
+                            className="mobile-nav-option"
                             key={opt.path}
                             onClick={() => {
                                 navigate(opt.path);   // ✅ navigate
                                 setMenuOpen(false);   // ✅ close menu immediately
                             }}
                         >
-                            <p className='baby-text'>{opt.label}</p>
+                            <p className="mobile-nav-text">{opt.label}</p>
                             <span>
                                 <img height="20px" width="20px" src={moblienavIcon} alt="" />
                             </span>
@@ -207,4 +209,5 @@ export default function Heading() {
             </div>
         </>
     );
+
 }

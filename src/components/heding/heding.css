@@ -287,7 +287,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   rotate: -180deg;
 }
 
-.content-inner {
+.mobile-nav {
   width: 100%;
   position: absolute;
   height: 89.2vh;
@@ -297,7 +297,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   z-index: 5;
 }
 
-.baby-text-container {
+.mobile-nav-option {
   padding: 15px 10px;
   border-bottom: 1px solid #ffffff24;
   cursor: pointer;
@@ -306,7 +306,7 @@ background: linear-gradient(90deg, #1f2a48 0%, #141820 100%);
   margin-top: 10px;
 }
 
-.baby-text {
+.mobile-nav-text {
   font-size: 16px;
   margin: 0px;
   color: white;
