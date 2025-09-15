@@ -2,34 +2,33 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 // Services & Utils
-import { AgejournyAPI } from "../../services/imageBase";
-import { blobUrlToFile } from "../../utils/blobToFile";
+import { AgejournyAPI } from "../../services/imageBase.jsx";
+import { blobUrlToFile } from "../../utils/blobToFile.js";
 
 // Hooks
-import usePopup from "../../hooks/usePopup";
-import useUploadImg from "../../hooks/useUploadImg";
-import { useCredits } from "../../components/global_com/context.jsx";
+import usePopup from "../../hooks/usePopup.jsx";
+import useUploadImg from "../../hooks/useUploadImg.jsx";
+import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
 // Components
-import Loader from "../../components/Loader/Loader";
-import HowWorkPopup from "../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx";
-import CropImage from "../../components/CropImage/CropImage";
-import GetImagePopup from "../../components/popUp/getimage_pop/GetImagePop.jsx";
-import UploadImg from "../../components/upload_img_re_compo/Upload_img";
+import Loader from "../../components/Loader/Loader.jsx";
+import HowWorkPopup from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
+import CropImage from "../../components/CropImage/CropImage.jsx";
+import GetImagePopup from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
+import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
 
 // Assets
-import starIcon from "../BabyGenrator_page/babyG-img/star.svg";
-import questionMarkIcon from "../BabyGenrator_page/babyG-img/question.svg";
-import popPassImg3 from "../BabyGenrator_page/babyG-img/poppassimg3.png";
-import profileIcon1 from "../BabyGenrator_page/babyG-img/profile-1.svg";
-import uploadIcon from "../BabyGenrator_page/babyG-img/upload.svg";
-import journeyImage from "./journey_image/agejourney.png";
-import timeIcon from "../AgeJourney_page/journey_image/time.svg";
-import closeIcon from "../../components/heding/hedingimg/close.svg";
+import starIcon from "../BabyGenerator/baby-img/star.svg";
+import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
+import popPassImg3 from "../BabyGenerator/baby-img/poppassimg3.png";
+import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
+import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
+import journeyImage from "./journey-image/agejourney.png";
+import timeIcon from "./journey-image/time.svg";
+import closeIcon from "../../components/Heading/heading-img/close.svg";
 
 // Styles
-import "./ageJourney.css";
-import "../BabyGenrator_page/babyPage.css";
+import "./age-journey.css";
 
 
 

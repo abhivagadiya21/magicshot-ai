@@ -2,35 +2,35 @@ import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import usePopup from "../../hooks/usePopup";
-import useUploadImg from "../../hooks/useUploadImg";
-import { babyUploadeAPI } from "../../services/imageBase";
+import usePopup from "../../hooks/usePopup.jsx";
+import useUploadImg from "../../hooks/useUploadImg.jsx";
+import { babyUploadeAPI } from "../../services/imageBase.jsx";
 
-import "../BabyGenrator_page/babyPage.css";
+import "./baby-page.css";
 
-import UploadImg from "../../components/upload_img_re_compo/Upload_img";
-import CropImage from "../../components/CropImage/CropImage";
-import HowWorkPop from "../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx";
+import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
+import CropImage from "../../components/CropImage/CropImage.jsx";
+import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
 
-import starIcon from "./babyG-img/star.svg";
-import babyImage from "./babyG-img/babyG.png";
-import questionMarkIcon from "./babyG-img/question.svg";
-import popPassImage1 from "./babyG-img/poppassimg1.png";
-import profileIcon1 from "./babyG-img/profile-1.svg";
-import uploadIcon from "./babyG-img/upload.svg";
-import boyIcon from "../BabyGenrator_page/babyG-img/boy.png";
-import girlIcon from "../BabyGenrator_page/babyG-img/girl.png";
+import starIcon from "../BabyGenerator/baby-img/star.svg";
+import babyImage from "./baby-img/babyG.png";
+import questionMarkIcon from "./baby-img/question.svg";
+import popPassImage1 from "./baby-img/poppassimg1.png";
+import profileIcon1 from "./baby-img/profile-1.svg";
+import uploadIcon from "./baby-img/upload.svg";
+import boyIcon from "./baby-img/boy.png";
+import girlIcon from "./baby-img/girl.png";
 
-import GetImagePop from "../../components/popUp/getimage_pop/GetImagePop.jsx";
+import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
 
-import { blobUrlToFile } from "../../utils/blobToFile";
-import { useCredits } from "../../components/global_com/context.jsx";
+import { blobUrlToFile } from "../../utils/blobToFile.js";
+import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
-import closeIcon from "../../components/heding/hedingimg/close.svg";
-import timeIcon from "../AgeJourney_page/journey_image/time.svg";
-import checkmarkIcon from "../../components/heding/hedingimg/checkmark.svg";
+import closeIcon from "../../components/Heading/heading-img/close.svg";
+import timeIcon from "../AgeJourney/journey-image/time.svg";
+import checkmarkIcon from "../../components/Heading/heading-img/checkmark.svg";
 
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader/Loader.jsx";
 
 function UploadSection({ label, uploadHook, inputId }) {
   return (

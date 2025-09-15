@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import Header from '../components/heding/heding.jsx';
+import Header from '../components/Heading/Heading.jsx';
 
 function MainLayout() {
     return (

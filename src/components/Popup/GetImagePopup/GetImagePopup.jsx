@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
 
-import graduant from '../getimage_pop/getimage_pop-img/Black-Fade-PNG-Isolated-HD.png';
-import closeIcon from "../getimage_pop/getimage_pop-img/close.svg";
-import downloadIcon from "../getimage_pop/getimage_pop-img/download.svg";
+import graduant from './GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
+import closeIcon from "./GetImagePopupImage/close.svg";
+import downloadIcon from "./GetImagePopupImage/download.svg";
 
-import './getimage_pop.css';
+import './getimage_popup.css';
 
 function GetImagePop({ getimage_details }) {
 

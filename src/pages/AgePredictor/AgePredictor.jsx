@@ -2,33 +2,33 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 // hooks
-import usePopup from "../../hooks/usePopup";
-import useUploadImg from "../../hooks/useUploadImg";
+import usePopup from "../../hooks/usePopup.jsx";
+import useUploadImg from "../../hooks/useUploadImg.jsx";
 
 // services & utils
-import { agePredictorApi } from "../../services/imageBase";
-import { blobUrlToFile } from "../../utils/blobToFile";
-import { useCredits } from "../../components/global_com/context.jsx";
+import { agePredictorApi } from "../../services/imageBase.jsx";
+import { blobUrlToFile } from "../../utils/blobToFile.js";
+import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
 // components
-import UploadImg from "../../components/upload_img_re_compo/Upload_img.jsx";
-import CropImage from "../../components/CropImage/CropImage";
-import HowtiWorkPop from "../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx";
-import GetImagePop from "../../components/popUp/getimage_pop/GetImagePop.jsx";
-import Loader from "../../components/Loader/Loader";
+import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
+import CropImage from "../../components/CropImage/CropImage.jsx";
+import HowtiWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
+import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
+import Loader from "../../components/Loader/Loader.jsx";
 
 // assets (icons & images)
-import popPassImg2 from "../BabyGenrator_page/babyG-img/poppassimg2.png";
-import starIcon from "../BabyGenrator_page/babyG-img/star.svg";
-import predictorImage from "./predictor_image/agepredictor.png";
-import questionMarkIcon from "../BabyGenrator_page/babyG-img/question.svg";
-import profileIcon1 from "../BabyGenrator_page/babyG-img/profile-1.svg";
-import uploadIcon from "../BabyGenrator_page/babyG-img/upload.svg";
-import closeIcon from "../../components/heding/hedingimg/close.svg";
-import timeIcon from "../AgeJourney_page/journey_image/time.svg";
+import popPassImg2 from "../BabyGenerator/baby-img/poppassimg2.png";
+import starIcon from "../BabyGenerator/baby-img/star.svg";
+import predictorImage from "./predictor-image/agePredictor.png";
+import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
+import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
+import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
+import closeIcon from "../../components/Heading/heading-img/close.svg";
+import timeIcon from "../AgeJourney/journey-image/time.svg";
 
 // styles
-import "./agePredictor.css";
+import "./age-predictor.css";
 
 
 function AgePredictor() {

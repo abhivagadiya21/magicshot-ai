@@ -1,5 +1,4 @@
 import './Upload_img.css';
-// import babyG from './image_that/babyG.png'
 function Upload_img({uploadDetails}) {
     return (
         <>

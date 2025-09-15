@@ -73,7 +73,7 @@ export const agePredictorApi = async (imageFiles, otherData) => {
   }
 };
 
-export const changeHaircutAPI = async (imageFiles, otherData) => {
+export const changeHaircutApi = async (imageFiles, otherData) => {
   try {
     const formData = new FormData();
     // Send actual File objects, not blob URLs

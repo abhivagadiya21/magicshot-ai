@@ -1,26 +1,32 @@
-import { useState } from 'react';
-import usePopup from '../../hooks/usePopup.jsx';
-import Upload_img from '../../components/upload_img_re_compo/Upload_img.jsx';
-import './chnageHaircut.css';
-import star from '../BabyGenrator_page/babyG-img/star.svg';
-import hairImage from './hairstyle_image/changehaircut.png'
-import poppassimg4 from '../BabyGenrator_page/babyG-img/poppassimg4.png';
-import questionMark from '../BabyGenrator_page/babyG-img/question.svg';
-import Howworkpop from '../../components/popUp/how_it_work_pop/HowtiWorkpopup.jsx';
-import Profileicon1 from '../BabyGenrator_page/babyG-img/profile-1.svg';
-import upload from '../BabyGenrator_page/babyG-img/upload.svg';
-import boyIcon from '../BabyGenrator_page/babyG-img/boy.png';
-import girlIcon from '../BabyGenrator_page/babyG-img/girl.png';
-import CropImage from "../../components/CropImage/CropImage.jsx";
-import useUploadImg from "../../hooks/useUploadImg.jsx";
-import { changeHaircutAPI } from '../../services/imageBase.jsx';
-import { blobUrlToFile } from '../../utils/blobToFile.js';
+import { useState } from "react";
 import { toast } from "react-toastify";
-import GetImage_pop from "../../components/popUp/getimage_pop/GetImagePop.jsx";
-import { useCredits } from "../../components/global_com/context.jsx";
-import Loader from "../../components/Loader/Loader";
-import hairstyles from '../../utils/hairstyles.json';
-import haircolors from '../../utils/haircolors.json';
+
+import usePopup from "../../hooks/usePopup.jsx";
+import useUploadImg from "../../hooks/useUploadImg.jsx";
+
+import "./change-hairstyle.css";
+
+import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
+import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
+import CropImage from "../../components/CropImage/CropImage.jsx";
+import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
+import { useCredits } from "../../components/GlobalCom/Context.jsx";
+import Loader from "../../components/Loader/Loader.jsx";
+
+import star from "../BabyGenerator/baby-img/star.svg";
+import hairImage from "./hairstyle-image/changeHaircut.png";
+import popPassImg4 from "../BabyGenerator/baby-img/poppassimg4.png";
+import questionMark from "../BabyGenerator/baby-img/question.svg";
+import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
+import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
+import boyIcon from "../BabyGenerator/baby-img/boy.png";
+import girlIcon from "../BabyGenerator/baby-img/girl.png";
+
+import { changeHaircutApi } from "../../services/imageBase.jsx";
+import { blobUrlToFile } from "../../utils/blobToFile.js";
+
+import hairStyles from "../../utils/hairstyles.json";
+import hairColors from "../../utils/haircolors.json";
 
 const importAll = (r) => {
     let images = {};
@@ -28,11 +34,11 @@ const importAll = (r) => {
     return images;
 };
 
-const hairstyleImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}", {
+const hairstyleImages = import.meta.glob("./hairstyle-image/*.{png,jpg,jpeg,svg}", {
     eager: true,
     import: "default",
 });
-const haircolorImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}", {
+const haircolorImages = import.meta.glob("./hairstyle-image/*.{png,jpg,jpeg,svg}", {
     eager: true,
     import: "default",
 });
@@ -40,28 +46,24 @@ const haircolorImages = import.meta.glob("./hairstyle_image/*.{png,jpg,jpeg,svg}
 function ChangehaircutPage() {
     const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
     const { showPopup: showImagePopup, handleOpen: openImagePopup, handleClose: closeImagePopup } = usePopup();
-
     const [genraterImageurl, setGenraterImageurl] = useState(null);
     const [loading, setLoading] = useState(false);
-
     const [selectedGender, setSelectedGender] = useState("boy");
     const [activeTab, setActiveTab] = useState('tab1');
     const parent1Upload = useUploadImg();
-
     const [hairColor, setHairColor] = useState("default");
     const [hairstyle, setHairstyle] = useState(null);
     const { dispatch, fetchUser } = useCredits();
 
-    const styles = hairstyles.map((s) => ({
+    const styles = hairStyles.map((s) => ({
         ...s,
-        img: hairstyleImages[`./hairstyle_image/${s.img}`],
+        img: hairstyleImages[`./hairstyle-image/${s.img}`],
     }));
 
-    const HairColor = haircolors.map((c) => ({
+    const HairColor = hairColors.map((c) => ({
         ...c,
-        img: haircolorImages[`./hairstyle_image/${c.img}`],
+        img: haircolorImages[`./hairstyle-image/${c.img}`],
     }));
-
 
     const handleGenderSelect = (gender) => {
         setSelectedGender(gender);
@@ -72,22 +74,18 @@ function ChangehaircutPage() {
             toast.error("⚠ Please upload an image of Parent 1.");
             return;
         }
-
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (!storedUser?.id) {
             toast.error("❌ User not logged in.");
             return;
         }
-
         const uploadPhoto = await blobUrlToFile(
             parent1Upload.croppedImage,
             "parent1.jpg"
         );
-
         const imageFiles = {
             parent1: uploadPhoto,
         };
-
         const otherData = {
             hairstyle: hairstyle,
             hairColor: hairColor,
@@ -99,19 +97,15 @@ function ChangehaircutPage() {
         setLoading(true);
 
         try {
-            const { data } = await changeHaircutAPI(imageFiles, otherData);
+            const { data } = await changeHaircutApi(imageFiles, otherData);
             console.log("Response from API:", data);
 
             if (data?.file) {
-                // setTimeout(() => {
                 setLoading(false);
                 setGenraterImageurl(data.file);
                 openImagePopup();
                 toast.success("🎉 Hairstyle image generated successfully!");
                 fetchUser()
-
-
-                // }, 5000);
             } else {
                 toast.error("❌ No image returned from server.");
                 setLoading(false);
@@ -122,32 +116,27 @@ function ChangehaircutPage() {
         }
     };
 
-
-
     const handleClickGenerate = async () => {
         await handleGenerate();
         openImagePopup();
     };
 
-
     return (
         <>
             <div className="main-changeHair">
                 {loading && <Loader />}
-
-
-                <div className="left-container left-container-changeHair">
-                    <div className="inner-left-1-changeHair">
+                <div className="left-container">
+                    <div className="header-section">
                         <p className="Baby-hading">Al Change Hairstyle</p>
-                        <button onClick={openHowWork} className='btn-pop-up-howWork'>
+                        <button onClick={openHowWork} className="button-popup-howtowork">
                             <img src={questionMark} alt="" />
                             <span>How It Works</span>
                         </button>
                         {showHowWork && (
-                            <Howworkpop
-                                howworkpopDetails={{
+                            <HowWorkPop
+                                howWorkPopDetails={{
                                     onClose: closeHowWork,
-                                    image: poppassimg4,
+                                    image: popPassImg4,
                                     message: "Generate your age journey in seconds with help of AI."
                                 }}
                             />
@@ -166,7 +155,7 @@ function ChangehaircutPage() {
                                 <>
                                     <div className="profile-icon-container">
                                         <img
-                                            src={Profileicon1}
+                                            src={profileIcon1}
                                             alt="Parent 1 Icon"
                                             className="Parent-Icon"
                                         />
@@ -187,7 +176,7 @@ function ChangehaircutPage() {
 
                             {!parent1Upload.croppedImage ? (
                                 <label htmlFor="parent1Input" className="uplod-button">
-                                    <img className="upload-img-icon" src={upload} alt="Upload" />
+                                    <img className="upload-img-icon" src={uploadIcon} alt="Upload" />
                                     <p>Upload</p>
                                 </label>
                             ) : (
@@ -238,9 +227,7 @@ function ChangehaircutPage() {
                         )}
                     </div>
 
-                    {/* <p className='baby-gender-changeHair'> Gender</p> */}
                     <p className='Gender-hading'> Gender</p>
-
                     <div className="gender-main-container">
                         {/* Boy Option */}
                         <button
@@ -281,7 +268,6 @@ function ChangehaircutPage() {
                                 />
                                 <span className="avatar-text">Girl</span>
                             </div>
-
                             <div className={`button-container ${selectedGender === "girl" ? "checked" : ""}`} >
                                 {selectedGender === "girl" && (
                                     <span className="checkmark">
@@ -382,7 +368,7 @@ function ChangehaircutPage() {
                     </div>
                 </div>
                 {showImagePopup && genraterImageurl && (
-                    <GetImage_pop
+                    <GetImagePop
                         getimage_details={{
                             onClose: () => {
                                 setGenraterImageurl(null);
@@ -394,7 +380,7 @@ function ChangehaircutPage() {
                     />
                 )}
                 <div className="right-main-changeHair">
-                    <Upload_img uploadDetails={{ image: hairImage }} />
+                    <UploadImg uploadDetails={{ image: hairImage }} />
                 </div>
             </div>
         </>

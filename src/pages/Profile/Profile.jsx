@@ -1,6 +1,6 @@
 import './profile.css';
 import { useEffect, useState } from "react";
-import userIcon from '../../components/heding/hedingimg/user.svg';
+import userIcon from '../../components/Heading/heading-img/user.svg';
 
 export default function profile() {
     const [userEmail, setUserEmail] = useState("");

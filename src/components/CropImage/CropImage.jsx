@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 
-import Rotateleft from "./CropImage-svg/rotate-left.svg";
-import Refresh from "./CropImage-svg/refresh.svg";
-import Rotateright from "./CropImage-svg/rotate-right.svg";
+import Rotateleft from "./CropImageSvg/rotate-left.svg";
+import Refresh from "./CropImageSvg/refresh.svg";
+import Rotateright from "./CropImageSvg/rotate-right.svg";
 
-import "./CropImage.css";
+import "./crop-image.css";
 
 function CropImage({ imageSrc, onCropDone }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });

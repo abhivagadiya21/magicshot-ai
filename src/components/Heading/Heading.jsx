@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useCredits } from '../global_com/context';
+import { useCredits } from "../GlobalCom/Context.jsx";
 
-import Logo from "../heding/hedingimg/logo.png";
-import Plan from "../heding/hedingimg/plan.svg";
-import square from "../heding/hedingimg/squarelogo.png";
-import closeIcon from "../heding/hedingimg/close.svg";
-import menuIcon from "../heding/hedingimg/menu.svg";
-import dropdownIcon from "../heding/hedingimg/dropdown.svg";
-import checkmarkIcon from "../heding/hedingimg/checkmark.svg";
-import userIcon from "../heding/hedingimg/user.svg";
-import moblienavIcon from "../heding/hedingimg/moblienavarrow.svg";
+import Logo from "./heading-img/logo.png";
+import Plan from "./heading-img/plan.svg";
+import square from "./heading-img/squarelogo.png";
+import closeIcon from "./heading-img/close.svg";
+import menuIcon from "./heading-img/menu.svg";
+import dropdownIcon from "./heading-img/dropdown.svg";
+import checkmarkIcon from "./heading-img/checkmark.svg";
+import userIcon from "./heading-img/user.svg";
+import moblienavIcon from "./heading-img/moblienavarrow.svg";
 
-import './heding.css';
+import './heading.css';
 
 const options = [
     { label: 'Baby Generator', path: '/' },

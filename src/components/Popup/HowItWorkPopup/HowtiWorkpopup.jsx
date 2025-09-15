@@ -1,7 +1,7 @@
-import questionMarkIcon from "../../../pages/BabyGenrator_page/babyG-img/question.svg";
-import closeIcon from "../getimage_pop/getImage_pop-img/close.svg";
+import questionMarkIcon from "../../../pages/BabyGenerator/baby-img/question.svg";
+import closeIcon from "../GetImagePopup/GetImagePopupImage/close.svg";
 
-import "../how_it_work_pop/howWorkPop.css";
+import "./howWorkPop.css";
 
 function HowtiWorkpopup({ howWorkPopDetails }) {
   return (

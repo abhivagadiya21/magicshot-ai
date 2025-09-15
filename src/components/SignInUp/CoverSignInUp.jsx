@@ -1,11 +1,11 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import closeIcon from "../../components/heding/hedingimg/close.svg";
-import containtImg from './sign_in_up_img/containt.png';
-import Logo from "../heding/hedingimg/logo.png";
+import closeIcon from "../Heading/heading-img/close.svg";
+import containtImg from './sign-in-up-img/containt.png';
+import Logo from "../Heading/heading-img/logo.png";
 
-import './cover_sing_page.css';
+import './cover-sign-page.css';
 
 function CoverPagesing() {
   const location = useLocation();
