@@ -1,0 +1,118 @@
+@use '../abstracts/variables' as *;
+
+.right-main-ageJourney {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.main-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+
+  .select-age-hader {
+    margin-top: 10px;
+    color: $white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+
+  .slider-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #605174;
+    color: $white;
+    margin-top: 10px;
+  }
+}
+
+.age-slider {
+  position: relative;
+  width: 75%;
+  margin-top: 10px;
+
+  .age-slider-thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: black;
+    z-index: 2;
+    background: linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(90deg, #3231d3, #443e4d) border-box;
+    border: 3px solid transparent;
+  }
+
+  .age-slider-line {
+    height: 10px;
+    width: 100%;
+    background-color: #e1e1e1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .age-slider-line-fill {
+    position: absolute;
+    height: 10px;
+    width: 0;
+    background: $button-gradiatent-color;
+  }
+
+  .age-slider-input {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    opacity: 0;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-main-ageJourney {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .right-main-ageJourney {
+    display: none;
+  }
+}

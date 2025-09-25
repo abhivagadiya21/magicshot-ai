@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import "./sign-in.css";
+
 
 export default function SignIn({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
@@ -90,7 +90,7 @@ export default function SignIn({ onLoginSuccess }) {
         />
       </div>
 
-      <button type="submit" className="form-submit-btn" disabled={loading}>
+      <button type="submit" className="form-submit-button" disabled={loading}>
         {loading ? "Signing In..." : "Sign In"}
       </button>
 

@@ -4,20 +4,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 import usePopup from "../../hooks/usePopup.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
-import { babyUploadeAPI } from "../../services/imageBase.jsx";
+import { babyUploadAPI } from "../../services/imageBase.jsx";
 
-import "./baby-page.css";
-
-import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
-import CropImage from "../../components/CropImage/CropImage.jsx";
+import UploadImg from "../../components/Upload-image/UploadImage.jsx";
 import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
+import GenderOption from "../../components/GenderOption/GenderOption.jsx";
+import UploadSection from "../../components/UploadSection/UploadSection.jsx";
 
 import starIcon from "../BabyGenerator/baby-img/star.svg";
 import babyImage from "./baby-img/babyG.png";
 import questionMarkIcon from "./baby-img/question.svg";
 import popPassImage1 from "./baby-img/poppassimg1.png";
-import profileIcon1 from "./baby-img/profile-1.svg";
-import uploadIcon from "./baby-img/upload.svg";
 import boyIcon from "./baby-img/boy.png";
 import girlIcon from "./baby-img/girl.png";
 
@@ -26,114 +23,9 @@ import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx"
 import { blobUrlToFile } from "../../utils/blobToFile.js";
 import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
-import closeIcon from "../../components/Heading/heading-img/close.svg";
 import timeIcon from "../AgeJourney/journey-image/time.svg";
-import checkmarkIcon from "../../components/Heading/heading-img/checkmark.svg";
 
 import Loader from "../../components/Loader/Loader.jsx";
-
-function UploadSection({ label, uploadHook, inputId }) {
-  return (
-    <div className="uplod-image-button-container">
-      <label className="uplod-image-button" htmlFor={inputId}>
-        {uploadHook.croppedImage ? (
-          <img src={uploadHook.croppedImage} alt={label} className="preview-img" />
-        ) : (
-          <>
-            <div className="profile-icon-container">
-              <img src={profileIcon1} alt={`${label} Icon`} className="Parent-Icon" />
-            </div>
-            <p>{label}</p>
-          </>
-        )}
-      </label>
-      <div className="image-upload-button-container">
-        <input
-          type="file"
-          accept="image/*"
-          id={inputId}
-          className="hidden"
-          onChange={uploadHook.handleFileUpload}
-          disabled={!!uploadHook.croppedImage}
-        />
-
-        {!uploadHook.croppedImage ? (
-          <label htmlFor={inputId} className="uplod-button">
-            <img className="upload-image-icon" src={uploadIcon} alt="Upload Icon" />
-            <p>Upload</p>
-          </label>
-        ) : (
-          <button
-            type="button"
-            className="uplod-button"
-            onClick={() => {
-              uploadHook.resetImage();
-              const input = document.getElementById(inputId);
-              if (input) input.value = "";
-            }}>
-            <img
-              width="10"
-              height="10"
-              src={closeIcon}
-              alt="delete"
-            />
-            Cancel
-          </button>
-        )}
-      </div>
-
-      {uploadHook.showCropper && (
-        <div className="overlay">
-          <div className="crop-popup">
-            <button className="close-popup-button" onClick={() => uploadHook.setShowCropper(false)}>
-              <img
-                width="20"
-                height="20"
-                src={closeIcon}
-                alt="close"
-              />
-            </button>
-            <div className="cropper-header">
-              <p>Crop Image</p>
-            </div>
-            <CropImage
-              imageSrc={uploadHook.selectedFile}
-              onCropDone={uploadHook.handleCropComplete}
-              onCancel={() => uploadHook.setShowCropper(false)}
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function GenderOption({ gender, selectedGender, handleSelect, icon }) {
-  const isSelected = selectedGender === gender;
-  return (
-    <button
-      type="button"
-      className={`gender-option ${isSelected ? "selected" : ""}`}
-      onClick={() => handleSelect(gender)}>
-      <div className="gender-avatar-container">
-        <img src={icon} alt={`${gender} Avatar`} className="gender-avatar-img" />
-        <span className="avatar-text">{gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-      </div>
-      <div className={`button-container ${isSelected ? "checked" : ""}`}>
-        {isSelected && (
-          <span className="checkmark">
-            <img
-              width="24"
-              height="24"
-              src={checkmarkIcon}
-              alt="checkmark"
-            />
-          </span>
-        )}
-      </div>
-    </button>
-  );
-}
 
 function BabyPage() {
   const { showPopup: showHowWork, handleOpen: openHowWork, handleClose: closeHowWork } = usePopup();
@@ -165,6 +57,7 @@ function BabyPage() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (!storedUser?.id) {
       toast.error("❌ User not logged in.");
+
       return;
     }
 
@@ -187,7 +80,7 @@ function BabyPage() {
     setLoading(true);
 
     try {
-      const response = await babyUploadeAPI(imageFiles, otherData);
+      const response = await babyUploadAPI(imageFiles, otherData);
       console.log("Response from API:", response);
       const data = response.data;
       if (data?.file) {
@@ -214,7 +107,6 @@ function BabyPage() {
     <>
       <div className="main-container main-baby-genrartor-midia">
         {loading && <Loader />}
-        {/* Left Section */}
         <div className="left-container">
           <div className="header-section">
             <p className="Baby-hading">AI Baby Generator</p>
@@ -238,7 +130,7 @@ function BabyPage() {
             <UploadSection label="Parent 2" uploadHook={parent2Upload} inputId="parent2Input" />
           </div>
 
-          <p className="Baby-gender">Baby's Gender</p>
+          <p className="Gender-hading">Baby's Gender</p>
           <div className="gender-main-container">
             <GenderOption
               gender="boy"
@@ -253,25 +145,25 @@ function BabyPage() {
               icon={girlIcon}
             />
           </div>
-        </div>
 
-        <div className="left-main-babyG-footer" ref={fixedRef}>
-          <div className="time-estimation-container">
-            <div className="time-estimation">
-              <img src={timeIcon} alt="" />
-              <p>Est. time: 30 to 50 seconds</p>
-            </div>
-          </div>
-
-          <div className="action-buttons-container">
-            <button className="pricing-btn">See Pricing</button>
-            <button className="generate-btn" onClick={handleClickGenerate}>
-              Generate
-              <div className="generate-btn-icon">
-                <img src={starIcon} alt="star icon" />
-                <span>-0.5</span>
+          <div className="left-main-babyG-footer" ref={fixedRef}>
+            <div className="time-estimation-container">
+              <div className="time-estimation">
+                <img src={timeIcon} alt="" />
+                <p>Est. time: 30 to 50 seconds</p>
               </div>
-            </button>
+            </div>
+
+            <div className="action-buttons-container">
+              <button className="pricing-button">See Pricing</button>
+              <button className="generate-button" onClick={handleClickGenerate}>
+                Generate
+                <div className="generate-button-icon">
+                  <img src={starIcon} alt="star icon" />
+                  <span>-0.5</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 

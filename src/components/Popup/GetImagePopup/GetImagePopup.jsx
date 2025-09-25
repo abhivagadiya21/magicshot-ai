@@ -5,7 +5,6 @@ import graduant from './GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import closeIcon from "./GetImagePopupImage/close.svg";
 import downloadIcon from "./GetImagePopupImage/download.svg";
 
-import './getimage_popup.css';
 
 function GetImagePop({ getimage_details }) {
 
@@ -21,6 +20,7 @@ function GetImagePop({ getimage_details }) {
             const canvas = await html2canvas(imageRef.current, {
                 useCORS: true,
                 backgroundColor: null,
+                   allowTaint: true,
                 scale: 2,
             });
 
@@ -49,23 +49,24 @@ function GetImagePop({ getimage_details }) {
 
         <div className="popup-overlay-getimage">
             <div className="popup-box-getimage">
-                <div className="inner-1-pop-getimage">
+                <div className="Generat-image-heading">
                     <span>Generated Image</span>
                     <button
-                        className="getimage-pop-close-btn"
+                        className="getimage-pop-close-button"
                         onClick={getimage_details.onClose}
                     >
-                        <img width="20" height="20" src={closeIcon} alt="close"/>
+                        <img width="20" height="20" src={closeIcon} alt="close" />
                     </button>
                 </div>
 
-                <div className="inner-2-pop-getimage" ref={imageRef}>
+                <div className="generated-image" ref={imageRef}>
                     <div className="pop-pass-image-get">
                         <img
                             className="pop-pass-image-get"
                             src={getimage_details.image}
                             alt=""
                         />
+
                         {getimage_details.getingAge && (
                             <div className="age-overlay">
                                 <img
@@ -83,7 +84,7 @@ function GetImagePop({ getimage_details }) {
 
                 <div className="download-button-container">
                     <button
-                        className="download-btn pixel-corners"
+                        className="download-button pixel-corners"
                         onClick={handleDownload}
                         disabled={downloadingRef.current}
                     >

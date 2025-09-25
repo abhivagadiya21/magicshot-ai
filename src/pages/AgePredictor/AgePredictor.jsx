@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-// hooks
 import usePopup from "../../hooks/usePopup.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
 
-// services & utils
-import { agePredictorApi } from "../../services/imageBase.jsx";
+import { agePredictorAPI } from "../../services/imageBase.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile.js";
 import { useCredits } from "../../components/GlobalCom/Context.jsx";
+import  UploadSection  from "../../components/UploadSection/UploadSection.jsx";
 
-// components
-import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
+import UploadImg from "../../components/Upload-image/UploadImage.jsx";
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import HowtiWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
 import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 
-// assets (icons & images)
 import popPassImg2 from "../BabyGenerator/baby-img/poppassimg2.png";
 import starIcon from "../BabyGenerator/baby-img/star.svg";
 import predictorImage from "./predictor-image/agePredictor.png";
@@ -26,9 +23,6 @@ import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
 import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
 import closeIcon from "../../components/Heading/heading-img/close.svg";
 import timeIcon from "../AgeJourney/journey-image/time.svg";
-
-// styles
-import "./age-predictor.css";
 
 
 function AgePredictor() {
@@ -84,7 +78,7 @@ function AgePredictor() {
     setLoading(true);
 
     try {
-      const response = await agePredictorApi(imageFiles, otherData);
+      const response = await agePredictorAPI(imageFiles, otherData);
       console.log("✅ Response from API:", response);
       const data = response.data;
 
@@ -137,86 +131,11 @@ function AgePredictor() {
 
         {/* Upload Section */}
         <div className="upload-image-buttons">
-          <label className="uplod-image-button" htmlFor="parent1Input">
-            {parent1Upload.croppedImage ? (
-              <img
-                src={parent1Upload.croppedImage}
-                alt="Parent 1"
-                className="preview-img"
-              />
-            ) : (
-              <>
-                <div className="profile-icon-container">
-                  <img
-                    src={profileIcon1}
-                    alt="Parent 1 Icon"
-                    className="Parent-Icon"
-                  />
-                </div>
-                <p>Upload Your Image</p>
-              </>
-            )}
-          </label>
-
-          <div className="img-upload-button-container">
-            <input
-              type="file"
-              accept="image/*"
-              id="parent1Input"
-              className="hidden"
-              onChange={parent1Upload.handleFileUpload}
-              disabled={!!parent1Upload.croppedImage}
-            />
-
-            {!parent1Upload.croppedImage ? (
-              <label htmlFor="parent1Input" className="uplod-button">
-                <img
-                  className="upload-img-icon"
-                  src={uploadIcon}
-                  alt="Upload"
-                />
-                <p>Upload</p>
-              </label>
-            ) : (
-              <button
-                type="button"
-                className="uplod-button"
-                onClick={() => {
-                  parent1Upload.resetImage();
-                  const input = document.getElementById("parent1Input");
-                  if (input) input.value = "";
-                }}
-              >
-                <img width="10" height="10" src={closeIcon} alt="delete" />
-                Cancel
-              </button>
-            )}
+          <div className="upload-image-buttons-baby">
+            <UploadSection label="Upload Your Image" uploadHook={parent1Upload} inputId="parent1Input" />
           </div>
-
-          {/* Crop Popup */}
-          {parent1Upload.showCropper && (
-            <div className="overlay">
-              <div className="crop-popup">
-                <div className="cropper-header">
-                  <p>Crop Image</p>
-                </div>
-                <button
-                  className="close-popup-button"
-                  onClick={() => parent1Upload.setShowCropper(false)}
-                >
-                  <img width="20" height="20" src={closeIcon} alt="close" />
-                </button>
-                <CropImage
-                  imageSrc={parent1Upload.selectedFile}
-                  onCropDone={parent1Upload.handleCropComplete}
-                  onCancel={() => parent1Upload.setShowCropper(false)}
-                />
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Footer */}
         <div className="left-main-babyG-footer">
           <div className="time-estimation-container">
             <div className="time-estimation">
@@ -225,10 +144,10 @@ function AgePredictor() {
             </div>
           </div>
           <div className="action-buttons-container">
-            <button className="pricing-btn">See Pricing</button>
-            <button className="generate-btn" onClick={handleClick}>
+            <button className="pricing-button">See Pricing</button>
+            <button className="generate-button" onClick={handleClick}>
               Generate
-              <div className="generate-btn-icon">
+              <div className="generate-button-icon">
                 <img src={starIcon} alt="star icon" />
                 <span>-0.5</span>
               </div>
@@ -237,7 +156,6 @@ function AgePredictor() {
         </div>
       </div>
 
-      {/* Popup Image */}
       {showImagePopup && generatedImageUrl && (
         <GetImagePop
           getimage_details={{
@@ -252,7 +170,6 @@ function AgePredictor() {
         />
       )}
 
-      {/* Right Section */}
       <div className="right-main-agePredictor">
         <UploadImg uploadDetails={{ image: predictorImage }} />
       </div>

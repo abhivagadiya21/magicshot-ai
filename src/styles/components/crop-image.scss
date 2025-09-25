@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 .cropper-wrapper {
   display: flex;
   flex-direction: row-reverse;
@@ -20,10 +22,10 @@
   position: relative;
   z-index: 10;
   height: 100%;
-  background: #15191c;
-  color: white;
+  background: $background-color;
+  color: $white;
   border-radius: 15px;
-  border: 3px solid #262a2d;
+  border: 3px solid $border-color;
   justify-content: center;
   flex-direction: column;
   gap: 11px;
@@ -32,14 +34,14 @@
 }
 
 .aspect-select {
-  color: white;
+  color: $white;
   border-radius: 12px;
   padding: 0.625rem 0.625rem;
   font-size: 0.8rem;
   border: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: #1d2328;
+  background-color: $border-color;
   background-image: url("https://img.icons8.com/material-sharp/24/FFFFFF/expand-arrow--v1.png");
   background-repeat: no-repeat;
   background-size: 15px 15px;
@@ -52,23 +54,23 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: #1d2328;
+  background-color: $border-color;
   border-radius: 12px;
   text-align: center;
   width: 25px;
   border: none;
-  color: white;
+  color: $white;
   text-wrap: nowrap;
   padding: 0.725rem 1.35rem;
 }
 
-.select-img-button {
+.select-image-button {
   width: 100%;
   margin-top: 10px;
   border-radius: 15px;
-  background-color: #15191c;
-  color: white;
-  border: 3px solid #262a2d;
+  background-color: $background-color;
+  color: $white;
+  border: 3px solid $border-color;
   padding: 10px;
 }
 

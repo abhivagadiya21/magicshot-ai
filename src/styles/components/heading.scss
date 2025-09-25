@@ -1,0 +1,339 @@
+@use '../abstracts/variables' as *;
+
+.custom-navbar {
+  background-color: $background-color;
+  padding: 9px 0px;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 100%;
+  border-radius: 15px;
+  border: 3px solid $border-color;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 2.9px 10px;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  float: inline-end;
+
+  .upgrade-button {
+    background-color: $outer-background;
+    color: $white;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border: 3px solid $border-color;
+
+
+    .highlight-text {
+      color: $white;
+    }
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 20px;
+    height: 40px;
+  }
+
+  .signin-button {
+    background: $outer-background;
+    color: $white;
+    border-bottom: 1.5px solid $black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    padding: 9px 25px;
+    cursor: pointer;
+    font-size: 14px;
+    outline-style: solid;
+    outline-color: #262a2d;
+    outline-width: 3px;
+    outline: 3px solid #262a2d !important;
+    outline-offset: 0;
+    text-wrap: nowrap;
+  }
+
+  .signin-button:active {
+    border-bottom: none;
+  }
+
+  .profile-credit-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .credit-show-container {
+      background-color: $outer-background;
+      color: $white;
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      border: 3px solid $border-color;
+      text-wrap: nowrap;
+    }
+
+    .profile-button {
+      background-color: $outer-background;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border-radius: 50px;
+      padding: 5px;
+      border: 3px solid $border-color;
+    }
+  }
+
+  .signup-button {
+    background: $signup-gradiatent-color;
+    color: $white;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 25px;
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+    text-wrap: nowrap;
+  }
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .navbar-hamburger-container {
+    display: none;
+
+    .hamburger {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .hamburger svg {
+      width: 24px;
+      height: 24px;
+      rotate: -180deg;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      color: $white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: none;
+    }
+
+  }
+
+  .logo-img {
+    width: 150px;
+    height: 36.33;
+    cursor: pointer;
+  }
+
+  .square {
+    display: none;
+  }
+
+  .dropdown {
+    position: relative;
+    font-size: 14px;
+
+    .dropdown-button {
+      background-color: $outer-background;
+      color: $white;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      min-width: 200px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 3px solid $border-color;
+    }
+
+    .arrow {
+      margin-left: 0.5rem;
+    }
+
+    .dropdown-menu {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 99999 !important;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background-color: $outer-background;
+      list-style: none;
+      padding: 0.5rem 0;
+      border-radius: 10px;
+      z-index: 100;
+      width: 100%;
+      border: 3px solid $border-color;
+    }
+
+    .dropdown-item {
+      background: none;
+      border: none;
+      color: $white;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .dropdown-item.active {
+      background-color: $border-color;
+    }
+
+    .check {
+      float: right;
+    }
+  }
+}
+
+.content {
+  display: none;
+
+  .mobile-nav {
+    width: 100%;
+    position: absolute;
+    height: 89.2vh;
+    padding: 0px 15px;
+    backdrop-filter: blur(10px);
+    background-color: hsl(0deg 0% 0% / 70%);
+    z-index: 5;
+  }
+
+  .mobile-nav-option {
+    padding: 15px 10px;
+    border-bottom: 1px solid #ffffff24;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .mobile-nav-text {
+    font-size: 16px;
+    margin: 0px;
+    color: $white;
+  }
+}
+
+.navbar-main-container {
+  display: flex;
+  justify-content: center;
+  padding: 13px;
+}
+
+@media (max-width: 768px) {
+  .user-info {
+    display: none;
+  }
+
+  .logo-img {
+    display: none;
+  }
+
+  .square {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  .navbar-hamburger-container {
+    display: block;
+  }
+
+  .navbar-main-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navbar-content {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    margin-top: 1rem;
+  }
+
+  .content.show {
+    display: flex;
+  }
+
+  .navbar-right {
+    width: 50%;
+    justify-content: end;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+  }
+
+  .dropdown-button {
+    width: 100%;
+  }
+
+  .signup-button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .signin-button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .auth-buttons {
+    height: 35px;
+  }
+}
+
+@media (max-width: 1260px) {
+  .upgrade-button {
+    display: none;
+  }
+}

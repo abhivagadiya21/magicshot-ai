@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 h1 {
     color: beige;
 }
@@ -8,7 +10,6 @@ h1 {
     justify-content: center;
     width: 100%;
     padding: 15PX;
-    /* background-color: aqua; */
 }
 
 .profile-info{
@@ -17,8 +18,8 @@ h1 {
     align-items: center;
     justify-content: center;
     color: beige;
-    background-color: #15191c;
+    background-color: $background-color;
     width: 100%;
     border-radius: 15px;
-    border: 3px solid #262a2d; 
+    border: 3px solid $border-color; 
 }

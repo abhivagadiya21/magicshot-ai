@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 .popup-overlay-getimage {
   position: fixed;
   height: 100%;
@@ -14,78 +16,84 @@
 }
 
 .popup-box-getimage {
-  /* width: 35%; */
   height: 81%;
-  background-color: rgb(26 29 31);
+  background-color: $background-color;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
 }
 
-.inner-1-pop-getimage {
+.Generat-image-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  color: white;
+  color: $white;
+
+  .getimage-pop-close-button {
+    border-radius: 50%;
+    background-color: transparent;
+    color: $white;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 7px 0px 7px;
+  }
 }
 
-.inner-2-pop-getimage {
+.generated-image {
   height: 70%;
   width: 100%;
   padding: 0px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .pop-pass-image-get {
+    height: 100%;
+    opacity: hidden;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+
+  .age-overlay {
+    position: absolute;
+    top: 49%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pop-pass-image-black {
+    width: 100%;
+    height: 52%;
+    object-fit: cover;
+  }
+
+  .age-img {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bold;
+    color: $white;
+    text-shadow: 2px 2px 5px $black;
+  }
 }
 
-.inner-3-pop-getimage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 35px;
-}
-
-.getimage-pop-close-btn {
-  border-radius: 50%;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 7px 0px 7px;
-}
-
-.getimage-pop-download-btn {
-  background: #1d2328;
-  color: white;
-  border: 1.5px solid black;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-radius: 10px;
-  padding: 9px 25px;
-  cursor: pointer;
-  font-size: 14px;
-  outline-style: solid;
-  outline-color: #262a2d;
-  outline-width: 3px;
-  outline: 3px solid #262a2d !important;
-  outline-offset: 0;
-}
-
-.getimage-pop-download-btn:active {
+.getimage-pop-download-button:active {
   border-bottom: none;
 }
 
-.download-btn {
+.download-button {
   height: 45px;
   width: 120px;
   cursor: pointer;
-  background: white;
+  background: $white;
   border: none;
   background: #0000ff;
   border-radius: 30px;
@@ -109,7 +117,7 @@
 
 .text-container .text {
   font-size: 17px;
-  color: #fff;
+  color: $white;
   font-weight: 600;
   opacity: 1;
   transition: opacity ease-in-out 250ms;
@@ -118,24 +126,24 @@
 .download-icon {
   height: 25px;
   width: 25px;
-  fill: #fff;
+  fill: $white;
   opacity: 0;
   transition: opacity ease-in-out 250ms;
 }
 
-.download-btn:hover .button-content {
+.download-button:hover .button-content {
   transform: translateY(0px);
 }
 
-.download-btn:hover .text {
+.download-button:hover .text {
   opacity: 0;
 }
 
-.download-btn:hover .download-icon {
+.download-button:hover .download-icon {
   opacity: 1;
 }
 
-.download-btn:focus .download-icon {
+.download-button:focus .download-icon {
   -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
   animation: heartbeat 1.5s ease-in-out infinite both;
 }
@@ -225,43 +233,6 @@
   margin-top: 20px;
 }
 
-.pop-pass-image-get {
-  height: 100%;
-  opacity: hidden;
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-}
-
-
-
-.age-overlay {
-  position: absolute;
-  top: 49%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.pop-pass-image-black {
-  width: 100%;
-  height: 52%;
-  object-fit: cover;
-}
-
-.age-img {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 50px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 5px black;
-}
-
-
-
 @media (max-width: 768px) {
   .popup-box-getimage {
     width: 100%;
@@ -272,6 +243,5 @@
     display: inline-block;
     width: 100%;
     object-fit: contain;
-    /* border-radius: 15px; */
   }
 }

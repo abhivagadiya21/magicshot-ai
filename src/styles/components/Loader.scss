@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -23,7 +25,7 @@
   font-size: 1.6em;
   font-weight: 600;
   user-select: none;
-  color: #fff;
+  color: $white;
   scale: 2;
 }
 

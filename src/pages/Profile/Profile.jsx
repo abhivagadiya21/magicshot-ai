@@ -1,4 +1,3 @@
-import './profile.css';
 import { useEffect, useState } from "react";
 import userIcon from '../../components/Heading/heading-img/user.svg';
 

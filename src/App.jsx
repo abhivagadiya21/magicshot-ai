@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import BabyPage from './pages/BabyGenerator/BabyPage.jsx';
-import ChangeHaircut from "./pages/ChangeHaircut/ChangeHairsthle.jsx";
+import ChangeHaircut from "./pages/ChangeHaircut/ChangeHairstyle.jsx";
 import AgeJourney from './pages/AgeJourney/AgeJourney.jsx';
 import CoverPagesing from './components/SignInUp/CoverSignInUp.jsx';
 import AgePredictor from './pages/AgePredictor/AgePredictor.jsx';
@@ -14,6 +14,7 @@ import SignUp from './components/SignInUp/SignUp.jsx';
 import ForgotPassword from './components/SignInUp/ForgotPassword.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 import { CreditProvider } from './components/GlobalCom/Context.jsx';
+import './styles/main.scss';
 
 function App() {
   return (

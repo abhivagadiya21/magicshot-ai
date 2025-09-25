@@ -1,0 +1,16 @@
+@use 'abstracts/variables' as *;
+
+@use 'components/cover-sign-page';
+@use 'components/crop-image';
+@use 'components/getimage-popup';
+@use 'components/heading';
+@use 'components/howworkpop';
+@use 'components/Loader';
+@use 'components/sign-in';
+@use 'components/Upload_img';
+
+@use 'pages/age-journey';
+@use 'pages/age-predictor';
+@use 'pages/baby-page';
+@use 'pages/change-hairstyle';
+@use 'pages/profile';

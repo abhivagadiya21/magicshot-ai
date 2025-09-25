@@ -5,7 +5,7 @@ import closeIcon from "../Heading/heading-img/close.svg";
 import containtImg from './sign-in-up-img/containt.png';
 import Logo from "../Heading/heading-img/logo.png";
 
-import './cover-sign-page.css';
+
 
 function CoverPagesing() {
   const location = useLocation();
@@ -15,7 +15,7 @@ function CoverPagesing() {
   const redirectPath = searchParams.get("ref") || "/";
 
   return (
-    <div className="main-cover-sign-page-compo">
+    <div className="main-cover-sign-page-component">
       <div className="main-cover-sing-page">
         <div className="inner-main-cover-sing-page">
           <div className="left-inner-main-cover-sing">
@@ -34,14 +34,14 @@ function CoverPagesing() {
                   <div className="form-header">
                     <Link to="signin">
                       <button
-                        className={`tab-btn ${currentPath === "signin" ? "active" : ""}`}
+                        className={`tab-button ${currentPath === "signin" ? "active" : ""}`}
                       >
                         Sign In
                       </button>
                     </Link>
                     <Link to="signup">
                       <button
-                        className={`tab-btn ${currentPath === "signup" ? "active" : ""}`}
+                        className={`tab-button ${currentPath === "signup" ? "active" : ""}`}
                       >
                         Sign Up
                       </button>

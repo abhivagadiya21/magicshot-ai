@@ -1,0 +1,93 @@
+@use '../abstracts/variables' as *;
+
+.right-main-agePredictor {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.upload-image-buttons {
+    justify-content: center;
+    width: 100%;
+    gap: 25px;
+    height: 140px;
+}
+
+
+.img-upload-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: -17px;
+
+    .upload-img-icon {
+        width: 15px;
+    }
+
+    .uplod-button {
+        position: relative;
+        background: $button-gradiatent-color;
+        color: $white;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        padding: 7px 15px;
+        gap: 10px;
+        font-size: 0.85rem;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+}
+
+.uplod-image-button {
+    background-color: $outer-background;
+    outline: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 1px 1px 50px #181818;
+    padding-top: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: $white;
+
+    .preview-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #413e5d4f;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    .profile-icon-container img {
+        width: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .right-main-agePredictor {
+        display: none;
+    }
+}

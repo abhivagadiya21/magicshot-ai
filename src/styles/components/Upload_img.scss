@@ -1,0 +1,69 @@
+@use '../abstracts/variables' as *;
+
+.main-upload-image-container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  margin-top: 50px;
+}
+
+.inner-1-image-container {
+  height: 50%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.upload-img-props {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.upload-container {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(39 39 42);
+  border-radius: 0px 0px 10px 10px;
+  cursor: pointer;
+  padding-bottom: 30px;
+
+  .plus-icon {
+    font-size: 50px;
+    color: #999;
+    display: block;
+  }
+  .text {
+    color: rgb(134 134 141);
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .subtext {
+    font-size: 12px;
+    color: rgb(134 134 141);
+    margin-bottom: 20px;
+  }
+
+  .upload-btn {
+    background-color: hsl(273.96000000000004 100% 58.43% / 1);
+    color: white;
+    border: none;
+    padding: 10px 35px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 965px) {
+  .main-upload-img-babyG {
+    width: 90%;
+  }
+}

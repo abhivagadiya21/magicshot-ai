@@ -1,0 +1,110 @@
+@use '../abstracts/variables' as *;
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $outer-background;
+    margin: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+}
+
+
+.right-main-changeHair {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.Gender-hading {
+    color: $white;
+    margin-top: 17px;
+
+}
+
+
+
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    column-gap: 60px;
+}
+
+.tab-button-1-chageHairstyle,
+.tab-button-2-chageHairstyle {
+    width: 30%;
+    padding: 10px;
+    font-size: 0.8rem;
+    background-color: transparent;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.active-tab1 {
+    border-bottom: 2px solid #c589e4;
+}
+
+.tab-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.tab1-inner-1-content {
+    display: flex;
+    width: 25%;
+    padding: 1.5%;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    font-size: .8rem;
+
+    .tab1-inner-1-content p {
+        color: $white;
+    }
+
+    .tab-image {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 3px solid transparent;
+    }
+
+    .tab1-inner-1-content.selected .tab-image {
+        border: 3px solid #c589e4;
+
+    }
+
+    .tab-image:active {
+        border: 2px solid #c589e4;
+    }
+}
+
+@media (max-width: 768px) {
+    .left-main-changeHair {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .right-main-changeHair {
+        display: none;
+    }
+}

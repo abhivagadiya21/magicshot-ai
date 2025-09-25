@@ -5,8 +5,6 @@ import Rotateleft from "./CropImageSvg/rotate-left.svg";
 import Refresh from "./CropImageSvg/refresh.svg";
 import Rotateright from "./CropImageSvg/rotate-right.svg";
 
-import "./crop-image.css";
-
 function CropImage({ imageSrc, onCropDone }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -88,7 +86,7 @@ function CropImage({ imageSrc, onCropDone }) {
       </div>
 
       <div className="action-buttons">
-        <button className="select-img-button" onClick={handleCropDone}>
+        <button className="select-image-button" onClick={handleCropDone}>
           Select Image
         </button>
       </div>

@@ -1,23 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-// Services & Utils
-import { AgejournyAPI } from "../../services/imageBase.jsx";
+import { ageJourneyAPI } from "../../services/imageBase.jsx";
 import { blobUrlToFile } from "../../utils/blobToFile.js";
+import  UploadSection  from "../../components/UploadSection/UploadSection.jsx";
 
-// Hooks
 import usePopup from "../../hooks/usePopup.jsx";
 import useUploadImg from "../../hooks/useUploadImg.jsx";
 import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
-// Components
 import Loader from "../../components/Loader/Loader.jsx";
-import HowWorkPopup from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
+import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import GetImagePopup from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
-import UploadImg from "../../components/upload_img_re_compo/UploadImage.jsx";
+import UploadImg from "../../components/Upload-image/UploadImage.jsx";
 
-// Assets
 import starIcon from "../BabyGenerator/baby-img/star.svg";
 import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
 import popPassImg3 from "../BabyGenerator/baby-img/poppassimg3.png";
@@ -27,18 +24,14 @@ import journeyImage from "./journey-image/agejourney.png";
 import timeIcon from "./journey-image/time.svg";
 import closeIcon from "../../components/Heading/heading-img/close.svg";
 
-// Styles
-import "./age-journey.css";
-
-
-
 function AgeJourney() {
-  // Popup hooks
+
   const {
     showPopup: showHowWork,
     handleOpen: openHowWork,
     handleClose: closeHowWork,
   } = usePopup();
+
   const {
     showPopup: showImagePopup,
     handleOpen: openImagePopup,
@@ -111,12 +104,11 @@ function AgeJourney() {
     const otherData = {
       userId: storedUser.id,
       selectAge: sliderValue,
-      transactionId: 1,
     };
 
     setLoading(true);
     try {
-      const { data } = await AgejournyAPI(imageFiles, otherData);
+      const { data } = await ageJourneyAPI(imageFiles, otherData);
       if (data?.file) {
         setLoading(false);
         setGeneratedImageUrl(data.file);
@@ -148,132 +140,58 @@ function AgeJourney() {
         <div className="header-section">
           <p className="Baby-hading">AI Age Journey</p>
           <button onClick={openHowWork} className="button-popup-howtowork">
-            <img src={questionMarkIcon} alt="question icon" />
+            <img src={questionMarkIcon} alt="Help icon" />
             <span>How It Works</span>
           </button>
           {showHowWork && (
-            <HowWorkPopup
-              howworkpopDetails={{
+            <HowWorkPop
+              howWorkPopDetails={{
                 onClose: closeHowWork,
                 image: popPassImg3,
-                message: "Generate your age journey in seconds with help of AI.",
+                message: "Upload your photos, and AI quickly generates an image of your future baby.",
               }}
             />
           )}
         </div>
 
         <div className="upload-image-buttons">
-          <label className="uplod-image-button" htmlFor="parent1Input">
-            {parentUpload.croppedImage ? (
-              <img
-                src={parentUpload.croppedImage}
-                alt="Uploaded preview"
-                className="preview-img"
-              />
-            ) : (
-              <>
-                <div className="profile-icon-container">
-                  <img
-                    src={profileIcon1}
-                    alt="Profile Icon"
-                    className="Parent-Icon"
-                  />
-                </div>
-                <p>Upload Your Image</p>
-              </>
-            )}
-          </label>
-
-          <div className="img-upload-button-container">
-            <input
-              type="file"
-              accept="image/*"
-              id="parent1Input"
-              className="hidden"
-              onChange={parentUpload.handleFileUpload}
-              disabled={!!parentUpload.croppedImage}
-            />
-
-            {!parentUpload.croppedImage ? (
-              <label htmlFor="parent1Input" className="uplod-button">
-                <img
-                  className="upload-img-icon"
-                  src={uploadIcon}
-                  alt="Upload icon"
-                />
-                <p>Upload</p>
-              </label>
-            ) : (
-              <button
-                type="button"
-                className="uplod-button"
-                onClick={() => {
-                  parentUpload.resetImage();
-                  const input = document.getElementById("parent1Input");
-                  if (input) input.value = "";
-                }}
-              >
-                <img width="10" height="10" src={closeIcon} alt="close icon" />
-                Cancel
-              </button>
-            )}
+          <div className="upload-image-buttons-baby">
+            <UploadSection label="Upload Your Image" uploadHook={parentUpload} inputId="parent1Input" />
           </div>
-
-          {/* Crop Popup */}
-          {parentUpload.showCropper && (
-            <div className="overlay">
-              <div className="crop-popup">
-                <div className="cropper-header">
-                  <p>Crop Image</p>
-                </div>
-                <button
-                  className="close-popup-button"
-                  onClick={() => parentUpload.setShowCropper(false)}
-                >
-                  <img width="20" height="20" src={closeIcon} alt="close icon" />
-                </button>
-                <CropImage
-                  imageSrc={parentUpload.selectedFile}
-                  onCropDone={parentUpload.handleCropComplete}
-                  onCancel={() => parentUpload.setShowCropper(false)}
-                />
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Slider */}
-        <div>
-          <p className="select-age">
+        <div className="main-slider-container">
+          <div className="select-age-hader">
             Select End Age <strong>{sliderValue}</strong>
-          </p>
-        </div>
-        <div className="container">
-          <div className="ageJourney-rang-slider-icon">👶</div>
-          <div className="range-slider">
-            <div
-              ref={sliderThumbRef}
-              id="sliderThumb"
-              className="range-slider_thumb"
-            ></div>
-            <div className="range-slider_line">
-              <div
-                ref={sliderLineRef}
-                id="sliderLine"
-                className="range-slider_line-fill"
-              ></div>
-            </div>
-            <input
-              ref={sliderInputRef}
-              id="sliderInput"
-              className="range-slider_input"
-              type="range"
-              defaultValue="50"
-              min="0"
-              max="100"
-            />
           </div>
-          <div className="ageJourney-rang-slider-icon">👴🏻</div>
+
+          <div className="slider-container">
+            <div className="slider-icon">👶</div>
+            <div className="age-slider">
+              <div
+                ref={sliderThumbRef}
+                id="sliderThumb"
+                className="age-slider-thumb"
+              ></div>
+              <div className="age-slider-line">
+                <div
+                  ref={sliderLineRef}
+                  id="sliderLine"
+                  className="age-slider-line-fill"
+                ></div>
+              </div>
+              <input
+                ref={sliderInputRef}
+                id="sliderInput"
+                className="age-slider-input"
+                type="range"
+                defaultValue="50"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div className="slider-icon">👴🏻</div>
+          </div>
         </div>
 
         {/* Generate Button */}
@@ -286,10 +204,10 @@ function AgeJourney() {
           </div>
 
           <div className="action-buttons-container">
-            <button className="pricing-btn">See Pricing</button>
-            <button className="generate-btn" onClick={handleClickGenerate}>
+            <button className="pricing-button">See Pricing</button>
+            <button className="generate-button" onClick={handleClickGenerate}>
               Generate
-              <div className="generate-btn-icon">
+              <div className="generate-button-icon">
                 <img src={starIcon} alt="star icon" />
                 <span>-0.5</span>
               </div>

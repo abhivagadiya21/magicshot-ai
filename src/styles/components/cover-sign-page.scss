@@ -1,0 +1,159 @@
+@use '../abstracts/variables' as *;
+
+.main-cover-sign-page-component {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main-cover-sign-page-component::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url(./sign_in_up_img/cover_image.png);
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.inner-main-cover-sing-page {
+  display: flex;
+  width: 100%;
+  height: 82%;
+  z-index: 1;
+  justify-content: center;
+}
+
+.left-inner-main-cover-sing {
+  width: 600px;
+  height: 100%;
+  display: flex;
+
+  .containt-left-sign-page {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.right-inner-main-cover-sing {
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 371px;
+  height: 552px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  .right-inner-main-cover-sing::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cloase-button {
+    position: relative;
+    bottom: 12%;
+    left: 50%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+
+  .right-side-main-logo {
+    width: 200px;
+    height: 48.2px;
+  }
+
+  .form-container {
+    width: 100%;
+    border-radius: 12px;
+    padding: 1rem .2rem;
+  }
+
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $outer-background;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 100%;
+    padding: 0px;
+    border: 3px solid $border-color;
+  }
+
+  .form-header button {
+    padding: 0.3rem 3.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 14px;
+    text-wrap: nowrap;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #555;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .tab-button.active {
+    color: $white;
+    background: $signin-background;
+    border-radius: 50px;
+    font-weight: bold;
+  }
+
+}
+
+.form-body {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .left-inner-main-cover-sing {
+    display: none;
+  }
+
+  .right-inner-main-cover-sing {
+    width: 500px;
+    height: 100dvh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .main-cover-sing-page {
+    width: 100%;
+    background: $black;
+  }
+
+  .cloase-button {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    left: 95%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+}

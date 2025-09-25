@@ -12,7 +12,6 @@ import checkmarkIcon from "./heading-img/checkmark.svg";
 import userIcon from "./heading-img/user.svg";
 import moblienavIcon from "./heading-img/moblienavarrow.svg";
 
-import './heading.css';
 
 const options = [
     { label: 'Baby Generator', path: '/' },
@@ -33,7 +32,7 @@ export default function Heading() {
     const { state, dispatch, fetchUser } = useCredits();
     const { user, credits } = state;
 
-    // ✅ Run fetchUser only if localStorage has user
+
     useEffect(() => {
         const savedUser = localStorage.getItem("user");
         if (savedUser) {
@@ -41,7 +40,7 @@ export default function Heading() {
         }
     }, [location.pathname]);
 
-    // ✅ Proper logout
+
     const handleLogout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -139,7 +138,7 @@ export default function Heading() {
                         </div>
 
                         <div className="navbar-right">
-                            <button className="upgrade-btn">
+                            <button className="upgrade-button">
                                 <img src={Plan} alt="Upgrade" />
                                 <span>Upgrade | <span className="highlight-text">50% Off</span></span>
                             </button>
@@ -147,7 +146,7 @@ export default function Heading() {
                             <div className="auth-buttons">
                                 {user ? (
                                     <div className='profile-credit-container'>
-                                        <div className='credit-show-con'>
+                                        <div className='credit-show-container'>
                                             Credits: {credits}
                                         </div>
 
@@ -157,14 +156,14 @@ export default function Heading() {
                                                 <img src={Plan} alt="logout" />
                                             </span>
                                         </div>
-                                        <button className="profile-btn" onClick={() => navigate('/profile')}>
+                                        <button className="profile-button" onClick={() => navigate('/profile')}>
                                             <img width="30" height="30" src={userIcon} alt="user" />
                                         </button>
                                     </div>
                                 ) : (
                                     <>
                                         <button
-                                            className="signin-btn"
+                                            className="signin-button"
                                             onClick={() =>
                                                 navigate(`/auth/signin?ref=${encodeURIComponent(currentUrl)}`)
                                             }
@@ -172,7 +171,7 @@ export default function Heading() {
                                             Sign In
                                         </button>
                                         <button
-                                            className="signup-btn"
+                                            className="signup-button"
                                             onClick={() =>
                                                 navigate(`/auth/signup?ref=${encodeURIComponent(currentUrl)}`)
                                             }
@@ -186,8 +185,7 @@ export default function Heading() {
                     </div>
                 </nav>
             </div>
-
-            {/* Mobile menu below navbar */}
+            
             <div className={`content ${menuOpen ? "show" : ""}`}>
                 <div className="mobile-nav">
                     {options.map((opt) => (
@@ -195,8 +193,8 @@ export default function Heading() {
                             className="mobile-nav-option"
                             key={opt.path}
                             onClick={() => {
-                                navigate(opt.path);   // ✅ navigate
-                                setMenuOpen(false);   // ✅ close menu immediately
+                                navigate(opt.path);  
+                                setMenuOpen(false);
                             }}
                         >
                             <p className="mobile-nav-text">{opt.label}</p>
