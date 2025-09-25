@@ -11,18 +11,14 @@ import { useCredits } from "../../components/GlobalCom/Context.jsx";
 
 import Loader from "../../components/Loader/Loader.jsx";
 import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
-import CropImage from "../../components/CropImage/CropImage.jsx";
 import GetImagePopup from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
 import UploadImg from "../../components/Upload-image/UploadImage.jsx";
 
 import starIcon from "../BabyGenerator/baby-img/star.svg";
 import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
 import popPassImg3 from "../BabyGenerator/baby-img/poppassimg3.png";
-import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
-import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
 import journeyImage from "./journey-image/agejourney.png";
 import timeIcon from "./journey-image/time.svg";
-import closeIcon from "../../components/Heading/heading-img/close.svg";
 
 function AgeJourney() {
 

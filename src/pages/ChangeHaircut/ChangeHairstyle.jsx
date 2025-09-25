@@ -6,7 +6,6 @@ import useUploadImg from "../../hooks/useUploadImg.jsx";
 
 import UploadImg from "../../components/Upload-image/UploadImage.jsx";
 import HowWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
-import CropImage from "../../components/CropImage/CropImage.jsx";
 import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
 import { useCredits } from "../../components/GlobalCom/Context.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
@@ -15,8 +14,6 @@ import star from "../BabyGenerator/baby-img/star.svg";
 import hairImage from "./hairstyle-image/changeHaircut.png";
 import popPassImg4 from "../BabyGenerator/baby-img/poppassimg4.png";
 import questionMark from "../BabyGenerator/baby-img/question.svg";
-import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
-import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
 import boyIcon from "../BabyGenerator/baby-img/boy.png";
 import girlIcon from "../BabyGenerator/baby-img/girl.png";
 
