@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import userIcon from '../../components/Heading/heading-img/user.svg';
+import { Outlet, NavLink } from "react-router-dom";
 
 export default function profile() {
     const [userEmail, setUserEmail] = useState("");
@@ -22,6 +23,7 @@ export default function profile() {
   }, []);
 
   return (
+    <>
     <div className="profile-Main-container">
         <div className="profile-info">
             <h1>User Profile</h1>
@@ -32,5 +34,13 @@ export default function profile() {
       
     
     </div>
+     <div>
+      <nav>
+        <NavLink to="personal-info">Personal Info</NavLink> |{" "}
+        <NavLink to="credits-history">Credits History</NavLink>
+      </nav>
+      <Outlet />
+    </div>
+    </>
   )
 }
