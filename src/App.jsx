@@ -13,6 +13,8 @@ import SignIn from './components/SignInUp/SignIn.jsx';
 import SignUp from './components/SignInUp/SignUp.jsx';
 import ForgotPassword from './components/SignInUp/ForgotPassword.jsx';
 import Profile from './pages/Profile/Profile.jsx';
+import PersonalInfo from './pages/Profile/PersonalInfo.jsx';
+import CreditsHistory from './pages/Profile/CreditsHistory.jsx';
 import { CreditProvider } from './components/GlobalCom/Context.jsx';
 import './styles/main.scss';
 
@@ -30,7 +32,6 @@ function App() {
           draggable
           pauseOnHover
           theme="colored"
-          
         />
 
         <Routes>
@@ -39,7 +40,12 @@ function App() {
             <Route path="/age-predictor" element={<AgePredictor />} />
             <Route path="/age-journey" element={<AgeJourney />} />
             <Route path="/change-haircut" element={<ChangeHaircut />} />
-            <Route path="/profile" element={<Profile />} />
+
+            {/* Profile nested routes */}
+            <Route path="/profile" element={<Profile />}>
+              <Route path="personal-info" element={<PersonalInfo />} />
+              <Route path="credits-history" element={<CreditsHistory />} />
+            </Route>
           </Route>
 
           <Route path="/auth" element={<CoverPagesing />}>
