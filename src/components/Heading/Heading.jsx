@@ -156,7 +156,7 @@ export default function Heading() {
                                                 <img src={Plan} alt="logout" />
                                             </span>
                                         </div>
-                                        <button className="profile-button" onClick={() => navigate('/profile')}>
+                                        <button className="profile-button" onClick={() => navigate(`/profile?ref=${encodeURIComponent(currentUrl)}`)}>
                                             <img width="30" height="30" src={userIcon} alt="user" />
                                         </button>
                                     </div>

@@ -81,7 +81,7 @@ function AgePredictor() {
       if (data?.file) {
         setLoading(false);
         setGeneratedImageUrl(data.file);
-        setPredictedAge(data.agePrediction);
+        setPredictedAge(data.agepredic);
         toast.success("🎉 Age prediction generated successfully!");
         fetchUser();
       } else {

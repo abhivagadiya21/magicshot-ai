@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import BabyPage from './pages/BabyGenerator/BabyPage.jsx';
 import ChangeHaircut from "./pages/ChangeHaircut/ChangeHairstyle.jsx";
 import AgeJourney from './pages/AgeJourney/AgeJourney.jsx';
@@ -19,12 +19,13 @@ import { CreditProvider } from './components/GlobalCom/Context.jsx';
 import './styles/main.scss';
 
 function App() {
+
   return (
     <>
       <CreditProvider>
         <ToastContainer
           position="top-right"
-          autoClose={3000}  
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -47,7 +48,6 @@ function App() {
               <Route path="credits-history" element={<CreditsHistory />} />
             </Route>
           </Route>
-
           <Route path="/auth" element={<CoverPagesing />}>
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />

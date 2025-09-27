@@ -56,6 +56,7 @@ function GetImagePop({ getimage_details }) {
                         onClick={getimage_details.onClose}
                     >
                         <img width="20" height="20" src={closeIcon} alt="close" />
+                        
                     </button>
                 </div>
 
