@@ -48,6 +48,7 @@ function App() {
               <Route path="credits-history" element={<CreditsHistory />} />
             </Route>
           </Route>
+          
           <Route path="/auth" element={<CoverPagesing />}>
             <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />

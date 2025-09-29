@@ -1,9 +1,5 @@
 @use '../abstracts/variables' as *;
 
-h1 {
-    color: beige;
-}
-
 .profile-Main-container {
     display: flex;
     flex-direction: column;
@@ -18,7 +14,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: beige;
+    color: $white;
     background-color: $background-color;
     width: 100%;
     border-radius: 15px;
@@ -56,7 +52,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: center;
     width: 100%;
     gap: 10px;
     margin-top: 20px;
@@ -74,16 +69,6 @@ h1 {
         }
     }
 
-    // .personal-info-button {
-    //     align-items: center;
-    //     width: 100%;
-    //     border: none;
-    //     display: flex;
-    //     column-gap: 5px;
-    //     color: white;
-    //     background-color: transparent;
-    // }
-
     .personal-info-button,
     .credit-history-button {
         align-items: center;
@@ -94,9 +79,15 @@ h1 {
         column-gap: 5px;
         background-color: transparent;
     }
-
 }
 
 .detail-arrow img {
     rotate: 180deg;
+}
+
+.right-main-profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
 }

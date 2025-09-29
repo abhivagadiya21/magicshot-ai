@@ -44,13 +44,14 @@ export default function profile() {
         <div className="left-container">
 
           <div className="back-icon-container">
-            <img className="back-icon-image" onClick={() => navigate(redirectPath)} src={BackArrow} alt="" />
+            <img className="back-icon-image" onClick={() => navigate(-1)} alt="" />
           </div>
 
           <div className="profile-info">
             <div className="profile-info-image-container">
               <img width="100" height="100" src={ProfileImage} alt="user" />
             </div>
+            <span className="profile-name">Abhi Vagadiya</span>
             <span className="profile-name">{userEmail}</span>
 
           </div>
@@ -88,10 +89,10 @@ export default function profile() {
 
 
         </div>
-        <div className="right-main-babyG-1">
-          <div>
+        <div className="right-main-profile">
+          
             <Outlet />
-          </div>
+          
         </div>
 
 
