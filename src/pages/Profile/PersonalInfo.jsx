@@ -1,7 +1,10 @@
 import React from "react";
 import ProfileImage from "./Profile-image/Profile-icon.svg"
+import { useCredits } from "../../components/GlobalCom/Context";
 
 function PersonalInfo() {
+  const { state, dispatch, fetchUser } = useCredits();
+  const { name, email } = state;
   return (
     <>
       <div className="right-main-container">
@@ -22,7 +25,7 @@ function PersonalInfo() {
           <button className="edit-details-button">Edit Details</button>
         </div>
         <div className="right-name-container">
-          <p className="right-name">abhi vagadiya</p>
+          <p className="right-name">{name}</p>
         </div>
         <p className="profile-name">Username</p>
         <div className="right-name-container">
@@ -36,16 +39,16 @@ function PersonalInfo() {
         <div className="divayder"></div>
         <p className="profile-name">Email</p>
         <div className="right-name-container">
-          <p className="right-name">abhivagadiya591@gmail.com</p>
+          <p className="right-name">{email}</p>
         </div>
         <div className="divayder"></div>
 
         <p className="profile-name">Password</p>
         <div className="right-name-container">
           <div className="name-and-button-container">
-          <p className="right-name">Change Password</p>
-          <button className="edit-details-button">Change Password</button>
-        </div>
+            <p className="right-name">Change Password</p>
+            <button className="edit-details-button">Change Password</button>
+          </div>
         </div>
         <div className="divayder"></div>
       </div>

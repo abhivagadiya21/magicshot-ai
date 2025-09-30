@@ -9,10 +9,10 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [referralCode, setReferralCode] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [credit,setCredit] = useState();
+  const [credit, setCredit] = useState();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const SignUp = () => {
         body: JSON.stringify({
           email,
           password,
-          referralCode: referralCode || undefined,
+          name,
         }),
       });
 
@@ -62,13 +62,22 @@ const SignUp = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div className="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
         <label>Email Address</label>
         <input
           type="email"
           placeholder="Email Address"
           onChange={(e) => setEmail(e.target.value)}
           required
-           autoComplete="email"
+          autoComplete="email"
         />
       </div>
 
@@ -79,7 +88,7 @@ const SignUp = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           required
-           autoComplete="new-password"
+          autoComplete="new-password"
         />
       </div>
 
@@ -90,16 +99,7 @@ const SignUp = () => {
           placeholder="Confirm Password"
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-           autoComplete="new-password"
-        />
-      </div>
-
-      <div className="form-group">
-        <label>Referral Code</label>
-        <input
-          type="text"
-          placeholder="Referral Code (Optional)"
-          onChange={(e) => setReferralCode(e.target.value)}
+          autoComplete="new-password"
         />
       </div>
 

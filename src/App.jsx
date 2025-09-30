@@ -42,7 +42,6 @@ function App() {
             <Route path="/age-journey" element={<AgeJourney />} />
             <Route path="/change-haircut" element={<ChangeHaircut />} />
 
-            {/* Profile nested routes */}
             <Route path="/profile" element={<Profile />}>
               <Route path="personal-info" element={<PersonalInfo />} />
               <Route path="credits-history" element={<CreditsHistory />} />
