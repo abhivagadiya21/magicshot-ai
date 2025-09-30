@@ -21,6 +21,7 @@ function PersonalInfo() {
           <p className="profile-name">Name</p>
           <button className="edit-details-button">Edit Details</button>
         </div>
+        
         <div className="right-name-container">
           <p className="right-name">abhi vagadiya</p>
         </div>
@@ -43,9 +44,9 @@ function PersonalInfo() {
         <p className="profile-name">Password</p>
         <div className="right-name-container">
           <div className="name-and-button-container">
-          <p className="right-name">Change Password</p>
-          <button className="edit-details-button">Change Password</button>
-        </div>
+            <p className="right-name">Change Password</p>
+            <button className="edit-details-button">Change Password</button>
+          </div>
         </div>
         <div className="divayder"></div>
       </div>

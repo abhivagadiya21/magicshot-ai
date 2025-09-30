@@ -1,0 +1,112 @@
+@use '../abstracts/variables' as *;
+
+.right-main-creidt-container {
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    min-width: 95%;
+    border-radius: 15px;
+    border: 3px solid $border-color;
+    overflow: hidden;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.my-credits-container {
+    color: #ecedee;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.credit-and-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    padding-top: 0px;
+
+    .buy-credit-button-container {
+        display: flex;
+        justify-content: space-between;
+        background-color: $background-color;
+        color: $white;
+        border: 3px double transparent;
+        background-image: linear-gradient(#242424, #242424), linear-gradient(90deg, #7762ff, #c589e4, #fc6590);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        border-radius: 50px;
+        font-size: 14px;
+        cursor: pointer;
+        border-width: 2px;
+    }
+
+    .buy-credit-button {
+        padding: 8px 13px;
+        border-radius: 50px;
+        font-size: 14px;
+        background-color: $outer-background;
+        border: none;
+        color: $white;
+    }
+
+    .credit-icon-main-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .staricon {
+        width: 30px;
+    }
+
+    .credit-text {
+        font-size: 20px;
+        font-weight: bold;
+        color: $white;
+    }
+}
+
+.credit-history-and-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+
+    .credit-text {
+        font-size: 20px;
+        font-weight: bold;
+        color: $white;
+    }
+}
+.table-credit-history{
+    color: $white;
+    align-items: center;
+}
+
+.table-container{
+    padding: 15px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+table {
+    width: 100%;
+    
+}
+
+th {
+    border-bottom: 1px solid $border-color;
+    align-items: center;
+    text-align: center;
+   padding: 10px;
+}
+
+td {
+    text-align: center;
+    border: 1px solid $border-color;
+}

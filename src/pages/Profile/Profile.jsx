@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import userIcon from '../../components/Heading/heading-img/user.svg';
 import { Outlet, NavLink, useLocation, useNavigate, Link } from "react-router-dom";
-import UploadImg from "../../components/Upload-image/UploadImage";
-import babyImage from "../BabyGenerator/baby-img/babyG.png";
-import BackArrow from "./Profile-image/backArrow.png"
 import ProfileImage from "./Profile-image/Profile-icon.svg"
 import GreterThan from "../../components/Heading/heading-img/moblienavarrow.svg"
 import StarIcon from "../BabyGenerator/baby-img/star.svg"
@@ -37,7 +33,6 @@ export default function profile() {
 
   const isActive = (path) => currentPath === path;
 
-
   return (
     <>
       <div className=" main-container">
@@ -53,7 +48,6 @@ export default function profile() {
             </div>
             <span className="profile-name">Abhi Vagadiya</span>
             <span className="profile-name">{userEmail}</span>
-
           </div>
 
           {currentPath && (
@@ -68,9 +62,7 @@ export default function profile() {
                 <span className="detail-arrow">
                   <img width="15" height="15" src={GreterThan} alt="" />
                 </span>
-
               </Link>
-
 
               <Link to="credits-history" className={`link-button ${isActive("credits-history") ? "action-credit-info" : ""} `}>
                 <button className={`credit-history-button `}>
@@ -81,14 +73,10 @@ export default function profile() {
                   <img width="15" height="15" src={GreterThan} alt="" />
                 </span>
               </Link>
-
             </div>
-
-
           )}
-
-
         </div>
+        
         <div className="right-main-profile">
           
             <Outlet />
