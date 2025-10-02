@@ -12,8 +12,17 @@
 .right-main-container {
     width: 100%;
     display: flex;
-    padding-left: 13px;
+    // padding-left: 13px;
+    .right-container{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
 }
+
 
 .right-main-info-container {
     background-color: $background-color;
@@ -55,7 +64,7 @@
 }
 
 .profile-name {
-    color: #a1a1aa;
+    color: $white;
     font-size: 12px;
     font-weight: 700;
 }
@@ -90,4 +99,10 @@
     height: 1px;
     background-color: $border-color;
     margin-bottom: 16px;
+}
+@media (max-width: 768px) {
+    .right-main-info-container {
+        width: 100%;
+        min-width: 100%;
+    }
 }

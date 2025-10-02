@@ -19,6 +19,7 @@ function creditsReducer(state, action) {
         credits: action.payload.credits ?? 0,
         name: action.payload.name ?? "",
         email: action.payload.email ?? "",
+        // transactions: action.payload.transactions ?? [],
       };
 
     case SET_CREDITS:
@@ -40,6 +41,7 @@ export function CreditProvider({ children }) {
     credits: 0,
     name: "",
     email: "",
+    // transactions: [],
   });
 
   const fetchUser = async () => {
@@ -56,10 +58,9 @@ export function CreditProvider({ children }) {
           payload: {
             user: res.data,
             credits: res.data.credits,
-            // name: user.name,
-            // email: user.email,
-            name : res.data.name,
+            name: res.data.name,
             email: res.data.email,
+            // transactions: res.data.transactionsDetails,
           },
         });
       }

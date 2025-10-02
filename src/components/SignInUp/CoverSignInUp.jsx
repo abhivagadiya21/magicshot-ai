@@ -23,12 +23,13 @@ function CoverPagesing() {
           </div>
 
           <div className="right-inner-main-cover-sing">
-            <img width="20" height="20" className='cloase-button'
-              onClick={() => navigate(redirectPath)} src={closeIcon} alt="cancel" />
-            <img src={Logo} alt="Logo" className="right-side-main-logo" />
-
+            <div>
+              <img src={Logo} alt="Logo" className="right-side-main-logo" />
+              <img width="20" height="20" className='cloase-button'
+                onClick={() => navigate(redirectPath)} src={closeIcon} alt="cancel" />
+            </div>
             <div className="form-container">
-              <div className="form-container">
+              <div className="form-header-container">
                 {/* ✅ Hide tabs on forgot-password */}
                 {currentPath !== "forgot-password" && (
                   <div className="form-header">

@@ -4,6 +4,7 @@ import ProfileImage from "./Profile-image/Profile-icon.svg"
 import GreterThan from "../../components/Heading/heading-img/moblienavarrow.svg"
 import StarIcon from "../BabyGenerator/baby-img/star.svg"
 import ProfileInfo from "./Profile-image/profile-info.svg"
+import BackArrow from "./Profile-image/backArrow.png"
 import { useCredits } from "../../components/GlobalCom/Context";
 
 
@@ -40,10 +41,10 @@ export default function profile() {
   return (
     <>
       <div className=" main-container">
-        <div className="left-container">
+        <div className="left-container profile-left-container">
 
           <div className="back-icon-container">
-            <img className="back-icon-image" onClick={() => navigate(-1)} alt="" />
+            <img className="back-icon-image" src={BackArrow} onClick={() => navigate(-1)} alt="" />
           </div>
 
           <div className="profile-info">
@@ -80,7 +81,6 @@ export default function profile() {
             </div>
           )}
         </div>
-
         <div className="right-main-profile">
 
           <Outlet />

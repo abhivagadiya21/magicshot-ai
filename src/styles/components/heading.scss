@@ -330,10 +330,8 @@
   .auth-buttons {
     height: 35px;
   }
-}
 
-@media (max-width: 1260px) {
-  .upgrade-button {
-    display: none;
+  .navbar-right .upgrade-button {
+    display: none !important;
   }
 }
