@@ -31,7 +31,6 @@ function CreditsHistory() {
     {
       name: "Time & Date",
       selector: (row) => row.created_at,
-      sortable: true,
     },
     {
       name: "Recharge/Consumed",

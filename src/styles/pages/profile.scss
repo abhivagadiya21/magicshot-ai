@@ -92,3 +92,24 @@
     flex-direction: column;
     padding: 15px;
 }
+
+@media (max-width: 768px) {
+    .profile-left-container {
+        display: none; // default hide
+    }
+
+    .show-on-mobile {
+        display: block; 
+        width: 100%;
+        min-width: 100%;
+    }
+
+    // .hide-on-mobile {
+    //     display: none; // hide on subroutes
+    // }
+
+    .right-main-profile {
+        width: 100%;
+        min-width: 100%;
+    }
+}
