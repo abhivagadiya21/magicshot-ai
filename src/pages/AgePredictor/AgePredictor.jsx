@@ -10,7 +10,6 @@ import { useCredits } from "../../components/GlobalCom/Context.jsx";
 import  UploadSection  from "../../components/UploadSection/UploadSection.jsx";
 
 import UploadImg from "../../components/Upload-image/UploadImage.jsx";
-import CropImage from "../../components/CropImage/CropImage.jsx";
 import HowtiWorkPop from "../../components/Popup/HowItWorkPopup/HowtiWorkpopup.jsx";
 import GetImagePop from "../../components/Popup/GetImagePopup/GetImagePopup.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
@@ -19,9 +18,6 @@ import popPassImg2 from "../BabyGenerator/baby-img/poppassimg2.png";
 import starIcon from "../BabyGenerator/baby-img/star.svg";
 import predictorImage from "./predictor-image/agePredictor.png";
 import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
-import profileIcon1 from "../BabyGenerator/baby-img/profile-1.svg";
-import uploadIcon from "../BabyGenerator/baby-img/upload.svg";
-import closeIcon from "../../components/Heading/heading-img/close.svg";
 import timeIcon from "../AgeJourney/journey-image/time.svg";
 
 
@@ -85,7 +81,7 @@ function AgePredictor() {
       if (data?.file) {
         setLoading(false);
         setGeneratedImageUrl(data.file);
-        setPredictedAge(data.agePrediction);
+        setPredictedAge(data.agepredic);
         toast.success("🎉 Age prediction generated successfully!");
         fetchUser();
       } else {

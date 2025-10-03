@@ -17,6 +17,9 @@ function creditsReducer(state, action) {
         ...state,
         user: action.payload.user,
         credits: action.payload.credits ?? 0,
+        name: action.payload.name ?? "",
+        email: action.payload.email ?? "",
+        // transactions: action.payload.transactions ?? [],
       };
 
     case SET_CREDITS:
@@ -36,6 +39,9 @@ export function CreditProvider({ children }) {
   const [state, dispatch] = useReducer(creditsReducer, {
     user: null,
     credits: 0,
+    name: "",
+    email: "",
+    // transactions: [],
   });
 
   const fetchUser = async () => {
@@ -45,11 +51,16 @@ export function CreditProvider({ children }) {
 
       const res = await getUserProfileAPI(token);
       if (res.status === "success") {
+        const user = res.data.user || res.data;
+        console.log("Fetched user:", user);
         dispatch({
           type: SET_USER,
           payload: {
             user: res.data,
             credits: res.data.credits,
+            name: res.data.name,
+            email: res.data.email,
+            // transactions: res.data.transactionsDetails,
           },
         });
       }

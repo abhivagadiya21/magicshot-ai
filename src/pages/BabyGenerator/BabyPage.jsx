@@ -169,7 +169,7 @@ function BabyPage() {
 
         {showImagePopup && genraterImageUrl && (
           <GetImagePop
-            getImageDetails={{
+            getimage_details={{
               onClose: () => {
                 setGenraterImageUrl(null);
                 closeImagePopup();

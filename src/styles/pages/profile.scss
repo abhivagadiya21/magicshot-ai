@@ -1,9 +1,6 @@
 @use '../abstracts/variables' as *;
 
-h1 {
-    color: beige;
-}
-.profile-Main-container{
+.profile-Main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,14 +9,86 @@ h1 {
     padding: 15PX;
 }
 
-.profile-info{
+.profile-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: beige;
+    color: $white;
     background-color: $background-color;
     width: 100%;
     border-radius: 15px;
-    border: 3px solid $border-color; 
+    border: 3px solid $border-color;
+}
+
+.back-icon-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+
+    .back-icon-image {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.profile-info {
+    padding: 15px;
+    background-color: $outer-background;
+
+    .profile-info-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid $border-color;
+        padding: 15px;
+        border-radius: 50%;
+        background-color: $background-color;
+    }
+}
+
+.user-details-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 20px;
+
+    .link-button {
+        width: 100%;
+        display: flex;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 15px;
+
+        &.active-profile-info,
+        &.action-credit-info {
+            background-color: $outer-background;
+        }
+    }
+
+    .personal-info-button,
+    .credit-history-button {
+        align-items: center;
+        width: 100%;
+        border: none;
+        display: flex;
+        color: white;
+        column-gap: 5px;
+        background-color: transparent;
+    }
+}
+
+.detail-arrow img {
+    rotate: 180deg;
+}
+
+.right-main-profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    padding: 15px;
 }
