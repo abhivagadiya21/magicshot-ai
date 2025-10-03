@@ -82,8 +82,12 @@ function CreditsHistory() {
             <p>Credit History Details</p>
 
           </div>
-          <div className="buy-credit-button-container">
-            <button className="buy-credit-button">Buy More Credits</button>
+          <div className="credit-history-dropdown">
+            <select className="buy-credit-dropdown">
+              <option value="all">All</option>
+              <option value="recharge">Recharge</option>
+              <option value="consumed">Consumed</option>
+            </select>
           </div>
         </div>
         <div className="divayder"></div>
@@ -96,6 +100,32 @@ function CreditsHistory() {
               pagination
               // highlightOnHover
               // striped
+              customStyles={{
+                table: {
+                  style: {
+                    backgroundColor: "#15191c",
+                  },
+                },
+                headRow: {
+                  style: {
+                    backgroundColor: "#15191c",
+                    color: "white",
+                  },
+                },
+                rows: {
+                  style: {
+                    backgroundColor: "#15191c",
+                    color: "white",
+                    borderBottom: "1px solid #2a2e32",
+                  },
+                },
+                pagination: {
+                  style: {
+                    backgroundColor: "#15191c",
+                    color: "white",
+                  },
+                },
+              }}
             />
           </table>
         </div>

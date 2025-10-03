@@ -67,6 +67,24 @@
         font-weight: bold;
         color: $white;
     }
+
+
+}
+
+.credit-history-dropdown {
+    background-color: $outer-background;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid $border-color;
+}
+
+.buy-credit-dropdown option {
+    background-color: #15191c;
+    color: #ffffff;
 }
 
 .credit-history-and-button-container {
@@ -145,16 +163,19 @@ table {
 }
 
 .my-custom-table {
-    border: 1px solid #f70000;
     border-radius: 8px;
-    background-color: #0cd1f4;
     overflow: hidden;
 }
 
 .my-custom-table .rdt_TableHead {
-    background-color: #c2f40c;
     font-weight: bold;
     font-size: 14px;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+.my-custom-table .rdt_TableRow {
+    color: #ffffff !important;
+    border-bottom: 1px solid #ffffff !important;
 }
 
 .my-custom-table .rdt_TableRow:hover {
@@ -162,9 +183,7 @@ table {
 }
 
 .my-custom-table .rdt_Pagination {
-    border-top: 1px solid #e90000;
     padding: 8px;
-    background-color: #7762ff;
 }
 
 @media (max-width: 768px) {
