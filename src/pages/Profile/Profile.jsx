@@ -41,10 +41,20 @@ export default function profile() {
   return (
     <>
       <div className=" main-container">
-        <div className="left-container profile-left-container">
+        {/* <div className="left-container profile-left-container"> */}
+        <div
+          className={`left-container profile-left-container ${currentPath === "profile" ? "show-on-mobile" : "hide-on-mobile"
+            }`}
+        >
 
           <div className="back-icon-container">
-            <img className="back-icon-image" src={BackArrow} onClick={() => navigate(-1)} alt="" />
+            <img className="back-icon-image" src={BackArrow} onClick={() => {
+              if (currentPath === "profile") {
+                navigate('/');
+              } else {
+                navigate(-1);
+              }
+            }} alt="" />
           </div>
 
           <div className="profile-info">
