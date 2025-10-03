@@ -130,43 +130,12 @@
 
   .navbar-hamburger-container {
     display: none;
-
-    .hamburger {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-    }
-
-    .hamburger svg {
-      width: 24px;
-      height: 24px;
-      rotate: -180deg;
-    }
-
-    .hamburger {
-      background: none;
-      border: none;
-      color: $white;
-      font-size: 1.8rem;
-      cursor: pointer;
-      display: none;
-    }
-
   }
 
   .logo-img {
     width: 150px;
     height: 36.33;
     cursor: pointer;
-  }
-
-  .square {
-    display: none;
   }
 
   .dropdown {
@@ -231,6 +200,36 @@
     }
   }
 }
+  .square {
+    display: none;
+  }
+
+.hamburger {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .hamburger svg {
+      width: 24px;
+      height: 24px;
+      rotate: -180deg;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      color: $white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: none;
+    }
+
 
 .content {
   display: none;
@@ -281,11 +280,12 @@
     width: 30px;
     height: 30px;
     border-radius: 5px;
+    background-color: aliceblue;
   }
 
   .navbar-hamburger-container {
-    display: block;
-  }
+      display: block;
+    }
 
   .navbar-main-container {
     display: flex;

@@ -101,63 +101,82 @@ table {
     width: 100%;
 }
 
-th {
-    border-bottom: 1px solid $border-color;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-}
-
-td {
-    text-align: center;
-    border: 1px solid $border-color;
-}
 
 .pagination-button {
-  margin: 2px 5px;
-  width: 40px;
-  padding: 2.5px 10px;
-  background-color: #f0f0f0; 
-  color: #000;          
-  border: 0px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
+    margin: 2px 5px;
+    width: 40px;
+    padding: 2.5px 10px;
+    background-color: #f0f0f0;
+    color: #000;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .pagination-button.active {
-  background: #007bff;
-  color: #fff;         
+    background: #007bff;
+    color: #fff;
 }
+
 .pagination-container {
     margin-bottom: 8px;
     text-align: center;
     display: flex;
     justify-content: center;
 }
-.pagination-button-prev, .pagination-button-next {
+
+.pagination-button-prev,
+.pagination-button-next {
     margin: 2px 5px;
     width: 30px;
-    background-color:$outer-background; 
-    color: #000;          
+    background-color: $outer-background;
+    color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-.credits-back-arrow{
+
+.credits-back-arrow {
     width: 25px;
     height: 25px;
     cursor: pointer;
     margin-right: 10px;
     display: none;
 }
+
+.my-custom-table {
+    border: 1px solid #f70000;
+    border-radius: 8px;
+    background-color: #0cd1f4;
+    overflow: hidden;
+}
+
+.my-custom-table .rdt_TableHead {
+    background-color: #c2f40c;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.my-custom-table .rdt_TableRow:hover {
+    background-color: #0084f7;
+}
+
+.my-custom-table .rdt_Pagination {
+    border-top: 1px solid #e90000;
+    padding: 8px;
+    background-color: #7762ff;
+}
+
 @media (max-width: 768px) {
-    .credits-back-arrow{
+    .credits-back-arrow {
         display: block;
     }
-    .profile-left-container{
+
+    .profile-left-container {
         display: none;
     }
-    .right-main-profile{
+
+    .right-main-profile {
         width: 100%;
         min-width: 100%;
     }

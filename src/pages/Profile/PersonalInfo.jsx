@@ -13,7 +13,7 @@ function PersonalInfo() {
     <>
       <div className="right-main-container">
         <div className="right-container">
-          <img className="credits-back-arrow" onClick={() => navigate(`/`)} src={backArrow} alt="" />
+          <img className="credits-back-arrow" onClick={() => navigate(`/profile`)} src={backArrow} alt="" />
           <p>Personal Info</p>
         </div>
       </div>
