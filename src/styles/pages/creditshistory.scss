@@ -4,12 +4,13 @@
     background-color: $background-color;
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 100%;
     min-width: 95%;
     border-radius: 15px;
     border: 3px solid $border-color;
     overflow: hidden;
     margin-top: 15px;
+    padding-left: 13px;
     justify-content: center;
 }
 
@@ -80,12 +81,14 @@
         color: $white;
     }
 }
-.table-credit-history{
+
+.table-credit-history {
     color: $white;
     align-items: center;
 }
 
-.table-container{
+.table-container {
+    margin-top: -25px;
     padding: 15px;
     align-items: center;
     display: flex;
@@ -102,10 +105,60 @@ th {
     border-bottom: 1px solid $border-color;
     align-items: center;
     text-align: center;
-   padding: 10px;
+    padding: 10px;
 }
 
 td {
     text-align: center;
     border: 1px solid $border-color;
+}
+
+.pagination-button {
+  margin: 2px 5px;
+  width: 40px;
+  padding: 2.5px 10px;
+  background-color: #f0f0f0; 
+  color: #000;          
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-button.active {
+  background: #007bff;
+  color: #fff;         
+}
+.pagination-container {
+    margin-bottom: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.pagination-button-prev, .pagination-button-next {
+    margin: 2px 5px;
+    width: 30px;
+    background-color:$outer-background; 
+    color: #000;          
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.credits-back-arrow{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-right: 10px;
+    display: none;
+}
+@media (max-width: 768px) {
+    .credits-back-arrow{
+        display: block;
+    }
+    .profile-left-container{
+        display: none;
+    }
+    .right-main-profile{
+        width: 100%;
+        min-width: 100%;
+    }
 }

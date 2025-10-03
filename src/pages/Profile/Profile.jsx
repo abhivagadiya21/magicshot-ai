@@ -4,6 +4,8 @@ import ProfileImage from "./Profile-image/Profile-icon.svg"
 import GreterThan from "../../components/Heading/heading-img/moblienavarrow.svg"
 import StarIcon from "../BabyGenerator/baby-img/star.svg"
 import ProfileInfo from "./Profile-image/profile-info.svg"
+import BackArrow from "./Profile-image/backArrow.png"
+import { useCredits } from "../../components/GlobalCom/Context";
 
 
 export default function profile() {
@@ -12,42 +14,45 @@ export default function profile() {
   const currentPath = location.pathname.split('/').pop();
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/";
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
 
-  useEffect(() => {
-    const loadUser = () => {
-      const savedUser = localStorage.getItem("user");
-      if (savedUser) {
-        const user = JSON.parse(savedUser);
-        setUserEmail(user.email || "");
-      }
-    };
+  const { state, dispatch, fetchUser } = useCredits();
+  const { name, email } = state;
 
-    loadUser();
-    window.addEventListener("userUpdated", loadUser);
+  // useEffect(() => {
+  //   const loadUser = () => {
+  //     const savedUser = localStorage.getItem("user");
+  //     if (savedUser) {
+  //       const user = JSON.parse(savedUser);
+  //       setUserEmail(user.email || "");
+  //     }
+  //   };
 
-    return () => {
-      window.removeEventListener("userUpdated", loadUser);
-    };
-  }, []);
+  //   loadUser();
+  //   window.addEventListener("userUpdated", loadUser);
+
+  //   return () => {
+  //     window.removeEventListener("userUpdated", loadUser);
+  //   };
+  // }, []);
 
   const isActive = (path) => currentPath === path;
 
   return (
     <>
       <div className=" main-container">
-        <div className="left-container">
+        <div className="left-container profile-left-container">
 
           <div className="back-icon-container">
-            <img className="back-icon-image" onClick={() => navigate(-1)} alt="" />
+            <img className="back-icon-image" src={BackArrow} onClick={() => navigate(-1)} alt="" />
           </div>
 
           <div className="profile-info">
             <div className="profile-info-image-container">
               <img width="100" height="100" src={ProfileImage} alt="user" />
             </div>
-            <span className="profile-name">Abhi Vagadiya</span>
-            <span className="profile-name">{userEmail}</span>
+            <span className="profile-name">{name}</span>
+            <span className="profile-name">{email}</span>
           </div>
 
           {currentPath && (
@@ -76,11 +81,10 @@ export default function profile() {
             </div>
           )}
         </div>
-        
         <div className="right-main-profile">
-          
-            <Outlet />
-          
+
+          <Outlet />
+
         </div>
 
 
