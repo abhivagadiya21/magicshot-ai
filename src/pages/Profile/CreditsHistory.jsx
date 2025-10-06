@@ -3,13 +3,14 @@ import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import starIcon from "../BabyGenerator/baby-img/star.svg"
 import { getTransactionsAPI } from "../../services/imageBase";
-import { FaPlus, FaMinus } from "react-icons/fa";
 import { useCredits } from "../../components/GlobalCom/Context";
 import backArrow from "./Profile-image/backArrow.png";
 function CreditsHistory() {
   const { state, dispatch, fetchUser } = useCredits();
   const { credits } = state;
   const [transactions, setTransactions] = useState([]);
+  const [filterTransactions, setFilterTransactions] = useState([]);
+  // const [filterType, setFilterType] = useState("all");
   const navigate = useNavigate();
 
 
@@ -22,11 +23,22 @@ function CreditsHistory() {
         console.log("Fetched transactions:", res.data);
         const transactionsData = res.data.transactionsDetails || [];
         setTransactions(transactionsData);
+        setFilterTransactions(transactionsData);
       }
     } catch (error) {
       console.error("Transactions fetch error:", error);
     }
   };
+  const handleFilter = (type) => {
+    // setFilterType(type);
+    if (type === "all") {
+      setFilterTransactions(transactions);
+    } else if (type === "recharge") {
+      setFilterTransactions(transactions.filter((t) => t.credits > 0))
+    } else if (type === "consumed") {
+      setFilterTransactions(transactions.filter((t) => t.credits < 0))
+    }
+  }
   const columns = [
     {
       name: "Time & Date",
@@ -82,10 +94,10 @@ function CreditsHistory() {
 
           </div>
           <div className="credit-history-dropdown">
-            <select className="buy-credit-dropdown">
-              <option value="all">All</option>
-              <option value="recharge">Recharge</option>
-              <option value="consumed">Consumed</option>
+            <select className="buy-credit-dropdown" onChange={(e) => handleFilter(e.target.value)} >
+              <option value="all" >All</option>
+              <option value="recharge" >Recharge</option>
+              <option value="consumed" >Consumed</option>
             </select>
           </div>
         </div>
@@ -95,7 +107,7 @@ function CreditsHistory() {
             <DataTable
               className="my-custom-table"
               columns={columns}
-              data={transactions}
+              data={filterTransactions}
               pagination
               // highlightOnHover
               // striped
