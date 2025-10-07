@@ -115,3 +115,19 @@ export const getTransactionsAPI = async (token) => {
     throw error;
   }
 };
+
+export const updateUserProfileAPI = async (token, profileData) => {
+  try {
+    const response = await api.put("/profile", profileData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(profileData),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    throw error;
+  }
+};

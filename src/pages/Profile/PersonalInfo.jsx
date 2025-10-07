@@ -1,19 +1,77 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
 import { useCredits } from "../../components/GlobalCom/Context";
+import { updateUserProfileAPI } from "../../services/imageBase";
+import { toast } from "react-toastify";
 import backArrow from "./Profile-image/backArrow.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function PersonalInfo() {
-  const { state } = useCredits();
-  const { name, email } = state;
+  const { state, fetchUser } = useCredits();
+  const { name, email, userName, bio } = state;
+  console.log("User Info:", { name, email, userName, bio });
   const navigate = useNavigate();
+  // const location = useLocation();
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
-    bio: "",
+    username: '',
+    bio: '',
   });
+
+  useEffect(() => {
+    setFormData({
+      username: userName,
+      bio: bio,
+    });
+  }, [userName, bio]);
+
+
+  const updateUserInfo = async () => {
+    const cleanedData = {
+      username: formData.username.trim() === "" ? "Not set" : formData.username.trim(),
+      bio: formData.bio.trim() === "" ? "Not set" : formData.bio.trim(),
+    };
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("User not authenticated");
+      return;
+    }
+    try {
+      const { data } = await updateUserProfileAPI(token, cleanedData);
+      console.log("Update response:", data);
+      if (data.username || data.bio) {
+        toast.success("Profile updated successfully!");
+        await fetchUser();
+      }
+      else {
+        toast.error(data.message || "Failed to update profile info");
+      }
+
+      // const response = await fetch("http://localhost:3000/auth/profile", {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //   },
+      //   body: JSON.stringify(cleanedData),
+      // });
+      // const data = await response.json();
+
+      // if (!response.ok) {
+      //   toast.error(data.error || "Not   update profile info");
+      //   setLoading(false);
+      //   return;
+      // }
+      // // toast.success("Profile updated successfully!");
+      // await fetchUser();
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message || "❌ Failed to generate image."
+      );
+    }
+  }
+
 
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
@@ -21,13 +79,14 @@ function PersonalInfo() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log("Input Change:", name, value);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = () => {
     console.log("Saved Data:", formData);
+    updateUserInfo();
     setIsEditing(false);
-    // Optionally call API to update user info here
   };
 
   return (
@@ -79,7 +138,7 @@ function PersonalInfo() {
             />
           ) : (
             <p className="right-name">
-              {formData.username || "Not Set"}
+              {userName || "Not Set"}
             </p>
           )}
         </div>
@@ -96,7 +155,7 @@ function PersonalInfo() {
             />
           ) : (
             <p className="right-name">
-              {formData.bio || "Not Set"}
+              {bio || "Not Set"}
             </p>
           )}
         </div>

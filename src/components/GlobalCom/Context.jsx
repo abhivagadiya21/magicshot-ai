@@ -19,6 +19,8 @@ function creditsReducer(state, action) {
         credits: action.payload.credits ?? 0,
         name: action.payload.name ?? "",
         email: action.payload.email ?? "",
+        userName : action.payload.userName ?? "",
+        bio: action.payload.bio ?? "",
         // transactions: action.payload.transactions ?? [],
       };
 
@@ -41,6 +43,8 @@ export function CreditProvider({ children }) {
     credits: 0,
     name: "",
     email: "",
+    userName: "",
+    bio: "",
     // transactions: [],
   });
 
@@ -60,6 +64,8 @@ export function CreditProvider({ children }) {
             credits: res.data.credits,
             name: res.data.name,
             email: res.data.email,
+            userName: res.data.username,
+            bio: res.data.bio,
             // transactions: res.data.transactionsDetails,
           },
         });
