@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 
-import Rotateleft from "./CropImageSvg/rotate-left.svg";
-import Refresh from "./CropImageSvg/refresh.svg";
-import Rotateright from "./CropImageSvg/rotate-right.svg";
+import Rotateleft from "../CropImage/CropImageSvg/rotate-left.svg";
+import Refresh from "../CropImage/CropImageSvg/refresh.svg";
+import Rotateright from "../CropImage/CropImageSvg/rotate-right.svg";
 
 function ProfileCropImage({ imageSrc, onCropDone }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -37,8 +37,8 @@ function ProfileCropImage({ imageSrc, onCropDone }) {
             crop={crop}
             zoom={zoom}
             rotation={rotation}
-            aspect={1} // Locked 1:1 for circular crop
-            cropShape="round" // 👈 makes it round
+            aspect={1} 
+            cropShape="round" 
             showGrid={false}
             onCropChange={setCrop}
             onZoomChange={setZoom}
