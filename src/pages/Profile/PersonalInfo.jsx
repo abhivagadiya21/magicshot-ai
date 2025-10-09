@@ -75,16 +75,16 @@ function PersonalInfo() {
       const { data } = await updateUserProfileInfoAPI(token, cleanedData);
       console.log("Update response:", data);
       if (data.username || data.bio) {
-        toast.success("Profile updated successfully!");
+        toast.success("Profile updated username bio successfully!");
         await fetchUser();
       }
       else {
         toast.error(data.message || "Failed to update profile info");
       }
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "❌ Failed to generate image."
-      );
+      // toast.error(
+      //   error?.response?.data?.message || "❌ Failed to  image."
+      // );
     }
   }
 
