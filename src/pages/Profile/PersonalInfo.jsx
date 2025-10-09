@@ -1,19 +1,25 @@
-import React, { useState } from "react";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
+import React, { useState } from "react";
 import { useCredits } from "../../components/GlobalCom/Context";
 import backArrow from "./Profile-image/backArrow.png";
 import { useNavigate } from "react-router-dom";
+import ProfileCropImage from "../../components/ProfilecropImage/ProfilecropImage"; // ✅ fixed import
 
 function PersonalInfo() {
-  const { state } = useCredits();
+    const { state, dispatch } = useCredits();
   const { name, email } = state;
   const navigate = useNavigate();
+ 
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     bio: "",
   });
+
+  const [profileImg, setProfileImg] = useState(ProfileImage); // default image
+  const [isCropOpen, setIsCropOpen] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
 
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
@@ -27,7 +33,39 @@ function PersonalInfo() {
   const handleSave = () => {
     console.log("Saved Data:", formData);
     setIsEditing(false);
-    // Optionally call API to update user info here
+  };
+
+  // 🔹 Handle image upload
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      setImageSrc(reader.result);
+      setIsCropOpen(true); // open crop modal
+    });
+    reader.readAsDataURL(file);
+  };
+
+  // 🔹 Handle final cropped image
+  const handleCropDone = async (croppedAreaPixels, rotation) => {
+    const croppedImage = await getCroppedImage(imageSrc, croppedAreaPixels, rotation);
+    setProfileImg(croppedImage);
+    setIsCropOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    dispatch({ type: "SET_USER", payload: null });
+    dispatch({ type: "SET_CREDITS", payload: 0 });
+
+    window.dispatchEvent(new Event("userUpdated"));
+
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 50);
   };
 
   return (
@@ -38,7 +76,7 @@ function PersonalInfo() {
             className="credits-back-arrow"
             onClick={() => navigate(`/profile`)}
             src={backArrow}
-            alt=""
+            alt="back"
           />
           <p>Personal Info</p>
         </div>
@@ -47,9 +85,23 @@ function PersonalInfo() {
       <div className="right-main-info-container">
         <div className="right-image-profile-info-container">
           <div className="right-profile-info-container">
-            <img width="100" height="100" src={ProfileImage} alt="user" />
+            <img
+              width="100"
+              height="100"
+              src={profileImg}
+              alt="user"
+            />
           </div>
-          <button className="right-profile-name">Change Image</button>
+
+          <label className="right-profile-name">
+            Change Image
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImageUpload}
+            />
+          </label>
         </div>
 
         <div className="name-and-button-container">
@@ -78,9 +130,7 @@ function PersonalInfo() {
               placeholder="Enter username"
             />
           ) : (
-            <p className="right-name">
-              {formData.username || "Not Set"}
-            </p>
+            <p className="right-name">{formData.username || "Not Set"}</p>
           )}
         </div>
 
@@ -95,9 +145,7 @@ function PersonalInfo() {
               placeholder="Write something about yourself..."
             />
           ) : (
-            <p className="right-name">
-              {formData.bio || "Not Set"}
-            </p>
+            <p className="right-name">{formData.bio || "Not Set"}</p>
           )}
         </div>
 
@@ -116,9 +164,78 @@ function PersonalInfo() {
           </div>
         </div>
         <div className="divayder"></div>
+
+        <button className="logout" onClick={handleLogout}>Logout</button>
       </div>
+
+      {isCropOpen && (
+        <div className="crop-modal">
+          <div className="crop-modal-content">
+            <ProfileCropImage imageSrc={imageSrc} onCropDone={handleCropDone} />
+            <button className="close-crop" onClick={() => setIsCropOpen(false)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
 
 export default PersonalInfo;
+
+/* ✅ Helper to get cropped image */
+async function getCroppedImage(imageSrc, croppedAreaPixels, rotation = 0) {
+  const image = await createImage(imageSrc);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  const safeArea = Math.max(image.width, image.height) * 2;
+  canvas.width = safeArea;
+  canvas.height = safeArea;
+
+  ctx.translate(safeArea / 2, safeArea / 2);
+  ctx.rotate((rotation * Math.PI) / 180);
+  ctx.translate(-safeArea / 2, -safeArea / 2);
+
+  ctx.drawImage(
+    image,
+    safeArea / 2 - image.width / 2,
+    safeArea / 2 - image.height / 2
+  );
+
+  const data = ctx.getImageData(0, 0, safeArea, safeArea);
+  canvas.width = croppedAreaPixels.width;
+  canvas.height = croppedAreaPixels.height;
+
+  ctx.putImageData(
+    data,
+    Math.round(-safeArea / 2 + image.width / 2 - croppedAreaPixels.x),
+    Math.round(-safeArea / 2 + image.height / 2 - croppedAreaPixels.y)
+  );
+
+  // ✅ Make output circular
+  const size = Math.min(canvas.width, canvas.height);
+  const roundCanvas = document.createElement("canvas");
+  const roundCtx = roundCanvas.getContext("2d");
+  roundCanvas.width = size;
+  roundCanvas.height = size;
+
+  roundCtx.beginPath();
+  roundCtx.arc(size / 2, size / 2, size / 2, 0, 2 * Math.PI);
+  roundCtx.closePath();
+  roundCtx.clip();
+  roundCtx.drawImage(canvas, 0, 0, size, size);
+
+  return roundCanvas.toDataURL("image/png");
+}
+
+function createImage(url) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", (error) => reject(error));
+    image.setAttribute("crossOrigin", "anonymous");
+    image.src = url;
+  });
+}

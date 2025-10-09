@@ -81,8 +81,8 @@ function CreditsHistory() {
             <p>Credit History Details</p>
 
           </div>
-          <div className="credit-history-dropdown">
-            <select className="buy-credit-dropdown">
+          <div>
+            <select className="credit-history-dropdown">
               <option value="all">All</option>
               <option value="recharge">Recharge</option>
               <option value="consumed">Consumed</option>
@@ -97,6 +97,7 @@ function CreditsHistory() {
               columns={columns}
               data={transactions}
               pagination
+              
               // highlightOnHover
               // striped
               customStyles={{
@@ -121,6 +122,12 @@ function CreditsHistory() {
                 pagination: {
                   style: {
                     backgroundColor: "#15191c",
+                    color: "white",
+                  },
+                },
+                svgWrapper: {
+                  style: {
+                    fill: "white",
                     color: "white",
                   },
                 },

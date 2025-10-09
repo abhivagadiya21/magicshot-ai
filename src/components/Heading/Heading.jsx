@@ -41,20 +41,6 @@ export default function Heading() {
     }, [location.pathname]);
 
 
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-
-        dispatch({ type: "SET_USER", payload: null });
-        dispatch({ type: "SET_CREDITS", payload: 0 });
-
-        window.dispatchEvent(new Event("userUpdated"));
-
-        setTimeout(() => {
-            navigate("/", { replace: true });
-        }, 50);
-    };
-
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
         if (match) {
@@ -151,12 +137,6 @@ export default function Heading() {
                                             Credits: {credits}
                                         </div>
 
-                                        <div className="user-info">
-                                            <span className="profile-name">{user.name}</span>
-                                            <span className="credits" onClick={handleLogout}>
-                                                <img src={Plan} alt="logout" />
-                                            </span>
-                                        </div>
                                         <button className="profile-button" onClick={() => navigate(`/profile/personal-info`)}>
                                             <img width="30" height="30" src={userIcon} alt="user" />
                                         </button>

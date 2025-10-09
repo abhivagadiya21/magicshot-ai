@@ -120,6 +120,61 @@
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
 }
 
+.crop-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.crop-modal-content {
+    background: #1e252c;
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    color: #fff;
+}
+
+.close-crop {
+    margin-top: 12px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-crop:hover {
+    background-color: #666;
+}
+
+.logout {
+    background-color: #666;
+    color: $white;
+    border: 3px solid #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+}
+
+:hover.logout {
+    background-color: red;
+
+}
+
+
 @media (max-width: 768px) {
     .right-main-info-container {
         width: 100%;
