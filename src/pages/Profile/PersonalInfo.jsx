@@ -77,6 +77,7 @@ function PersonalInfo() {
       if (data.username || data.bio) {
         toast.success("Profile updated username bio successfully!");
         await fetchUser();
+        
       }
       else {
         toast.error(data.message || "Failed to update profile info");
@@ -120,7 +121,7 @@ function PersonalInfo() {
       const { data } = await updateUserProfileImageAPI(token, file);
       if (data.profileImage) {
         toast.success("Profile image updated!");
-        setGetProfileImg(data.profileImage);
+        setProfileImg(data.profileImage);
         console.log("Image upload response:", data.profileImage);
         await getProfile();
         await fetchUser();
@@ -218,7 +219,7 @@ function PersonalInfo() {
             <img
               width="100"
               height="100"
-              src={getProfileImg ? getProfileImg : profileImg}
+              src={profileImg}
               alt="user"
             />
           </div>
@@ -258,6 +259,7 @@ function PersonalInfo() {
               onChange={handleChange}
               className="edit-input"
               placeholder="Enter username"
+              maxLength={20}
             />
           ) : (
             <p className="right-name">
@@ -275,6 +277,7 @@ function PersonalInfo() {
               onChange={handleChange}
               className="edit-input"
               placeholder="Write something about yourself..."
+              maxLength={150}
             />
           ) : (
             <p className="right-name">
