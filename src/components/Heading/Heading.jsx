@@ -98,46 +98,44 @@ export default function Heading() {
                             <img src={square} alt="Logo" className="square" />
 
                             <div className={`navbar-content`}>
-                                {location.pathname !== "/profile" &&
-                                    location.pathname !== "/personal-info" &&
-                                    location.pathname !== "/credits-history" && (
-                                        <div className="dropdown" ref={dropdownRef}>
-                                            <button
-                                                className="dropdown-button"
-                                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                                            >
-                                                {selected}
-                                                <span className="arrow">
-                                                    <img height="20px" width="20px" src={dropdownIcon} alt="" />
-                                                </span>
-                                            </button>
-                                            {dropdownOpen && (
-                                                <ul className="dropdown-menu">
-                                                    {options.map(({ label, path }) => (
-                                                        <li key={label}>
-                                                            <button
-                                                                className={`dropdown-item ${selected === label ? 'active' : ''}`}
-                                                                onClick={() => {
-                                                                    setSelected(label);
-                                                                    setDropdownOpen(false);
-                                                                    navigate(path);
-                                                                }}
-                                                            >
-                                                                {label}
-                                                                {selected === label && (
-                                                                    <span className="check">
-                                                                        <img width="15" height="15" src={checkmarkIcon} alt="check" />
-                                                                    </span>
-                                                                )}
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    )}
-
+                                {!["/profile/personal-info", "/profile/credits-history"].includes(location.pathname) && (
+                                    <div className="dropdown" ref={dropdownRef}>
+                                        <button
+                                            className="dropdown-button"
+                                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        >
+                                            {selected}
+                                            <span className="arrow">
+                                                <img height="20px" width="20px" src={dropdownIcon} alt="" />
+                                            </span>
+                                        </button>
+                                        {dropdownOpen && (
+                                            <ul className="dropdown-menu">
+                                                {options.map(({ label, path }) => (
+                                                    <li key={label}>
+                                                        <button
+                                                            className={`dropdown-item ${selected === label ? 'active' : ''}`}
+                                                            onClick={() => {
+                                                                setSelected(label);
+                                                                setDropdownOpen(false);
+                                                                navigate(path);
+                                                            }}
+                                                        >
+                                                            {label}
+                                                            {selected === label && (
+                                                                <span className="check">
+                                                                    <img width="15" height="15" src={checkmarkIcon} alt="check" />
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                )}
                             </div>
+
                         </div>
 
                         <div className="navbar-right">
