@@ -12,7 +12,6 @@ import checkmarkIcon from "./heading-img/checkmark.svg";
 import userIcon from "./heading-img/user.svg";
 import moblienavIcon from "./heading-img/moblienavarrow.svg";
 
-
 const options = [
     { label: 'Baby Generator', path: '/' },
     { label: 'Age Predictor', path: '/age-predictor' },
@@ -31,7 +30,6 @@ export default function Heading() {
 
     const { state, dispatch, fetchUser } = useCredits();
     const { user, credits } = state;
-
 
     useEffect(() => {
         const savedUser = localStorage.getItem("user");

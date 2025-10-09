@@ -93,8 +93,8 @@ function CreditsHistory() {
             <p>Credit History Details</p>
 
           </div>
-          <div className="credit-history-dropdown">
-            <select className="buy-credit-dropdown" onChange={(e) => handleFilter(e.target.value)} >
+          <div >
+            <select className="credit-history-dropdown" onChange={(e) => handleFilter(e.target.value)} >
               <option value="all" >All</option>
               <option value="recharge" >Recharge</option>
               <option value="consumed" >Consumed</option>
