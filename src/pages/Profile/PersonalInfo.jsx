@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import ProfileCropImage from "../../components/ProfilecropImage/ProfilecropImage"; // ✅ fixed import
 
 function PersonalInfo() {
-  const { state } = useCredits();
+    const { state, dispatch } = useCredits();
   const { name, email } = state;
   const navigate = useNavigate();
+ 
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -51,6 +52,20 @@ function PersonalInfo() {
     const croppedImage = await getCroppedImage(imageSrc, croppedAreaPixels, rotation);
     setProfileImg(croppedImage);
     setIsCropOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    dispatch({ type: "SET_USER", payload: null });
+    dispatch({ type: "SET_CREDITS", payload: 0 });
+
+    window.dispatchEvent(new Event("userUpdated"));
+
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 50);
   };
 
   return (
@@ -149,9 +164,10 @@ function PersonalInfo() {
           </div>
         </div>
         <div className="divayder"></div>
+
+        <button className="logout" onClick={handleLogout}>Logout</button>
       </div>
 
-      {/* ✅ Crop Modal */}
       {isCropOpen && (
         <div className="crop-modal">
           <div className="crop-modal-content">

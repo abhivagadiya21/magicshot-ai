@@ -97,6 +97,7 @@ function CreditsHistory() {
               columns={columns}
               data={transactions}
               pagination
+              
               // highlightOnHover
               // striped
               customStyles={{
@@ -124,7 +125,7 @@ function CreditsHistory() {
                     color: "white",
                   },
                 },
-                svgWrapper: { // renamed the property
+                svgWrapper: {
                   style: {
                     fill: "white",
                     color: "white",
