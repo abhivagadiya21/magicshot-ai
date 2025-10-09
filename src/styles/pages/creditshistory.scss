@@ -74,12 +74,12 @@
 .credit-history-dropdown {
     background-color: $outer-background;
     border-radius: 10px;
-    padding: 0.5rem 1rem;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 3px solid $border-color;
+    color: $white;
 }
 
 .buy-credit-dropdown option {
@@ -132,7 +132,7 @@ table {
 }
 
 .pagination-button.active {
-    background: #007bff;
+    background: #ffffff;
     color: #fff;
 }
 
@@ -170,30 +170,30 @@ table {
 .my-custom-table .rdt_TableHead {
     font-weight: bold;
     font-size: 14px;
-    border-bottom: 1px solid #ffffff !important;
+    border-bottom: 1px solid $border-color !important;
 }
 
 .my-custom-table .rdt_TableRow {
     color: #ffffff !important;
-    border-bottom: 1px solid #ffffff !important;
+    border-bottom: 1px solid $border-color !important;
 }
 
 .my-custom-table .rdt_TableRow:hover {
-    background-color: #0084f7;
+    background-color: $outer-background;
 }
 
 .my-custom-table .rdt_Pagination {
     padding: 8px;
 }
 
+.kngfZm svg {
+    fill: #ffffff !important;
+}
+
 @media (max-width: 768px) {
     .credits-back-arrow {
         display: block;
     }
-
-    // .profile-left-container {
-    //     display: none;
-    // }
 
     .right-main-profile {
         width: 100%;

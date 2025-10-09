@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as *;
+
+.profile-cropper-round {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #2f3a46;
+}
+select-image-button-2{
+  background-color: aliceblue;
+}

@@ -17,7 +17,7 @@ export default function profile() {
   // const [userEmail, setUserEmail] = useState("");
 
   const { state, dispatch, fetchUser } = useCredits();
-  const { name, email } = state;
+  const { name, email,profileImage } = state;
 
   // useEffect(() => {
   //   const loadUser = () => {
@@ -59,7 +59,7 @@ export default function profile() {
 
           <div className="profile-info">
             <div className="profile-info-image-container">
-              <img width="100" height="100" src={ProfileImage} alt="user" />
+              <img width="100" height="100" src={profileImage?profileImage:ProfileImage} alt="user" />
             </div>
             <span className="profile-name">{name}</span>
             <span className="profile-name">{email}</span>

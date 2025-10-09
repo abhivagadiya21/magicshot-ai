@@ -116,18 +116,35 @@ export const getTransactionsAPI = async (token) => {
   }
 };
 
-export const updateUserProfileAPI = async (token, profileData) => {
+export const updateUserProfileInfoAPI = async (token, cleanedData) => {
   try {
-    const response = await api.put("/profile", profileData, {
+    const response = await api.post("/profile/usernameBio", cleanedData, {
       headers: {
-        "Content-Type": "application/json",
+       "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(profileData),
+      body: JSON.stringify(cleanedData),
     });
     return response.data;
   } catch (error) {
     console.error("Error updating user profile:", error);
     throw error;
   }
+};
+
+export const updateUserProfileImageAPI = async (token, imageFile) => {
+  try {
+    const formData = new FormData();
+    formData.append("profileImage", imageFile); 
+    const response = await api.post("/profile/changeprofileimage", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",  
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating profile image:", error);
+    throw error;
+  }   
 };

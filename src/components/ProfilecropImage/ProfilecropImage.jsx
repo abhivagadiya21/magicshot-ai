@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 
-import Rotateleft from "./CropImageSvg/rotate-left.svg";
-import Refresh from "./CropImageSvg/refresh.svg";
-import Rotateright from "./CropImageSvg/rotate-right.svg";
+import Rotateleft from "../CropImage/CropImageSvg/rotate-left.svg";
+import Refresh from "../CropImage/CropImageSvg/refresh.svg";
+import Rotateright from "../CropImage/CropImageSvg/rotate-right.svg";
 
-function ProfileCropImage({ imageSrc, onCropDone }) {
+function ProfileCropImage({ imageSrc, onCropDone, onSelectIMG }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
@@ -24,8 +24,9 @@ function ProfileCropImage({ imageSrc, onCropDone }) {
 
   // Handle Crop Done
   const handleCropDone = useCallback(async () => {
-    if (!croppedAreaPixels) return;
-    onCropDone(croppedAreaPixels, rotation);
+    if (!croppedAreaPixels) return null;
+    const croppedImage = await onCropDone(croppedAreaPixels, rotation);
+    return croppedImage; // ✅ return cropped image
   }, [croppedAreaPixels, rotation, onCropDone]);
 
   return (
@@ -37,8 +38,8 @@ function ProfileCropImage({ imageSrc, onCropDone }) {
             crop={crop}
             zoom={zoom}
             rotation={rotation}
-            aspect={1} // Locked 1:1 for circular crop
-            cropShape="round" // 👈 makes it round
+            aspect={1}
+            cropShape="round"
             showGrid={false}
             onCropChange={setCrop}
             onZoomChange={setZoom}
@@ -73,7 +74,12 @@ function ProfileCropImage({ imageSrc, onCropDone }) {
       </div>
 
       <div className="action-buttons">
-        <button className="select-image-button" onClick={handleCropDone}>
+        <button className="select-image-button" onClick={async () => {
+          const croppedImage = await handleCropDone(); // get cropped image
+          console.log("Cropped Image:", croppedImage);
+          if (!croppedImage) return;
+          onSelectIMG(croppedImage); // send cropped image to parent
+        }}>
           Select Image
         </button>
       </div>

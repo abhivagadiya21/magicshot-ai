@@ -136,6 +136,12 @@ function CreditsHistory() {
                     color: "white",
                   },
                 },
+                svgWrapper: { // renamed the property
+                  style: {
+                    fill: "white",
+                    color: "white",
+                  },
+                },
               }}
             />
           </table>
