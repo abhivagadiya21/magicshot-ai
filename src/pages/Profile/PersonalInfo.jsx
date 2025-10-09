@@ -17,7 +17,7 @@ function PersonalInfo() {
   const [imageSrc, setImageSrc] = useState(null);
 
   // const { state, fetchUser } = useCredits();
-  const { state, dispatch } = useCredits();
+  const { state, dispatch,fetchUser } = useCredits();
   const { name, email } = state;
   console.log("User Info:", { name, email });
 
@@ -82,9 +82,9 @@ function PersonalInfo() {
         toast.error(data.message || "Failed to update profile info");
       }
     } catch (error) {
-      // toast.error(
-      //   error?.response?.data?.message || "❌ Failed to  image."
-      // );
+      toast.error(
+        error?.response?.data?.message || "❌ Failed to  image."
+      );
     }
   }
 
