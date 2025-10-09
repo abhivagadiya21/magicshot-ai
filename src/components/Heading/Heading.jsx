@@ -41,20 +41,6 @@ export default function Heading() {
     }, [location.pathname]);
 
 
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-
-        dispatch({ type: "SET_USER", payload: null });
-        dispatch({ type: "SET_CREDITS", payload: 0 });
-
-        window.dispatchEvent(new Event("userUpdated"));
-
-        setTimeout(() => {
-            navigate("/", { replace: true });
-        }, 50);
-    };
-
     useEffect(() => {
         const match = options.find(opt => opt.path === location.pathname);
         if (match) {
@@ -98,46 +84,44 @@ export default function Heading() {
                             <img src={square} alt="Logo" className="square" />
 
                             <div className={`navbar-content`}>
-                                {location.pathname !== "/profile" &&
-                                    location.pathname !== "/personal-info" &&
-                                    location.pathname !== "/credits-history" && (
-                                        <div className="dropdown" ref={dropdownRef}>
-                                            <button
-                                                className="dropdown-button"
-                                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                                            >
-                                                {selected}
-                                                <span className="arrow">
-                                                    <img height="20px" width="20px" src={dropdownIcon} alt="" />
-                                                </span>
-                                            </button>
-                                            {dropdownOpen && (
-                                                <ul className="dropdown-menu">
-                                                    {options.map(({ label, path }) => (
-                                                        <li key={label}>
-                                                            <button
-                                                                className={`dropdown-item ${selected === label ? 'active' : ''}`}
-                                                                onClick={() => {
-                                                                    setSelected(label);
-                                                                    setDropdownOpen(false);
-                                                                    navigate(path);
-                                                                }}
-                                                            >
-                                                                {label}
-                                                                {selected === label && (
-                                                                    <span className="check">
-                                                                        <img width="15" height="15" src={checkmarkIcon} alt="check" />
-                                                                    </span>
-                                                                )}
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
-                                        </div>
-                                    )}
-
+                                {!["/profile/personal-info", "/profile/credits-history"].includes(location.pathname) && (
+                                    <div className="dropdown" ref={dropdownRef}>
+                                        <button
+                                            className="dropdown-button"
+                                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                                        >
+                                            {selected}
+                                            <span className="arrow">
+                                                <img height="20px" width="20px" src={dropdownIcon} alt="" />
+                                            </span>
+                                        </button>
+                                        {dropdownOpen && (
+                                            <ul className="dropdown-menu">
+                                                {options.map(({ label, path }) => (
+                                                    <li key={label}>
+                                                        <button
+                                                            className={`dropdown-item ${selected === label ? 'active' : ''}`}
+                                                            onClick={() => {
+                                                                setSelected(label);
+                                                                setDropdownOpen(false);
+                                                                navigate(path);
+                                                            }}
+                                                        >
+                                                            {label}
+                                                            {selected === label && (
+                                                                <span className="check">
+                                                                    <img width="15" height="15" src={checkmarkIcon} alt="check" />
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                )}
                             </div>
+
                         </div>
 
                         <div className="navbar-right">
@@ -153,12 +137,6 @@ export default function Heading() {
                                             Credits: {credits}
                                         </div>
 
-                                        <div className="user-info">
-                                            <span className="profile-name">{user.name}</span>
-                                            <span className="credits" onClick={handleLogout}>
-                                                <img src={Plan} alt="logout" />
-                                            </span>
-                                        </div>
                                         <button className="profile-button" onClick={() => navigate(`/profile/personal-info`)}>
                                             <img width="30" height="30" src={userIcon} alt="user" />
                                         </button>

@@ -45,8 +45,8 @@
   }
 
   .highlight-text {
-      color: $white;
-    }
+    color: $white;
+  }
 
   .auth-buttons {
     display: flex;
@@ -125,11 +125,7 @@
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 20px;
 
-  .navbar-hamburger-container {
-    display: none;
-  }
 
   .logo-img {
     width: 150px;
@@ -199,35 +195,41 @@
     }
   }
 }
-  .square {
-    display: none;
-  }
+
+.square {
+  display: none;
+}
+
+.navbar-hamburger-container {
+  display: none;
+}
+
 
 .hamburger {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-    }
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
 
-    .hamburger svg {
-      width: 24px;
-      height: 24px;
-      rotate: -180deg;
-    }
+.hamburger svg {
+  width: 24px;
+  height: 24px;
+  rotate: -180deg;
+}
 
-    .hamburger {
-      background: none;
-      border: none;
-      color: $white;
-      font-size: 1.8rem;
-      cursor: pointer;
-      display: none;
-    }
+// .hamburger {
+//   background: none;
+//   border: none;
+//   color: $white;
+//   font-size: 1.8rem;
+//   cursor: pointer;
+//   display: none;
+// }
 
 
 .content {
@@ -265,6 +267,12 @@
   padding: 13px;
 }
 
+@media (max-width: 1280px) {
+  .navbar-right .upgrade-button {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .user-info {
     display: none;
@@ -283,8 +291,8 @@
   }
 
   .navbar-hamburger-container {
-      display: block;
-    }
+    display: block;
+  }
 
   .navbar-main-container {
     display: flex;
@@ -330,7 +338,5 @@
     height: 35px;
   }
 
-  .navbar-right .upgrade-button {
-    display: none !important;
-  }
+
 }

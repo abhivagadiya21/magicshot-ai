@@ -16,11 +16,13 @@ function PersonalInfo() {
   const [isCropOpen, setIsCropOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
 
-  const { state, fetchUser } = useCredits();
+  // const { state, fetchUser } = useCredits();
+  const { state, dispatch } = useCredits();
   const { name, email } = state;
   console.log("User Info:", { name, email });
 
   const navigate = useNavigate();
+
 
   const [isEditing, setIsEditing] = useState(false);
   const [formDataFields, setFormDataFields] = useState({
@@ -120,7 +122,7 @@ function PersonalInfo() {
         toast.success("Profile image updated!");
         setGetProfileImg(data.profileImage);
         console.log("Image upload response:", data.profileImage);
-         await getProfile();
+        await getProfile();
         await fetchUser();
       } else {
         toast.error(data.message || "Failed to update image");
@@ -182,6 +184,20 @@ function PersonalInfo() {
     // await updateUserProfileIMG(croppedImage);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    dispatch({ type: "SET_USER", payload: null });
+    dispatch({ type: "SET_CREDITS", payload: 0 });
+
+    window.dispatchEvent(new Event("userUpdated"));
+
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 50);
+  };
+
   return (
     <>
       <div className="right-main-container">
@@ -202,7 +218,7 @@ function PersonalInfo() {
             <img
               width="100"
               height="100"
-              src={getProfileImg?getProfileImg:profileImg}
+              src={getProfileImg ? getProfileImg : profileImg}
               alt="user"
             />
           </div>
@@ -282,9 +298,10 @@ function PersonalInfo() {
           </div>
         </div>
         <div className="divayder"></div>
+
+        <button className="logout" onClick={handleLogout}>Logout</button>
       </div>
 
-      {/* ✅ Crop Modal */}
       {isCropOpen && (
         <div className="crop-modal">
           <div className="crop-modal-content">
