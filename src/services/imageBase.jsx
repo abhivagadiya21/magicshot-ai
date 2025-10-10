@@ -102,6 +102,20 @@ export const getUserProfileAPI = async (token) => {
   }
 };
 
+export const getImageHistoryAPI = async (token) => {
+  try {
+    const response = await api.get("/image-history", {  
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching image history:", error);
+    throw error;
+  }
+};
+
 export const getTransactionsAPI = async (token) => {
   try {
     const response = await api.get("/transactions", {
