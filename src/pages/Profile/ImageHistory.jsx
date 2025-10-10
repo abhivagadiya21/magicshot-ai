@@ -25,13 +25,13 @@ function ImageHistory() {
     return (
         <>
             <div className='image-history-container'>
-                <div className='image-card'>
-                    {imagedata.images && imagedata.images.map((item, index) => (
+                {imagedata.images && imagedata.images.map((item, index) => (
+                    <div className='image-card'>
                         <img key={index} src={item.generator_img} alt={`Generated ${index}`} />
-                    ))}
-                </div>
+                    </div>
+                ))}
                 {/* <div className='image-card'> */}
-                    {/* <img src={backArrow} alt="" /> */}
+                {/* <img src={backArrow} alt="" /> */}
                 {/* </div> */}
                 {/* <div className='image-card'>
                     <img src={ProfileImage} alt="" />
@@ -58,7 +58,7 @@ function ImageHistory() {
                     <img src={backArrow} alt="" />
                 </div> */}
 
-            </div>  
+            </div>
         </>
     )
 
