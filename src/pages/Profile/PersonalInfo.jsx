@@ -22,8 +22,6 @@ function PersonalInfo() {
   console.log("User Info:", { name, email });
 
   const navigate = useNavigate();
-
-
   const [isEditing, setIsEditing] = useState(false);
   const [formDataFields, setFormDataFields] = useState({
     username: '',
@@ -99,7 +97,6 @@ function PersonalInfo() {
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
-
     return new File([u8arr], filename, { type: mime });
   }
 
@@ -115,8 +112,6 @@ function PersonalInfo() {
       // Convert base64 to File
       const file = base64ToFile(imageBase64, "profile.png");
       console.log("Converted file:", file);
-      // const formData = new FormData();
-      // formData.append("profileImage", file);
 
       const { data } = await updateUserProfileImageAPI(token, file);
       if (data.profileImage) {
@@ -164,25 +159,25 @@ function PersonalInfo() {
     setIsEditing(false);
   };
 
-  // 🔹 Handle image upload
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      setImageSrc(reader.result);
-      setIsCropOpen(true); // open crop modal
-    });
-    reader.readAsDataURL(file);
-  };
+  const file = e.target.files[0];
+  if (!file) return;
 
-  // 🔹 Handle final cropped image
+  const reader = new FileReader();
+  reader.onload = () => {
+    setImageSrc(reader.result);
+    setIsCropOpen(true);
+    e.target.value = null;
+  };
+  reader.readAsDataURL(file);
+};
+
+
   const handleCropDone = async (croppedAreaPixels, rotation) => {
     const croppedImage = await getCroppedImage(imageSrc, croppedAreaPixels, rotation);
     setProfileImg(croppedImage);
     setIsCropOpen(false);
     return croppedImage;
-    // await updateUserProfileIMG(croppedImage);
   };
 
   const handleLogout = () => {
@@ -303,6 +298,7 @@ function PersonalInfo() {
         <div className="divayder"></div>
 
         <button className="logout" onClick={handleLogout}>Logout</button>
+
       </div>
 
       {isCropOpen && (
@@ -321,7 +317,6 @@ function PersonalInfo() {
 
 export default PersonalInfo;
 
-/* ✅ Helper to get cropped image */
 async function getCroppedImage(imageSrc, croppedAreaPixels, rotation = 0) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
