@@ -82,7 +82,7 @@ export default function Heading() {
                             <img src={square} alt="Logo" className="square" />
 
                             <div className={`navbar-content`}>
-                                {!["/profile/personal-info", "/profile/credits-history"].includes(location.pathname) && (
+                                {!["/profile/personal-info", "/profile/credits-history","/profile/image-history"].includes(location.pathname) && (
                                     <div className="dropdown" ref={dropdownRef}>
                                         <button
                                             className="dropdown-button"
