@@ -1,0 +1,18 @@
+@use '../abstracts/variables' as *;
+
+.image-history-container{
+    background-color: aliceblue;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    // justify-content: center;
+}
+
+.image-card{
+    background-color: rgba(255, 228, 196, 0.311);
+    height: auto;
+    width: 100px;
+
+
+}

@@ -26,6 +26,7 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 7px;
 
     .back-icon-image {
         width: 30px;
@@ -42,7 +43,7 @@
         align-items: center;
         justify-content: center;
         border: 2px solid $border-color;
-        padding: 15px;
+        // padding: 15px;
         border-radius: 50%;
         background-color: $background-color;
     }
