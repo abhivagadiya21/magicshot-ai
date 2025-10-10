@@ -16,6 +16,7 @@ import Profile from './pages/Profile/Profile.jsx';
 import PersonalInfo from './pages/Profile/PersonalInfo.jsx';
 import CreditsHistory from './pages/Profile/CreditsHistory.jsx';
 import { CreditProvider } from './components/GlobalCom/Context.jsx';
+import ImageHistory from './pages/Profile/ImageHistory.jsx';
 import './styles/main.scss';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/profile" element={<Profile />}>
               <Route path="personal-info" element={<PersonalInfo />} />
               <Route path="credits-history" element={<CreditsHistory />} />
+              <Route path="image-history" element={<ImageHistory />} />
             </Route>
           </Route>
           

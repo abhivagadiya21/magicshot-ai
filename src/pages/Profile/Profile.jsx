@@ -5,6 +5,7 @@ import GreterThan from "../../components/Heading/heading-img/moblienavarrow.svg"
 import StarIcon from "../BabyGenerator/baby-img/star.svg"
 import ProfileInfo from "./Profile-image/profile-info.svg"
 import BackArrow from "./Profile-image/backArrow.png"
+import imageicon from "./Profile-image/imageicon.png"
 import { useCredits } from "../../components/GlobalCom/Context";
 
 
@@ -19,29 +20,11 @@ export default function profile() {
   const { state, dispatch, fetchUser } = useCredits();
   const { name, email,profileImage } = state;
 
-  // useEffect(() => {
-  //   const loadUser = () => {
-  //     const savedUser = localStorage.getItem("user");
-  //     if (savedUser) {
-  //       const user = JSON.parse(savedUser);
-  //       setUserEmail(user.email || "");
-  //     }
-  //   };
-
-  //   loadUser();
-  //   window.addEventListener("userUpdated", loadUser);
-
-  //   return () => {
-  //     window.removeEventListener("userUpdated", loadUser);
-  //   };
-  // }, []);
-
   const isActive = (path) => currentPath === path;
 
   return (
     <>
       <div className=" main-container">
-        {/* <div className="left-container profile-left-container"> */}
         <div
           className={`left-container profile-left-container ${currentPath === "profile" ? "show-on-mobile" : "hide-on-mobile"
             }`}
@@ -83,6 +66,16 @@ export default function profile() {
                 <button className={`credit-history-button `}>
                   <img width="24" height="24" src={StarIcon} alt="" />
                   Credits Histroy
+                </button>
+                <span className="detail-arrow">
+                  <img width="15" height="15" src={GreterThan} alt="" />
+                </span>
+              </Link>
+
+              <Link to="image-history" className={`link-button ${isActive("credits-history") ? "action-credit-info" : ""} `}>
+                <button className={`credit-history-button `}>
+                  <img width="24" height="24" src={imageicon} alt="" />
+                  Image History
                 </button>
                 <span className="detail-arrow">
                   <img width="15" height="15" src={GreterThan} alt="" />
