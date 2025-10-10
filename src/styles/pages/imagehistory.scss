@@ -1,23 +1,30 @@
 @use '../abstracts/variables' as *;
 
-.image-history-container{
-    // background-color: rgb(0, 136, 255);
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 10px;
-    // justify-content: center;
-}
-
-.image-card{
-    background-color: rgba(255, 255, 255, 0.311);
-    width: 100px;
-    border-radius: 5px;
-}
-
-.image-card:hover{
+.image-history-container {
+    column-count: 4; 
+    column-gap: 7px;
+    margin-top: 20px;
+    max-width: 1400px;
     cursor: pointer;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in-out;
-
 }
+
+.image-card {
+   margin-bottom: 0px;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px
+}
+
+.image-card img {
+    object-fit: contain;
+    width: 100%;
+}
+
+// .image-card:hover{
+//     cursor: pointer;
+//     transform: scale(1.05);
+//     transition: all 0.3s ease-in-out;
+
+// }
