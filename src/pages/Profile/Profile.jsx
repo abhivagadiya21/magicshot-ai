@@ -18,7 +18,7 @@ export default function profile() {
   // const [userEmail, setUserEmail] = useState("");
 
   const { state, dispatch, fetchUser } = useCredits();
-  const { name, email,profileImage } = state;
+  const { name, email, profileImage } = state;
 
   const isActive = (path) => currentPath === path;
 
@@ -42,7 +42,7 @@ export default function profile() {
 
           <div className="profile-info">
             <div className="profile-info-image-container">
-              <img width="100" height="100" src={profileImage?profileImage:ProfileImage} alt="user" />
+              <img width="100" height="100" src={profileImage ? profileImage : ProfileImage} alt="user" />
             </div>
             <span className="profile-name">{name}</span>
             <span className="profile-name">{email}</span>
@@ -72,7 +72,7 @@ export default function profile() {
                 </span>
               </Link>
 
-              <Link to="image-history" className={`link-button ${isActive("credits-history") ? "action-credit-info" : ""} `}>
+              <Link to="image-history" className={`link-button ${isActive("image-history") ? "action-credit-info" : ""} `}>
                 <button className={`credit-history-button `}>
                   <img width="24" height="24" src={imageicon} alt="" />
                   Image History
