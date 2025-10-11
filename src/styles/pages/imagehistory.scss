@@ -1,29 +1,65 @@
 @use '../abstracts/variables' as *;
 
+// .image-history-container {
+//   column-count: 4;
+//   flex-wrap: wrap;
+//   gap: 7px;
+//   height: calc(100dvh - 115px);
+// }
+
+// .image-card {
+//   display: inline-block;
+//   border-radius: 8px;
+//   margin-top: 7px;
+// }
+
+// .image-card img {
+//   width: 100%;
+//   height: auto;
+//   border-radius: 8px;
+// }
+
+.image-history-main-container {
+    height: calc(100dvh - 115px);
+    width: 100%;
+    // overflow: hidden;
+    overflow-X: scroll;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .image-history-container {
-    // background-color: aliceblue;
-    // display: flex;
-    // flex-wrap: wrap;
-    // width: 100%;
-    // gap: 10px;
-    // justify-content: center;
     column-count: 4;
     column-gap: 7px;
-    margin-top: 20px;
-    max-width: 1400px;
-    cursor: pointer;
+    background-color: $background-color;
+    float: right;
+    padding: 7px;
+    border: 3px solid $border-color;
+    width: 100%;
+    
 
 }
 
 .image-card {
-    // background-color: rgba(255, 228, 196, 0.311);
-    // height: auto;
-    // width: 100px;
-
-    margin-bottom: 0px;
     display: inline-block;
     width: 100%;
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 7px;
     border-radius: 8px;
 }
+
+.image-card img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+
+
+
+
+// .image-card:hover{
+//     cursor: pointer;
+//     transform: scale(1.05);
+//     transition: all 0.3s ease-in-out;
+
+// }

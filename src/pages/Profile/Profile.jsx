@@ -26,7 +26,7 @@ export default function profile() {
     <>
       <div className=" main-container">
         <div
-          className={`left-container profile-left-container ${currentPath === "profile" ? "show-on-mobile" : "hide-on-mobile"
+          className={`profile-left-container ${currentPath === "profile" ? "show-on-mobile" : "hide-on-mobile"
             }`}
         >
 

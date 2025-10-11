@@ -20,6 +20,18 @@
     border-radius: 15px;
     border: 3px solid $border-color;
 }
+.profile-left-container{
+    height: calc(100dvh - 110px);
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+    width: 421px;
+    min-width: 421px;
+    border-radius: 15px;
+    border: 3px solid $border-color;
+    overflow: hidden;
+    padding: 15px;
+}
 
 .back-icon-container {
     display: flex;

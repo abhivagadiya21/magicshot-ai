@@ -24,44 +24,31 @@ function ImageHistory() {
     }, []);
     return (
         <>
-            <div className='image-history-container'>
-                {imagedata.images && imagedata.images.map((item, index) => (
-                    <div className='image-card'>
-                        <img key={index} src={item.generator_img} alt={`Generated ${index}`} />
-                    </div>
-                ))}
-                {/* <div className='image-card'> */}
-                {/* <img src={backArrow} alt="" /> */}
-                {/* </div> */}
-                {/* <div className='image-card'>
-                    <img src={ProfileImage} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={backArrow} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={ProfileImage} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={backArrow} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={ProfileImage} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={backArrow} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={ProfileImage} alt="" />
-                </div>
-                <div className='image-card'>
-                    <img src={backArrow} alt="" />
-                </div> */}
+            <div className='image-history-main-container'>
+                <div className='image-history-container'>
 
+                    {imagedata.images && imagedata.images.map((item, index) => {
+                        // ✅ Parse metadata safely (string → object)
+                        // const metadata =
+                        //     typeof item.metadata === "string"
+                        //         ? JSON.parse(item.metadata)
+                        //         : item.metadata;
+
+                        // ✅ Log metadata in console for each image
+                        // console.log(`Metadata for image ${index}:`, metadata.upload_img);
+
+                        return (
+                            <div className='image-card' key={index}>
+                                <img src={item.generator_img} alt={`Generated ${index}`} />
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </>
     )
 
 }
+
 
 export default ImageHistory
