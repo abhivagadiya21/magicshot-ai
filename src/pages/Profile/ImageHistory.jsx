@@ -4,6 +4,10 @@ import backArrow from "./Profile-image/backArrow.png";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
+    const [getMetaData, setGetMetaData] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(null);
+    const [zoom, setZoom] = useState(1);
     const getImage = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -22,19 +26,107 @@ function ImageHistory() {
     useEffect(() => {
         getImage();
     }, []);
+    const showPrevious = () => {
+        if (selectedIndex > 0) {
+            const newIndex = selectedIndex - 1;
+            setSelectedImage(imagedata.images[newIndex]);
+            setSelectedIndex(newIndex);
+        }
+    };
+
+    const showNext = () => {
+        if (selectedIndex < imagedata.images.length - 1) {
+            const newIndex = selectedIndex + 1;
+            setSelectedImage(imagedata.images[newIndex]);
+            setSelectedIndex(newIndex);
+        }
+    };
+    const closePopup = () => {
+        setSelectedImage(null);
+        setSelectedIndex(null);
+    };
     return (
         <>
-        <div className='image-history-main-container'>
-            <div className='image-history-container'>
-                
-                    {imagedata.images && imagedata.images.map((item, index) => (
-                        <div className='image-card'>
-                        <img key={index} src={item.generator_img} alt={`Generated ${index}`} />
-                         </div>
-                    ))}
+            <div className='image-history-main-container'>
+                <div className='image-history-container'>
 
-            </div>  
-            </div> 
+                    {imagedata.images && imagedata.images.map((item, index) => {
+                       // ✅ Parse metadata safely (string → object)
+                        const metadata =
+                            typeof item.metadata === "string"
+                                ? JSON.parse(item.metadata)
+                                : item.metadata;
+
+                        //✅ Log metadata in console for each image
+                        console.log(`Metadata for image ${index}:`, metadata.upload_img);
+
+                        return (
+                            <div className='image-card' key={index} onClick={() => {
+                                setSelectedImage(item);
+                                setSelectedIndex(index);
+                                setGetMetaData(metadata)
+                            }}>
+                                <img src={item.generator_img} alt={`Generated ${index}`} />
+                            </div>
+                        );
+                    })}
+                    {selectedImage && (
+                        <div className="popup-overlay" onClick={closePopup}>
+                            {selectedIndex > 0 && (
+                                <button
+                                    className="side-nav left"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        showPrevious();
+                                    }}
+                                >
+                                    &#8249;
+                                </button>
+                            )}
+
+                            {selectedIndex < imagedata.images.length - 1 && (
+                                <button
+                                    className="side-nav right"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        showNext();
+                                    }}
+                                >
+                                    &#8250;
+                                </button>
+                            )}
+
+                            <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+                                <div className="main-container">
+                                    <div className="popup-image-section">
+                                        <img
+                                            className="popup-image"
+                                            src={selectedImage.generator_img}
+                                            alt="Selected"
+                                        />
+                                    </div>
+
+                                </div>
+
+                                <div className="popup-info-panel">
+                                    <div className="popup-close" onClick={closePopup}>
+                                        ✕
+                                    </div>
+
+                                    <div className="prompt-section">
+                                        <div>
+                                            <h3>{selectedImage.record_type}</h3>
+                                            <h2>{selectedImage.use_credit}</h2>
+                                            <img className='upload_img_popup' src={getMetaData.upload_img} alt=""  />
+                                            <h4>{selectedImage.created_at}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
         </>
     )
 

@@ -1,10 +1,27 @@
 import React from "react";
+import { toast } from "react-toastify";
 import CropImage from "../../components/CropImage/CropImage.jsx";
 import profileIcon1 from "../../pages/BabyGenerator/baby-img/profile-1.svg";
 import uploadIcon from "../../pages/BabyGenerator/baby-img/upload.svg";
 import closeIcon from "../../components/Heading/heading-img/close.svg";
 
 function UploadSection({ label, uploadHook, inputId }) {
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // ✅ Allowed image types
+        const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+
+        // ✅ Check if file type is allowed
+        if (!validTypes.includes(file.type)) {
+            toast.error("❌ Only image files (JPG, PNG, JPEG, WEBP) are allowed!");
+            e.target.value = ""; // clear input
+            return;
+        }
+
+        uploadHook.handleFileUpload(e); // proceed with upload
+    };
     return (
         <div className="uplod-image-button-container">
             <label className="uplod-image-button" htmlFor={inputId}>
@@ -26,7 +43,7 @@ function UploadSection({ label, uploadHook, inputId }) {
                     accept="image/*"
                     id={inputId}
                     className="hidden"
-                    onChange={uploadHook.handleFileUpload}
+                    onChange={handleFileChange}
                     disabled={!!uploadHook.croppedImage}
                 />
 
