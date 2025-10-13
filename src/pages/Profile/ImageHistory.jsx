@@ -1,7 +1,11 @@
 import React, { Component, useEffect, useState } from 'react'
 import { getImageHistoryAPI } from '../../services/imageBase'
-import backArrow from "./Profile-image/backArrow.png";
-import ProfileImage from "./Profile-image/Profile-icon.svg";
+import magic from './Profile-image/magic.svg';
+import imagegallery from './Profile-image/imageicon.png';
+import star from '../BabyGenerator/baby-img/star.svg';
+import timeicon from './Profile-image/timeicon.png';
+import arrowleft from './Profile-image/arrow-left.svg';
+
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
     // const [getMetaData, setGetMetaData] = useState([]);
@@ -92,7 +96,7 @@ function ImageHistory() {
                                         showPrevious();
                                     }}
                                 >
-                                    &#8249;
+                                    <img src={arrowleft} alt="Previous" />
                                 </button>
                             )}
 
@@ -104,34 +108,63 @@ function ImageHistory() {
                                         showNext();
                                     }}
                                 >
-                                    &#8250;
+                                    <img className='transform-image' src={arrowleft} alt="Previous" />
                                 </button>
                             )}
 
                             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-                                <div className="main-container">
-                                    <div className="popup-image-section">
-                                        <img
-                                            className="popup-image"
-                                            src={selectedImage.generator_img}
-                                            alt="Selected"
-                                        />
-                                    </div>
+                                <div className="main-container-popup">
+
+                                    <img
+                                        className="popup-image"
+                                        src={selectedImage.generator_img}
+                                        alt="Selected"
+                                    />
+
 
                                 </div>
 
                                 <div className="popup-info-panel">
-                                    <div className="popup-close" onClick={closePopup}>
+                                    <div className="popup-close-button" onClick={closePopup}>
                                         ✕
                                     </div>
 
                                     <div className="prompt-section">
-                                        <div>
-                                            <h3>{selectedImage.record_type}</h3>
-                                            <h2>{selectedImage.use_credit}</h2>
-                                            <img className='upload_img_popup' src={metadata.upload_img} alt="" />
-                                            <h4>{selectedImage.created_at}</h4>
+                                        <div className='record-type-container'>
+                                            <img src={magic} alt="" />
+                                            <p>{selectedImage.record_type}</p>
                                         </div>
+
+                                        <div className='Uoploded-image-container'>
+                                            <img src={imagegallery} alt="" />
+                                            <p >Uoploded Image</p>
+                                        </div>
+
+                                        <div>
+                                            {metadata.upload_img && <img className='upload_img_popup' src={metadata.upload_img} alt="" />}
+                                        </div>
+                                        <div className='uploded-parent-images'>
+                                            {metadata.parent_1 && <img className='upload_img_popup' src={metadata.parent_1} alt="" />}
+                                            {metadata.parent_2 && <img className='upload_img_popup' src={metadata.parent_2} alt="" />}
+                                        </div>
+                                        <i class="fa-solid fa-hourglass-end"></i>
+
+
+                                        <div className='use-credit-container'>
+                                            <img src={star} alt="" />
+                                            <p>{selectedImage.use_credit}</p>
+                                            <p>Use Credit</p>
+                                        </div>
+
+                                        <div className='time-date-container'>
+                                            <img src={timeicon} alt="" />
+                                            <p>{selectedImage.created_at}</p>
+                                        </div>
+                                    </div>
+                                    <div className='dowanload-share-button'>
+                                        <button className='download-button-imgde-history'>Share</button>
+                                        <button className='download-button-imgde-history'>Download</button>
+                                      
                                     </div>
                                 </div>
                             </div>
