@@ -66,13 +66,20 @@ function ImageHistory() {
                         // console.log(`Metadata for image ${index}:`, metadata.upload_img);
 
                         return (
-                            <div className='image-card' key={index} onClick={() => {
-                                setSelectedImage(item);
-                                setSelectedIndex(index);
-                                // setGetMetaData(metadata)
-                            }}>
+                            <div
+                                className='image-card'
+                                key={index}
+                                onClick={() => {
+                                    setSelectedImage(item);
+                                    setSelectedIndex(index);
+                                }}
+                            >
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
+                                <div className="overlay-1">
+                                <button className="">Download</button>
+                                </div>
                             </div>
+
                         );
                     })}
                     {selectedImage && (

@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+
 .image-history-main-container {
     height: calc(100dvh - 115px);
     width: 100%;
@@ -18,19 +19,45 @@
     width: 100%;
 }
 
+
 .image-card {
-    display: inline-block;
-    width: 100%;
-    // margin-bottom: 7px;
-    border-radius: 8px;
+  width: 100%; 
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
 }
 
 .image-card img {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
-.image-card:hover{
-    cursor: pointer;
+.image-card .overlay-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 10px;
 }
+
+.image-card:hover .overlay-1 {
+  opacity: 1;
+}
+
+// . {
+//   background: white;
+//   position: absolute;
+//   // top: 75%;
+//   bottom: 5%;
+//   border: none;
+//   border-radius: 4px;
+//   padding: 8px 12px;
+//   cursor: pointer;
+// }
