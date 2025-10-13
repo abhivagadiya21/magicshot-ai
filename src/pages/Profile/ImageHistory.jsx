@@ -8,7 +8,7 @@ import arrowleft from './Profile-image/arrow-left.svg';
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
-    //const [getMetaData, setGetMetaData] = useState([]);
+    // const [getMetaData, setGetMetaData] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(null);
     const getImage = async () => {
@@ -60,6 +60,15 @@ function ImageHistory() {
                 <div className='image-history-container'>
 
                     {imagedata.images && imagedata.images.map((item, index) => {
+                        // ✅ Parse metadata safely (string → object)
+                        // const metadata =
+                        //     typeof item.metadata === "string"
+                        //         ? JSON.parse(item.metadata)
+                        //         : item.metadata;
+
+                        //✅ Log metadata in console for each image
+                        // console.log(`Metadata for image ${index}:`, metadata.upload_img);
+
                         return (
                             <div className='image-card' key={index} onClick={() => {
                                 setSelectedImage(item);
