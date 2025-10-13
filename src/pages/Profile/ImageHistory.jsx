@@ -6,8 +6,10 @@ import { meta } from '@eslint/js';
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
-import timeicon from './Profile-image/timeicon.png';
+// import timeicon from './Profile-image/timeicon.png';
 import arrowleft from './Profile-image/arrow-left.svg';
+import timeIcon from "../AgeJourney/journey-image/time.svg";
+
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
@@ -196,7 +198,7 @@ function ImageHistory() {
                                         </div>
 
                                         <div className='time-date-container'>
-                                            <img src={timeicon} alt="" />
+                                            <img src={timeIcon} alt="" />
                                             <p>{selectedImage.created_at}</p>
                                         </div>
                                     </div>
