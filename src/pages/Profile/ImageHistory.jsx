@@ -1,5 +1,8 @@
 import React, { Component, useEffect, useState } from 'react'
 import { getImageHistoryAPI } from '../../services/imageBase'
+import backArrow from "./Profile-image/backArrow.png";
+import ProfileImage from "./Profile-image/Profile-icon.svg";
+import { meta } from '@eslint/js';
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
@@ -47,6 +50,54 @@ function ImageHistory() {
         setSelectedImage(null);
         setSelectedIndex(null);
     };
+    const handleDownload = async (imageUrl) => {
+        try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = blobUrl;
+            link.download = `image_${Date.now()}.png`; // Or .jpg, depending on your image type
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Cleanup the blob URL after a short delay
+            setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+        } catch (error) {
+            console.error("Download failed:", error);
+        }
+    };
+    const handleShare = async (imageUrl) => {
+        try {
+            // Fetch the image as a Blob
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+
+            // Create a File object from the blob
+            const file = new File([blob], 'shared_image.png', { type: blob.type });
+
+            // Check if the browser supports sharing files
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: 'Check out this image!',
+                    text: 'Here’s an image I generated.',
+                    files: [file],
+                });
+            } else {
+                // Fallback: just copy the link
+                await navigator.clipboard.writeText(imageUrl);
+                alert('📋 Your browser does not support image sharing. Link copied!');
+            }
+        } catch (error) {
+            console.error('Error sharing image:', error);
+            alert('❌ Failed to share image.');
+        }
+    };
+
+
+
     const metadata =
         selectedImage && selectedImage.metadata
             ? typeof selectedImage.metadata === "string"
@@ -67,7 +118,10 @@ function ImageHistory() {
                             }}>
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
                                 <div className="overlay-1">
-                                <button className="download-button-imgde-history-hover">Download</button>
+                                    <button className="download-button-imgde-history-hover" onClick={(e) => {
+                                        e.stopPropagation(); // Prevent opening the popup
+                                        handleDownload(item.generator_img);
+                                    }}>Download</button>
                                 </div>
                             </div>
 
@@ -147,8 +201,8 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history'>Share</button>
-                                        <button className='download-button-imgde-history'>Download</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img)}>Share</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img)}>Download</button>
                                     </div>
                                 </div>
                             </div>
