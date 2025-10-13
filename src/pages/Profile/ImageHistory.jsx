@@ -60,20 +60,11 @@ function ImageHistory() {
                 <div className='image-history-container'>
 
                     {imagedata.images && imagedata.images.map((item, index) => {
-                        // ✅ Parse metadata safely (string → object)
-                        // const metadata =
-                        //     typeof item.metadata === "string"
-                        //         ? JSON.parse(item.metadata)
-                        //         : item.metadata;
-
-                        //✅ Log metadata in console for each image
-                        // console.log(`Metadata for image ${index}:`, metadata.upload_img);
 
                         return (
                             <div className='image-card' key={index} onClick={() => {
                                 setSelectedImage(item);
                                 setSelectedIndex(index);
-                                // setGetMetaData(metadata)
                             }}>
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
                             </div>
@@ -134,12 +125,12 @@ function ImageHistory() {
                                         <div>
                                             {metadata.upload_img && <img className='upload_img_popup' src={metadata.upload_img} alt="" />}
                                         </div>
+
                                         <div className='uploded-parent-images'>
                                             {metadata.parent_1 && <img className='upload_img_popup' src={metadata.parent_1} alt="" />}
                                             {metadata.parent_2 && <img className='upload_img_popup' src={metadata.parent_2} alt="" />}
                                         </div>
                                         <i class="fa-solid fa-hourglass-end"></i>
-
 
                                         <div className='use-credit-container'>
                                             <img src={star} alt="" />
@@ -155,7 +146,6 @@ function ImageHistory() {
                                     <div className='dowanload-share-button'>
                                         <button className='download-button-imgde-history'>Share</button>
                                         <button className='download-button-imgde-history'>Download</button>
-                                      
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +155,6 @@ function ImageHistory() {
             </div>
         </>
     )
-
 }
 
 
