@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import { getImageHistoryAPI } from '../../services/imageBase'
 import backArrow from "./Profile-image/backArrow.png";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
+import { meta } from '@eslint/js';
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
     // const [getMetaData, setGetMetaData] = useState([]);
@@ -122,7 +123,10 @@ function ImageHistory() {
                                         <div>
                                             <h3>{selectedImage.record_type}</h3>
                                             <h2>{selectedImage.use_credit}</h2>
-                                            <img className='upload_img_popup' src={metadata.upload_img} alt="" />
+                                            {/* <img className='upload_img_popup' src={metadata.upload_img} alt="" /> */}
+                                            {metadata.upload_img && <img className='upload_img_popup' src={metadata.upload_img} alt="" />}
+                                            {metadata.parent_1 && <img className='upload_img_popup' src={metadata.parent_1} alt="" />}
+                                            {metadata.parent_2 && <img className='upload_img_popup' src={metadata.parent_2} alt="" />}
                                             <h4>{selectedImage.created_at}</h4>
                                         </div>
                                     </div>
