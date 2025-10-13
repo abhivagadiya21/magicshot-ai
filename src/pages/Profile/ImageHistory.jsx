@@ -113,8 +113,6 @@ function ImageHistory() {
                                         src={selectedImage.generator_img}
                                         alt="Selected"
                                     />
-
-
                                 </div>
 
                                 <div className="popup-info-panel">
