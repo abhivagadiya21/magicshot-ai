@@ -200,7 +200,19 @@
     width: 100%;
     margin-top: 10px;
     color: $white;
+}
 
+.download-button-imgde-history-hover{
+    background: $background-color;
+    border: 3px solid $border-color;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    color: $white;
+    position: absolute;
+    bottom: 5%;
 }
 
 .reuse-button {

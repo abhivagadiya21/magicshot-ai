@@ -68,7 +68,7 @@ function ImageHistory() {
                             }}>
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
                                 <div className="overlay-1">
-                                <button className="">Download</button>
+                                <button className="download-button-imgde-history-hover">Download</button>
                                 </div>
                             </div>
 
