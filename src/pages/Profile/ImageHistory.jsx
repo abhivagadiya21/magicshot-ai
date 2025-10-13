@@ -8,7 +8,6 @@ import arrowleft from './Profile-image/arrow-left.svg';
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
-    // const [getMetaData, setGetMetaData] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(null);
     const getImage = async () => {
