@@ -66,6 +66,20 @@
     margin-bottom: 80px;
 }
 
+.left-container-changeHair {
+  height: calc(100dvh - 110px);
+  overflow-y: scroll;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  width: 421px;
+  min-width: 421px;
+  border-radius: 15px;
+  border: 3px solid $border-color;
+  // overflow: hidden;
+  padding: 15px;
+}
+
 .tab1-inner-1-content {
     display: flex;
     width: 25%;
@@ -73,29 +87,32 @@
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    font-size: .8rem;
-
-    .tab1-inner-1-content p {
-        color: $white;
-    }
-
-    .tab-image {
-        width: 100%;
-        object-fit: contain;
-        border-radius: 10px;
-        cursor: pointer;
-        border: 3px solid transparent;
-    }
-
-    .tab1-inner-1-content.selected .tab-image {
-        border: 3px solid #c589e4;
-
-    }
-
-    .tab-image:active {
-        border: 2px solid #c589e4;
-    }
+    font-size: 0.8rem;
 }
+
+.tab1-inner-1-content p {
+    color: #fff;
+}
+
+.tab-image {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab1-inner-1-content.selected .tab-image {
+    border: 3px solid transparent;
+    background: linear-gradient(#000, #000) padding-box,
+                linear-gradient(90deg, #3231d3 0%, #443e4d 100%) border-box;
+}
+
+.tab-image:active {
+    transform: scale(0.97);
+}
+
 
 @media (max-width: 768px) {
     .left-main-changeHair {

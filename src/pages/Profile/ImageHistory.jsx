@@ -67,7 +67,11 @@ function ImageHistory() {
                                 setSelectedIndex(index);
                             }}>
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
+                                <div className="overlay-1">
+                                <button className="">Download</button>
+                                </div>
                             </div>
+
                         );
                     })}
                     {selectedImage && (
