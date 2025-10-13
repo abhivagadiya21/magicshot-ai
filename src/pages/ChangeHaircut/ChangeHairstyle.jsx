@@ -122,7 +122,7 @@ function ChangehaircutPage() {
         <>
             <div className="main-container">
                 {loading && <Loader />}
-                <div className="left-container">
+                <div className="left-container-changeHair">
                     <div className="header-section">
                         <p className="Baby-hading">Al Change Hairstyle</p>
                         <button onClick={openHowWork} className="button-popup-howtowork">
