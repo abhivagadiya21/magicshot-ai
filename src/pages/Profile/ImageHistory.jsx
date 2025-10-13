@@ -8,8 +8,6 @@ import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
 // import timeicon from './Profile-image/timeicon.png';
 import arrowleft from './Profile-image/arrow-left.svg';
-import timeIcon from "../AgeJourney/journey-image/time.svg";
-
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
@@ -97,7 +95,38 @@ function ImageHistory() {
             alert('❌ Failed to share image.');
         }
     };
+    const dateDifference = (dateString) => {
+        const now = dayjs();
+        const pastDate = dayjs(dateString);
+        const diff = now.diff(pastDate);
+        const durationObj = dayjs.duration(diff);
 
+        if (durationObj.years() > 0) {
+            return `${durationObj.years()} year(s) ago`;
+        } else if (durationObj.months() > 0) {
+            return `${durationObj.months()} month(s) ago`;
+        } else if (durationObj.days() > 0) {
+            return `${durationObj.days()} day(s) ago`;
+        } else if (durationObj.hours() > 0) {
+            return `${durationObj.hours()} hour(s) ago`;
+        } else if (durationObj.minutes() > 0) {
+            return `${durationObj.minutes()} minute(s) ago`;
+        }
+        else {
+            return 'Just now';
+        }
+    };
+    const displayDateFormatted = (dateString) => {
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        };
+        const date = new Date(dateString);
+        return date.toLocaleDateString(undefined, options);
+    }
 
 
     const metadata =
@@ -174,6 +203,7 @@ function ImageHistory() {
                                         <div className='record-type-container'>
                                             <img src={magic} alt="" />
                                             <p>{selectedImage.record_type}</p>
+                                            <p>{dateDifference(selectedImage.created_at)}</p>
                                         </div>
 
                                         <div className='Uoploded-image-container'>
@@ -198,7 +228,7 @@ function ImageHistory() {
                                         </div>
 
                                         <div className='time-date-container'>
-                                            <img src={timeIcon} alt="" />
+                                            <img src={timeicon} alt="" />
                                             <p>{selectedImage.created_at}</p>
                                         </div>
                                     </div>
