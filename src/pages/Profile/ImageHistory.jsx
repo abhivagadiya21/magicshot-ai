@@ -1,16 +1,15 @@
 import React, { Component, useEffect, useState } from 'react'
 import { getImageHistoryAPI } from '../../services/imageBase'
-import backArrow from "./Profile-image/backArrow.png";
-import ProfileImage from "./Profile-image/Profile-icon.svg";
-import { meta } from '@eslint/js';
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
-import timeicon from './Profile-image/timeicon.png';
-import arrowleft from './Profile-image/arrow-left.svg';
+// import timeicon from './Profile-image/timeicon.png';
+import timeIcon from "../AgeJourney/journey-image/time.svg";
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
+import arrowleft from './Profile-image/arrow-left.svg';
+
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -104,20 +103,21 @@ function ImageHistory() {
         const durationObj = dayjs.duration(diff);
 
         if (durationObj.years() > 0) {
-            return `${durationObj.years()} year(s) ago`;
+            return `${durationObj.years()} year ago`;
         } else if (durationObj.months() > 0) {
-            return `${durationObj.months()} month(s) ago`;
+            return `${durationObj.months()} month ago`;
         } else if (durationObj.days() > 0) {
-            return `${durationObj.days()} day(s) ago`;
+            return `${durationObj.days()} day ago`;
         } else if (durationObj.hours() > 0) {
-            return `${durationObj.hours()} hour(s) ago`;
+            return `${durationObj.hours()} hour ago`;
         } else if (durationObj.minutes() > 0) {
-            return `${durationObj.minutes()} minute(s) ago`;
+            return `${durationObj.minutes()} minute ago`;
         }
         else {
             return 'Just now';
         }
     };
+
     const displayDateFormatted = (dateString) => {
         const options = {
             year: 'numeric',
@@ -134,7 +134,7 @@ function ImageHistory() {
             case 'age_predictor':
                 return 'Age Predictor';
             case 'change_hairstyle':
-                return 'Change Hairstyle';      
+                return 'Change Hairstyle';
             case 'age_journey':
                 return 'Age Journey';
             case 'baby_generation':
@@ -214,10 +214,16 @@ function ImageHistory() {
 
                                     <div className="prompt-section">
                                         <div className='record-type-container'>
-                                            <img src={magic} alt="" />
-                                            {/* <p>{selectedImage.record_type}</p> */}
-                                            <p>{switchRecordType(selectedImage.record_type)}</p>
-                                            <p>{dateDifference(selectedImage.created_at)}</p>
+                                            <div>
+                                                <img src={magic} alt="" />
+                                            </div>
+                                            <div>
+                                                {/* <p>{selectedImage.record_type}</p> */}
+                                                <p>{switchRecordType(selectedImage.record_type)}</p>
+                                                <p className='caranttime'>{dateDifference(selectedImage.created_at)}</p>
+
+                                            </div>
+
                                         </div>
 
                                         <div className='Uoploded-image-container'>
@@ -242,8 +248,7 @@ function ImageHistory() {
                                         </div>
 
                                         <div className='time-date-container'>
-                                            <img src={timeicon} alt="" />
-                                            {/* <p>{selectedImage.created_at}</p> */}
+                                            <img src={timeIcon} alt="" />
                                             <p>{displayDateFormatted(selectedImage.created_at)}</p>
                                         </div>
                                     </div>

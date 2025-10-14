@@ -1,13 +1,14 @@
 import React, { use, useEffect, useState } from "react";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
 import { useCredits } from "../../components/GlobalCom/Context";
-import { updateUserProfileInfoAPI } from "../../services/imageBase";
+import { updateUserProfileInfoAPI, changePasswordAPI } from "../../services/imageBase";
 import { updateUserProfileImageAPI } from "../../services/imageBase";
 import { getUserProfileAPI } from "../../services/imageBase";
 import { toast } from "react-toastify";
 import backArrow from "./Profile-image/backArrow.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import ProfileCropImage from "../../components/ProfilecropImage/ProfilecropImage";
+import closeicon from '../../components/Popup/GetImagePopup/GetImagePopupImage/close.svg'
 
 function PersonalInfo() {
 
@@ -17,7 +18,7 @@ function PersonalInfo() {
   const [imageSrc, setImageSrc] = useState(null);
 
   // const { state, fetchUser } = useCredits();
-  const { state, dispatch,fetchUser } = useCredits();
+  const { state, dispatch, fetchUser } = useCredits();
   const { name, email } = state;
   console.log("User Info:", { name, email });
 
@@ -31,6 +32,53 @@ function PersonalInfo() {
     username: '',
     bio: '',
   });
+
+  const [isPasswordPopupOpen, setIsPasswordPopupOpen] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePasswordSave = async () => {
+    if (!passwordData.currentPassword) {
+      toast.error("Current password is required");
+      return;
+    }
+
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error("New passwords do not match");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("User not authenticated");
+      return;
+    }
+
+    try {
+      const { status } = await changePasswordAPI(token, {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+      });
+      if (status === "success") {
+        toast.success("Password updated successfully");
+        setIsPasswordPopupOpen(false);
+        setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+      }
+    } catch (error) {
+      toast.error("Failed to update password");
+    }
+  };
+
+
 
   const getProfile = async () => {
     const token = localStorage.getItem("token");
@@ -75,7 +123,7 @@ function PersonalInfo() {
       if (data.username || data.bio) {
         toast.success("Profile updated username bio successfully!");
         await fetchUser();
-        
+
       }
       else {
         toast.error(data.message || "Failed to update profile info");
@@ -160,17 +208,17 @@ function PersonalInfo() {
   };
 
   const handleImageUpload = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    setImageSrc(reader.result);
-    setIsCropOpen(true);
-    e.target.value = null;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageSrc(reader.result);
+      setIsCropOpen(true);
+      e.target.value = null;
+    };
+    reader.readAsDataURL(file);
   };
-  reader.readAsDataURL(file);
-};
 
 
   const handleCropDone = async (croppedAreaPixels, rotation) => {
@@ -193,6 +241,8 @@ function PersonalInfo() {
       navigate("/", { replace: true });
     }, 50);
   };
+
+  // image-history-main-container
 
   return (
     <>
@@ -292,7 +342,13 @@ function PersonalInfo() {
         <div className="right-name-container">
           <div className="name-and-button-container">
             <p className="right-name">Change Password</p>
-            <button className="edit-details-button">Change Password</button>
+            <button
+              className="edit-details-button"
+              onClick={() => setIsPasswordPopupOpen(true)}
+            >
+              Change Password
+            </button>
+
           </div>
         </div>
         <div className="divayder"></div>
@@ -311,6 +367,49 @@ function PersonalInfo() {
           </div>
         </div>
       )}
+
+      {isPasswordPopupOpen && (
+        <div className="crop-modal">
+          <div className="crop-modal-content password-modal">
+            <h3>Change Password</h3>
+
+            <input
+              type="password"
+              name="currentPassword"
+              placeholder="Current Password"
+              value={passwordData.currentPassword}
+              onChange={handlePasswordChange}
+              className="password-input"
+            />
+            <input
+              type="password"
+              name="newPassword"
+              placeholder="New Password"
+              value={passwordData.newPassword}
+              onChange={handlePasswordChange}
+              className="password-input"
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm New Password"
+              value={passwordData.confirmPassword}
+              onChange={handlePasswordChange}
+              className="password-input"
+            />
+
+            <div className="password-modal-buttons">
+              <button className="save-password-modal-buttons" onClick={handlePasswordSave}>
+                Save
+              </button>
+              <button className="password-close-button" onClick={() => setIsPasswordPopupOpen(false)}>
+                <img src={closeicon} alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </>
   );
 }

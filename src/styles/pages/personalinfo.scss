@@ -20,6 +20,7 @@
         gap: 10px;
         font-size: 20px;
         font-weight: bold;
+        margin-left: 15px;
     }
 
 }
@@ -94,6 +95,8 @@
     }
 }
 
+
+
 .right-name-container {
     margin-bottom: 16px;
 
@@ -120,7 +123,6 @@
     font-size: 14px;
     color: $white;
     background-color: $outer-background;
-
 }
 
 .edit-input:focus {
@@ -182,6 +184,65 @@
     background-color: red;
     color: $white;
 
+}
+
+.password-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.password-modal h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.password-modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.save-password-modal-buttons {
+    width: 100%;
+    background-color: $background-color;
+    color: #fff;
+    border: 3px solid $border-color;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+}
+
+.password-close-button {
+    cursor: pointer;
+    position: absolute;
+    bottom: 67%;
+    right: 31%;
+    border: none;
+    background-color: transparent;
+}
+
+.password-close-button img {
+    width: 20px;
+}
+
+.password-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 3px solid $border-color;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: $white;
+    background-color: $background-color;
+}
+
+.password-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
 }
 
 
