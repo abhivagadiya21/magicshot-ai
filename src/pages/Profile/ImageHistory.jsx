@@ -129,7 +129,18 @@ function ImageHistory() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
-
+    const switchRecordType = (type) => {
+        switch (type) {
+            case 'age_predictor':
+                return 'Age Predictor';
+            case 'change_hairstyle':
+                return 'Change Hairstyle';      
+            case 'age_journey':
+                return 'Age Journey';
+            case 'baby_generation':
+                return 'Baby Generation';
+        }
+    }
 
     const metadata =
         selectedImage && selectedImage.metadata
@@ -204,7 +215,8 @@ function ImageHistory() {
                                     <div className="prompt-section">
                                         <div className='record-type-container'>
                                             <img src={magic} alt="" />
-                                            <p>{selectedImage.record_type}</p>
+                                            {/* <p>{selectedImage.record_type}</p> */}
+                                            <p>{switchRecordType(selectedImage.record_type)}</p>
                                             <p>{dateDifference(selectedImage.created_at)}</p>
                                         </div>
 
@@ -225,7 +237,7 @@ function ImageHistory() {
 
                                         <div className='use-credit-container'>
                                             <img src={star} alt="" />
-                                            <p>{selectedImage.use_credit}</p>
+                                            <p>{selectedImage.use_credit.replace("-", "")}</p>
                                             <p>Use Credit</p>
                                         </div>
 
