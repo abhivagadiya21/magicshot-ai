@@ -84,7 +84,7 @@ export default function profile() {
             </div>
           )}
         </div>
-        <div className="right-main-profile">
+        <div className="image-history-main-container">
 
           <Outlet />
 
