@@ -243,8 +243,7 @@ function ImageHistory() {
 
                                         <div className='use-credit-container'>
                                             <img src={star} alt="" />
-                                            <p>{selectedImage.use_credit.replace("-", "")}</p>
-                                            <p>Use Credit</p>
+                                            <p>{selectedImage.use_credit.replace("-", "")} Use Credit</p>
                                         </div>
 
                                         <div className='time-date-container'>
