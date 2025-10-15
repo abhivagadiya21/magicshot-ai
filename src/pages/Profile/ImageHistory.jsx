@@ -3,6 +3,7 @@ import { getImageHistoryAPI } from '../../services/imageBase'
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
+import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png'
 // import timeicon from './Profile-image/timeicon.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
 import dayjs from 'dayjs';
@@ -161,6 +162,7 @@ function ImageHistory() {
                                 setSelectedIndex(index);
                             }}>
                                 <img src={item.generator_img} alt={`Generated ${index}`} />
+
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
@@ -205,6 +207,22 @@ function ImageHistory() {
                                         src={selectedImage.generator_img}
                                         alt="Selected"
                                     />
+                                    {selectedImage.record_type === "age_predictor" && metadata.predict_age && (
+                                        <div className="age-overlay-imageHistory">
+                                            <div className="age-overlay-left">
+                                                <img
+                                                    className="graduant-overlay-image"
+                                                    src={graduant}
+                                                    alt="Graduation background"
+                                                />
+                                            </div>
+
+                                            <div className="age-overlay-right">
+                                                <p className="predicted-age-label">Predicted Age</p>
+                                                <p className="predicted-age-value">{metadata.predict_age}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="popup-info-panel">
