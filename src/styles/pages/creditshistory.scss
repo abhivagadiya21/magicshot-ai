@@ -69,7 +69,6 @@
         color: $white;
     }
 
-
 }
 
 .credit-history-dropdown {
@@ -112,9 +111,8 @@
     padding: 15px;
     align-items: center;
     display: flex;
-    justify-content: center;
     width: 100%;
-
+    overflow-x: scroll;
 }
 
 table {

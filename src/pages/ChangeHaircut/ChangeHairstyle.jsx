@@ -68,7 +68,7 @@ function ChangehaircutPage() {
 
     const handleGenerate = async () => {
         if (!parent1Upload.croppedImage) {
-            toast.error("⚠ Please upload an image of Parent 1.");
+            toast.error("Please upload an image");
             return;
         }
         const storedUser = JSON.parse(localStorage.getItem("user"));
