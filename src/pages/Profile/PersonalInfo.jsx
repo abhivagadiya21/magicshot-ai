@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from "react";
 import ProfileImage from "./Profile-image/Profile-icon.svg";
 import { useCredits } from "../../components/GlobalCom/Context";
-import { updateUserProfileInfoAPI } from "../../services/imageBase";
+import { updateUserProfileInfoAPI, changePasswordAPI } from "../../services/imageBase";
 import { updateUserProfileImageAPI } from "../../services/imageBase";
 import { getUserProfileAPI } from "../../services/imageBase";
 import { toast } from "react-toastify";
@@ -46,6 +46,12 @@ function PersonalInfo() {
   };
 
   const handlePasswordSave = async () => {
+    if (!passwordData.currentPassword) {
+      toast.error("Current password is required");
+      return;
+    }
+
+
     if (passwordData.newPassword !== passwordData.confirmPassword) {
       toast.error("New passwords do not match");
       return;
@@ -58,11 +64,15 @@ function PersonalInfo() {
     }
 
     try {
-      // 🔄 Call your backend API to update password (replace this API)
-      // await updatePasswordAPI(token, passwordData);
-      toast.success("Password updated successfully");
-      setIsPasswordPopupOpen(false);
-      setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+      const { status } = await changePasswordAPI(token, {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+      });
+      if (status === "success") {
+        toast.success("Password updated successfully");
+        setIsPasswordPopupOpen(false);
+        setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+      }
     } catch (error) {
       toast.error("Failed to update password");
     }

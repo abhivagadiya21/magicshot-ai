@@ -129,7 +129,6 @@ function ImageHistory() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
-
     const switchRecordType = (type) => {
         switch (type) {
             case 'age_predictor':

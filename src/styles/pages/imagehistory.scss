@@ -434,6 +434,74 @@
     flex-direction: column;
     justify-content: center;
 }
+@media (max-width: 768px) {
+    .image-history-container {
+        column-count: 2;
+    }
+    .popup-container {
+        flex-direction: column;
+        scrollbar-width: thin;
+        overflow-y: auto;
+        padding: 15px;
+    }
+    .main-container-popup {
+        width: 100%;
+        height: 40%;
+        margin: 15px 0px 0px 0px;
+        border-radius: 5px;
+    }
+    .popup-info-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        margin: 10px 0px 0px 0px;
+         height: 60%;
+    }
+    .popup-close-button {
+        position: fixed;
+        top: 2%;
+        right: 25px;
+        font-size: 18px;
+    }
+   .prompt-section{
+    flex-direction: column;
+   }
+   .record-type-container{
+    font-size: 16px;
+    margin-top: 0px;
+   }
+   .Uoploded-image-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .upload_img_popup{
+    margin-top: 5px;
+    height: 60px;
+    width: 60px;
+   }
+   .uploded-parent-images{
+    flex-direction: row;
+    column-gap: 10px;
+   }
+   .use-credit-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .time-date-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .dowanload-share-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    bottom: 0%;
+   }
+   .download-button-imgde-history{
+    width: 50%;
+   }
+}
 
 
 @media (max-width: 400px) {

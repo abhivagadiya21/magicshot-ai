@@ -162,3 +162,19 @@ export const updateUserProfileImageAPI = async (token, imageFile) => {
     throw error;
   }   
 };
+
+export const changePasswordAPI = async (token, passwordData) => {
+  try {
+    const response = await api.post("/profile/changepassword", passwordData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(passwordData),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error changing password:", error);
+    throw error;
+  }
+};
