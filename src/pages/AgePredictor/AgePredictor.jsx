@@ -43,7 +43,7 @@ function AgePredictor() {
 
   const handleGenerate = async () => {
     if (!parent1Upload.croppedImage) {
-      toast.error("❌ Please upload both parent images.");
+      toast.error("❌ Please upload images.");
       return;
     }
 
