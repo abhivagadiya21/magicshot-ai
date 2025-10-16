@@ -3,13 +3,14 @@ import { getImageHistoryAPI } from '../../services/imageBase'
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
-import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png'
-// import timeicon from './Profile-image/timeicon.png';
+// import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
+import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 import arrowleft from './Profile-image/arrow-left.svg';
+import AgeOverlayCanvas from '../../components/AgeOverlayCanvas/AgeOverlayCanvas';
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
@@ -52,25 +53,39 @@ function ImageHistory() {
         setSelectedImage(null);
         setSelectedIndex(null);
     };
-    const handleDownload = async (imageUrl) => {
+    const handleDownload = async (imageUrl, recordType) => {
         try {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            const blobUrl = window.URL.createObjectURL(blob);
+            if (recordType === "age_predictor") {
+                const canvas = document.getElementById("ageCanvasWrapper");
+                if (!canvas) {
+                    console.error("Canvas not found!");
+                    return;
+                }
 
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = `image_${Date.now()}.png`; // Or .jpg, depending on your image type
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Cleanup the blob URL after a short delay
-            setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+                // ✅ Capture the canvas directly
+                const dataUrl = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = dataUrl;
+                link.download = `age_prediction_${Date.now()}.png`;
+                link.click();
+            } else {
+                // ✅ Normal image download
+                const response = await fetch(imageUrl, { mode: "cors" });
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = `image_${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+            }
         } catch (error) {
             console.error("Download failed:", error);
         }
     };
+
     const handleShare = async (imageUrl) => {
         try {
             // Fetch the image as a Blob
@@ -200,28 +215,18 @@ function ImageHistory() {
                             )}
 
                             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+
                                 <div className="main-container-popup">
 
-                                    <img
-                                        className="popup-image"
-                                        src={selectedImage.generator_img}
-                                        alt="Selected"
-                                    />
-                                    {/* {selectedImage.record_type === "age_predictor" && (
-                                        metadata.predict_age && (
-                                            <div className="age-overlay-imageHistory">
-                                                <img
-                                                    className="pop-pass-image-black-imageHistory"
-                                                    src={graduant}
-                                                    alt=""
-                                                />
-                                                <p className="age-img-imageHistory">
-                                                    {metadata.predict_age}
-                                                </p>
-                                            </div>
-                                        )
-                                    )
-                                    } */}
+                                    {selectedImage.record_type === "age_predictor" ? (
+                                        <AgeOverlayCanvas imageSrc={selectedImage.generator_img} metadata={metadata} />
+                                    ) : <>
+                                        <img
+                                            className="popup-image"
+                                            src={selectedImage.generator_img}
+                                            alt="Selected"
+                                        />
+                                    </>}
                                 </div>
 
                                 <div className="popup-info-panel">
@@ -235,7 +240,6 @@ function ImageHistory() {
                                                 <img src={magic} alt="" />
                                             </div>
                                             <div>
-                                                {/* <p>{selectedImage.record_type}</p> */}
                                                 <p>{switchRecordType(selectedImage.record_type)}</p>
                                                 <p className='caranttime'>{dateDifference(selectedImage.created_at)}</p>
 
@@ -260,8 +264,7 @@ function ImageHistory() {
 
                                         <div className='use-credit-container'>
                                             <img src={star} alt="" />
-                                            <p>{selectedImage.use_credit.replace("-", "")}</p>
-                                            <p>Use Credit</p>
+                                            <p>{selectedImage.use_credit.replace("-", "")} Use Credit</p>
                                         </div>
 
                                         <div className='time-date-container'>
@@ -271,7 +274,7 @@ function ImageHistory() {
                                     </div>
                                     <div className='dowanload-share-button'>
                                         <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img)}>Share</button>
-                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img)}>Download</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img,selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>
                             </div>

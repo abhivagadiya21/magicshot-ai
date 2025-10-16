@@ -130,10 +130,11 @@ function PersonalInfo() {
       }
     } catch (error) {
       toast.error(
-        error?.response?.data?.message || "❌ Failed to  image."
+        error?.response?.data?.message || "❌ Failed to update profile info."
       );
       return false;
     }
+    return false;
   }
 
   function base64ToFile(base64String, filename) {
@@ -203,11 +204,12 @@ function PersonalInfo() {
 
   const handleSave = async () => {
     console.log("Saved Data:", formDataFields);
-    let updateInfo = await updateUserInfo();
-    if (updateInfo) {
+    let isUpdated = await updateUserInfo();
+    if (isUpdated) {
       await getProfile();
       setIsEditing(false);
     }
+
   };
 
   const handleImageUpload = async (e) => {

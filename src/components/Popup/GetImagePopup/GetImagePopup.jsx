@@ -5,7 +5,6 @@ import graduant from './GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import closeIcon from "./GetImagePopupImage/close.svg";
 import downloadIcon from "./GetImagePopupImage/download.svg";
 
-
 function GetImagePop({ getimage_details }) {
 
     const imageRef = useRef(null);
@@ -103,9 +102,7 @@ function GetImagePop({ getimage_details }) {
                 </div>
             </div>
         </div>
-
     );
-
 }
 
 export default GetImagePop;

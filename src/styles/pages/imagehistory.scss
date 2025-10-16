@@ -1,28 +1,8 @@
 @use '../abstracts/variables' as *;
 
-// .image-history-container {
-//   column-count: 4;
-//   flex-wrap: wrap;
-//   gap: 7px;
-//   height: calc(100dvh - 115px);
-// }
-
-// .image-card {
-//   display: inline-block;
-//   border-radius: 8px;
-//   margin-top: 7px;
-// }
-
-// .image-card img {
-//   width: 100%;
-//   height: auto;
-//   border-radius: 8px;
-// }
-
 .image-history-main-container {
     height: calc(100dvh - 115px);
     width: 100%;
-    // overflow: hidden;
     overflow-X: scroll;
     display: flex;
     flex-wrap: wrap;
@@ -31,9 +11,8 @@
 
 .image-history-container {
     column-count: 4;
-    column-gap: 7px;
+    gap: 7px;
     background-color: $background-color;
-    float: right;
     padding: 7px;
     border: 3px solid $border-color;
     width: 100%;
@@ -41,17 +20,14 @@
     margin-left: 15px;
 }
 
-
 .image-card {
     width: 100%;
     overflow: hidden;
-    margin-bottom: 10px;
     position: relative;
     cursor: pointer;
     border-radius: 10px;
     display: inline-block;
     width: 100%;
-    margin-bottom: 7px;
     border-radius: 8px;
 }
 
@@ -75,85 +51,6 @@
 
 .image-card:hover .overlay-1 {
     opacity: 1;
-}
-
-// . {
-//   background: white;
-//   position: absolute;
-//   // top: 75%;
-//   bottom: 5%;
-//   border: none;
-//   border-radius: 4px;
-//   padding: 8px 12px;
-//   cursor: pointer;
-// }
-
-
-
-
-// .image-card:hover{
-//     cursor: pointer;
-//     transform: scale(1.05);
-//     transition: all 0.3s ease-in-out;
-
-// }
-
-
-
-//----dhruv copy code css
-
-
-.App {
-    text-align: center;
-    color: white;
-    padding-top: 20px;
-}
-
-.gallery {
-    column-count: 4;
-    column-gap: 7px;
-    margin-top: 20px;
-    max-width: 1400px;
-    cursor: pointer;
-}
-
-@media(min-width : 1280px) {
-    .gallery {
-        columns: 4;
-    }
-}
-
-@media(max-width : 1196px) {
-    .gallery {
-        columns: 2;
-    }
-}
-
-.gallery-item {
-    margin-bottom: 0px;
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.img-avatar {
-    min-width: 20px;
-    max-width: 20px;
-    margin-top: 7px;
-    border-radius: 50px;
-    margin-left: 10px;
-    margin-right: 6px;
-    object-fit: cover;
 }
 
 .use-credit-container {
@@ -220,16 +117,6 @@
     bottom: 5%;
 }
 
-.reuse-button {
-    background: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 0 auto 10px 10px;
-}
-
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -271,20 +158,6 @@
 .uploded-parent-images {
     display: flex;
     flex-direction: column;
-}
-
-.popup-image-section {
-    background-color: $background-color;
-    border: 3px solid $border-color;
-    margin: 15px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 100%;
-    width: 90%;
 }
 
 .popup-image {
@@ -352,31 +225,6 @@
     border-radius: 5px;
 }
 
-.prompt-content {
-    line-height: 1.5;
-}
-
-@keyframes slideFade {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
 .side-nav {
     position: absolute;
     top: 50%;
@@ -394,7 +242,6 @@
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease;
-
 }
 
 .side-nav:hover {
@@ -404,7 +251,6 @@
 .side-nav.left {
     left: 15px;
     text-align: center;
-
 }
 
 .side-nav.right {
@@ -418,7 +264,6 @@
 .side-nav img {
     width: 20px;
     height: 20px;
-
 }
 
 .upload_img_popup {
@@ -438,32 +283,12 @@
     justify-content: center;
 }
 
-// .age-overlay-imageHistory {
-//     width: 100%;
-//     margin: 10px;
-//     // padding: 15px;
-//     height: inherit;
-//     position: absolute;
-//     top: 5.5%;
-//     left: 0%;
-// }
-
-// .pop-pass-image-black-imageHistory {
-//     width: inherit;
-//     height: inherit;
-//     // position:absolute;
-//     // left: 21%;
-//     border-radius: 10px;
-
-// }
-
-// .age-img-imageHistory {
-// color: aqua;
-// }
-
-
 
 @media (max-width: 768px) {
+    .side-nav {
+        top: 26%;
+    }
+
     .image-history-container {
         column-count: 2;
     }
@@ -545,7 +370,6 @@
     }
 }
 
-
 @media (max-width: 400px) {
 
     .container-3 {
@@ -558,9 +382,9 @@
         overflow-y: auto;
     }
 
-    .popup-image-section {
-        height: 240px;
-    }
+    // .popup-image-section {
+    //     height: 240px;
+    // }
 
     .date-info {
         text-wrap: nowrap;
@@ -614,14 +438,6 @@
     }
 
     .popup-close {
-        display: none;
-    }
-
-    .side-nav.right {
-        display: none;
-    }
-
-    .side-nav.left {
         display: none;
     }
 
