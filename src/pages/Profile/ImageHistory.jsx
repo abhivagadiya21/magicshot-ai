@@ -207,22 +207,21 @@ function ImageHistory() {
                                         src={selectedImage.generator_img}
                                         alt="Selected"
                                     />
-                                    {selectedImage.record_type === "age_predictor" && metadata.predict_age && (
-                                        <div className="age-overlay-imageHistory">
-                                            <div className="age-overlay-left">
+                                    {/* {selectedImage.record_type === "age_predictor" && (
+                                        metadata.predict_age && (
+                                            <div className="age-overlay-imageHistory">
                                                 <img
-                                                    className="graduant-overlay-image"
+                                                    className="pop-pass-image-black-imageHistory"
                                                     src={graduant}
-                                                    alt="Graduation background"
+                                                    alt=""
                                                 />
+                                                <p className="age-img-imageHistory">
+                                                    {metadata.predict_age}
+                                                </p>
                                             </div>
-
-                                            <div className="age-overlay-right">
-                                                <p className="predicted-age-label">Predicted Age</p>
-                                                <p className="predicted-age-value">{metadata.predict_age}</p>
-                                            </div>
-                                        </div>
-                                    )}
+                                        )
+                                    )
+                                    } */}
                                 </div>
 
                                 <div className="popup-info-panel">

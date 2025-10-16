@@ -122,8 +122,8 @@ function PersonalInfo() {
       console.log("Update response:", data);
       if (data.username || data.bio) {
         toast.success("Profile updated username bio successfully!");
-        await fetchUser();
-
+        // await fetchUser();
+        return true;
       }
       else {
         toast.error(data.message || "Failed to update profile info");
@@ -132,6 +132,7 @@ function PersonalInfo() {
       toast.error(
         error?.response?.data?.message || "❌ Failed to  image."
       );
+      return false;
     }
   }
 
@@ -202,9 +203,11 @@ function PersonalInfo() {
 
   const handleSave = async () => {
     console.log("Saved Data:", formDataFields);
-    await updateUserInfo();
-    await getProfile();
-    setIsEditing(false);
+    let updateInfo = await updateUserInfo();
+    if (updateInfo) {
+      await getProfile();
+      setIsEditing(false);
+    }
   };
 
   const handleImageUpload = async (e) => {
