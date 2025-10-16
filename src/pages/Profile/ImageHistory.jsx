@@ -86,32 +86,48 @@ function ImageHistory() {
         }
     };
 
-    const handleShare = async (imageUrl) => {
+    const handleShare = async (imageUrl, recordType) => {
         try {
-            // Fetch the image as a Blob
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
+            let file;
 
-            // Create a File object from the blob
-            const file = new File([blob], 'shared_image.png', { type: blob.type });
+            if (recordType === "age_predictor") {
+                // ✅ Capture the canvas
+                const canvas = document.getElementById("ageCanvasWrapper");
+                if (!canvas) {
+                    alert("Canvas not found!");
+                    return;
+                }
 
-            // Check if the browser supports sharing files
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                const dataUrl = canvas.toDataURL("image/png");
+                const blob = await (await fetch(dataUrl)).blob();
+                file = new File([blob], "age_prediction.png", { type: "image/png" });
+            } else {
+                // ✅ Normal image share
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                file = new File([blob], "shared_image.png", { type: blob.type });
+            }
+
+            // ✅ Check if the browser supports sharing files
+            const caption = "✨ Created with Magic Through Generator ✨";
+
+            if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
-                    title: 'Check out this image!',
-                    text: 'Here’s an image I generated.',
+                    title: "Check out this image!",
+                    text: caption,
                     files: [file],
                 });
             } else {
-                // Fallback: just copy the link
+                // Fallback: copy the link
                 await navigator.clipboard.writeText(imageUrl);
-                alert('📋 Your browser does not support image sharing. Link copied!');
+                alert("📋 Your browser doesn’t support file sharing. Link copied!");
             }
         } catch (error) {
-            console.error('Error sharing image:', error);
-            alert('❌ Failed to share image.');
+            console.error("Error sharing image:", error);
+            alert("❌ Failed to share image.");
         }
     };
+
     const dateDifference = (dateString) => {
         const now = dayjs();
         const pastDate = dayjs(dateString);
@@ -273,8 +289,8 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img)}>Share</button>
-                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img,selectedImage.record_type)}>Download</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img, selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>
                             </div>
