@@ -13,6 +13,9 @@ const AgeOverlayCanvas = ({ imageSrc, metadata }) => {
     const bottomImg = new Image();
     const gradientOverlay = new Image();
 
+    bottomImg.crossOrigin = "anonymous";
+    gradientOverlay.crossOrigin = "anonymous";
+
     bottomImg.src = imageSrc;
     gradientOverlay.src = gradientImg;
 
@@ -71,6 +74,7 @@ const AgeOverlayCanvas = ({ imageSrc, metadata }) => {
 
   return (
     <canvas
+      id="ageCanvasWrapper"
       ref={canvasRef}
       style={{
         width: "100%",

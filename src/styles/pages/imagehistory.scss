@@ -146,6 +146,8 @@
 .main-container-popup {
     width: 80%;
     height: 95%;
+    display: flex;
+    flex-wrap: wrap ;
     background: $background-color;
     margin: 15px;
     margin-right: 0px;

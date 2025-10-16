@@ -5,6 +5,7 @@ import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
 // import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
+import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
@@ -52,51 +53,81 @@ function ImageHistory() {
         setSelectedImage(null);
         setSelectedIndex(null);
     };
-    const handleDownload = async (imageUrl) => {
+    const handleDownload = async (imageUrl, recordType) => {
         try {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            const blobUrl = window.URL.createObjectURL(blob);
+            if (recordType === "age_predictor") {
+                const canvas = document.getElementById("ageCanvasWrapper");
+                if (!canvas) {
+                    console.error("Canvas not found!");
+                    return;
+                }
 
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = `image_${Date.now()}.png`; // Or .jpg, depending on your image type
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Cleanup the blob URL after a short delay
-            setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+                // ✅ Capture the canvas directly
+                const dataUrl = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = dataUrl;
+                link.download = `age_prediction_${Date.now()}.png`;
+                link.click();
+            } else {
+                // ✅ Normal image download
+                const response = await fetch(imageUrl, { mode: "cors" });
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = `image_${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+            }
         } catch (error) {
             console.error("Download failed:", error);
         }
     };
-    const handleShare = async (imageUrl) => {
+
+    const handleShare = async (imageUrl, recordType) => {
         try {
-            // Fetch the image as a Blob
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
+            let file;
 
-            // Create a File object from the blob
-            const file = new File([blob], 'shared_image.png', { type: blob.type });
+            if (recordType === "age_predictor") {
+                // ✅ Capture the canvas
+                const canvas = document.getElementById("ageCanvasWrapper");
+                if (!canvas) {
+                    alert("Canvas not found!");
+                    return;
+                }
 
-            // Check if the browser supports sharing files
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                const dataUrl = canvas.toDataURL("image/png");
+                const blob = await (await fetch(dataUrl)).blob();
+                file = new File([blob], "age_prediction.png", { type: "image/png" });
+            } else {
+                // ✅ Normal image share
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                file = new File([blob], "shared_image.png", { type: blob.type });
+            }
+
+            // ✅ Check if the browser supports sharing files
+            const caption = "✨ Created with Magic Through Generator ✨";
+
+            if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
-                    title: 'Check out this image!',
-                    text: 'Here’s an image I generated.',
+                    title: "Check out this image!",
+                    text: caption,
                     files: [file],
                 });
             } else {
-                // Fallback: just copy the link
+                // Fallback: copy the link
                 await navigator.clipboard.writeText(imageUrl);
-                alert('📋 Your browser does not support image sharing. Link copied!');
+                alert("📋 Your browser doesn’t support file sharing. Link copied!");
             }
         } catch (error) {
-            console.error('Error sharing image:', error);
-            alert('❌ Failed to share image.');
+            console.error("Error sharing image:", error);
+            alert("❌ Failed to share image.");
         }
     };
+
     const dateDifference = (dateString) => {
         const now = dayjs();
         const pastDate = dayjs(dateString);
@@ -258,8 +289,8 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img)}>Share</button>
-                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img)}>Download</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img, selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>
                             </div>

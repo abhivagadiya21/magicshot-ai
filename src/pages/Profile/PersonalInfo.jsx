@@ -132,6 +132,7 @@ function PersonalInfo() {
       toast.error(
         error?.response?.data?.message || "❌ Failed to update profile info."
       );
+      return false;
     }
     return false;
   }
