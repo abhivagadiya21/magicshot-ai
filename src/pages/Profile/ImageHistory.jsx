@@ -3,13 +3,13 @@ import { getImageHistoryAPI } from '../../services/imageBase'
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
-import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png'
-// import timeicon from './Profile-image/timeicon.png';
+// import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 import arrowleft from './Profile-image/arrow-left.svg';
+import AgeOverlayCanvas from '../../components/AgeOverlayCanvas/AgeOverlayCanvas';
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
@@ -200,29 +200,18 @@ function ImageHistory() {
                             )}
 
                             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
+
                                 <div className="main-container-popup">
 
-                                    <img
-                                        className="popup-image"
-                                        src={selectedImage.generator_img}
-                                        alt="Selected"
-                                    />
-                                    {selectedImage.record_type === "age_predictor" && metadata.predict_age && (
-                                        <div className="age-overlay-imageHistory">
-                                            <div className="age-overlay-left">
-                                                <img
-                                                    className="graduant-overlay-image"
-                                                    src={graduant}
-                                                    alt="Graduation background"
-                                                />
-                                            </div>
-
-                                            <div className="age-overlay-right">
-                                                <p className="predicted-age-label">Predicted Age</p>
-                                                <p className="predicted-age-value">{metadata.predict_age}</p>
-                                            </div>
-                                        </div>
-                                    )}
+                                    {selectedImage.record_type === "age_predictor" ? (
+                                        <AgeOverlayCanvas imageSrc={selectedImage.generator_img} metadata={metadata} />
+                                    ) : <>
+                                        <img
+                                            className="popup-image"
+                                            src={selectedImage.generator_img}
+                                            alt="Selected"
+                                        />
+                                    </>}
                                 </div>
 
                                 <div className="popup-info-panel">
@@ -236,7 +225,6 @@ function ImageHistory() {
                                                 <img src={magic} alt="" />
                                             </div>
                                             <div>
-                                                {/* <p>{selectedImage.record_type}</p> */}
                                                 <p>{switchRecordType(selectedImage.record_type)}</p>
                                                 <p className='caranttime'>{dateDifference(selectedImage.created_at)}</p>
 
