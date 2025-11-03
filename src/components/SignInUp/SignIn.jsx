@@ -12,12 +12,12 @@ export default function SignIn({ onLoginSuccess }) {
   const searchParams = new URLSearchParams(location.search);
   const redirectPath = searchParams.get("ref") || "/"; 
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e) => {  
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("http://192.168.1.11:3000/auth/login", {
+      const response = await fetch("http://192.168.1.21:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

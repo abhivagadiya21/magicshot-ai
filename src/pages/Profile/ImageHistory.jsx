@@ -3,9 +3,7 @@ import { getImageHistoryAPI } from '../../services/imageBase'
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
-// import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
-import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
@@ -62,14 +60,13 @@ function ImageHistory() {
                     return;
                 }
 
-                // ✅ Capture the canvas directly
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-                // ✅ Normal image download
+
                 const response = await fetch(imageUrl, { mode: "cors" });
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -88,45 +85,67 @@ function ImageHistory() {
 
     const handleShare = async (imageUrl, recordType) => {
         try {
-            let file;
+            const caption = "✨ Created with Magic Through Generator ✨ http://localhost:5173/profile/image-history" ;
 
+            const image = new Image();
+            image.crossOrigin = "anonymous";
             if (recordType === "age_predictor") {
-                // ✅ Capture the canvas
                 const canvas = document.getElementById("ageCanvasWrapper");
                 if (!canvas) {
                     alert("Canvas not found!");
                     return;
                 }
-
-                const dataUrl = canvas.toDataURL("image/png");
-                const blob = await (await fetch(dataUrl)).blob();
-                file = new File([blob], "age_prediction.png", { type: "image/png" });
+                image.src = canvas.toDataURL("image/png");
             } else {
-                // ✅ Normal image share
-                const response = await fetch(imageUrl);
-                const blob = await response.blob();
-                file = new File([blob], "shared_image.png", { type: blob.type });
+                image.src = imageUrl;
             }
 
-            // ✅ Check if the browser supports sharing files
-            const caption = "✨ Created with Magic Through Generator ✨";
+            await new Promise((resolve) => (image.onload = resolve));
 
-            if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = image.width;
+            canvas.height = image.height + 80;
+
+          
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+
+           
+            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+            ctx.fillRect(0, image.height, canvas.width, 80);
+
+            
+            ctx.fillStyle = "#000";
+            ctx.font = "bold 28px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(caption, canvas.width / 2, image.height + 50);
+
+            
+            const dataUrl = canvas.toDataURL("image/png");
+            const blob = await (await fetch(dataUrl)).blob();
+            const file = new File([blob], "shared_image.png", { type: "image/png" });
+
+            
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 await navigator.share({
-                    title: "Check out this image!",
-                    text: caption,
+                    title: "Magic Generator",
                     files: [file],
                 });
             } else {
-                // Fallback: copy the link
-                await navigator.clipboard.writeText(imageUrl);
-                alert("📋 Your browser doesn’t support file sharing. Link copied!");
+           
+                const link = document.createElement("a");
+                link.href = dataUrl;
+                link.download = "shared_with_caption.png";
+                link.click();
+                alert("📥 Sharing not supported, image downloaded with caption.");
             }
         } catch (error) {
             console.error("Error sharing image:", error);
-            alert("❌ Failed to share image.");
+            alert("❌ Error sharing image.");
         }
     };
+
 
     const dateDifference = (dateString) => {
         const now = dayjs();
@@ -161,6 +180,7 @@ function ImageHistory() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
+
     const switchRecordType = (type) => {
         switch (type) {
             case 'age_predictor':
