@@ -26,7 +26,7 @@ const SignUp = () => {
       setLoading(true);
       setError("");
 
-      const res = await fetch("http://192.168.1.21/:3000/auth/register", {
+      const res = await fetch("https://magicshot-ai-backend.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
