@@ -11,7 +11,7 @@ import { useCredits } from "../../components/GlobalCom/Context.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 
 import star from "../BabyGenerator/baby-img/star.svg";
-import hairImage from "./hairstyle-image/changeHaircut.png";
+import hairImage from "./hairstyle-image/changehaircut.png";
 import popPassImg4 from "../BabyGenerator/baby-img/poppassimg4.png";
 import questionMark from "../BabyGenerator/baby-img/question.svg";
 import boyIcon from "../BabyGenerator/baby-img/boy.png";
