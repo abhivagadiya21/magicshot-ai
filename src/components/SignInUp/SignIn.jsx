@@ -10,9 +10,9 @@ export default function SignIn({ onLoginSuccess }) {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const redirectPath = searchParams.get("ref") || "/";
+  const redirectPath = searchParams.get("ref") || "/"; 
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e) => {  
     e.preventDefault();
     setLoading(true);
 

@@ -3,7 +3,11 @@ import { getImageHistoryAPI } from '../../services/imageBase'
 import magic from './Profile-image/magic.svg';
 import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
+// import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
+import * as shareButtons from 'react-share';
+// import { RWebShare } from 'react-web-share';
+import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
@@ -60,13 +64,14 @@ function ImageHistory() {
                     return;
                 }
 
+                // ✅ Capture the canvas directly
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-
+                // ✅ Normal image download
                 const response = await fetch(imageUrl, { mode: "cors" });
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -82,70 +87,54 @@ function ImageHistory() {
             console.error("Download failed:", error);
         }
     };
+    const normalConvert = async (imageUrl) => {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        let convert = new File([blob], "shared_image.png", { type: blob.type });
 
+        return convert;
+    }
     const handleShare = async (imageUrl, recordType) => {
         try {
-            const caption = "✨ Created with Magic Through Generator ✨ http://localhost:5173/profile/image-history" ;
+            let file;
 
-            const image = new Image();
-            image.crossOrigin = "anonymous";
             if (recordType === "age_predictor") {
+                // ✅ Capture the canvas
                 const canvas = document.getElementById("ageCanvasWrapper");
                 if (!canvas) {
                     alert("Canvas not found!");
                     return;
                 }
-                image.src = canvas.toDataURL("image/png");
+
+                const dataUrl = canvas.toDataURL("image/png");
+                const blob = await (await fetch(dataUrl)).blob();
+                file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
-                image.src = imageUrl;
+                // ✅ Normal image share
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                file = new File([blob], "shared_image.png", { type: blob.type });
             }
 
-            await new Promise((resolve) => (image.onload = resolve));
+            // ✅ Check if the browser supports sharing files
+            const caption = "✨ Created with Magic Through Generator ✨";
 
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-
-            canvas.width = image.width;
-            canvas.height = image.height + 80;
-
-          
-            ctx.drawImage(image, 0, 0, image.width, image.height);
-
-           
-            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-            ctx.fillRect(0, image.height, canvas.width, 80);
-
-            
-            ctx.fillStyle = "#000";
-            ctx.font = "bold 28px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText(caption, canvas.width / 2, image.height + 50);
-
-            
-            const dataUrl = canvas.toDataURL("image/png");
-            const blob = await (await fetch(dataUrl)).blob();
-            const file = new File([blob], "shared_image.png", { type: "image/png" });
-
-            
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            if (navigator.canShare && navigator.canShare({ text: caption, files: [file] })) {
                 await navigator.share({
-                    title: "Magic Generator",
+                    title: "Check out this image!",
+                    text: caption,
                     files: [file],
                 });
             } else {
-           
-                const link = document.createElement("a");
-                link.href = dataUrl;
-                link.download = "shared_with_caption.png";
-                link.click();
-                alert("📥 Sharing not supported, image downloaded with caption.");
+                // Fallback: copy the link
+                await navigator.clipboard?.writeText(imageUrl);
+                alert("📋 Your browser doesn’t support file sharing. Link copied!");
             }
         } catch (error) {
             console.error("Error sharing image:", error);
-            alert("❌ Error sharing image.");
+            alert(error);
         }
     };
-
 
     const dateDifference = (dateString) => {
         const now = dayjs();
@@ -180,7 +169,6 @@ function ImageHistory() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
-
     const switchRecordType = (type) => {
         switch (type) {
             case 'age_predictor':
@@ -309,7 +297,19 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share
+                                            {/* <shareButtons.WhatsappShareButton url={normalConvert(selectedImage.generator_img)}
+                                                title={"✨ Created with Magic Through Generator ✨"}>
+                                                Share
+                                            </shareButtons.WhatsappShareButton> */}
+                                            {/* <RWebShare
+                                            data={{
+                                                text: "✨ Created with Magic Through Generator ✨",
+                                                file:`${selectedImage.generator_img}`,
+                                                title: "Check out this image!",
+                                                url: selectedImage.generator_img,
+                                            }}>share</RWebShare> */}
+                                        </button>
                                         <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img, selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>
