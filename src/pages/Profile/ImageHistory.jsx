@@ -5,6 +5,8 @@ import imagegallery from './Profile-image/imageicon.png';
 import star from '../BabyGenerator/baby-img/star.svg';
 // import graduant from '../../components/Popup/GetImagePopup/GetImagePopupImage/Black-Fade-PNG-Isolated-HD.png';
 import timeIcon from "../AgeJourney/journey-image/time.svg";
+import * as shareButtons from 'react-share';
+// import { RWebShare } from 'react-web-share';
 import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -102,6 +104,7 @@ function ImageHistory() {
                 const blob = await (await fetch(dataUrl)).blob();
                 file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
+
                 // ✅ Normal image share
                 const response = await fetch(imageUrl);
                 const blob = await response.blob();
@@ -110,7 +113,6 @@ function ImageHistory() {
 
             // ✅ Check if the browser supports sharing files
             const caption = "✨ Created with Magic Through Generator ✨";
-
             if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
                     title: "Check out this image!",
@@ -197,7 +199,7 @@ function ImageHistory() {
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
-                                        handleDownload(item.generator_img);
+                                        handleDownload(item.generator_img,item.record_type);
                                     }}>Download</button>
                                 </div>
                             </div>
@@ -289,7 +291,7 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share</button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>share</button>
                                         <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img, selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>

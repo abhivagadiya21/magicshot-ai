@@ -17,7 +17,7 @@ export default function SignIn({ onLoginSuccess }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://192.168.1.11:3000/auth/login", {
+      const response = await fetch("https://magicshot-ai-backend.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
