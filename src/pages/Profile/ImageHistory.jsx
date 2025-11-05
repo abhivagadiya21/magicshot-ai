@@ -64,14 +64,14 @@ function ImageHistory() {
                     return;
                 }
 
-                // ✅ Capture the canvas directly
+                
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-                // ✅ Normal image download
+               
                 const response = await fetch(imageUrl, { mode: "cors" });
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -87,19 +87,13 @@ function ImageHistory() {
             console.error("Download failed:", error);
         }
     };
-    const normalConvert = async (imageUrl) => {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-        let convert = new File([blob], "shared_image.png", { type: blob.type });
-
-        return convert;
-    }
+  
     const handleShare = async (imageUrl, recordType) => {
         try {
             let file;
 
             if (recordType === "age_predictor") {
-                // ✅ Capture the canvas
+                
                 const canvas = document.getElementById("ageCanvasWrapper");
                 if (!canvas) {
                     alert("Canvas not found!");
@@ -110,16 +104,17 @@ function ImageHistory() {
                 const blob = await (await fetch(dataUrl)).blob();
                 file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
-                // ✅ Normal image share
+                console.log("imageUrl-1", imageUrl);
+               
                 const response = await fetch(imageUrl);
+                console.log("response-fethch");
                 const blob = await response.blob();
                 file = new File([blob], "shared_image.png", { type: blob.type });
             }
 
-            // ✅ Check if the browser supports sharing files
+           
             const caption = "✨ Created with Magic Through Generator ✨";
-
-            if (navigator.canShare && navigator.canShare({ text: caption, files: [file] })) {
+            if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
                     title: "Check out this image!",
                     text: caption,
@@ -205,7 +200,7 @@ function ImageHistory() {
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
-                                        handleDownload(item.generator_img);
+                                        handleDownload(item.generator_img,item.record_type);
                                     }}>Download</button>
                                 </div>
                             </div>
@@ -297,19 +292,7 @@ function ImageHistory() {
                                         </div>
                                     </div>
                                     <div className='dowanload-share-button'>
-                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>Share
-                                            {/* <shareButtons.WhatsappShareButton url={normalConvert(selectedImage.generator_img)}
-                                                title={"✨ Created with Magic Through Generator ✨"}>
-                                                Share
-                                            </shareButtons.WhatsappShareButton> */}
-                                            {/* <RWebShare
-                                            data={{
-                                                text: "✨ Created with Magic Through Generator ✨",
-                                                file:`${selectedImage.generator_img}`,
-                                                title: "Check out this image!",
-                                                url: selectedImage.generator_img,
-                                            }}>share</RWebShare> */}
-                                        </button>
+                                        <button className='download-button-imgde-history' onClick={() => handleShare(selectedImage.generator_img, selectedImage.record_type)}>share</button>
                                         <button className='download-button-imgde-history' onClick={() => handleDownload(selectedImage.generator_img, selectedImage.record_type)}>Download</button>
                                     </div>
                                 </div>
