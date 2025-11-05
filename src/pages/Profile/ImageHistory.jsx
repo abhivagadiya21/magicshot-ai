@@ -55,38 +55,6 @@ function ImageHistory() {
         setSelectedImage(null);
         setSelectedIndex(null);
     };
-    // const handleDownload = async (imageUrl, recordType) => {
-    //     try {
-    //         if (recordType === "age_predictor") {
-    //             const canvas = document.getElementById("ageCanvasWrapper");
-    //             if (!canvas) {
-    //                 console.error("Canvas not found!");
-    //                 return;
-    //             }
-
-    //             // ✅ Capture the canvas directly
-    //             const dataUrl = canvas.toDataURL("image/png");
-    //             const link = document.createElement("a");
-    //             link.href = dataUrl;
-    //             link.download = `age_prediction_${Date.now()}.png`;
-    //             link.click();
-    //         } else {
-    //             // ✅ Normal image download
-    //             const response = await fetch(imageUrl, { mode: "cors" });
-    //             const blob = await response.blob();
-    //             const blobUrl = window.URL.createObjectURL(blob);
-    //             const link = document.createElement("a");
-    //             link.href = blobUrl;
-    //             link.download = `image_${Date.now()}.png`;
-    //             document.body.appendChild(link);
-    //             link.click();
-    //             document.body.removeChild(link);
-    //             setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
-    //         }
-    //     } catch (error) {
-    //         console.error("Download failed:", error);
-    //     }
-    // };
     const handleDownload = async (imageUrl, recordType) => {
         try {
             if (recordType === "age_predictor") {
@@ -95,38 +63,37 @@ function ImageHistory() {
                     console.error("Canvas not found!");
                     return;
                 }
+
+                
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-                // ✅ Direct link method — works even if CORS blocked
+               
+                const response = await fetch(imageUrl, { mode: "cors" });
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
                 const link = document.createElement("a");
-                link.href = imageUrl;
-                link.setAttribute("download", `image_${Date.now()}.png`);
+                link.href = blobUrl;
+                link.download = `image_${Date.now()}.png`;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
             }
         } catch (error) {
             console.error("Download failed:", error);
         }
     };
-
-    const normalConvert = async (imageUrl) => {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-        let convert = new File([blob], "shared_image.png", { type: blob.type });
-
-        return convert;
-    }
+  
     const handleShare = async (imageUrl, recordType) => {
         try {
             let file;
 
             if (recordType === "age_predictor") {
-                // ✅ Capture the canvas
+                
                 const canvas = document.getElementById("ageCanvasWrapper");
                 if (!canvas) {
                     alert("Canvas not found!");
@@ -138,14 +105,14 @@ function ImageHistory() {
                 file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
                 console.log("imageUrl-1", imageUrl);
-                // ✅ Normal image share
+               
                 const response = await fetch(imageUrl);
                 console.log("response-fethch");
                 const blob = await response.blob();
                 file = new File([blob], "shared_image.png", { type: blob.type });
             }
 
-            // ✅ Check if the browser supports sharing files
+           
             const caption = "✨ Created with Magic Through Generator ✨";
             if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
@@ -233,7 +200,7 @@ function ImageHistory() {
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
-                                        handleDownload(item.generator_img, item.record_type);
+                                        handleDownload(item.generator_img,item.record_type);
                                     }}>Download</button>
                                 </div>
                             </div>
