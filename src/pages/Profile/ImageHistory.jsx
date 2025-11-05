@@ -110,9 +110,10 @@ function ImageHistory() {
                 const blob = await (await fetch(dataUrl)).blob();
                 file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
-
+                console.log("imageUrl-1", imageUrl);
                 // ✅ Normal image share
                 const response = await fetch(imageUrl);
+                console.log("response-fethch");
                 const blob = await response.blob();
                 file = new File([blob], "shared_image.png", { type: blob.type });
             }
