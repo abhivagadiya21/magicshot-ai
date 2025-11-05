@@ -55,6 +55,38 @@ function ImageHistory() {
         setSelectedImage(null);
         setSelectedIndex(null);
     };
+    // const handleDownload = async (imageUrl, recordType) => {
+    //     try {
+    //         if (recordType === "age_predictor") {
+    //             const canvas = document.getElementById("ageCanvasWrapper");
+    //             if (!canvas) {
+    //                 console.error("Canvas not found!");
+    //                 return;
+    //             }
+
+    //             // ✅ Capture the canvas directly
+    //             const dataUrl = canvas.toDataURL("image/png");
+    //             const link = document.createElement("a");
+    //             link.href = dataUrl;
+    //             link.download = `age_prediction_${Date.now()}.png`;
+    //             link.click();
+    //         } else {
+    //             // ✅ Normal image download
+    //             const response = await fetch(imageUrl, { mode: "cors" });
+    //             const blob = await response.blob();
+    //             const blobUrl = window.URL.createObjectURL(blob);
+    //             const link = document.createElement("a");
+    //             link.href = blobUrl;
+    //             link.download = `image_${Date.now()}.png`;
+    //             document.body.appendChild(link);
+    //             link.click();
+    //             document.body.removeChild(link);
+    //             setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+    //         }
+    //     } catch (error) {
+    //         console.error("Download failed:", error);
+    //     }
+    // };
     const handleDownload = async (imageUrl, recordType) => {
         try {
             if (recordType === "age_predictor") {
@@ -63,30 +95,25 @@ function ImageHistory() {
                     console.error("Canvas not found!");
                     return;
                 }
-
-                // ✅ Capture the canvas directly
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-                // ✅ Normal image download
-                const response = await fetch(imageUrl, { mode: "cors" });
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
+                // ✅ Direct link method — works even if CORS blocked
                 const link = document.createElement("a");
-                link.href = blobUrl;
-                link.download = `image_${Date.now()}.png`;
+                link.href = imageUrl;
+                link.setAttribute("download", `image_${Date.now()}.png`);
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
             }
         } catch (error) {
             console.error("Download failed:", error);
         }
     };
+
     const normalConvert = async (imageUrl) => {
         const response = await fetch(imageUrl);
         const blob = await response.blob();
@@ -206,7 +233,7 @@ function ImageHistory() {
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
-                                        handleDownload(item.generator_img,item.record_type);
+                                        handleDownload(item.generator_img, item.record_type);
                                     }}>Download</button>
                                 </div>
                             </div>
