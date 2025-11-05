@@ -15,7 +15,7 @@ export const babyUploadAPI = async (imageFiles, otherData) => {
 
     const response = await api.post("/baby-generator", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
