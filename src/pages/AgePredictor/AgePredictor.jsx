@@ -16,7 +16,7 @@ import Loader from "../../components/Loader/Loader.jsx";
 
 import popPassImg2 from "../BabyGenerator/baby-img/poppassimg2.png";
 import starIcon from "../BabyGenerator/baby-img/star.svg";
-import predictorImage from "./predictor-image/agePredictor.png";
+import predictorImage from "./predictor-image/agepredictor.png";
 import questionMarkIcon from "../BabyGenerator/baby-img/question.svg";
 import timeIcon from "../AgeJourney/journey-image/time.svg";
 

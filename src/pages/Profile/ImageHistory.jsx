@@ -87,7 +87,13 @@ function ImageHistory() {
             console.error("Download failed:", error);
         }
     };
+    const normalConvert = async (imageUrl) => {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        let convert = new File([blob], "shared_image.png", { type: blob.type });
 
+        return convert;
+    }
     const handleShare = async (imageUrl, recordType) => {
         try {
             let file;
@@ -121,12 +127,12 @@ function ImageHistory() {
                 });
             } else {
                 // Fallback: copy the link
-                await navigator.clipboard.writeText(imageUrl);
+                await navigator.clipboard?.writeText(imageUrl);
                 alert("📋 Your browser doesn’t support file sharing. Link copied!");
             }
         } catch (error) {
             console.error("Error sharing image:", error);
-            alert("❌ Failed to share image.");
+            alert(error);
         }
     };
 

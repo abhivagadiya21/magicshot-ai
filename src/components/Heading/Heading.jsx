@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCredits } from "../GlobalCom/Context.jsx";
-
 import Logo from "./heading-img/logo.png";
 import Plan from "./heading-img/plan.svg";
 import square from "./heading-img/squarelogo.png";
@@ -28,7 +27,7 @@ export default function Heading() {
     const location = useLocation();
     const currentUrl = location.pathname + location.search;
 
-    const { state, dispatch, fetchUser } = useCredits();
+    const { state, fetchUser } = useCredits();
     const { user, credits } = state;
 
     useEffect(() => {
@@ -78,11 +77,11 @@ export default function Heading() {
                                 </button>
                             </div>
 
-                            <img src={Logo} alt="Logo" className="logo-img" />
+                            <img src={Logo} alt="Logo" className="logo-img" onClick={() => navigate("/")} />
                             <img src={square} alt="Logo" className="square" />
 
                             <div className={`navbar-content`}>
-                                {!["/profile/personal-info", "/profile/credits-history","/profile/image-history"].includes(location.pathname) && (
+                                {!["/profile/personal-info", "/profile/credits-history", "/profile/image-history"].includes(location.pathname) && (
                                     <div className="dropdown" ref={dropdownRef}>
                                         <button
                                             className="dropdown-button"

@@ -283,7 +283,6 @@
     justify-content: center;
 }
 
-
 @media (max-width: 768px) {
     .side-nav {
         top: 26%;
@@ -367,81 +366,5 @@
 
     .download-button-imgde-history {
         width: 50%;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .container-3 {
-        padding: 1px 10px;
-    }
-
-    .popup-container {
-        flex-direction: column;
-        scrollbar-width: thin;
-        overflow-y: auto;
-    }
-
-    // .popup-image-section {
-    //     height: 240px;
-    // }
-
-    .date-info {
-        text-wrap: nowrap;
-    }
-
-    .prompt-section p {
-        width: 301px;
-    }
-
-    .read-more {
-        text-wrap: nowrap;
-    }
-
-    .actions {
-        flex-direction: column-reverse;
-        width: 300px;
-    }
-
-    .main-reuse-btn {
-        width: 100%;
-        padding-top: 10px;
-    }
-
-    .reuse-btn {
-        width: 300px;
-    }
-
-    .main-action-btn {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 15px;
-        row-gap: 0px;
-        display: flex;
-    }
-
-    .action-btn {
-        text-wrap: nowrap;
-    }
-
-    .picture-height {
-        display: flex;
-        flex-wrap: nowrap;
-    }
-
-    .tag-badge {
-        text-wrap: nowrap;
-    }
-
-    .tool-badge {
-        text-wrap: nowrap;
-    }
-
-    .popup-close {
-        display: none;
-    }
-
-    .zoom-slider-container {
-        display: none;
     }
 }
