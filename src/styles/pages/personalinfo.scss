@@ -13,7 +13,6 @@
     width: 100%;
     display: flex;
 
-    // padding-left: 13px;
     .right-container {
         display: flex;
         align-items: center;
@@ -250,5 +249,13 @@
     .right-main-info-container {
         width: 100%;
         min-width: 100%;
+    }
+
+    .right-main-container{
+        margin-left: 0px;
+    }
+
+    .right-container {
+        margin-left: 0px;
     }
 }
