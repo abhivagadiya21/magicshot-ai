@@ -215,8 +215,8 @@
 .password-close-button {
     cursor: pointer;
     position: absolute;
-    bottom: 67%;
-    right: 31%;
+    bottom: 66%;
+    right: 35%;;
     border: none;
     background-color: transparent;
 }
@@ -249,11 +249,12 @@
         min-width: 100%;
     }
 
-    .right-main-container{
+    .right-main-container .right-container {
         margin-left: 0px;
     }
 
-    .right-container {
-        margin-left: 0px;
+    .password-close-button{
+        right: 10%;
+        bottom: 68%;
     }
 }

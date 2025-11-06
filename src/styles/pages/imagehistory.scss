@@ -3,6 +3,7 @@
 .image-history-main-container {
     height: calc(100dvh - 115px);
     width: 100%;
+    // overflow: hidden;
     overflow-X: scroll;
     display: flex;
     flex-wrap: wrap;
@@ -17,6 +18,7 @@
     border: 3px solid $border-color;
     width: 100%;
     border-radius: 15px;
+    margin-top: 15px;
     margin-left: 15px;
 }
 
@@ -51,6 +53,85 @@
 
 .image-card:hover .overlay-1 {
     opacity: 1;
+}
+
+// . {
+//   background: white;
+//   position: absolute;
+//   // top: 75%;
+//   bottom: 5%;
+//   border: none;
+//   border-radius: 4px;
+//   padding: 8px 12px;
+//   cursor: pointer;
+// }
+
+
+
+
+// .image-card:hover{
+//     cursor: pointer;
+//     transform: scale(1.05);
+//     transition: all 0.3s ease-in-out;
+
+// }
+
+
+
+//----dhruv copy code css
+
+
+.App {
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+}
+
+.gallery {
+    column-count: 4;
+    column-gap: 7px;
+    margin-top: 20px;
+    max-width: 1400px;
+    cursor: pointer;
+}
+
+@media(min-width : 1280px) {
+    .gallery {
+        columns: 4;
+    }
+}
+
+@media(max-width : 1196px) {
+    .gallery {
+        columns: 2;
+    }
+}
+
+.gallery-item {
+    margin-bottom: 0px;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.img-avatar {
+    min-width: 20px;
+    max-width: 20px;
+    margin-top: 7px;
+    border-radius: 50px;
+    margin-left: 10px;
+    margin-right: 6px;
+    object-fit: cover;
 }
 
 .use-credit-container {
@@ -290,12 +371,11 @@
 
     .image-history-container {
         column-count: 2;
+        margin-left: 0px;
     }
 
     .popup-container {
         flex-direction: column;
-        scrollbar-width: thin;
-        overflow-y: auto;
         padding: 15px;
     }
 
@@ -309,7 +389,6 @@
     .popup-info-panel {
         width: 100%;
         flex-direction: row;
-        overflow-x: auto;
         margin: 10px 0px 0px 0px;
         height: 60%;
     }
@@ -320,51 +399,127 @@
         right: 25px;
         font-size: 18px;
     }
+   .prompt-section{
+    flex-direction: column;
+   }
+   .record-type-container{
+    font-size: 16px;
+    margin-top: 0px;
+   }
+   .Uoploded-image-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .upload_img_popup{
+    margin-top: 5px;
+    height: 60px;
+    width: 60px;
+   }
+   .uploded-parent-images{
+    flex-direction: row;
+    column-gap: 10px;
+   }
+   .use-credit-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .time-date-container{
+    margin-top: 10px;
+    font-size: 12px;
+   }
+   .dowanload-share-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    bottom: 0%;
+   }
+   .download-button-imgde-history{
+    width: 50%;
+   }
+}
 
-    .prompt-section {
+
+@media (max-width: 400px) {
+
+    .container-3 {
+        padding: 1px 10px;
+    }
+
+    .popup-container {
         flex-direction: column;
+        scrollbar-width: thin;
+        overflow-y: auto;
     }
 
-    .record-type-container {
-        font-size: 16px;
-        margin-top: 0px;
+    .popup-image-section {
+        height: 240px;
     }
 
-    .Uoploded-image-container {
-        margin-top: 10px;
-        font-size: 12px;
+    .date-info {
+        text-wrap: nowrap;
     }
 
-    .upload_img_popup {
-        margin-top: 5px;
-        height: 60px;
-        width: 60px;
+    .prompt-section p {
+        width: 301px;
     }
 
-    .uploded-parent-images {
-        flex-direction: row;
-        column-gap: 10px;
+    .read-more {
+        text-wrap: nowrap;
     }
 
-    .use-credit-container {
-        margin-top: 10px;
-        font-size: 12px;
+    .actions {
+        flex-direction: column-reverse;
+        width: 300px;
     }
 
-    .time-date-container {
-        margin-top: 10px;
-        font-size: 12px;
-    }
-
-    .dowanload-share-button {
+    .main-reuse-btn {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        column-gap: 5px;
-        bottom: 0%;
+        padding-top: 10px;
     }
 
-    .download-button-imgde-history {
-        width: 50%;
+    .reuse-btn {
+        width: 300px;
+    }
+
+    .main-action-btn {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        row-gap: 0px;
+        display: flex;
+    }
+
+    .action-btn {
+        text-wrap: nowrap;
+    }
+
+    .picture-height {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .tag-badge {
+        text-wrap: nowrap;
+    }
+
+    .tool-badge {
+        text-wrap: nowrap;
+    }
+
+    .popup-close {
+        display: none;
+    }
+
+    .side-nav.right {
+        display: none;
+    }
+
+    .side-nav.left {
+        display: none;
+    }
+
+    .zoom-slider-container {
+        display: none;
     }
 }
