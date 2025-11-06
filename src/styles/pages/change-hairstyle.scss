@@ -31,8 +31,6 @@
 
 }
 
-
-
 .tabs-container {
     display: flex;
     justify-content: center;
@@ -119,6 +117,16 @@
         width: 100%;
         min-width: 100%;
         max-width: 100%;
+    }
+    
+    .left-container-changeHair{
+          min-width: unset;
+          width: unset;
+    }
+
+    .left-container-changeHair {
+        width: unset;
+        min-width: unset;
     }
 
     .right-main-changeHair {

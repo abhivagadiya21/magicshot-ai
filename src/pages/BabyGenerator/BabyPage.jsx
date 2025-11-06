@@ -93,6 +93,7 @@ function BabyPage() {
         setLoading(false);
       }
     } catch (error) {
+      
       toast.error(error?.response?.data?.message || "❌ Failed to generate image.");
       setLoading(false);
     }

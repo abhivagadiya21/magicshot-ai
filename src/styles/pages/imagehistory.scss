@@ -4,7 +4,7 @@
     height: calc(100dvh - 115px);
     width: 100%;
     // overflow: hidden;
-    overflow-y: scroll;
+    overflow-X: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -12,9 +12,8 @@
 
 .image-history-container {
     column-count: 4;
-    column-gap: 7px;
+    gap: 7px;
     background-color: $background-color;
-    float: right;
     padding: 7px;
     border: 3px solid $border-color;
     width: 100%;
@@ -23,17 +22,14 @@
     margin-left: 15px;
 }
 
-
 .image-card {
     width: 100%;
     overflow: hidden;
-    margin-bottom: 10px;
     position: relative;
     cursor: pointer;
     border-radius: 10px;
     display: inline-block;
     width: 100%;
-    margin-bottom: 7px;
     border-radius: 8px;
 }
 
@@ -58,6 +54,31 @@
 .image-card:hover .overlay-1 {
     opacity: 1;
 }
+
+// . {
+//   background: white;
+//   position: absolute;
+//   // top: 75%;
+//   bottom: 5%;
+//   border: none;
+//   border-radius: 4px;
+//   padding: 8px 12px;
+//   cursor: pointer;
+// }
+
+
+
+
+// .image-card:hover{
+//     cursor: pointer;
+//     transform: scale(1.05);
+//     transition: all 0.3s ease-in-out;
+
+// }
+
+
+
+//----dhruv copy code css
 
 
 .App {
@@ -177,16 +198,6 @@
     bottom: 5%;
 }
 
-.reuse-button {
-    background: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 0 auto 10px 10px;
-}
-
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -216,29 +227,18 @@
 .main-container-popup {
     width: 80%;
     height: 95%;
+    display: flex;
+    flex-wrap: wrap ;
     background: $background-color;
     margin: 15px;
     margin-right: 0px;
     border-radius: 10px;
+
 }
 
 .uploded-parent-images {
     display: flex;
     flex-direction: column;
-}
-
-.popup-image-section {
-    background-color: $background-color;
-    border: 3px solid $border-color;
-    margin: 15px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 100%;
-    width: 90%;
 }
 
 .popup-image {
@@ -306,31 +306,6 @@
     border-radius: 5px;
 }
 
-.prompt-content {
-    line-height: 1.5;
-}
-
-@keyframes slideFade {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
 .side-nav {
     position: absolute;
     top: 50%;
@@ -348,7 +323,6 @@
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease;
-
 }
 
 .side-nav:hover {
@@ -358,7 +332,6 @@
 .side-nav.left {
     left: 15px;
     text-align: center;
-
 }
 
 .side-nav.right {
@@ -372,7 +345,6 @@
 .side-nav img {
     width: 20px;
     height: 20px;
-
 }
 
 .upload_img_popup {
@@ -393,6 +365,10 @@
 }
 
 @media (max-width: 768px) {
+    .side-nav {
+        top: 26%;
+    }
+
     .image-history-container {
         column-count: 2;
         margin-left: 0px;
@@ -423,42 +399,34 @@
         right: 25px;
         font-size: 18px;
     }
-
    .prompt-section{
     flex-direction: column;
    }
-
    .record-type-container{
     font-size: 16px;
     margin-top: 0px;
    }
-
    .Uoploded-image-container{
     margin-top: 10px;
     font-size: 12px;
    }
-
    .upload_img_popup{
     margin-top: 5px;
     height: 60px;
     width: 60px;
    }
-
    .uploded-parent-images{
     flex-direction: row;
     column-gap: 10px;
    }
-
    .use-credit-container{
     margin-top: 10px;
     font-size: 12px;
    }
-
    .time-date-container{
     margin-top: 10px;
     font-size: 12px;
    }
-
    .dowanload-share-button{
     width: 100%;
     display: flex;
@@ -466,7 +434,6 @@
     column-gap: 5px;
     bottom: 0%;
    }
-
    .download-button-imgde-history{
     width: 50%;
    }
@@ -481,6 +448,8 @@
 
     .popup-container {
         flex-direction: column;
+        scrollbar-width: thin;
+        overflow-y: auto;
     }
 
     .popup-image-section {

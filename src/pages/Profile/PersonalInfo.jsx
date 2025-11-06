@@ -122,17 +122,19 @@ function PersonalInfo() {
       console.log("Update response:", data);
       if (data.username || data.bio) {
         toast.success("Profile updated username bio successfully!");
-        await fetchUser();
-
+        // await fetchUser();
+        return true;
       }
       else {
         toast.error(data.message || "Failed to update profile info");
       }
     } catch (error) {
       toast.error(
-        error?.response?.data?.message || "❌ Failed to  image."
+        error?.response?.data?.message || "❌ Failed to update profile info."
       );
+      return false;
     }
+    return false;
   }
 
   function base64ToFile(base64String, filename) {
@@ -202,9 +204,12 @@ function PersonalInfo() {
 
   const handleSave = async () => {
     console.log("Saved Data:", formDataFields);
-    await updateUserInfo();
-    await getProfile();
-    setIsEditing(false);
+    let isUpdated = await updateUserInfo();
+    if (isUpdated) {
+      await getProfile();
+      setIsEditing(false);
+    }
+
   };
 
   const handleImageUpload = async (e) => {

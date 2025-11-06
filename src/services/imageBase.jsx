@@ -1,12 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "https://magicshot-ai-backend.onrender.com/auth",
-  baseURL: "http://localhost:3000/auth",
+  baseURL: "https://magicshot-ai-backend.onrender.com/auth",
+  // baseURL: "http://localhost:3000/auth",
+  // baseURL: "http://192.168.1.21:3000/auth",
 });
-const token = localStorage.getItem("token");
+
 export const babyUploadAPI = async (imageFiles, otherData) => {
   try {
+    const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("parent1", imageFiles.parent1);
     formData.append("parent2", imageFiles.parent2);
@@ -28,6 +30,7 @@ export const babyUploadAPI = async (imageFiles, otherData) => {
 
 export const ageJourneyAPI = async (imageFiles, otherData) => {
   try {
+    const token = localStorage.getItem("token");
     const formData = new FormData();
 
     formData.append("ageJourneyUpload", imageFiles.ageJourneyUpload);
@@ -48,6 +51,7 @@ export const ageJourneyAPI = async (imageFiles, otherData) => {
 
 export const agePredictorAPI = async (imageFiles, otherData) => {
   try {
+    const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("agePredictorUpload", imageFiles.agePredictorUpload);
     formData.append("Predict_age", otherData.predictAge);
@@ -66,8 +70,10 @@ export const agePredictorAPI = async (imageFiles, otherData) => {
   }
 };
 
+
 export const changeHairstyleAPI = async (imageFiles, otherData) => {
   try {
+    const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("HairuploadPhoto", imageFiles.parent1);
     formData.append("hairStyle", otherData.hairstyle);
@@ -90,6 +96,7 @@ export const changeHairstyleAPI = async (imageFiles, otherData) => {
 
 export const getUserProfileAPI = async (token) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await api.get("/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -104,7 +111,8 @@ export const getUserProfileAPI = async (token) => {
 
 export const getImageHistoryAPI = async (token) => {
   try {
-    const response = await api.get("/image-history", {  
+    const token = localStorage.getItem("token");
+    const response = await api.get("/image-history", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -118,6 +126,7 @@ export const getImageHistoryAPI = async (token) => {
 
 export const getTransactionsAPI = async (token) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await api.get("/transactions", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -132,9 +141,10 @@ export const getTransactionsAPI = async (token) => {
 
 export const updateUserProfileInfoAPI = async (token, cleanedData) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await api.post("/profile/usernameBio", cleanedData, {
       headers: {
-       "Content-Type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(cleanedData),
@@ -148,11 +158,12 @@ export const updateUserProfileInfoAPI = async (token, cleanedData) => {
 
 export const updateUserProfileImageAPI = async (token, imageFile) => {
   try {
+    const token = localStorage.getItem("token");
     const formData = new FormData();
-    formData.append("profileImage", imageFile); 
+    formData.append("profileImage", imageFile);
     const response = await api.post("/profile/changeprofileimage", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",  
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -160,11 +171,12 @@ export const updateUserProfileImageAPI = async (token, imageFile) => {
   } catch (error) {
     console.error("Error updating profile image:", error);
     throw error;
-  }   
+  }
 };
 
 export const changePasswordAPI = async (token, passwordData) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await api.post("/profile/changepassword", passwordData, {
       headers: {
         "Content-Type": "application/json",
