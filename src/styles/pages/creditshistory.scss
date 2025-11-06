@@ -4,15 +4,21 @@
     background-color: $background-color;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-width: 95%;
     border-radius: 15px;
     border: 3px solid $border-color;
-    overflow: hidden;
     margin-top: 15px;
-    padding-left: 13px;
     justify-content: center;
-    margin-left: 15px;
+}
+
+.right-main-creidt-container-2{
+    background-color: #15191c;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 3px solid #2c2f33;
+    // overflow: hidden;
+    margin-top: 15px;
+    justify-content: center;
 }
 
 .my-credits-container {

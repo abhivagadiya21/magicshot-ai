@@ -189,22 +189,22 @@ function ImageHistory() {
                 : selectedImage.metadata
             : {};
     return (
-        <>
-            <div className="right-main-container">
-                <div className="right-container">
-                    <img
-                        className="credits-back-arrow"
-                        onClick={() => navigate(`/profile`)}
-                        src={backArrow}
-                        alt="back"
-                    />
-                    <p>Image History</p>
-                </div>
-            </div>
-
+        
             <div className='image-history-main-container'>
-
+                <div className="right-main-container">
+                    <div className="right-container">
+                        <img
+                            className="credits-back-arrow"
+                            onClick={() => navigate(`/profile`)}
+                            src={backArrow}
+                            alt="back"
+                        />
+                        <p>Image History</p>
+                    </div>
+                </div>
                 <div className='image-history-container'>
+
+
                     {imagedata.images && imagedata.images.map((item, index) => {
 
                         return (
@@ -320,7 +320,7 @@ function ImageHistory() {
                     )}
                 </div>
             </div>
-        </>
+        
     )
 }
 

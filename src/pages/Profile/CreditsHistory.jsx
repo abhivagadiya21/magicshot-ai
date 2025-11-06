@@ -85,7 +85,7 @@ function CreditsHistory() {
           </div>
         </div>
       </div>
-      <div className="right-main-creidt-container">
+      <div className="right-main-creidt-container-2">
 
 
         <div className="credit-history-and-button-container">

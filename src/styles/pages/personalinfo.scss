@@ -19,7 +19,6 @@
         gap: 10px;
         font-size: 20px;
         font-weight: bold;
-        margin-left: 15px;
     }
 
 }
@@ -32,9 +31,10 @@
     min-width: 650px;
     border-radius: 15px;
     border: 3px solid $border-color;
-    overflow: hidden;
     padding: 15px;
     margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
 
     .right-image-profile-info-container {
         display: flex;

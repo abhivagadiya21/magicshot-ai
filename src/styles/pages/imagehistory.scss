@@ -3,11 +3,10 @@
 .image-history-main-container {
     height: calc(100dvh - 115px);
     width: 100%;
-    // overflow: hidden;
     overflow-X: scroll;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    padding-left: 15px;
 }
 
 .image-history-container {
@@ -16,10 +15,8 @@
     background-color: $background-color;
     padding: 7px;
     border: 3px solid $border-color;
-    width: 100%;
     border-radius: 15px;
     margin-top: 15px;
-    margin-left: 15px;
 }
 
 .image-card {
