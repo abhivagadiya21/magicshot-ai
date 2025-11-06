@@ -62,7 +62,7 @@ function CreditsHistory() {
     <>
       <div className="right-main-container">
         <div className="right-container">
-          <img className="credits-back-arrow" onClick={() => navigate(`/profile/personal-info`)} src={backArrow} alt="" />
+          <img className="credits-back-arrow" onClick={() => navigate(`/profile`)} src={backArrow} alt="" />
           <p>Credits History</p>
         </div>
       </div>

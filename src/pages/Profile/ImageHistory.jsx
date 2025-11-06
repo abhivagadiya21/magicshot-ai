@@ -9,11 +9,16 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 dayjs.extend(duration);
 import arrowleft from './Profile-image/arrow-left.svg';
+import backArrow from "./Profile-image/backArrow.png";
+import { useNavigate, useLocation } from "react-router-dom";
+
+
 
 function ImageHistory() {
     const [imagedata, setImagedata] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(null);
+    const navigate = useNavigate();
     const getImage = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -151,8 +156,19 @@ function ImageHistory() {
     return (
         <>
             <div className='image-history-main-container'>
-                <div className='image-history-container'>
+                <div className="right-main-container">
+                    <div className="right-container">
+                        <img
+                            className="credits-back-arrow"
+                            onClick={() => navigate(`/profile`)}
+                            src={backArrow}
+                            alt="back"
+                        />
+                        <p>Image History</p>
+                    </div>
+                </div>
 
+                <div className='image-history-container'>
                     {imagedata.images && imagedata.images.map((item, index) => {
 
                         return (
@@ -243,7 +259,7 @@ function ImageHistory() {
 
                                         <div className='use-credit-container'>
                                             <img src={star} alt="" />
-                                            <p>{selectedImage.use_credit.replace("-", "")}</p>
+                                            <p>{selectedImage.use_credit}</p>
                                             <p>Use Credit</p>
                                         </div>
 
