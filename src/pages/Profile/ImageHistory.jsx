@@ -69,14 +69,14 @@ function ImageHistory() {
                     return;
                 }
 
-                
+
                 const dataUrl = canvas.toDataURL("image/png");
                 const link = document.createElement("a");
                 link.href = dataUrl;
                 link.download = `age_prediction_${Date.now()}.png`;
                 link.click();
             } else {
-               
+
                 const response = await fetch(imageUrl, { mode: "cors" });
                 const blob = await response.blob();
                 const blobUrl = window.URL.createObjectURL(blob);
@@ -92,13 +92,13 @@ function ImageHistory() {
             console.error("Download failed:", error);
         }
     };
-  
+
     const handleShare = async (imageUrl, recordType) => {
         try {
             let file;
 
             if (recordType === "age_predictor") {
-                
+
                 const canvas = document.getElementById("ageCanvasWrapper");
                 if (!canvas) {
                     alert("Canvas not found!");
@@ -110,14 +110,14 @@ function ImageHistory() {
                 file = new File([blob], "age_prediction.png", { type: "image/png" });
             } else {
                 console.log("imageUrl-1", imageUrl);
-               
+
                 const response = await fetch(imageUrl);
                 console.log("response-fethch");
                 const blob = await response.blob();
                 file = new File([blob], "shared_image.png", { type: blob.type });
             }
 
-           
+
             const caption = "✨ Created with Magic Through Generator ✨";
             if (navigator.canShare && navigator.canShare({ files: [file], text: caption })) {
                 await navigator.share({
@@ -190,18 +190,19 @@ function ImageHistory() {
             : {};
     return (
         <>
-            <div className='image-history-main-container'>
-                <div className="right-main-container">
-                    <div className="right-container">
-                        <img
-                            className="credits-back-arrow"
-                            onClick={() => navigate(`/profile`)}
-                            src={backArrow}
-                            alt="back"
-                        />
-                        <p>Image History</p>
-                    </div>
+            <div className="right-main-container">
+                <div className="right-container">
+                    <img
+                        className="credits-back-arrow"
+                        onClick={() => navigate(`/profile`)}
+                        src={backArrow}
+                        alt="back"
+                    />
+                    <p>Image History</p>
                 </div>
+            </div>
+
+            <div className='image-history-main-container'>
 
                 <div className='image-history-container'>
                     {imagedata.images && imagedata.images.map((item, index) => {
@@ -216,7 +217,7 @@ function ImageHistory() {
                                 <div className="overlay-1">
                                     <button className="download-button-imgde-history-hover" onClick={(e) => {
                                         e.stopPropagation(); // Prevent opening the popup
-                                        handleDownload(item.generator_img,item.record_type);
+                                        handleDownload(item.generator_img, item.record_type);
                                     }}>Download</button>
                                 </div>
                             </div>
