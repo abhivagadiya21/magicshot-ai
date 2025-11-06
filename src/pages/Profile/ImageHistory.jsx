@@ -189,8 +189,7 @@ function ImageHistory() {
                 : selectedImage.metadata
             : {};
     return (
-        
-            <div className='image-history-main-container'>
+        <>
                 <div className="right-main-container">
                     <div className="right-container">
                         <img
@@ -319,8 +318,7 @@ function ImageHistory() {
                         </div>
                     )}
                 </div>
-            </div>
-        
+        </>
     )
 }
 
