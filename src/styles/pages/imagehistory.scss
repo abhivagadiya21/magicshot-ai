@@ -225,7 +225,7 @@
     width: 80%;
     height: 95%;
     display: flex;
-    flex-wrap: wrap ;
+    flex-wrap: wrap;
     background: $background-color;
     margin: 15px;
     margin-right: 0px;
@@ -396,44 +396,53 @@
         right: 25px;
         font-size: 18px;
     }
-   .prompt-section{
-    flex-direction: column;
-   }
-   .record-type-container{
-    font-size: 16px;
-    margin-top: 0px;
-   }
-   .Uoploded-image-container{
-    margin-top: 10px;
-    font-size: 12px;
-   }
-   .upload_img_popup{
-    margin-top: 5px;
-    height: 60px;
-    width: 60px;
-   }
-   .uploded-parent-images{
-    flex-direction: row;
-    column-gap: 10px;
-   }
-   .use-credit-container{
-    margin-top: 10px;
-    font-size: 12px;
-   }
-   .time-date-container{
-    margin-top: 10px;
-    font-size: 12px;
-   }
-   .dowanload-share-button{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    column-gap: 5px;
-    bottom: 0%;
-   }
-   .download-button-imgde-history{
-    width: 50%;
-   }
+
+    .prompt-section {
+        flex-direction: column;
+    }
+
+    .record-type-container {
+        font-size: 16px;
+        margin-top: 0px;
+    }
+
+    .Uoploded-image-container {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .upload_img_popup {
+        margin-top: 5px;
+        height: 60px;
+        width: 60px;
+    }
+
+    .uploded-parent-images {
+        flex-direction: row;
+        column-gap: 10px;
+    }
+
+    .use-credit-container {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .time-date-container {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .dowanload-share-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        column-gap: 5px;
+        bottom: 0%;
+    }
+
+    .download-button-imgde-history {
+        width: 50%;
+    }
 }
 
 
@@ -508,15 +517,13 @@
         display: none;
     }
 
-    .side-nav.right {
-        display: none;
+    .side-nav {
+        width: 25px;
+        height: 25px;
     }
 
-    .side-nav.left {
-        display: none;
-    }
-
-    .zoom-slider-container {
-        display: none;
+    .side-nav img {
+        width: 15px;
+        height: 15px;
     }
 }
